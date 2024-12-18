@@ -5,10 +5,10 @@ use App\Http\Core\InternalInterface\InputServiceInterface;
 
 class ShowSubscriptionInput implements InputServiceInterface
 {
-    private int $subscriptionId;
+    private int $tagId;
     public function __construct( array $input)
     {
-        $this->subscriptionId = $input['subscriptionId'];
+        $this->tagId = $input['tagId'];
     }
 
     // write your input function here..
@@ -22,19 +22,19 @@ class ShowSubscriptionInput implements InputServiceInterface
     /**
      * Get the value of subscriptionId
      */
-    public function getSubscriptionId()
+    public function getTagId()
     {
-        return $this->subscriptionId;
+        return $this->tagId;
     }
 
     /**
-     * Set the value of subscriptionId
+     * Set the value of tagId
      *
      * @return  self
      */
-    public function setSubscriptionId($subscriptionId)
+    public function setTagId($tagId)
     {
-        $this->subscriptionId = $subscriptionId;
+        $this->tagId = $tagId;
 
         return $this;
     }

@@ -61,11 +61,7 @@
                                 {{ Form::text('phoneNumber',old('phoneNumber'),['placeholder' => __('messages.phone'),'class' =>'form-control contact_number','required']) }}
                                 <small class="help-block with-errors text-danger" id="contact_number_err"></small>
                             </div>
-                            <div class="form-group col-md-4">
-                                {{ Form::label('personalid',__('messages.personalid').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
-                                {{ Form::text('personalid',old('personalid'),['placeholder' => __('messages.National_Id'),'class' =>'form-control National_Id','required']) }}
-                                <small class="help-block with-errors text-danger" id="National_Id_err"></small>
-                            </div>
+                          
 
                             {{-- <div class="form-group col-md-4">
                                 {{ Form::label('status',__('messages.status').' <span class="text-danger">*</span>',['class'=>'form-control-label'],false) }}
@@ -99,10 +95,7 @@
                             </div>
                             @endif --}}
 
-                            <div class="form-group col-md-12">
-                                {{ Form::label('address',__('messages.Address'), ['class' => 'form-control-label']) }}
-                                {{ Form::textarea('address', null, ['class'=>"form-control textarea" , 'rows'=>3  , 'placeholder'=> __('messages.Address') ]) }}
-                            </div>
+                          
                         </div>
                         
                         {{ Form::submit( __('messages.save'), ['class'=>'btn btn-md btn-primary float-right']) }}

@@ -37,40 +37,7 @@
     <div class="card">
         <div class="card-body">
             <div class="row justify-content-between">
-                <div>
-                    <div class="col-md-12">
-                        <form action="{{ route('provider.bulk-action') }}" id="quick-action-form"
-                            class="form-disabled d-flex gap-3 align-items-center">
-                            @csrf
-                            <select name="action_type" class="form-control select2" id="quick-action-type"
-                                style="width:100%" disabled>
-                                <option value="">{{ __('messages.no_action') }}</option>
-                                <option value="change-status">{{ __('messages.status') }}</option>
-                                <option value="delete">{{ __('messages.delete') }}</option>
-
-                            </select>
-
-                            <div class="select-status d-none quick-action-field" id="change-status-action"
-                                style="width:100%">
-                                <select name="status" class="form-control select2" id="status" style="width:100%">
-
-                                    <option value="1">{{ __('messages.approve') }}</option>
-
-                                    <option value="1">{{ __('messages.active') }}</option>
-                                    <option value="0">{{ __('messages.inactive') }}</option>
-
-                                </select>
-                            </div>
-                            <button id="quick-action-apply" class="btn btn-primary" data-confirmation='true'
-                                data-ajax="true" data--submit="{{ route('provider.bulk-action') }}"
-                                data-datatable="reload" data-title="{{ __('provider', ['form' => __('provider')]) }}"
-                                title="{{ __('provider', ['form' => __('provider')]) }}"
-                                data-message='{{ __('Do you want to perform this action?') }}'
-                                disabled>{{ __('messages.apply') }}</button>
-                    </div>
-
-                    </form>
-                </div>
+               
                 <div class="d-flex justify-content-end">
                     {{-- <div class="datatable-filter ml-auto">
                   <select name="column_status" id="column_status" class="select2 form-control" data-filter="select" style="width: 100%">

@@ -25,10 +25,13 @@ class ShowSubscriptionLogic implements Service {
         // write your Logic code..
         $subscritptionRepository = $this->repository->SubscriptionRepository();
 
-        $subscritption = $subscritptionRepository->readRepository()->getOneWithRelations($this->input->getSubscriptionId());
+        $subscritption = $subscritptionRepository->readRepository()->getByConditions(
+            ['tagId' => $this->input->getTagId()]
+        );
 
         $response  = new ShowSubscriptionOutput($subscritption , SuccessMessages::getKey(SuccessMessages::$show,Attributes::Subscription)
         ,viewPath:'subscription_management.show_subscription');
-        return $response->send_as_array();
+        
+        return $response->send_as_object();
    }
 }
