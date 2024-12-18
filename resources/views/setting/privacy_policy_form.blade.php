@@ -48,21 +48,19 @@
             <!-- الحقول الأساسية -->
             <div class="form-group col-md-6">
                 {{ Form::label('discountAmount', __('messages.discount_value') . ' <span class="text-danger">*</span>', ['class' => 'form-control-label'], false) }}
-                {{ Form::text('discountAmount', null, ['placeholder' => __('messages.discount_value'), 'class' => 'form-control', 'required']) }}
+                {{ Form::text('discountAmount', null, ['placeholder' => __('messages.discount_value'), 'class' => 'form-control', 'id' => 'discountAmount']) }}
                 <small class="help-block with-errors text-danger"></small>
             </div>
-
+            
             <div class="form-group col-md-6">
                 {{ Form::label('discountBecouse', __('messages.Discount_reason') . ' <span class="text-danger">*</span>', ['class' => 'form-control-label'], false) }}
-                {{ Form::text('discountBecouse', null, ['placeholder' => __('messages.Discount_reason'), 'class' => 'form-control', 'required']) }}
+                {{ Form::text('discountBecouse', null, ['placeholder' => __('messages.Discount_reason'), 'class' => 'form-control', 'id' => 'discountBecouse']) }}
                 <small class="help-block with-errors text-danger"></small>
             </div>
-
-
-
+            
             <div class="form-group col-md-6">
                 {{ Form::label('description', __('messages.payment_note') . ' <span class="text-danger">*</span>', ['class' => 'form-control-label'], false) }}
-                {{ Form::text('description', null, ['placeholder' => __('messages.payment_note'), 'class' => 'form-control', 'required']) }}
+                {{ Form::text('description', null, ['placeholder' => __('messages.payment_note'), 'class' => 'form-control', 'id' => 'description']) }}
                 <small class="help-block with-errors text-danger"></small>
             </div>
 
@@ -101,6 +99,32 @@
             </div>
  </div>
     @section('bottom_script')
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const discountAmount = document.getElementById('discountAmount');
+            const discountBecouse = document.getElementById('discountBecouse');
+            const description = document.getElementById('description');
+    
+            function toggleRequiredFields() {
+                if (discountAmount.value.trim() !== '') {
+                    // جعل الحقول الأخرى مطلوبة
+                    discountBecouse.setAttribute('required', 'required');
+                    description.setAttribute('required', 'required');
+                } else {
+                    // إزالة الإلزامية عند عدم وجود قيمة للحسم
+                    discountBecouse.removeAttribute('required');
+                    description.removeAttribute('required');
+                }
+            }
+    
+            // مراقبة إدخال المستخدم
+            discountAmount.addEventListener('input', toggleRequiredFields);
+    
+            // استدعاء الدالة لتطبيق القاعدة عند تحميل الصفحة
+            toggleRequiredFields();
+        });
+    </script>
+    
     <script>
 
 
@@ -164,9 +188,9 @@
             $(this).removeClass('btn-outline-secondary').addClass('btn-success');
             // طلب Ajax لجلب الـ tags الخاصة بالفئة
             $.ajax({
-                url: '{{ route("Tag") }}', // رابط الراوت
+                url: '{{ route("categoryTags") }}', // رابط الراوت
                 type: 'GET', // نوع الطلب (GET)
-                data: { category: category }, // إرسال الفئة في البيانات
+                data: { categoryId: category }, // إرسال الفئة في البيانات
                 success: function (response) {
                     console.log("Tags fetched successfully:", response);
 
@@ -210,8 +234,9 @@
         $(this).removeClass('btn-outline-secondary').addClass('btn-success');
             // طلب Ajax لجلب تفاصيل الاشتراك
             $.ajax({
-                url: '{{ route("Subscription.all") }}', // رابط الراوت
+                url: '{{ route("tagSubscriptions") }}', // رابط الراوت
                 type: 'GET', // نوع الطلب (GET)
+                data : { 'tagId' : tagId },
                // إرسال الـ tag_id في البيانات
                 success: function (response) {
                     console.log("Subscription data fetched successfully:", response);
@@ -284,9 +309,9 @@
         $("#amountDue").text(`{{  __('messages.Amount_Due :')}} ${subscriptionPrice}`)
         // طلب AJAX
         $.ajax({
-            url: '{{ route("SubscriptionCoach") }}',
+            url: '{{ route("calanderSubscription") }}',
             type: 'GET',
-            data: { subscription_id: subscriptionId },
+            data: { subscriptionCoachId: subscriptionId },
             success: function (response) {
                 console.log("Response:", response);
 

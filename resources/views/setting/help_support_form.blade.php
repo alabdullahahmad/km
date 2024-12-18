@@ -19,7 +19,9 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header bg-light d-flex justify-content-between align-items-center">
-                        <span>{{ $bill->date }}</span>
+                        <span >{{ __('messages.subscription_start') }}: {{ $bill->startDate }}</span>
+                        <span >{{ __('messages.subscription_end') }}: {{ $bill->endDate }}</span>
+                        
                         <span>{{ $bill->subscription->name }}</span>
                     </div>
                     <div class="card-body">
@@ -30,9 +32,10 @@
                                     <td><strong>{{ $bill->subscription->numOfDays }}</strong><br><small>{{ __('messages.days') }}</small></td>
                                     <td><strong>{{ $bill->subscription->numOfSessions }}</strong><br><small>{{ __('messages.sessions') }}</small></td>
                                 </tr>
+     
                             </tbody>
                         </table>
-
+        
                         <table class="table table-bordered text-center">
                             <tbody>
                                 <td><strong>{{ __('messages.bill_before_discount') }}</strong><br><small>{{ $bill->price + $bill->discountAmount }}</small></td>
@@ -47,15 +50,15 @@
                         data-id="{{ $bill->id }}" 
                         {{ $bill->price - $bill->amount <= 0 ? 'disabled' : '' }}
                         title="{{ $bill->price - $bill->amount <= 0 ? __('messages.cannot_complete_bill_zero_value') : '' }}">
-                    {{ __('messages.complete_bill') }}
-                </button>
-                
+                        {{ __('messages.complete_bill') }}
+                    </button>
+                    
                         <button class="btn btn-info freeze-bill-btn" data-id="{{ $bill->id }}">{{ __('messages.freeze') }}</button>
                     </div>
                 </div>
             </div>
-
-            @endforeach
+        @endforeach
+        
             {{-- ////////////////// completeBillModal///////////// --}}
             <div class="modal fade" id="completeBillModal" tabindex="-1" role="dialog" aria-labelledby="completeBillModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">

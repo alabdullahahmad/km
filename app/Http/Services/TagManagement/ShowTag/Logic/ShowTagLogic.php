@@ -11,6 +11,7 @@ class ShowTagLogic implements Service {
 
     private RepositoryCaller $repository ; // access to all model's repositories
 
+
     public function __construct(
     //---------------------------------------------------------------------------------------
     private ShowTagInput $input,  /*| Pass Request To Service*/
@@ -25,11 +26,14 @@ class ShowTagLogic implements Service {
         // write your Logic code..
         $tagRepository = $this->repository->TagRepository();
 
-        $tag = $tagRepository->readRepository()->find($this->input->getTagId());
+        $tag = $tagRepository->readRepository()->getByConditions(
+            ['categoryId' => $this->input->getCategoryId() ]
+        );
 
         $response  = new ShowTagOutput($tag ,
         SuccessMessages::getKey(SuccessMessages::$show,Attributes::Tag)
         ,viewPath:'tag_management.show_tag');
+        
         return $response->send_as_object();
    }
 }

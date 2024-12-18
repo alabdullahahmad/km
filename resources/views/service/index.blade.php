@@ -23,42 +23,11 @@
     <div class="card">
         <div class="card-body">
         <div class="row justify-content-between">
-            <div>
-              <div class="col-md-12">
-              <form action="{{ route('service.bulk-action') }}" id="quick-action-form" class="form-disabled d-flex gap-3 align-items-center">
-                    @csrf
-                  <select name="action_type" class="form-control select2" id="quick-action-type" style="width:100%" disabled>
-                      <option value="">{{ __('messages.no_action') }}</option>
-                      <option value="change-status">{{ __('messages.status') }}</option>
-                      <option value="delete">{{ __('messages.delete') }}</option>
-                      <option value="restore">{{ __('messages.restore') }}</option>
-                      <option value="permanently-delete">{{ __('messages.permanent_dlt') }}</option>
-                  </select>
-
-                <div class="select-status d-none quick-action-field" id="change-status-action" style="width:100%">
-                    <select name="status" class="form-control select2" id="status" >
-                      <option value="1">{{ __('messages.active') }}</option>
-                      <option value="0">{{ __('messages.inactive') }}</option>
-                    </select>
-                </div>
-                <button id="quick-action-apply" class="btn btn-primary" data-ajax="true"
-                data--submit="{{ route('service.bulk-action') }}"
-                data-datatable="reload" data-confirmation='true'
-                data-title="{{ __('service',['form'=>  __('service') ]) }}"
-                title="{{ __('service',['form'=>  __('service') ]) }}"
-                data-message='{{ __("Do you want to perform this action?") }}' disabled>{{ __('messages.apply') }}</button>
-            </div>
-
+           
             </form>
           </div>
               <div class="d-flex justify-content-end">
-                <div class="datatable-filter ml-auto">
-                  <select name="column_status" id="column_status" class="select2 form-control" data-filter="select" style="width: 100%">
-                    <option value="">{{ __('messages.all') }}</option>
-                    <option value="0" {{$filter['status'] == '0' ? "selected" : ''}}>{{ __('messages.inactive') }}</option>
-                    <option value="1" {{$filter['status'] == '1' ? "selected" : ''}}>{{ __('messages.active') }}</option>
-                  </select>
-                </div>
+               
                 <div class="input-group ml-2">
                     <span class="input-group-text" id="addon-wrapping"><i class="fas fa-search"></i></span>
                     <input type="text" class="form-control dt-search" placeholder="Search..." aria-label="Search" aria-describedby="addon-wrapping" aria-controls="dataTableBuilder">

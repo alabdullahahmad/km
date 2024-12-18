@@ -29,23 +29,9 @@
                 <div class="col-md-12">
                   <form action="{{ route('provider.bulk-action') }}" id="quick-action-form" class="form-disabled d-flex gap-3 align-items-center">
                     @csrf
-                  <select name="action_type" class="form-control select2" id="quick-action-type" style="width:100%" disabled>
-                      <option value="">{{ __('messages.no_action') }}</option>
-                      <option value="change-status">{{ __('messages.status') }}</option>
-                      <option value="delete">{{ __('messages.delete') }}</option>
-                     
-                  </select>
+                 
 
-                <div class="select-status d-none quick-action-field" id="change-status-action" style="width:100%">
-                    <select name="status" class="form-control select2" id="status" style="width:100%">
-                    @if($list_status == 'pending')
-                      <option value="1">{{ __('messages.approve') }}</option>
-                    @else
-                      <option value="1">{{ __('messages.active') }}</option>
-                      <option value="0">{{ __('messages.inactive') }}</option>
-                    @endif
-                    </select>
-                </div>
+                
                 <a id="quick-action-apply" class="btn btn-primary" 
                     href="{{ route('ExportExcel') }}">{{ __('messages.Export Excel') }}</a>
             </div>
@@ -99,14 +85,7 @@
                   }
                 },
                 columns: [
-                    // {
-                    //     name: 'check',
-                    //     data: 'check',
-                    //     title: '<input type="checkbox" class="form-check-input" name="select_all_table" id="select-all-table" data-type="user" onclick="selectAllTable(this)">',
-                    //     searchable: false,
-                    //     exportable: false,
-                    //     orderable: false,
-                    // },
+                
                     {
                         data: 'name',
                         name: 'display_name',
@@ -129,26 +108,40 @@
                       name:'contact_number',
                       title:"{{ __('messages.phone') }}"
                     },
-                    {
-                      data:'address',
-                      name:'wallet',
-                      title:"{{ __('messages.Address') }}",
-                      searchable: false,
-                      orderable: false,
-                    },
-                    {
-                      data:'personalid',
-                      name:'wallet',
-                      title:"{{ __('messages.National_Id') }}",
-                      searchable: false,
-                      orderable: false,
-                    },
+                
                     
-                    // {
-                    //     data: 'status',
-                    //     name: 'status',
-                    //     title: "{{ __('messages.status') }}"
-                    // },
+                 
+                    {
+    name: 'isAdmin',
+    data: 'isAdmin', 
+     title:"{{ __('messages.isAdmin') }}",
+    searchable: false,
+    orderable: false,
+    render: function(data, type, row) {
+        return `
+            <div class="custom-control custom-switch custom-switch-text custom-switch-color custom-control-inline">
+                <div class="custom-switch-inner">
+                    <input type="checkbox" 
+                           class="custom-control-input change_status" 
+                           data-type="isAdmin" 
+                           value="${row.id}" 
+                           data-id="${row.id}" 
+                           ${data == 1 ? 'checked' : ''} 
+                           id="switch-${row.id}"
+                           onchange="handleIsAdminChange(this)">
+                    <label class="custom-control-label" 
+                           for="switch-${row.id}" 
+                           data-on-label="" 
+                           data-off-label="">
+                    </label>
+                </div>
+            </div>`;
+    }
+},
+
+
+
+
                     {
                         data: 'action',
                         name: 'action',
@@ -161,7 +154,51 @@
 
             });
       });
+///////////////////////////
+function handleIsAdminChange(switchElement) {
+    const stafId = $(switchElement).data('id');
+    const isAdmin = $(switchElement).is(':checked') ? 1 : 0; // 1 إذا كان Checked، 0 إذا Unchecked
 
+    $.ajax({
+        url: '/update-admin-status', // المسار المناسب في الـ Backend
+        method: 'POST',
+        data: {
+            stafid: stafId,
+            isAdmin: isAdmin,
+            _token: '{{ csrf_token() }}' // إرسال CSRF Token
+        },
+        success: function(response) {
+            console.log('تم تحديث حالة المستخدم:', response.message);
+        },
+        error: function(xhr) {
+            console.error('فشل تحديث الحالة:', xhr.responseText);
+            // إعادة الحالة إذا فشل التحديث
+            $(switchElement).prop('checked', !isAdmin);
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ///////////////////////
     function resetQuickAction () {
     const actionValue = $('#quick-action-type').val();
     console.log(actionValue)

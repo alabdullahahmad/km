@@ -5,10 +5,10 @@ use App\Http\Core\InternalInterface\InputServiceInterface;
 
 class ShowTagInput implements InputServiceInterface
 {
-    private int $tagId;
+    private int $categoryId;
     public function __construct( array $input)
     {
-        $this->tagId = $input['tagId'];
+        $this->categoryId = $input['categoryId'];
     }
 
     // write your input function here..
@@ -22,9 +22,9 @@ class ShowTagInput implements InputServiceInterface
     /**
      * Get the value of tagId
      */
-    public function getTagId()
+    public function getCategoryId()
     {
-        return $this->tagId;
+        return $this->categoryId;
     }
 
     /**
@@ -32,9 +32,9 @@ class ShowTagInput implements InputServiceInterface
      *
      * @return  self
      */
-    public function setTagId($tagId)
+    public function setCategoryId($categoryId)
     {
-        $this->tagId = $tagId;
+        $this->categoryId = $categoryId;
 
         return $this;
     }
