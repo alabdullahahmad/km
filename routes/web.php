@@ -98,6 +98,7 @@ use App\Http\Services\AddSubscriptionToCoach\Controller\AddSubscriptionToCoachCo
 use App\Http\Services\FundLogManagement\DeleteFundLog\Controller\DeleteFundLogController;
 use App\Http\Services\CategoryManagement\EditeCategory\Controller\EditeCategoryController;
 use App\Http\Services\CategoryManagement\DeleteCategory\Controller\DeleteCategoryController;
+use App\Http\Services\ChangeAdminStatus\Controller\ChangeAdminStatusController;
 use App\Http\Services\CompletePaymenet\Controller\CompletePaymenetController;
 use App\Http\Services\FundLogManagement\AddFundLog\Controller\AddFundLogController;
 use App\Http\Services\Report\BillReport\Controller\BillReportController;
@@ -850,6 +851,7 @@ Route::group(['prefix' => 'room', 'middleware' => ['auth']],function(){
 Route::group(['prefix' => 'staf', 'middleware' => ['auth']],function(){
     Route::get('/',ViewStafController::class)->name('Staf');
     Route::get('/{stafId}',ShowStafController::class);
+    Route::post('change/status',ChangeAdminStatusController::class)->name('changeStafStatus');
     Route::delete('/delete/{stafId}',DeleteStafController::class)->name('deleteStaf');
     Route::post('/edit',EditeStafController::class)->name('editStaf');
     Route::post('/add',AddStafController::class)->name('addStaf');

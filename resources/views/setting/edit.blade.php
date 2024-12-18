@@ -25,9 +25,9 @@
                             <div class="col-sm-12 col-lg-12">
                                 <ul class="nav flex-column nav-pills nav-fill tabslink" id="tabs-text" role="tablist">
                                     @if(in_array( $page,['profile_form','password_form','time_slot']))
-                                    <li class="nav-item">
+                                    {{-- <li class="nav-item">
                                         <a href="javascript:void(0)" data-href="{{ route('layout_page') }}?page=profile_form" data-target=".paste_here" class="nav-link {{$page=='profile_form'?'active':''}}" data-toggle="tabajax" rel="tooltip"> {{ __('messages.profile')}} </a>
-                                    </li>
+                                    </li> --}}
                                     <li class="nav-item">
                                         <a href="javascript:void(0)" data-href="{{ route('layout_page') }}?page=password_form" data-target=".paste_here" class="nav-link {{$page=='password_form'?'active':''}}" data-toggle="tabajax" rel="tooltip"> {{ __('messages.change_password') }} </a>
                                     </li>
@@ -57,7 +57,7 @@
                                     <li class="nav-item">
                                         <a href="javascript:void(0)" data-href="{{ route('layout_page') }}?page=notification-setting" data-target=".paste_here" class="nav-link {{$page=='notification-setting'?'active':''}}" data-toggle="tabajax" rel="tooltip"> {{ __('messages.notification_configurations') }}</a>
                                     </li>
-                                   
+
                                     <li class="nav-item">
                                         <a href="javascript:void(0)" data-href="{{ route('layout_page') }}?page=social-media" data-target=".paste_here" class="nav-link {{$page=='social-media'?'active':''}}" data-toggle="tabajax" rel="tooltip"> {{ __('messages.social_media') }}</a>
                                     </li>
@@ -127,11 +127,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>     
+                                    </div>
                                 </div>
-                            </div>    
-                        </div>    
-                    </div>    
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

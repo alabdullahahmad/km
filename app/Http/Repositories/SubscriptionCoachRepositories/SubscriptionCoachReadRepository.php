@@ -12,7 +12,7 @@ class SubscriptionCoachReadRepository extends ReadRepository
 
     public function getWithRelations(int $subscriptionCoachId)
     {
-        return $this->model->with(['coach' , 'subscription'])->where('subscriptionId', $subscriptionCoachId)->get();
+        return $this->model->with(['coach'])->where('subscriptionId', $subscriptionCoachId)->get();
     }
 
 

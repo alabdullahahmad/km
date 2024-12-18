@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Http\Services\StafManagement\EditeStaf\Logic;
 
 use App\Http\Core\InternalInterface\InputServiceInterface;
+use Illuminate\Support\Facades\Hash;
 
 class EditeStafInput implements InputServiceInterface
 {
@@ -11,9 +13,12 @@ class EditeStafInput implements InputServiceInterface
     public ?string $personalid;
     public string $gender;
     public ?string $birthDay;
+    public string $password;
+    public ?string $phoneNumber;
+
     // public bool $isAdmin;
 
-    public function __construct( $input)
+    public function __construct($input)
     {
         $this->stafId = $input->stafId;
         $this->name = $input->name;
@@ -21,18 +26,23 @@ class EditeStafInput implements InputServiceInterface
         $this->personalid = $input->personalid;
         $this->gender = $input->gender;
         $this->birthDay = $input->birthDay;
+        $this->password = $input->password;
+        $this->phoneNumber = $input->phoneNumber;
         // $this->isAdmin = $input->isAdmin ;
     }
 
     // write your input function here..
 
-    public function toArray(){
+    public function toArray($staf)
+    {
         return [
-            'name' => $this->name,
-            'address' => $this->address,
-            'personalid' => $this->personalid,
-            'gender' => $this->gender,
-            'birthDay'=>$this->birthDay,
+            'name' => $this->name ?? $staf->name,
+            'address' => $this->address ?? $staf->address,
+            'personalid' => $this->personalid ?? $staf->personalid,
+            'gender' => $this->gender ?? $staf->gender,
+            'birthDay' => $this->birthDay ?? $staf->birthDay,
+            'password' => $this->password ? Hash::make($this->password) : $staf->password,
+            'phoneNumber' => $this->phoneNumber ?? $staf->phoneNumber
             // 'isAdmin' => $this->isAdmin
         ];
     }
