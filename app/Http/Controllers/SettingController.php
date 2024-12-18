@@ -11,6 +11,7 @@ use Hash;
 use App\Models\ProviderSlotMapping;
 use App\Http\Requests\UserRequest;
 use App\Models\NotificationTemplate;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 class SettingController extends Controller
 {
@@ -30,7 +31,7 @@ class SettingController extends Controller
             if ($auth_user->hasAnyRole(['admin', 'demo_admin'])) {
                 $page = 'general-setting';
             } else {
-                $page = 'profile_form';
+                $page = 'password_form';
             }
         }
 
@@ -327,7 +328,8 @@ class SettingController extends Controller
         $user->fill($data)->update();
         storeMediaFile($user, $request->profile_image, 'profile_image');
 
-        return redirect()->route('setting.index', ['page' => 'profile_form'])->withSuccess(__('messages.profile') . ' ' . __('messages.updated'));
+        // return redirect()->route('setting.index', ['page' => 'profile_form'])->withSuccess(__('messages.profile') . ' ' . __('messages.updated'));
+        return redirect()->route('setting.index', ['page' => 'password_form'])->withSuccess(__('messages.profile') . ' ' . __('messages.updated'));
     }
 
     public function changePassword(Request $request)
@@ -335,9 +337,9 @@ class SettingController extends Controller
         if (demoUserPermission()) {
             return  redirect()->back()->withErrors(trans('messages.demo_permission_denied'));
         }
-        $user = User::where('id', \Auth::user()->id)->first();
+        $user = Auth::user();
 
-        if ($user == "") {
+        if (!$user) {
             $message = __('messages.user_not_found');
             return comman_message_response($message, 400);
         }

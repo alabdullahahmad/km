@@ -74,7 +74,7 @@
 								'data-placeholder' => __('messages.select_name',[ 'select' => __('messages.city') ]),
 							]) }}
                     </div>
-                    
+
                     <div class="form-group col-md-6">
                         {{ Form::label('religion_id', __('messages.select_name',[ 'select' => __('Religion') ]),['class'=>'form-control-label'],false) }}
                         <br />
@@ -139,7 +139,7 @@
                         {{ Form::textarea('address', null, ['class'=>"form-control textarea" , 'rows'=>2  , 'placeholder'=> __('messages.address') ]) }}
                     </div>
 
-                  @if($user_data->user_type =='provider')   
+                  @if($user_data->user_type =='provider')
 
                      <div class="form-group col-md-12 mt-4">
                      <h4>{{ __('messages.why_choose_me') }}</h4>
@@ -156,7 +156,7 @@
                         {{ Form::textarea('about_description', null, ['class'=>"form-control textarea" , 'rows'=>2  , 'placeholder'=> __('messages.description') ]) }}
                     </div>
 
-                
+
 
                   @if($user_data->reason != null)
 
@@ -174,10 +174,10 @@
                             </div>
                           </div>
                       </div>
-    
+
                      @endforeach
 
-                    @endif 
+                    @endif
 
                    <div class="form-section form-group col-md-12 ">
                       {{ Form::label('reason', __('messages.reason').'', ['class' => 'form-control-label'], false) }}
@@ -187,7 +187,7 @@
                             <small class="help-block with-errors text-danger"></small>
 
                             <div class="form-group mb-0 col-3 align-self-center">
-                               
+
                                 <button class="remove-section  button-custom button-remove"> <i class="far fa-trash-alt"></i></button>
                             </div>
                         </div>
@@ -259,9 +259,9 @@ $(document).ready(function() {
 
           // Remove Section
         $(document).on('click', '.remove-section1', function () {
-            
+
          $(this).closest('.form-section1').remove();
-            
+
         });
 
         // Function to update Remove button visibility
@@ -403,7 +403,7 @@ $(document).ready(function() {
     $('.select2js').select2({
         width: '100%',
     });
-    
+
 
     var religion_id = "{{ isset($user_data->religion_id) ? $user_data->religion_id : 0 }}";
     loadReligions(religion_id);

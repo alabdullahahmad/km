@@ -98,6 +98,7 @@ use App\Http\Services\AddSubscriptionToCoach\Controller\AddSubscriptionToCoachCo
 use App\Http\Services\FundLogManagement\DeleteFundLog\Controller\DeleteFundLogController;
 use App\Http\Services\CategoryManagement\EditeCategory\Controller\EditeCategoryController;
 use App\Http\Services\CategoryManagement\DeleteCategory\Controller\DeleteCategoryController;
+use App\Http\Services\ChangeAdminStatus\Controller\ChangeAdminStatusController;
 use App\Http\Services\CompletePaymenet\Controller\CompletePaymenetController;
 use App\Http\Services\FundLogManagement\AddFundLog\Controller\AddFundLogController;
 use App\Http\Services\Report\BillReport\Controller\BillReportController;
@@ -833,7 +834,7 @@ Route::group(['prefix' => 'categorys', 'middleware' => ['auth']],function(){
 
 Route::group(['prefix' => 'tag', 'middleware' => ['auth']],function(){
     Route::get('/',ViewTagController::class)->name('Tag');
-    Route::get('/{tagId}',ShowTagController::class);
+    Route::get('category',ShowTagController::class)->name('categoryTags');
     Route::delete('/delete/{tagId}',DeleteTagController::class)->name('deleteTag');
     Route::post('/edit',EditeTagController::class)->name('editTag');
     Route::post('/add',AddTagController::class)->name('addTag');
@@ -850,6 +851,7 @@ Route::group(['prefix' => 'room', 'middleware' => ['auth']],function(){
 Route::group(['prefix' => 'staf', 'middleware' => ['auth']],function(){
     Route::get('/',ViewStafController::class)->name('Staf');
     Route::get('/{stafId}',ShowStafController::class);
+    Route::post('change/status',ChangeAdminStatusController::class)->name('changeStafStatus');
     Route::delete('/delete/{stafId}',DeleteStafController::class)->name('deleteStaf');
     Route::post('/edit',EditeStafController::class)->name('editStaf');
     Route::post('/add',AddStafController::class)->name('addStaf');
@@ -879,7 +881,7 @@ Route::group(['prefix' => 'bill', 'middleware' => ['auth']],function(){
 Route::group(['prefix' => 'subscription', 'middleware' => ['auth']],function(){
     Route::get('/{categoryId}',ViewSubscriptionController::class)->name('Subscription');
     Route::get('/',ViewSubscriptionAllController::class)->name('Subscription.all');
-    Route::get('/{subscriptionId}',ShowSubscriptionController::class);
+    Route::get('tag/show',ShowSubscriptionController::class)->name('tagSubscriptions');
     Route::delete('/delete/{subscriptionId}',DeleteSubscriptionController::class)->name('deleteSubscription');
     Route::post('/edit',EditeSubscriptionController::class)->name('editSubscription');
     Route::post('/add',AddSubscriptionController::class)->name('addSubscription');
@@ -888,7 +890,8 @@ Route::group(['prefix' => 'subscription', 'middleware' => ['auth']],function(){
 
 Route::group(['prefix' => 'subscriptionCoach', 'middleware' => ['auth']],function(){
     Route::get('/',ViewSubscriptionCoachController::class)->name('SubscriptionCoach');
-    Route::get('/{subscriptionCoachId}',ShowSubscriptionCoachController::class);
+    Route::get('calander/subscription',ShowSubscriptionCoachController::class)
+    ->name('calanderSubscription');
     Route::post('/delete',DeleteSubscriptionCoachController::class)->name('deleteEvent');
     Route::post('/edit',EditeSubscriptionCoachController::class)->name('updateEvent');
     Route::post('/add',AddSubscriptionCoachController::class)->name('addSubscriptionCoach');

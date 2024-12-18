@@ -164,9 +164,9 @@
             $(this).removeClass('btn-outline-secondary').addClass('btn-success');
             // طلب Ajax لجلب الـ tags الخاصة بالفئة
             $.ajax({
-                url: '{{ route("Tag") }}', // رابط الراوت
+                url: '{{ route("categoryTags") }}', // رابط الراوت
                 type: 'GET', // نوع الطلب (GET)
-                data: { category: category }, // إرسال الفئة في البيانات
+                data: { categoryId: category }, // إرسال الفئة في البيانات
                 success: function (response) {
                     console.log("Tags fetched successfully:", response);
 
@@ -210,8 +210,9 @@
         $(this).removeClass('btn-outline-secondary').addClass('btn-success');
             // طلب Ajax لجلب تفاصيل الاشتراك
             $.ajax({
-                url: '{{ route("Subscription.all") }}', // رابط الراوت
+                url: '{{ route("tagSubscriptions") }}', // رابط الراوت
                 type: 'GET', // نوع الطلب (GET)
+                data : { 'tagId' : tagId },
                // إرسال الـ tag_id في البيانات
                 success: function (response) {
                     console.log("Subscription data fetched successfully:", response);
@@ -284,9 +285,9 @@
         $("#amountDue").text(`{{  __('messages.Amount_Due :')}} ${subscriptionPrice}`)
         // طلب AJAX
         $.ajax({
-            url: '{{ route("SubscriptionCoach") }}',
+            url: '{{ route("calanderSubscription") }}',
             type: 'GET',
-            data: { subscription_id: subscriptionId },
+            data: { subscriptionCoachId: subscriptionId },
             success: function (response) {
                 console.log("Response:", response);
 

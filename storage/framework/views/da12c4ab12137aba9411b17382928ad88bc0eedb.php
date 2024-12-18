@@ -17,7 +17,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-lg-3">
                 <div class="card">
@@ -26,9 +26,7 @@
                             <div class="col-sm-12 col-lg-12">
                                 <ul class="nav flex-column nav-pills nav-fill tabslink" id="tabs-text" role="tablist">
                                     <?php if(in_array( $page,['profile_form','password_form','time_slot'])): ?>
-                                        <li class="nav-item">
-                                            <a href="javascript:void(0)" data-href="<?php echo e(route('layout_page')); ?>?page=profile_form" data-target=".paste_here" class="nav-link <?php echo e($page=='profile_form'?'active':''); ?>"  data-toggle="tabajax" rel="tooltip"> <?php echo e(__('messages.profile')); ?> </a>
-                                        </li>
+                                        
                                         <li class="nav-item">
                                             <a href="javascript:void(0)" data-href="<?php echo e(route('layout_page')); ?>?page=password_form" data-target=".paste_here" class="nav-link <?php echo e($page=='password_form'?'active':''); ?>"  data-toggle="tabajax" rel="tooltip"> <?php echo e(__('messages.change_password')); ?> </a>
                                         </li>
@@ -58,7 +56,7 @@
                                             <li class="nav-item">
                                                 <a href="javascript:void(0)" data-href="<?php echo e(route('layout_page')); ?>?page=notification-setting" data-target=".paste_here" class="nav-link <?php echo e($page=='notification-setting'?'active':''); ?>"  data-toggle="tabajax" rel="tooltip"> <?php echo e(__('messages.notification_configurations')); ?></a>
                                             </li>
-                                           
+
                                             <li class="nav-item">
                                                 <a href="javascript:void(0)" data-href="<?php echo e(route('layout_page')); ?>?page=social-media" data-target=".paste_here" class="nav-link <?php echo e($page=='social-media'?'active':''); ?>"  data-toggle="tabajax" rel="tooltip"> <?php echo e(__('messages.social_media')); ?></a>
                                             </li>
@@ -83,13 +81,13 @@
                                             <li class="nav-item">
                                                 <a href="javascript:void(0)" data-href="<?php echo e(route('layout_page')); ?>?page=mail-setting" data-target=".paste_here" class="nav-link <?php echo e($page=='mail-setting'?'active':''); ?>"  data-toggle="tabajax" rel="tooltip"> <?php echo e(__('messages.mail_settings')); ?></a>
                                             </li>
-                                            
+
                                             <!-- <li class="nav-item">
                                                 <a href="javascript:void(0)" data-href="<?php echo e(route('layout_page')); ?>?page=push-notification-setting" data-target=".paste_here" class="nav-link <?php echo e($page=='push-notification-setting'?'active':''); ?>"  data-toggle="tabajax" rel="tooltip"> <?php echo e(__('messages.pushnotification_settings')); ?></a>
                                             </li> -->
                                             <li class="nav-item">
                                                 <a href="javascript:void(0)" data-href="<?php echo e(route('layout_page')); ?>?page=earning-setting" data-target=".paste_here" class="nav-link <?php echo e($page=='earning-setting'?'active':''); ?>"  data-toggle="tabajax" rel="tooltip"> <?php echo e(__('messages.earning_setting')); ?></a>
-                                            </li>                                         
+                                            </li>
                                         <?php endif; ?>
                                     <?php endif; ?>
                                 </ul>

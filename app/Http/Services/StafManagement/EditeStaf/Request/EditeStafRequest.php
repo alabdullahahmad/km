@@ -31,7 +31,8 @@ class EditeStafRequest extends BaseRequest
             'personalid' => ['nullable' , 'string' , 'min:11','max:11'],
             'gender' => ['required' , 'string' ],
             'birthDay' => ['nullable' , 'date' , 'date_format:Y-m-d'],
-            'phoneNumber'=>['nullable' , 'string', 'min:10','max:10' , 'unique:stafs,phoneNumber']
+            'password'=>['required' ,"string","min:8"],
+            'phoneNumber'=>['nullable' , 'string', 'min:10','max:10']
             // 'isAdmin' => ['required' , 'boolean']
         ];
     }

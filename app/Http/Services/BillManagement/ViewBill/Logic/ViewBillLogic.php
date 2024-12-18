@@ -6,6 +6,7 @@ use App\Http\Core\Const\Messages\SuccessMessages;
 use App\Http\Repositories\RepositoryCaller;
 use App\Http\Core\InternalInterface\Service;
 use App\Http\Core\Response\Adapter\PresentersModels\ResponseModel;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ViewBillLogic implements Service {
@@ -30,7 +31,7 @@ class ViewBillLogic implements Service {
             ['userPayment'=>function($q){
                 return $q->select('id','billId', DB::raw('SUM(amount) as totalAmount'))->groupBy('billId');
             }]
-        );
+        ,(Auth::user()->isAdmin) ? null : ['stafId' => Auth::user()->id]);
 
         foreach ($bills as  $value) {
             $value->staf = $this->repository->StafRepository()->readRepository()->find($value->stafId);
