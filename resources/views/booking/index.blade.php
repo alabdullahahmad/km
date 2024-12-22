@@ -97,88 +97,96 @@
      @endif
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
-            // بيانات وهمية لعرضها في الجدول
-
-            // إنشاء جدول DataTable
-            window.renderedDataTable = $('#datatable').DataTable({
-                processing: true,
-                serverSide: false, // تم ضبط القيمة لتجنب طلبات AJAX
-                autoWidth: false,
-                responsive: true,
-                ajax: {
-                  "type"   : "get",
-                  "url"    : '{{ route("showBill") }}',
-                  headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                  "data"   : function( d ) {
-                    d.search = {
-                      value: $('.dt-search').val()
-                    };
-                    d.filter = {
-                            gender: $('#gender_filter').val(),
-                            status: $('#status_filter').val(),
-                            start_date: $('#start_date').val(),
-                            end_date: $('#end_date').val()
-                        }
-                    // d.startDate = $('#startDate').val();
-                    // d.endDate = $('#endDate').val();
-                  },
+        // إنشاء جدول DataTable
+        const dataTable = $('#datatable').DataTable({
+            processing: true,
+            serverSide: false, // Client-side فقط
+            autoWidth: false,
+            responsive: true,
+            ajax: {
+                type: "get",
+                url: '{{ route("showBill") }}',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                dom: '<"row align-items-center"><"table-responsive my-4" rt><"row align-items-center"<"col-md-6" l><"col-md-6" p>><"clear">',
-                columns: [
-                    // {
-                    //     data: 'check',
-                    //     title: '<input type="checkbox" class="form-check-input">',
-                    //     orderable: false
-                    // },
-                    {
-                        data: (data)=>{
-                            return data.user.name
-                        },
-                        title: 'الاسم'
-                    },
-                    {
-                        data: 'startDate',
-                        title: 'بداية الاشتراك'
-                    },
-                    {
-                        data: 'endDate',
-                        title: 'نهاية الاشتراك'
-                    },
-                    {
-                        data: (data)=>{
-                            return data.subscription.name
-                        },
-                        title: 'اسم الاشتراك'
-                    },
-                    {
-                        data: (data)=>{
-                            return (data.isEnd == 1) ?"غير فعال":"فعال"
-                        },
-                        title: 'الحالة'
-                    },
-                    {
-                        data: (data)=>{
-                            return data.subscription.numOfSessions
-                        },
-                        title: 'عدد الجلسات'
-                    },
-                    {
-                        data: (data)=>{
-                            return data.subscription.numOfDays
-                        },
-                        title: 'عدد الأيام'
-                    },
-                    {
-                        data: 'action',
-                        title: 'العمليات'
-                    },
-
-                ],
-            });
+                data: function (d) {
+                    d.filter = {
+                        gender: $('#gender_filter').val(),
+                        status: $('#status_filter').val(),
+                        start_date: $('#start_date').val(),
+                        end_date: $('#end_date').val()
+                    };
+                }
+            },
+            dom: '<"row align-items-center"><"table-responsive my-4" rt><"row align-items-center"<"col-md-6" l><"col-md-6" p>><"clear">',
+            columns: [
+                {
+                    data: (data) => data.user.name ?? '', // التحقق من وجود الاسم
+                    title: 'الاسم'
+                },
+                {
+                    data: 'startDate',
+                    title: 'بداية الاشتراك'
+                },
+                {
+                    data: 'endDate',
+                    title: 'نهاية الاشتراك'
+                },
+                {
+                    data: (data) => data.subscription.name ?? '', // اسم الاشتراك
+                    title: 'اسم الاشتراك'
+                },
+                {
+                    data: (data) => (data.isEnd == 1) ? "غير فعال" : "فعال", // حالة الاشتراك
+                    title: 'الحالة'
+                },
+                {
+                    data: (data) => data.subscription.numOfSessions ?? 0, // عدد الجلسات
+                    title: 'عدد الجلسات'
+                },
+                {
+                    data: (data) => data.subscription.numOfDays ?? 0, // عدد الأيام
+                    title: 'عدد الأيام'
+                },
+                {
+                    data: 'action',
+                    title: 'العمليات'
+                },
+            ],
         });
 
+        // تنفيذ البحث اليدوي (Client-side)
+        $('.dt-search').on('keyup', function () {
+            const searchTerm = this.value.toLowerCase(); // الحصول على نص البحث
+            dataTable.rows().every(function () {
+                const rowData = this.data(); // بيانات الصف
+                const searchableFields = [
+                    rowData.user?.name ?? '',                    // الاسم
+                    rowData.startDate ?? '',                     // بداية الاشتراك
+                    rowData.endDate ?? '',                       // نهاية الاشتراك
+                    rowData.subscription?.name ?? '',            // اسم الاشتراك
+                    (rowData.isEnd == 1 ? "غير فعال" : "فعال"),  // حالة الاشتراك
+                    (rowData.subscription?.numOfSessions ?? 0).toString(), // عدد الجلسات
+                    (rowData.subscription?.numOfDays ?? 0).toString()       // عدد الأيام
+                ];
+
+                // التحقق من وجود نص البحث في أي من الحقول
+                const matchFound = searchableFields.some(field => {
+                    if (field !== undefined && field !== null) {
+                        return field.toString().toLowerCase().includes(searchTerm);
+                    }
+                    return false;
+                });
+
+                // إظهار أو إخفاء الصف بناءً على المطابقة
+                if (matchFound) {
+                    $(this.node()).show();
+                } else {
+                    $(this.node()).hide();
+                }
+            });
+        });
+    });
         // دالة لتحديث قائمة الإجراءات السريعة
         function resetQuickAction() {
             const actionValue = $('#quick-action-type').val();

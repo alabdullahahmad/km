@@ -13,7 +13,7 @@ class EditeStafInput implements InputServiceInterface
     public ?string $personalid;
     public string $gender;
     public ?string $birthDay;
-    public string $password;
+    public ?string $password;
     public ?string $phoneNumber;
 
     // public bool $isAdmin;

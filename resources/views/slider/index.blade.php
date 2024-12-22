@@ -23,13 +23,13 @@
         <div class="card-body">
         <div class="row justify-content-between">
            
-              <div class="d-flex justify-content-end">
+              {{-- <div class="d-flex justify-content-end">
             
                 <div class="input-group ml-2">
                     <span class="input-group-text" id="addon-wrapping"><i class="fas fa-search"></i></span>
                     <input type="text" class="form-control dt-search" placeholder={{__('messages.search')}} aria-label="Search" aria-describedby="addon-wrapping" aria-controls="dataTableBuilder">
                   </div>
-              </div>
+              </div> --}}
                
               <div class="table-responsive">
                 <table id="datatable" class="table table-striped border">

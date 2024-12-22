@@ -42,135 +42,104 @@
             </div>
         </div>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-
-        window.renderedDataTable = $('#datatable').DataTable({
-                processing: true,
-                serverSide: true,
-                autoWidth: false,
-                responsive: true,
-                dom: '<"row align-items-center"><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" l><"col-md-6" p>><"clear">',
-                ajax: {
-                  "type"   : "GET",
-                  "url"    : '{{ route("Subscription", $id) }}',
-                  "data"   : function( d ) {
-                    d.search = {
-                      value: $('.dt-search').val()
-                    };
+   <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        // إنشاء جدول DataTable
+        const dataTable = $('#datatable').DataTable({
+            processing: true,
+            serverSide: false, // البحث Client-side فقط
+            autoWidth: false,
+            responsive: true,
+            dom: '<"row align-items-center"><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" l><"col-md-6" p>><"clear">',
+            ajax: {
+                type: "GET",
+                url: '{{ route("Subscription", $id) }}',
+                data: function (d) {
                     d.filter = {
-                      column_status: $('#column_status').val()
-                    }
-                  },
+                        column_status: $('#column_status').val()
+                    };
+                }
+            },
+            columns: [
+                {
+                    data: 'name',
+                    name: 'name',
+                    title: "{{ __('messages.name') }}"
                 },
+                {
+                    data: 'price',
+                    name: 'price',
+                    title: "{{ __('messages.price') }}"
+                },
+                {
+                    data: 'numOfDays',
+                    name: 'numOfDays',
+                    title: "{{ __('messages.number_day') }}"
+                },
+                {
+                    data: 'numOfSessions',
+                    name: 'numOfSessions',
+                    title: "{{ __('messages.Number_sessions') }}"
+                },
+                {
+                    data: 'price',
+                    name: 'price',
+                    title: "{{ __('messages.price') }}"
+                },
+                {
+                    data: (data) => {
+                        return data.tag.name;
+                    },
+                    name: 'tag',
+                    title: "{{ __('messages.Subscription type') }}"
+                },
+                {
+                    data: 'description',
+                    name: 'description',
+                    title: "{{ __('messages.description') }}"
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false,
+                    title: "{{ __('messages.action') }}"
+                }
+            ],
+        });
 
-                columns: [
-                    // {
-                    //     name: 'check',
-                    //     data: 'check',
-                    //     title: '<input type="checkbox" class="form-check-input" name="select_all_table" id="select-all-table" data-type="service" onclick="selectAllTable(this)">',
-                    //     exportable: false,
-                    //     orderable: false,
-                    //     searchable: false,
-                    // },
-                    {
-                        data: 'name',
-                        name: 'name',
-                        title: "{{ __('messages.name') }}"
-                    },
-                    {
-                        data:'price',
-                        name:'price',
-                        title:"{{ __('messages.price') }}"
-                    },
-                    {
-                        data:'numOfDays',
-                        name:'numOfDays',
-                        title:"{{ __('messages.number_day') }}"
-                    },
-                    {
-                        data:'numOfSessions',
-                        name:'numOfSessions',
-                        title:"{{ __('messages.Number_sessions') }}"
-                    },
-                    {
-                        data:'price',
-                        name:'price',
-                        title:"{{ __('messages.price') }}"
-                    },
-                    {
-                        data:(data)=>{
-                            return data.tag.name
-                        },
-                        name:'tag',
-                        title: "{{ __('messages.Subscription type') }}"
-                    },
-                    {
-                        data: 'description',
-                        name: 'description',
-                        title: "{{ __('messages.description') }}"
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false,
-                        searchable: false,
-                        title: "{{ __('messages.action') }}"
+        // البحث اليدوي
+        $('.dt-search').on('keyup', function () {
+            const searchTerm = this.value.toLowerCase(); // نص البحث
+            dataTable.rows().every(function () {
+                const rowData = this.data(); // بيانات الصف
+                const searchableFields = [
+                    rowData.name ?? '',                             // الاسم
+                    (rowData.price ?? '').toString(),               // السعر
+                    (rowData.numOfDays ?? '').toString(),           // عدد الأيام
+                    (rowData.numOfSessions ?? '').toString(),       // عدد الجلسات
+                    (rowData.tag?.name ?? ''),                      // نوع الاشتراك
+                    rowData.description ?? ''                       // الوصف
+                ];
+
+                // التحقق من وجود نص البحث في أي من الحقول
+                const matchFound = searchableFields.some(field => {
+                    if (field !== undefined && field !== null) {
+                        return field.toString().toLowerCase().includes(searchTerm);
                     }
+                    return false;
+                });
 
-                ]
-
+                // إظهار أو إخفاء الصف بناءً على المطابقة
+                if (matchFound) {
+                    $(this.node()).show();
+                } else {
+                    $(this.node()).hide();
+                }
             });
-      });
+        });
+    });
+</script>
 
-    function resetQuickAction () {
-    const actionValue = $('#quick-action-type').val();
-    console.log(actionValue)
-    if (actionValue != '') {
-        $('#quick-action-apply').removeAttr('disabled');
-
-        if (actionValue == 'change-status') {
-            $('.quick-action-field').addClass('d-none');
-            $('#change-status-action').removeClass('d-none');
-        } else {
-            $('.quick-action-field').addClass('d-none');
-        }
-    } else {
-        $('#quick-action-apply').attr('disabled', true);
-        $('.quick-action-field').addClass('d-none');
-    }
-  }
-
-  $('#quick-action-type').change(function () {
-    resetQuickAction()
-  });
-  $(document).on('update_quick_action', function() {
-
-    })
-
-
-
-  $(document).on('click', '[data-ajax="true"]', function (e) {
-      e.preventDefault();
-      const button = $(this);
-      const confirmation = button.data('confirmation');
-
-      if (confirmation === 'true') {
-          const message = button.data('message');
-          if (confirm(message)) {
-              const submitUrl = button.data('submit');
-              const form = button.closest('form');
-              form.attr('action', submitUrl);
-              form.submit();
-          }
-      } else {
-          const submitUrl = button.data('submit');
-          const form = button.closest('form');
-          form.attr('action', submitUrl);
-          form.submit();
-      }
-  });
-
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </x-master-layout>

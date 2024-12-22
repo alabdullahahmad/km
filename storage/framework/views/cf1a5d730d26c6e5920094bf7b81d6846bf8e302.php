@@ -559,4 +559,4 @@ $("#editEventBtn").on("click", function() {
 <?php $component = $__componentOriginalc6e081c8432fe1dd6b4e43af4871c93447ee9b23; ?>
 <?php unset($__componentOriginalc6e081c8432fe1dd6b4e43af4871c93447ee9b23); ?>
 <?php endif; ?>
-<?php /**PATH /home/kmpower/public_html/resources/views/encashment/index.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\Users\USER\Desktop\km\resources\views/encashment/index.blade.php ENDPATH**/ ?>

@@ -153,6 +153,37 @@
     <script>
 
 
+$(document).ready(function () {
+    // عند اختيار تصنيف
+    $(document).on('click', '.category-btn', function () {
+        // تفريغ جميع المستويات الأدنى
+        $('#class-categories').empty();
+        $('#subscription-cards').empty();
+        $('#Coash').empty().hide();
+        $('#shifts').empty().hide();
+    });
+
+    // عند اختيار Tag
+    $(document).on('click', '.class-btn', function () {
+        // تفريغ جميع المستويات الأدنى
+        $('#subscription-cards').empty();
+        $('#Coash').empty().hide();
+        $('#shifts').empty().hide();
+    });
+
+    // عند اختيار اشتراك
+    $(document).on('click', '.card', function () {
+        // تفريغ جميع المستويات الأدنى
+        $('#Coash').empty().hide();
+        $('#shifts').empty().hide();
+    });
+
+    // عند اختيار مدرب
+    $(document).on('click', '.coach-btn', function () {
+        // تفريغ الفترات
+        $('#shifts').empty().hide();
+    });
+});
 
 
 
@@ -403,7 +434,8 @@
                     const coachId = $(this).data('coach-id');
                     $('#coach_id').val(coachId);
                     const selectedCoach = uniqueCoaches[coachId];
-                    shiftContainer.empty(); // تفريغ القسم قبل عرض الفترات
+                    
+                    shiftContainer.empty(); 
                     $('.coach-btn').removeClass('btn-success').addClass('btn-outline-secondary');
                     $(this).removeClass('btn-outline-secondary').addClass('btn-success');
                     // إنشاء بطاقات الفترات
@@ -422,12 +454,16 @@
                                 </ul>
                             </div>
                         `;
+                     
                         shiftContainer.append(shiftCard);
+                   
                     }
 
                     // إظهار قسم الفترات
                     shiftContainer.show();
+                  
                 });
+             
                 $(document).on('click', '.cardd', function () {
                  highlightShiftCard($(this));
                 });
@@ -450,29 +486,6 @@ function highlightSubscriptionCard(card) {
         $('.shift-card').removeClass('border-success bg-success text-white').addClass('bg-light');
         card.removeClass('bg-light').addClass('border-success bg-success text-white');
     }
-
-// // تلوين البطاقة عند الضغط عليها (سواء كانت كارت مدرب أو غيره)
-// $(document).on('click', '.card', function () {
-//     // إزالة التلوين من جميع الكروت
-//     $('.card').removeClass('selected-card');
-
-//     // إضافة التلوين للكرت المختار
-//     $(this).addClass('bg-primary text-white');
-// });
-// $(document).on('click', '.cardd', function () {
-//     // إزالة التلوين من جميع الكروت
-//     $('.cardd').removeClass('selected-card');
-
-//     // إضافة التلوين للكرت المختار
-//     $(this).addClass('bg-primary text-white');
-// });
-
-
-
-
-
-
-///////////////////////
 
 $(document).ready(function () {
 
@@ -498,10 +511,6 @@ $(document).ready(function () {
         errorMessage += 'يرجى اختيار مدرب.\n';
     }
 
-    // if (!$('#shifts').val()) {
-    //     isValid = false;
-    //     errorMessage += 'يرجى اختيار فترة.\n';
-    // }
 
     if (!$('#startDate').val()) {
         isValid = false;
@@ -646,5 +655,4 @@ $(document).ready(function () {
 <?php if (isset($__componentOriginalc6e081c8432fe1dd6b4e43af4871c93447ee9b23)): ?>
 <?php $component = $__componentOriginalc6e081c8432fe1dd6b4e43af4871c93447ee9b23; ?>
 <?php unset($__componentOriginalc6e081c8432fe1dd6b4e43af4871c93447ee9b23); ?>
-<?php endif; ?>
-<?php /**PATH C:\Users\USER\Desktop\km\resources\views/setting/privacy_policy_form.blade.php ENDPATH**/ ?>
+<?php endif; ?><?php /**PATH C:\Users\USER\Desktop\km\resources\views/setting/privacy_policy_form.blade.php ENDPATH**/ ?>

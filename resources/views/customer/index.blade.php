@@ -48,83 +48,104 @@
       </div>
   </div>
   <script>
-      document.addEventListener('DOMContentLoaded', (event) => {
-          // إعداد الـ DataTable ليعرض البيانات بشكل عام أولاً
-          window.renderedDataTable = $('#datatable').DataTable({
-              processing: true,
-              serverSide: true,
-              autoWidth: false,
-              responsive: true,
-              dom: '<"row align-items-center"><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" l><"col-md-6" p>><"clear">',
-              ajax: {
-                  type: "GET",
-                  url: '{{ route("fundLogStaf") }}',  // جلب البيانات بدون أي فلتر زمني في البداية
-                  data: function (d) {
-                      d.search = { value: $('.dt-search').val() }; // البحث عند إدخال نص
-                      d.filter = { expire_date: $('#expire_date').val() }; // إضافة الفلترة عند تحديد تاريخ
-                  },
-              },
-              columns: [
-                  {
-                      name: 'display_name',
-                      data: (data)=>{
-                        return data.staf.name
-                      },
-                      title: "{{__('messages.name')}}"
-                  },
-                  {
-                      data: 'date',
-                      name: 'date',
-                      title: "{{ __('messages.date') }}"
-                  },
-                  {
-                      data: (data)=>{
-                        return data.staf.phoneNumber
-                      },
-                      name: 'contact_number',
-                      title: "{{__('messages.phone')}}"
-                  },
-                  {
-                      data: 'amount',
-                      name: 'amount',
-                      title: "{{__('messages.amount_due')}}"
-                  },
-              ]
-          });
+    document.addEventListener('DOMContentLoaded', (event) => {
+        // إعداد الـ DataTable ليعرض البيانات بشكل عام أولاً
+        const dataTable = $('#datatable').DataTable({
+            processing: true,
+            serverSide: false, // تعطيل البحث Server-side
+            autoWidth: false,
+            responsive: true,
+            dom: '<"row align-items-center"><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" l><"col-md-6" p>><"clear">',
+            ajax: {
+                type: "GET",
+                url: '{{ route("fundLogStaf") }}',  // جلب البيانات بدون أي فلتر زمني في البداية
+            },
+            columns: [
+                {
+                    name: 'display_name',
+                    data: (data) => {
+                        return data.staf.name;
+                    },
+                    title: "{{ __('messages.name') }}"
+                },
+                {
+                    data: 'date',
+                    name: 'date',
+                    title: "{{ __('messages.date') }}"
+                },
+                {
+                    data: (data) => {
+                        return data.staf.phoneNumber;
+                    },
+                    name: 'contact_number',
+                    title: "{{ __('messages.phone') }}"
+                },
+                {
+                    data: 'amount',
+                    name: 'amount',
+                    title: "{{ __('messages.amount_due') }}"
+                },
+            ]
+        });
 
-          // عند تغيير تاريخ الفلترة، يتم تمكين زر التطبيق
-          $('#expire_date').change(function() {
-              // إذا كان هناك تاريخ تم تحديده، نفعّل الزر
-              if ($('#expire_date').val()) {
-                  $('#quick-action-apply').prop('disabled', false);  // تمكين الزر
-              } else {
-                  $('#quick-action-apply').prop('disabled', true);  // تعطيل الزر إذا لم يتم تحديد تاريخ
-              }
-              // تحديث الجدول بناءً على الفلترة
-              renderedDataTable.draw();
-          });
+        // فلترة البيانات عند كتابة نص في حقل البحث
+        $('.dt-search').on('keyup', function () {
+            const searchTerm = this.value.toLowerCase(); // نص البحث
+            dataTable.rows().every(function () {
+                const rowData = this.data(); // بيانات الصف
+                const searchableFields = [
+                    rowData.staf.name ?? '',             // الاسم
+                    rowData.staf.phoneNumber ?? '',      // رقم الهاتف
+                    rowData.amount ?? '',                // المبلغ
+                    rowData.date ?? ''                   // التاريخ
+                ];
 
-          // فلترة البيانات عند كتابة نص في حقل البحث
-          $('.dt-search').on('keyup', function () {
-              renderedDataTable.draw();
-          });
+                // التحقق من وجود النص المدخل في أي من الحقول
+                const matchFound = searchableFields.some(field => {
+                    if (field !== undefined && field !== null) {
+                        return field.toString().toLowerCase().includes(searchTerm);
+                    }
+                    return false;
+                });
 
-          // التحقق من حالة زر التطبيق عند تحميل الصفحة
-          if ($('#expire_date').val()) {
-              $('#quick-action-apply').prop('disabled', false);  // تمكين الزر إذا تم تحديد تاريخ
-          } else {
-              $('#quick-action-apply').prop('disabled', true);  // تعطيل الزر في حال عدم تحديد تاريخ
-          }
-      });
+                // إظهار أو إخفاء الصف بناءً على المطابقة
+                if (matchFound) {
+                    $(this.node()).show();
+                } else {
+                    $(this.node()).hide();
+                }
+            });
+        });
 
-      $(document).on('click', '[data-ajax="true"]', function (e) {
-          e.preventDefault();
-          // الآن عند الضغط على الزر سيتم إرسال النموذج مباشرة دون التأكيد
-          const submitUrl = $(this).data('submit');
-          const form = $(this).closest('form');
-          form.attr('action', submitUrl);
-          form.submit();
-      });
-  </script>
+        // عند تغيير تاريخ الفلترة، يتم تمكين زر التطبيق
+        $('#expire_date').change(function () {
+            // إذا كان هناك تاريخ تم تحديده، نفعّل الزر
+            if ($('#expire_date').val()) {
+                $('#quick-action-apply').prop('disabled', false);  // تمكين الزر
+            } else {
+                $('#quick-action-apply').prop('disabled', true);  // تعطيل الزر إذا لم يتم تحديد تاريخ
+            }
+            // تحديث الجدول بناءً على الفلترة
+            dataTable.draw();
+        });
+
+        // التحقق من حالة زر التطبيق عند تحميل الصفحة
+        if ($('#expire_date').val()) {
+            $('#quick-action-apply').prop('disabled', false);  // تمكين الزر إذا تم تحديد تاريخ
+        } else {
+            $('#quick-action-apply').prop('disabled', true);  // تعطيل الزر في حال عدم تحديد تاريخ
+        }
+    });
+
+    $(document).on('click', '[data-ajax="true"]', function (e) {
+        e.preventDefault();
+        // الآن عند الضغط على الزر سيتم إرسال النموذج مباشرة دون التأكيد
+        const submitUrl = $(this).data('submit');
+        const form = $(this).closest('form');
+        form.attr('action', submitUrl);
+        form.submit();
+    });
+</script>
+
   <!-- تم إزالة أي سكربت خاص بـ sweetalert2 هنا -->
 </x-master-layout>
