@@ -101,6 +101,8 @@ use App\Http\Services\CategoryManagement\DeleteCategory\Controller\DeleteCategor
 use App\Http\Services\ChangeAdminStatus\Controller\ChangeAdminStatusController;
 use App\Http\Services\CompletePaymenet\Controller\CompletePaymenetController;
 use App\Http\Services\FundLogManagement\AddFundLog\Controller\AddFundLogController;
+use App\Http\Services\PlayerLoginLogManagement\AddPlayerLoginLog\Controller\AddPlayerLoginLogController;
+use App\Http\Services\PlayerLoginLogManagement\ShowPlayerLoginLog\Controller\ShowPlayerLoginLogController;
 use App\Http\Services\Report\BillReport\Controller\BillReportController;
 use App\Http\Services\Report\ClassReport\Controller\ClassReportController;
 use App\Http\Services\Report\ClassReportDetails\Controller\ClassReportDetailsController;
@@ -949,3 +951,13 @@ Route::get('show/booking/page',function(Request $request){
     $user = User::query()->find($request->data);
     return view('setting.privacy_policy_form',compact('user'));
 })->name('show.booking.page');
+
+
+Route::group(['prefix' => 'playerLoginLog' ,  'middleware' => ['auth']],function(){
+    // Route::get('/',ViewUserController::class);
+    // Route::post('/complete/paymenet',CompletePaymenetController::class);
+    Route::get('show',ShowPlayerLoginLogController::class)->name('allPlayerLoginLog');
+    // Route::delete('/delete/{UserId}',DeleteUserController::class);
+    // Route::post('/edit',EditeUserController::class);
+    Route::post('/add',AddPlayerLoginLogController::class)->name('addPlayerLoginLog');
+});

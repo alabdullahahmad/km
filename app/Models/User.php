@@ -241,4 +241,14 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->hasMany(Bill::class, 'userId');
     }
+
+    /**
+     * Get all of the playerLoginLog for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function playerLoginLog()
+    {
+        return $this->hasMany(PalyerLoginLog::class, 'userId');
+    }
 }
