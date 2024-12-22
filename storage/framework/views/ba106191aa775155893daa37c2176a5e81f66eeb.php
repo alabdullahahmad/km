@@ -1,4 +1,9 @@
-<x-master-layout>
+<?php if (isset($component)) { $__componentOriginalc6e081c8432fe1dd6b4e43af4871c93447ee9b23 = $component; } ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\MasterLayout::class, []); ?>
+<?php $component->withName('master-layout'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes([]); ?>
   <head>
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
@@ -9,12 +14,12 @@
               <div class="card card-block card-stretch">
                   <div class="card-body p-0">
                       <div class="d-flex justify-content-between align-items-center p-3 flex-wrap gap-3">
-                          <h5 class="font-weight-bold">{{ __('messages.Receptions') }}</h5>
-                          @if($list_status != 'pending')
-                          @if($auth_user->can('provider add'))
-                          <a href="{{ route('provider.create') }}" class="float-right mr-1 btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i> {{ __('messages.add_form_title',['form' => __('messages.Receptions')  ]) }}</a>
-                          @endif
-                          @endif
+                          <h5 class="font-weight-bold"><?php echo e(__('messages.Receptions')); ?></h5>
+                          <?php if($list_status != 'pending'): ?>
+                          <?php if($auth_user->can('provider add')): ?>
+                          <a href="<?php echo e(route('provider.create')); ?>" class="float-right mr-1 btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i> <?php echo e(__('messages.add_form_title',['form' => __('messages.Receptions')  ])); ?></a>
+                          <?php endif; ?>
+                          <?php endif; ?>
                       </div>
 
                   </div>
@@ -27,28 +32,22 @@
       <div class="row justify-content-between">
           <div>
               <div class="col-md-12">
-                <form action="{{ route('provider.bulk-action') }}" id="quick-action-form" class="form-disabled d-flex gap-3 align-items-center">
-                  @csrf
+                <form action="<?php echo e(route('provider.bulk-action')); ?>" id="quick-action-form" class="form-disabled d-flex gap-3 align-items-center">
+                  <?php echo csrf_field(); ?>
 
 
 
               <a id="quick-action-apply" class="btn btn-primary"
-                  href="{{ route('ExportExcel') }}">{{ __('messages.Export Excel') }}</a>
+                  href="<?php echo e(route('ExportExcel')); ?>"><?php echo e(__('messages.Export Excel')); ?></a>
           </div>
 
           </form>
         </div>
             <div class="d-flex justify-content-end">
-              {{-- <div class="datatable-filter ml-auto">
-                <select name="column_status" id="column_status" class="select2 form-control" data-filter="select" style="width: 100%">
-                  <option value="">{{ __('messages.all') }}</option>
-                  <option value="0" {{$filter['status'] == '0' ? "selected" : ''}}>{{ __('messages.inactive') }}</option>
-                  <option value="1" {{$filter['status'] == '1' ? "selected" : ''}}>{{ __('messages.active') }}</option>
-                </select>
-              </div> --}}
+              
               <div class="input-group ml-2">
                   <span class="input-group-text" id="addon-wrapping"><i class="fas fa-search"></i></span>
-                  <input type="text" class="form-control dt-search" placeholder="{{ __('messages.search') }}" aria-label="Search" aria-describedby="addon-wrapping" aria-controls="dataTableBuilder">
+                  <input type="text" class="form-control dt-search" placeholder="<?php echo e(__('messages.search')); ?>" aria-label="Search" aria-describedby="addon-wrapping" aria-controls="dataTableBuilder">
                 </div>
             </div>
 
@@ -74,7 +73,7 @@
             dom: '<"row align-items-center"><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" l><"col-md-6" p>><"clear">',
             ajax: {
                 type: "GET",
-                url: '{{ route("Staf") }}',
+                url: '<?php echo e(route("Staf")); ?>',
                 data: function (d) {
                     d.filter = {
                         column_status: $('#column_status').val()
@@ -85,27 +84,27 @@
                 {
                     data: 'name',
                     name: 'display_name',
-                    title: "{{ __('messages.name') }}"
+                    title: "<?php echo e(__('messages.name')); ?>"
                 },
                 {
                     data: 'gender',
                     name: 'gender',
-                    title: "{{ __('messages.gender') }}"
+                    title: "<?php echo e(__('messages.gender')); ?>"
                 },
                 {
                     data: 'birthDay',
                     name: 'providertype_id',
-                    title: "{{ __('messages.birthday') }}"
+                    title: "<?php echo e(__('messages.birthday')); ?>"
                 },
                 {
                     data: 'phoneNumber',
                     name: 'contact_number',
-                    title: "{{ __('messages.phone') }}"
+                    title: "<?php echo e(__('messages.phone')); ?>"
                 },
                 {
                     data: 'isAdmin',
                     name: 'isAdmin',
-                    title: "{{ __('messages.isAdmin') }}",
+                    title: "<?php echo e(__('messages.isAdmin')); ?>",
                     render: function (data, type, row) {
                         return `
                             <div class="custom-control custom-switch custom-switch-text custom-switch-color custom-control-inline">
@@ -132,7 +131,7 @@
                     name: 'action',
                     orderable: false,
                     searchable: false,
-                    title: "{{ __('messages.action') }}"
+                    title: "<?php echo e(__('messages.action')); ?>"
                 }
             ]
         });
@@ -173,12 +172,12 @@ function handleIsAdminChange(switchElement) {
   const isAdmin = $(switchElement).is(':checked') ? 1 : 0; // 1 إذا كان Checked، 0 إذا Unchecked
 
   $.ajax({
-      url: "{{ route('changeStafStatus') }}", // المسار المناسب في الـ Backend
+      url: "<?php echo e(route('changeStafStatus')); ?>", // المسار المناسب في الـ Backend
       method: 'POST',
       data: {
           stafId: stafId,
           isAdmin: isAdmin,
-          _token: '{{ csrf_token() }}' // إرسال CSRF Token
+          _token: '<?php echo e(csrf_token()); ?>' // إرسال CSRF Token
       },
       success: function(response) {
           console.log('تم تحديث حالة المستخدم:', response.message);
@@ -261,4 +260,10 @@ $(document).on('update_quick_action', function() {
 
   </script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-</x-master-layout>
+ <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc6e081c8432fe1dd6b4e43af4871c93447ee9b23)): ?>
+<?php $component = $__componentOriginalc6e081c8432fe1dd6b4e43af4871c93447ee9b23; ?>
+<?php unset($__componentOriginalc6e081c8432fe1dd6b4e43af4871c93447ee9b23); ?>
+<?php endif; ?>
+<?php /**PATH C:\Users\HP\OneDrive\سطح المكتب\km\resources\views/provider/index.blade.php ENDPATH**/ ?>

@@ -15,14 +15,17 @@ class ChangeAdminStatusLogic implements Service {
     //---------------------------------------------------------------------------------------
     private ChangeAdminStatusInput $input,  /*| Pass Request To Service*/
     //---------------------------------------------------------------------------------------
-    ){}
+    ){
+        $this->repository = new RepositoryCaller();
+    }
 
 
     public function execute (): ResponseModel {
 
         // write your logic code..
         $staf = $this->repository->StafRepository()
-        ->updateRepository()->update($this->input->stafId,[
+        ->updateRepository()->update(
+            ['id'=>$this->input->stafId],[
             'isAdmin' => $this->input->isAdmin
         ]);
 
@@ -37,7 +40,7 @@ class ChangeAdminStatusLogic implements Service {
         }
 
 
-        $response  = new ChangeAdminStatusOutput($staf ,
+        $response  = new ChangeAdminStatusOutput([] ,
         SuccessMessages::getKey(SuccessMessages::$show,Attributes::Staf));
 
         return $response->send_as_object();

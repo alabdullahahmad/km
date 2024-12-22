@@ -24,7 +24,9 @@ class Staf extends Authenticatable implements HasMedia
         'gender',
         'birthDay',
         'status',
-        'user_type'
+        'user_type',
+        'isAdmin',
+
     ];
 
         /**
@@ -35,7 +37,6 @@ class Staf extends Authenticatable implements HasMedia
     protected $hidden = [
         'password',
         'remember_token',
-        'isAdmin',
         'user_type'
 
     ];
