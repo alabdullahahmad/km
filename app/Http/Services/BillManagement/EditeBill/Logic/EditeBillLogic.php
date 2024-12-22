@@ -38,10 +38,10 @@ class EditeBillLogic implements Service {
             );
 
             $this->repository->UserPaymentRepository()->updateRepository()->update(
-                $readBill->id,
+                ['id'=>$readBill->id],
                 [
                     'amount' => $this->input->amount,
-                    'date' => $this->input->date
+                    // 'date' => $this->input->date
                 ]);
 
             $newAmount = ($this->input->payType == "in")? $this->input->amount : - $this->input->amount;

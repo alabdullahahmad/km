@@ -40,15 +40,19 @@
                                 <small class="help-block with-errors text-danger"></small>
                             </div>
 
-                            <?php if(!isset($providerdata->id) || $providerdata->id == null): ?>
                             <div class="form-group col-md-4">
                                 <?php echo e(Form::label('password', __('messages.password').' <span class="text-danger">*</span>', ['class' => 'form-control-label'], false)); ?>
 
-                                <?php echo e(Form::password('password', ['class' => 'form-control', 'placeholder' => __('messages.password'), 'required', 'autocomplete' => 'new-password'])); ?>
+                                <?php echo e(Form::password('password', [
+                                    'class' => 'form-control', 
+                                    'placeholder' => __('messages.password'), 
+                                    'required' => !isset($providerdata->id) || $providerdata->id == null, // اجعلها إجبارية فقط إذا لم يكن هناك id (أي عند إضافة مستخدم)
+                                    'autocomplete' => 'new-password'
+                                ])); ?>
 
                                 <small class="help-block with-errors text-danger"></small>
                             </div>
-                            <?php endif; ?>
+                            
 
                            
                             <div class="form-group col-md-4">

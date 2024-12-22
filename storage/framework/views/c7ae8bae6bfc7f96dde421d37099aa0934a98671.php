@@ -54,131 +54,131 @@
         </div>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-
-        window.renderedDataTable = $('#datatable').DataTable({
-                processing: true,
-                serverSide: true,
-                autoWidth: false,
-                responsive: true,
-                dom: '<"row align-items-center"><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" l><"col-md-6" p>><"clear">',
-                ajax: {
-                  "type"   : "GET",
-                  "url"    : '<?php echo e(route("Coache")); ?>',
-                  "data"   : function( d ) {
-                    d.search = {
-                      value: $('.dt-search').val()
-                    };
-                    d.filter = {
-                      column_status: $('#column_status').val()
-                    }
+      document.addEventListener('DOMContentLoaded', (event) => {
+          // إنشاء جدول DataTable
+          const dataTable = $('#datatable').DataTable({
+              processing: true,
+              serverSide: false, // تعطيل البحث Server-side
+              autoWidth: false,
+              responsive: true,
+              dom: '<"row align-items-center"><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" l><"col-md-6" p>><"clear">',
+              ajax: {
+                  type: "GET",
+                  url: '<?php echo e(route("Coache")); ?>',
+                
+              },
+              columns: [
+                  {
+                      data: 'name',
+                      name: 'display_name',
+                      title: "<?php echo e(__('messages.name')); ?>",
                   },
-                },
-                columns: [
-                    // {
-                    //     name: 'check',
-                    //     data: 'check',
-                    //     title: '<input type="checkbox" class="form-check-input" name="select_all_table" id="select-all-table" data-type="user" onclick="selectAllTable(this)">',
-                    //     exportable: false,
-                    //     orderable: false,
-                    //     searchable: false,
-                    // },
-                    {
-                        data: 'name',
-                        name: 'display_name',
-                        title: "<?php echo e(__('messages.name')); ?>",
-                        orderable: false,
-                    },
-
-                    {
-                        data: 'gender',
-                        name: 'created_at',
-                        title: "<?php echo e(__('messages.gender')); ?>"
-                    },
-                    {
-                      data:'birthDay',
-                      name:'providertype_id',
-                      title:"<?php echo e(__('messages.birthday')); ?>"
-                    },
-                    {
-                      data:'phoneNumber',
-                      name:'contact_number',
-                      title:"<?php echo e(__('messages.phone')); ?>"
-                    },
-                    {
-                      data:'address',
-                      name:'wallet',
-                      title:"<?php echo e(__('messages.Address')); ?>",
-                      searchable: false,
+                  {
+                      data: 'gender',
+                      name: 'created_at',
+                      title: "<?php echo e(__('messages.gender')); ?>"
+                  },
+                  {
+                      data: 'birthDay',
+                      name: 'providertype_id',
+                      title: "<?php echo e(__('messages.birthday')); ?>"
+                  },
+                  {
+                      data: 'phoneNumber',
+                      name: 'contact_number',
+                      title: "<?php echo e(__('messages.phone')); ?>"
+                  },
+                  {
+                      data: 'address',
+                      name: 'wallet',
+                      title: "<?php echo e(__('messages.Address')); ?>"
+                  },
+                  {
+                      data: 'action',
+                      name: 'action',
                       orderable: false,
-                    },
-
-                    // {
-                    //     data: 'status',
-                    //     name: 'status',
-                    //     title: "<?php echo e(__('messages.status')); ?>"
-                    // },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false,
-                        searchable: false,
-                        title: "<?php echo e(__('messages.action')); ?>"
-                    }
-
-
-                ]
-
-            });
+                      searchable: false,
+                      title: "<?php echo e(__('messages.action')); ?>"
+                  }
+              ]
+          });
+  
+          // البحث اليدوي
+          $('.dt-search').on('keyup', function () {
+              const searchTerm = this.value.toLowerCase(); // نص البحث
+              dataTable.rows().every(function () {
+                  const rowData = this.data(); // بيانات الصف
+                  const searchableFields = [
+                      rowData.name ?? '',              // الاسم
+                      rowData.gender ?? '',            // الجنس
+                      rowData.birthDay ?? '',          // تاريخ الميلاد
+                      rowData.phoneNumber ?? '',       // رقم الهاتف
+                      rowData.address ?? ''            // العنوان
+                  ];
+  
+                  // التحقق من وجود النص المدخل في أي من الحقول
+                  const matchFound = searchableFields.some(field => {
+                      if (field !== undefined && field !== null) {
+                          return field.toString().toLowerCase().includes(searchTerm);
+                      }
+                      return false;
+                  });
+  
+                  // إظهار أو إخفاء الصف بناءً على المطابقة
+                  if (matchFound) {
+                      $(this.node()).show();
+                  } else {
+                      $(this.node()).hide();
+                  }
+              });
+          });
       });
-
-    function resetQuickAction () {
-    const actionValue = $('#quick-action-type').val();
-    console.log(actionValue)
-    if (actionValue != '') {
-        $('#quick-action-apply').removeAttr('disabled');
-
-        if (actionValue == 'change-status') {
-            $('.quick-action-field').addClass('d-none');
-            $('#change-status-action').removeClass('d-none');
-        } else {
-            $('.quick-action-field').addClass('d-none');
-        }
-    } else {
-        $('#quick-action-apply').attr('disabled', true);
-        $('.quick-action-field').addClass('d-none');
-    }
-  }
-
-  $('#quick-action-type').change(function () {
-    resetQuickAction()
-  });
-
-  $(document).on('update_quick_action', function() {
-  })
-
-    $(document).on('click', '[data-ajax="true"]', function (e) {
-      e.preventDefault();
-      const button = $(this);
-      const confirmation = button.data('confirmation');
-
-      if (confirmation === 'true') {
-          const message = button.data('message');
-          if (confirm(message)) {
+  
+      function resetQuickAction() {
+          const actionValue = $('#quick-action-type').val();
+          if (actionValue != '') {
+              $('#quick-action-apply').removeAttr('disabled');
+  
+              if (actionValue == 'change-status') {
+                  $('.quick-action-field').addClass('d-none');
+                  $('#change-status-action').removeClass('d-none');
+              } else {
+                  $('.quick-action-field').addClass('d-none');
+              }
+          } else {
+              $('#quick-action-apply').attr('disabled', true);
+              $('.quick-action-field').addClass('d-none');
+          }
+      }
+  
+      $('#quick-action-type').change(function () {
+          resetQuickAction();
+      });
+  
+      $(document).on('update_quick_action', function () {});
+  
+      $(document).on('click', '[data-ajax="true"]', function (e) {
+          e.preventDefault();
+          const button = $(this);
+          const confirmation = button.data('confirmation');
+  
+          if (confirmation === 'true') {
+              const message = button.data('message');
+              if (confirm(message)) {
+                  const submitUrl = button.data('submit');
+                  const form = button.closest('form');
+                  form.attr('action', submitUrl);
+                  form.submit();
+              }
+          } else {
               const submitUrl = button.data('submit');
               const form = button.closest('form');
               form.attr('action', submitUrl);
               form.submit();
           }
-      } else {
-          const submitUrl = button.data('submit');
-          const form = button.closest('form');
-          form.attr('action', submitUrl);
-          form.submit();
-      }
-  });
-
-    </script>
+      });
+  </script>
+  
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
  <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>

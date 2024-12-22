@@ -29,13 +29,17 @@
                                 <small class="help-block with-errors text-danger"></small>
                             </div>
 
-                            @if (!isset($providerdata->id) || $providerdata->id == null)
                             <div class="form-group col-md-4">
                                 {{ Form::label('password', __('messages.password').' <span class="text-danger">*</span>', ['class' => 'form-control-label'], false) }}
-                                {{ Form::password('password', ['class' => 'form-control', 'placeholder' => __('messages.password'), 'required', 'autocomplete' => 'new-password']) }}
+                                {{ Form::password('password', [
+                                    'class' => 'form-control', 
+                                    'placeholder' => __('messages.password'), 
+                                    'required' => !isset($providerdata->id) || $providerdata->id == null, // اجعلها إجبارية فقط إذا لم يكن هناك id (أي عند إضافة مستخدم)
+                                    'autocomplete' => 'new-password'
+                                ]) }}
                                 <small class="help-block with-errors text-danger"></small>
                             </div>
-                            @endif
+                            
 
                            
                             <div class="form-group col-md-4">

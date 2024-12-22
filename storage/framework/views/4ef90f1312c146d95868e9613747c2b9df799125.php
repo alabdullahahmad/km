@@ -115,4 +115,4 @@
     $(document).ready(function() {
     $('#serviceSelect').select2();
 });
-</script><?php /**PATH C:\Users\HP\OneDrive\سطح المكتب\km\resources\views/setting/push-notification-setting.blade.php ENDPATH**/ ?>
+</script><?php /**PATH C:\Users\USER\Desktop\km\resources\views/setting/push-notification-setting.blade.php ENDPATH**/ ?>
