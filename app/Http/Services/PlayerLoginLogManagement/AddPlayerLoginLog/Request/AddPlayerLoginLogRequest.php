@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Services\PlayerLoginLogManagement\AddPlayerLoginLog\Logic;
+namespace App\Http\Services\PlayerLoginLogManagement\AddPlayerLoginLog\Request;
 
 use App\Http\Core\Request\BaseRequest;
 

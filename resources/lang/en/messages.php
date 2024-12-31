@@ -1110,7 +1110,24 @@ use App\Http\Core\Const\Messages\Attributes;
 'addEventnew'=>'add new Event',
 'From_Hour'=> 'From Hour',
 'To_Hour'=> 'To Hour',
-'add_Event' => 'add Event'
+'add_Event' => 'add Event',
+'new_player'=> 'New player',
+'old_player' => 'Old player',
+'payment_date_time' => 'Payment date_time',
+'subscription_period' => 'Subscription Period',
+'coach_name' => 'Coach Name',
+'payment_amount' => 'Payment amount',
+'modify_subscription_date' => 'Modify subscription_date',
+'modified_by' => 'modified_by',
+'date_after_modification' => 'date_after modification',
+'modification_date_time' => 'Modification date_time',
+'type_modified' => 'Subscription type_modified',
+'type_after_modification' => 'Subscription type after_modification',
+'type_modification_date_time' => 'Subscription type_modification_date_time',
+'subscription_frozen' => 'Subscription frozen',
+'Comprehensive_report' => 'Comprehensive report',
+"Active-subscriptions-report" =>"Active Subscriptions report",
+'One_Fund Report' => 'One_Fund Report',
 
 
     )

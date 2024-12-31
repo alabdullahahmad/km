@@ -1018,5 +1018,11 @@ use App\Http\Core\Const\Messages\Attributes;
          'pushnotification_settings' => 'Push Notification',
          'Receiving_Cash' => 'Receiving Cash',
          'category_list' => 'category list',
+         'new_player'=> 'New player',
+            'old_player' => 'Old player',
+            
+            'subscription_period' => 'Subscription Period',
+            'coach_name' => 'Coach Name',
+            
     )
     ?>

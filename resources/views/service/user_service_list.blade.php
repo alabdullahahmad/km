@@ -2,7 +2,10 @@
 
     <head>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+        <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     </head>
 
     <div class="container-fluid">
@@ -11,7 +14,11 @@
                 <div class="card card-block card-stretch">
                     <div class="card-body p-0">
                         <div class="d-flex justify-content-between align-items-center p-3 flex-wrap gap-3">
-                            <h5 class="font-weight-bold">{{ __('messages.Report_Bills') }}</h5>
+                            <h5 class="font-weight-bold">{{ __('messages.Comprehensive_report') }}</h5>
+                            <div class="d-flex justify-content-center align-items-center gap-3 mx-auto">
+                                <span class="value-label font-weight-bold">{{ __('messages.num_player') }}</span>
+                                <span class="value-amount font-weight-bold" id="player-count">0</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -52,15 +59,9 @@
                                 aria-label="Search" aria-describedby="addon-wrapping" aria-controls="dataTableBuilder">
                         </div>
 
-                        <!-- عنصر select بجانب حقل البحث -->
-                        <select name="column_status" id="column_status" class="select2 form-control"
-                            data-filter="select" style="width: 50%">
-                            <option value="">{{ __('messages.all') }}</option>
-                            <option value="0" {{ $filter['status'] == '0' ? 'selected' : '' }}>
-                                {{ __('messages.inactive') }}</option>
-                            <option value="1" {{ $filter['status'] == '1' ? 'selected' : '' }}>
-                                {{ __('messages.active') }}</option>
-                        </select>
+                        <button id="export-excel" class="btn btn-success btn-sm ml-2"><i class="fa fa-file-excel"></i> Export to Excel</button>
+                        {{-- <button id="export-pdf" class="btn btn-danger btn-sm"><i class="fa fa-file-pdf"></i> Export to PDF</button> --}}
+                   
                     </div>
                 </div>
             </div>
@@ -72,15 +73,18 @@
     </div>
 
     <script>
-document.addEventListener('DOMContentLoaded', () => {
+   document.addEventListener('DOMContentLoaded', () => {
     window.renderedDataTable = $('#datatable').DataTable({
-        processing: true,
-        serverSide: true,
-        autoWidth: false,
-        responsive: true,
-        dom: '<"row align-items-center"<"col-md-6" l><"col-md-6" f>>' +
-             '<"table-responsive my-3" rt>' +
-             '<"row align-items-center"<"col-md-6" i><"col-md-6" p>>',
+          processing: true,
+            serverSide: false, // البحث Client-side فقط
+            autoWidth: false,
+            responsive: true,
+            columnDefs: [
+                { targets: '_all', className: 'text-wrap', width: '20%' }
+            ],
+
+        dom: '<"row align-items-center"><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" l><"col-md-6" p>><"clear">',
+
         ajax: {
             type: "POST",
             url: "{{ route('billReport') }}",
@@ -99,53 +103,147 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
         columns: [
-            { data: (data) => data.staf?.name ?? 'N/A', title: "{{ __('messages.Reception_name') }}" },
-            { data: (data) => data.user?.name ?? 'No User', title: "{{ __('messages.player_name') }}" },
-            { data: 'payType', title: "{{ __('messages.payment_type') }}" },
-            { data: 'date', title: "{{ __('messages.payment_time') }}" },
-            { data: 'paymrentNote', title: "{{ __('messages.payment_note') }}" },
-            {
-                data: (data) =>{
+            { data: (data) => data.user?.name ?? 'No Name', title: "{{ __('messages.player_name') }}" },
+            { data: (data) => data.subscription?.type ?? 'No Type', title: "{{ __('messages.Subscription type') }}" },
+            { data: 'subscriptionPeriod', title: "{{ __('messages.subscription_period') }}" },
+            { data: (data) => data.coach?.name ?? 'No Coach', title: "{{ __('messages.coach_name') }}" },
+            { data: (data) => {
                     const baseAmount = data.price ?? data.amount ?? 0;
                     return baseAmount + (data.discountAmount ?? 0);
-                },
+                }, 
                 title: "{{ __('messages.Amount_Before_Discount') }}"
             },
             { data: 'discountAmount', title: "{{ __('messages.Discount_Percentage') }}" },
-            {
-                data: (data) => {
-                    const baseAmount = data.price ?? data.amount ?? 0;
-                    return baseAmount ;
-                },
-                title: "{{ __('messages.Amount_After_Discount') }}"
-            },
-            { data: (data) => {return data.user_payment?.[0]?.totalAmount ?? 0}, title: "{{ __('messages.Received_Amount') }}" },
+            { data: 'discountReason', title: "{{ __('messages.Discount_reason') }}" },
+            { data: (data) => data.price ?? data.amount ?? 0, title: "{{ __('messages.Amount_After_Discount') }}" },
+            { data: (data) => data.user?.name ?? 'No User', title: "{{ __('messages.Reception_name') }}" },
+            { data: 'paymentDate', title: "{{ __('messages.payment_date_time') }}" },
+            { data: (data) => data.user_payment?.[0]?.totalAmount ?? 0, title: "{{ __('messages.payment_amount') }}" },
             { data: 'description', title: "{{ __('messages.Description') }}" },
-            {
-                data: (data) => data.subscription?.name ?? 'No Subscription',
-                title: "{{ __('messages.Subscription_Name') }}"
-            },
-            { data: 'id', title: "{{ __('messages.Bill_Number') }}" }
-        ]
+            { data: 'remainingBalance', title: "{{ __('messages.remaining_balance') }}" },
+            { data: 'id', title: "{{ __('messages.Bill_Number') }}" },
+            { data: 'subscriptionStartDate', title: "{{ __('messages.Start_Subscription') }}" },
+            { data: 'subscriptionEndDate', title: "{{ __('messages.End_Subscription') }}" },
+            { data: 'subscriptionDateModified', title: "{{ __('messages.modify_subscription_date') }}" },
+            { data: 'modifierName', title: "{{ __('messages.modified_by') }}" },
+            { data: 'modifiedDate', title: "{{ __('messages.date_after_modification') }}" },
+            { data: 'modificationDate', title: "{{ __('messages.modification_date_time') }}" },
+            { data: 'isTypeModified', title: "{{ __('messages.type_modified') }}" },
+            { data: 'modifiedByUser', title: "{{ __('messages.modified_by') }}" },
+            { data: 'modifiedType', title: "{{ __('messages.type_after_modification') }}" },
+            { data: 'modificationDateTime', title: "{{ __('messages.type_modification_date_time') }}" },
+            { data: 'isFrozen', title: "{{ __('messages.subscription_frozen') }}" },
+            { data: 'frozenByUser', title: "{{ __('messages.modified_by') }}" },
+            { data: 'frozenStartDate', title: "{{ __('messages.freeze_start_date') }}" },
+            { data: 'frozenEndDate', title: "{{ __('messages.freeze_end_date') }}" },
+            { data: 'status', title: "{{ __('messages.status') }}" }
+        ],
+        drawCallback: function(settings) {
+            const playerCount = settings.json.recordsTotal || 0;
+            $('#player-count').text(playerCount);
+        }
+    });
+
+    // البحث اليدوي لجميع الأعمدة
+    $('.dt-search').on('keyup', function () {
+        const searchTerm = this.value.toLowerCase(); // نص البحث
+        window.renderedDataTable.rows().every(function () {
+            const rowData = this.data(); // بيانات الصف
+
+            // تعريف الحقول القابلة للبحث
+            const searchableFields = [
+                rowData.user?.name ?? '',                   // اسم اللاعب
+                rowData.subscription?.type ?? '',          // نوع الاشتراك
+                rowData.subscriptionPeriod ?? '',          // فترة الاشتراك
+                rowData.coach?.name ?? '',                 // اسم المدرب
+                (rowData.price ?? rowData.amount ?? 0) + (rowData.discountAmount ?? 0), // المبلغ قبل الخصم
+                rowData.discountAmount ?? '',              // نسبة الخصم
+                rowData.discountReason ?? '',              // سبب الخصم
+                rowData.price ?? rowData.amount ?? 0,      // المبلغ بعد الخصم
+                rowData.paymentDate ?? '',                 // تاريخ الدفع
+                rowData.description ?? '',                 // الوصف
+                rowData.remainingBalance ?? '',            // الرصيد المتبقي
+                rowData.id ?? '',                          // رقم الفاتورة
+                rowData.subscriptionStartDate ?? '',       // تاريخ بداية الاشتراك
+                rowData.subscriptionEndDate ?? '',         // تاريخ نهاية الاشتراك
+                rowData.subscriptionDateModified ?? '',    // تاريخ تعديل الاشتراك
+                rowData.modifierName ?? '',                // تم التعديل بواسطة
+                rowData.modifiedDate ?? '',                // تاريخ التعديل
+                rowData.status ?? ''                       // الحالة
+            ];
+
+            // التحقق من وجود نص البحث في أي من الحقول
+            const matchFound = searchableFields.some(field => {
+                if (field !== undefined && field !== null) {
+                    return field.toString().toLowerCase().includes(searchTerm);
+                }
+                return false;
+            });
+
+            // إظهار أو إخفاء الصف بناءً على المطابقة
+            if (matchFound) {
+                $(this.node()).show();
+            } else {
+                $(this.node()).hide();
+            }
+        });
     });
 });
 
-// Event Listeners:
-$('#expire_date').change(function() {
-    $('#quick-action-apply').prop('disabled', !$('#expire_date').val());
-    renderedDataTable.draw();
-});
 
-$('.dt-search').on('keyup', function() {
-    renderedDataTable.draw();
-});
+        
+        $('#export-excel').on('click', function() {
+                const wb = XLSX.utils.table_to_book(document.getElementById('datatable'), {sheet: "Sheet JS"});
+                XLSX.writeFile(wb, 'Report.xlsx');
+            });
 
-$(document).on('click', '[data-ajax="true"]', function(e) {
-    e.preventDefault();
-    const submitUrl = $(this).data('submit');
-    $(this).closest('form').attr('action', submitUrl).submit();
-});
+            $('#export-pdf').on('click', function() {
+                const element = document.getElementById('datatable');
+                html2pdf(element, {
+                    margin: 1,
+                    filename: 'Report.pdf',
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                });
+            });
+       
 
-    </script>
+
+
+        // Event Listeners:
+        $('#expire_date').change(function() {
+            $('#quick-action-apply').prop('disabled', !$('#expire_date').val());
+            renderedDataTable.draw();
+        });
+        
+        $('.dt-search').on('keyup', function() {
+            renderedDataTable.draw();
+        });
+        
+        $(document).on('click', '[data-ajax="true"]', function(e) {
+            e.preventDefault();
+            const submitUrl = $(this).data('submit');
+            $(this).closest('form').attr('action', submitUrl).submit();
+        });
+        </script>
+        
+        <style>
+            .dataTables_wrapper .dataTable th, 
+            .dataTables_wrapper .dataTable td {
+                white-space: nowrap !important;
+                text-overflow: ellipsis !important;
+                overflow: hidden !important;
+                text-align: center !important; /* يجعل النصوص والأرقام في منتصف الأعمدة */
+                vertical-align: middle !important; /* يضمن توسيط النصوص عموديًا أيضًا */
+            }
+            .dataTables_wrapper .dataTable td.text-wrap {
+                white-space: normal !important;
+            }
+            .text-center {
+                text-align: center !important;
+                vertical-align: middle !important;
+            }
+
+        </style>
 
 </x-master-layout>

@@ -6,13 +6,52 @@
                     <div class="card-body p-0">
                         <div class="d-flex justify-content-between align-items-center p-3 flex-wrap gap-3">
                             <h5 class="font-weight-bold">{{ __('messages.player_name') }}: {{ $data['user']->name }}</h5>
-                            <a href="#" class="float-right btn btn-sm btn-primary" data-toggle="modal" data-target="#checkinModal">
-                                <i class="fa fa-angle-double-left"></i> {{ __('messages.Display_checkin') }}
-                            </a>
+                            <a href="#" 
+                            class="float-right btn btn-sm btn-primary" 
+                            data-toggle="modal" 
+                            data-target="#checkinModal" 
+                            id="display-checkin-btn" 
+                            data-user-id="{{ $data['user']->id }}">
+                            <i class="fa fa-angle-double-left"></i> {{ __('messages.Display_checkin') }}
+                         </a>
+                         
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="checkinModal" tabindex="-1" role="dialog" aria-labelledby="checkinModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="checkinModalLabel">{{ __('messages.last_checkins') }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- الجدول -->
+                            <table class="table table-bordered text-center">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>{{ __('messages.Subscription_Name') }}</th>
+                                        <th>{{ __('messages.checkin_date') }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- سيتم ملء البيانات هنا بواسطة JavaScript -->
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('messages.close') }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
 
             <!-- Modal -->
             @foreach ($data['bills'] as $bill)
@@ -179,6 +218,55 @@
     </div>
     @section('bottom_script')
    <script>
+$(document).ready(function () {
+    $('#display-checkin-btn').on('click', function () {
+        const userId = $(this).data('user-id'); // الحصول على معرف اللاعب
+
+        // إرسال طلب AJAX
+        $.ajax({
+            url: '{{ route("allPlayerLoginLog") }}',
+            type: 'GET',
+            data: { userId: userId },
+            success: function (response) {
+                // التأكد من وجود البيانات
+                if (response.data && response.data.length > 0) {
+                    const tbody = $('#checkinModal .modal-body table tbody');
+                    tbody.empty(); // تنظيف الجدول القديم
+
+                    // تعبئة الجدول بالبيانات المستلمة
+                    response.data.forEach((checkin, index) => {
+                        tbody.append(`
+                            <tr>
+                                <td>${index + 1}</td>
+                                <td>${checkin.subscriptionName}</td>
+                                <td>${checkin.date}</td>
+                            </tr>
+                        `);
+                    });
+                } else {
+                    alert('لا توجد بيانات Check-in متوفرة.');
+                }
+            },
+            error: function (xhr) {
+                alert('حدث خطأ أثناء جلب بيانات Check-in.');
+            }
+        });
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     $(document).ready(function () {
     let currentBillId = null;
     let remainingBalance = 0;

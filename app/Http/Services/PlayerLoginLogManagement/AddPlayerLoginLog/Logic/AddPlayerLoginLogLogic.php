@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Services\PlayerLoginLogManagement\AddPlayerLoginLog\logic;
+namespace App\Http\Services\PlayerLoginLogManagement\AddPlayerLoginLog\Logic;
 
 use App\Http\Core\Const\Messages\SuccessMessages;
 use App\Http\Repositories\RepositoryCaller;
@@ -25,7 +25,7 @@ class AddPlayerLoginLogLogic implements Service {
         $playerLoginLog = $this->repository->PalyerLoginLogRepository()->createRepository()
         ->create($this->input->toArray());
 
-        $response  = new AddPlayerLoginLogOutput($playerLoginLog , 
+        $response  = new AddPlayerLoginLogOutput(['success'=>true] , 
         SuccessMessages::getKey(SuccessMessages::$Add));
 
         return $response->send_as_object();

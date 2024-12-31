@@ -7,4 +7,4 @@
         <a class="mr-2" href="{{ route('wallet.create',['id' => $wallet->id]) }}" title="{{ __('messages.update_form_title',['form' => __('messages.wallet') ]) }}"><i class="fas fa-pen text-secondary"></i></a>
     </div>
 @endif
-{{ Form::close() }}
+

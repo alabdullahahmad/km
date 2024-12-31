@@ -1011,10 +1011,10 @@ use App\Http\Core\Const\Messages\Attributes;
        'Total:' => 'مجموع :',
     'payment_time' => 'وقت الدفعة',
     'payment_note' => 'ملاحظة الدفعة',
-    'Amount_Before_Discount' => 'المبلغ قبل الخصم',
-    'Discount_Percentage' => 'نسبة الخصم',
-    'Discount_reason' => 'سبب الخصم',
-    'Amount_After_Discount' => 'المبلغ بعد الخصم',
+    'Amount_Before_Discount' => 'المبلغ قبل الحسم',
+    'Discount_Percentage' => 'نسبة الحسم',
+    'Discount_reason' => 'سبب الحسم',
+    'Amount_After_Discount' => 'المبلغ بعد الحسم',
     'Received_Amount' => 'المبلغ المستلم',
     'Description' => 'الوصف',
     'Subscription_Name' => 'اسم الاشتراك',
@@ -1035,6 +1035,7 @@ use App\Http\Core\Const\Messages\Attributes;
 'freeze_end_date' => 'تاريخ نهاية التجميد',
 
 'discount_value' => 'قيمة الحسم',
+
 
 
 'amount_paid' => 'المبلغ المقبوض',
@@ -1094,7 +1095,23 @@ use App\Http\Core\Const\Messages\Attributes;
 'From_Hour'=> 'من الساعة',
 'To_Hour'=> 'إلى الساعة',
 'add_Event' => 'إضافة موعد',
-
+'new_player'=> 'جديد',
+'old_player' => 'قديم',
+'subscription_period' => 'فترة الاشتراك',
+'coach_name' => 'اسم الكوتش',
+'payment_date_time' => 'تاريخ وتوقيت سداد الاشتراك',
+'payment_amount' => 'مبلغ السداد',
+'modify_subscription_date' => 'تعديل تاريخ الاشتراك',
+'modified_by' => 'اسم الرسبشين المعدل',
+'date_after_modification' => 'التاريخ بعد التعديل',
+'modification_date_time' => 'تاريخ وتوقيت التعديل',
+'type_modified' => 'تعديل طبيعة الاشتراك',
+'type_after_modification' => 'طبيعة الاشتراك بعد التعديل',
+'type_modification_date_time' => 'تاريخ وتوقيت التعديل',
+'subscription_frozen' => 'تجميد الاشتراك',
+'Comprehensive_report' => 'تقرير شامل',
+"Active-subscriptions-report" =>"تقرير الاشتراكات الفعالة",
+'One_Fund Report' => 'تقرير الصندوق الواحد',
 
     )
 

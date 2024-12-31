@@ -126,7 +126,7 @@ $menu->add('<span>'.__('messages.Report_cash').'</span><span class="custom-toolt
 ->nickname('post_job')
 ->data('permission', 'postjob');
 
-$menu->add('<span>'.__('messages.Report_Bills').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.subcategory').'</span></span>', ['route' => 'service.user-service-list'])
+$menu->add('<span>'.__('messages.Comprehensive_report').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.subcategory').'</span></span>', ['route' => 'service.user-service-list'])
 ->prepend('<svg width="15" height="12" class="sidebar-menu-icon" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M2 4.875C1.3775 4.875 0.875 5.3775 0.875 6C0.875 6.6225 1.3775 7.125 2 7.125C2.6225 7.125 3.125 6.6225 3.125 6C3.125 5.3775 2.6225 4.875 2 4.875ZM2 0.375C1.3775 0.375 0.875 0.8775 0.875 1.5C0.875 2.1225 1.3775 2.625 2 2.625C2.6225 2.625 3.125 2.1225 3.125 1.5C3.125 0.8775 2.6225 0.375 2 0.375ZM2 9.375C1.3775 9.375 0.875 9.885 0.875 10.5C0.875 11.115 1.385 11.625 2 11.625C2.615 11.625 3.125 11.115 3.125 10.5C3.125 9.885 2.6225 9.375 2 9.375ZM4.25 11.25H14.75V9.75H4.25V11.25ZM4.25 6.75H14.75V5.25H4.25V6.75ZM4.25 0.75V2.25H14.75V0.75H4.25Z" fill="#6C757D" />
 </svg>')
@@ -140,7 +140,7 @@ $menu->add('<span>'.trans('messages.list_form_title',['form' => trans('messages.
 ->nickname('user_ratings')
 ->data('permission', 'userrating list');
 
-$menu->add('<span>'.trans('messages.list_form_title',['form' => trans('messages.Players_bill')]).'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.Players_bill').'</span></span>', ['route' => 'handyman-rating.index'])
+$menu->add('<span>'.__('messages.Active-subscriptions-report').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.Players_bill').'</span></span>', ['route' => 'handyman-rating.index'])
 ->prepend('<svg width="15" height="15" class="sidebar-menu-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M15.94,10.179l-2.437-0.325l1.62-7.379c0.047-0.235-0.132-0.458-0.372-0.458H5.25c-0.241,0-0.42,0.223-0.373,0.458l1.634,7.376L4.06,10.179c-0.312,0.041-0.446,0.425-0.214,0.649l2.864,2.759l-0.724,3.947c-0.058,0.315,0.277,0.554,0.559,0.401l3.457-1.916l3.456,1.916c-0.419-0.238,0.56,0.439,0.56-0.401l-0.725-3.947l2.863-2.759C16.388,10.604,16.254,10.22,15.94,10.179M10.381,2.778h3.902l-1.536,6.977L12.036,9.66l-1.655-3.546V2.778z M5.717,2.778h3.903v3.335L7.965,9.66L7.268,9.753L5.717,2.778zM12.618,13.182c-0.092,0.088-0.134,0.217-0.11,0.343l0.615,3.356l-2.938-1.629c-0.057-0.03-0.122-0.048-0.184-0.048c-0.063,0-0.128,0.018-0.185,0.048l-2.938,1.629l0.616-3.356c0.022-0.126-0.019-0.255-0.11-0.343l-2.441-2.354l3.329-0.441c0.128-0.017,0.24-0.099,0.295-0.215l1.435-3.073l1.435,3.073c0.055,0.116,0.167,0.198,0.294,0.215l3.329,0.441L12.618,13.182z" fill="#6C757D" />
 </svg>')

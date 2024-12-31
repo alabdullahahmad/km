@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Core\Response\SendResponse;
 use App\Http\Services\PlayerLoginLogManagement\AddPlayerLoginLog\logic\AddPlayerLoginLogInput;
 use App\Http\Services\PlayerLoginLogManagement\AddPlayerLoginLog\logic\AddPlayerLoginLogLogic;
-use App\Http\Services\PlayerLoginLogManagement\AddPlayerLoginLog\Logic\AddPlayerLoginLogRequest;
+use App\Http\Services\PlayerLoginLogManagement\AddPlayerLoginLog\Request\AddPlayerLoginLogRequest;
 
 class AddPlayerLoginLogController extends Controller
 {
