@@ -82,12 +82,12 @@
    document.addEventListener('DOMContentLoaded', () => {
     window.renderedDataTable = $('#datatable').DataTable({
           processing: true,
-            serverSide: false, // البحث Client-side فقط
+            serverSide: true, // البحث Client-side فقط
             autoWidth: false,
             responsive: true,
-        columnDefs: [
-            { targets: '_all', className: 'text-wrap', width: '20%' }
-        ],
+            columnDefs: [
+                { targets: '_all', className: 'text-wrap', width: '20%' }
+            ],
 
         dom: '<"row align-items-center"><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" l><"col-md-6" p>><"clear">',
 

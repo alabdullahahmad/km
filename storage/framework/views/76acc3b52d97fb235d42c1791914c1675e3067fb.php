@@ -15,7 +15,7 @@
                     <div class="card-body p-0">
                         <div class="d-flex justify-content-between align-items-center p-3 flex-wrap gap-3">
                             <h5 class="font-weight-bold"><?php echo e(__('messages.Bodybuilding')); ?></h5>
-                            <?php if($auth_user->can('service add') &&  Route::currentRouteName() !=='servicepackage.service'): ?>
+                            <?php if($auth_user->can('subscription add') &&  Route::currentRouteName() !=='servicepackage.service'): ?>
                             <a href="<?php echo e(route('service.creat.id',$id)); ?>" class="float-right mr-1 btn btn-sm btn-primary "><i class="fa fa-plus-circle"></i> <?php echo e(__('messages.add_form_title',['form' => __('messages.Subscription')  ])); ?></a>
                             <?php endif; ?>
                         </div>

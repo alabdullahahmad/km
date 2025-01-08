@@ -11,7 +11,7 @@
                     <div class="card-body p-0">
                         <div class="d-flex justify-content-between align-items-center p-3">
                             <h5 class="font-weight-bold"><?php echo e($pageTitle ?? __('messages.list')); ?></h5>
-                            <h5 class="font-weight-bold">v<?php echo e(config('app.version')); ?></h5>
+                            
                         </div>
                     </div>
                 </div>
@@ -38,31 +38,7 @@
                                         <?php endif; ?>
                                     <?php else: ?>
                                         <?php if(auth()->check() && auth()->user()->hasAnyRole('admin|demo_admin')): ?>
-                                            <li class="nav-item">
-                                                <a href="javascript:void(0)" data-href="<?php echo e(route('layout_page')); ?>?page=general-setting" data-target=".paste_here" class="nav-link <?php echo e($page=='general-setting'?'active':''); ?>"  data-toggle="tabajax" rel="tooltip"> <?php echo e(__('messages.general_settings')); ?></a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="javascript:void(0)" data-href="<?php echo e(route('layout_page')); ?>?page=theme-setup" data-target=".paste_here" class="nav-link <?php echo e($page=='theme-setup'?'active':''); ?>"  data-toggle="tabajax" rel="tooltip"> <?php echo e(__('messages.theme_setup')); ?></a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="javascript:void(0)" data-href="<?php echo e(route('layout_page')); ?>?page=site-setup" data-target=".paste_here" class="nav-link <?php echo e($page=='site-setup'?'active':''); ?>"  data-toggle="tabajax" rel="tooltip"> <?php echo e(__('messages.site_setup')); ?></a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="javascript:void(0)" data-href="<?php echo e(route('layout_page')); ?>?page=service-configurations" data-target=".paste_here" class="nav-link <?php echo e($page=='service-configurations'?'active':''); ?>"  data-toggle="tabajax" rel="tooltip"> <?php echo e(__('messages.service_configurations')); ?></a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="javascript:void(0)" data-href="<?php echo e(route('layout_page')); ?>?page=other-setting" data-target=".paste_here" class="nav-link <?php echo e($page=='other-setting'?'active':''); ?>"  data-toggle="tabajax" rel="tooltip"> <?php echo e(__('messages.app_configurations')); ?></a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="javascript:void(0)" data-href="<?php echo e(route('layout_page')); ?>?page=notification-setting" data-target=".paste_here" class="nav-link <?php echo e($page=='notification-setting'?'active':''); ?>"  data-toggle="tabajax" rel="tooltip"> <?php echo e(__('messages.notification_configurations')); ?></a>
-                                            </li>
-
-                                            <li class="nav-item">
-                                                <a href="javascript:void(0)" data-href="<?php echo e(route('layout_page')); ?>?page=social-media" data-target=".paste_here" class="nav-link <?php echo e($page=='social-media'?'active':''); ?>"  data-toggle="tabajax" rel="tooltip"> <?php echo e(__('messages.social_media')); ?></a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="javascript:void(0)" data-href="<?php echo e(route('layout_page')); ?>?page=cookie-setup" data-target=".paste_here" class="nav-link <?php echo e($page=='cookie-setup'?'active':''); ?>"  data-toggle="tabajax" rel="tooltip"> <?php echo e(__('messages.cookie_setup')); ?></a>
-                                            </li>
+                                            
                                             <!-- <li class="nav-item">
                                                 <a href="javascript:void(0)" data-href="<?php echo e(route('layout_page')); ?>?page=sliders" data-target=".paste_here" class="nav-link <?php echo e($page=='sliders'?'active':''); ?>"  data-toggle="tabajax" rel="tooltip"> <?php echo e(__('messages.sliders')); ?></a>
                                             </li>
@@ -72,22 +48,7 @@
                                             <li class="nav-item">
                                                 <a href="javascript:void(0)" data-href="<?php echo e(route('layout_page')); ?>?page=role-permission-setup" data-target=".paste_here" class="nav-link <?php echo e($page=='role-permission-setup'?'active':''); ?>"  data-toggle="tabajax" rel="tooltip"> <?php echo e(__('messages.role_permission_setup')); ?></a>
                                             </li>
-                                            <li class="nav-item">
-                                                <a href="javascript:void(0)" data-href="<?php echo e(route('layout_page')); ?>?page=language-setting" data-target=".paste_here" class="nav-link <?php echo e($page=='language-setting'?'active':''); ?>"  data-toggle="tabajax" rel="tooltip"> <?php echo e(__('messages.language_settings')); ?></a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="javascript:void(0)" data-href="<?php echo e(route('layout_page')); ?>?page=payment-setting" data-target=".paste_here" class="nav-link <?php echo e($page=='payment-setting'?'active':''); ?>"  data-toggle="tabajax" rel="tooltip"> <?php echo e(__('messages.payment_configuration')); ?></a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="javascript:void(0)" data-href="<?php echo e(route('layout_page')); ?>?page=mail-setting" data-target=".paste_here" class="nav-link <?php echo e($page=='mail-setting'?'active':''); ?>"  data-toggle="tabajax" rel="tooltip"> <?php echo e(__('messages.mail_settings')); ?></a>
-                                            </li>
-
-                                            <!-- <li class="nav-item">
-                                                <a href="javascript:void(0)" data-href="<?php echo e(route('layout_page')); ?>?page=push-notification-setting" data-target=".paste_here" class="nav-link <?php echo e($page=='push-notification-setting'?'active':''); ?>"  data-toggle="tabajax" rel="tooltip"> <?php echo e(__('messages.pushnotification_settings')); ?></a>
-                                            </li> -->
-                                            <li class="nav-item">
-                                                <a href="javascript:void(0)" data-href="<?php echo e(route('layout_page')); ?>?page=earning-setting" data-target=".paste_here" class="nav-link <?php echo e($page=='earning-setting'?'active':''); ?>"  data-toggle="tabajax" rel="tooltip"> <?php echo e(__('messages.earning_setting')); ?></a>
-                                            </li>
+                                            
                                         <?php endif; ?>
                                     <?php endif; ?>
                                 </ul>

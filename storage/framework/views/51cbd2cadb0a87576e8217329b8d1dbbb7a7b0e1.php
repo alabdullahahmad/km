@@ -15,7 +15,7 @@
                     <div class="card-body p-0">
                         <div class="d-flex justify-content-between align-items-center p-3 flex-wrap gap-3">
                             <h5 class="font-weight-bold"><?php echo e(__('messages.Rooms')); ?></h5>
-                            <?php if($auth_user->can('slider add')): ?>
+                            <?php if($auth_user->can('room add')): ?>
                             <a href="<?php echo e(route('slider.create')); ?>" class="float-right mr-1 btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i> <?php echo e(trans('messages.add_form_title',['form' => trans('messages.Rooms')  ])); ?></a>
                             <?php endif; ?>
                         </div>

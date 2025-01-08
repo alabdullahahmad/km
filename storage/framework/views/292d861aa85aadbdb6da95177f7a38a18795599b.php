@@ -16,7 +16,7 @@
                       <div class="d-flex justify-content-between align-items-center p-3 flex-wrap gap-3">
                           <h5 class="font-weight-bold"><?php echo e(__('messages.Receptions')); ?></h5>
                           <?php if($list_status != 'pending'): ?>
-                          <?php if($auth_user->can('provider add')): ?>
+                          <?php if($auth_user->can('receptions add')): ?>
                           <a href="<?php echo e(route('provider.create')); ?>" class="float-right mr-1 btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i> <?php echo e(__('messages.add_form_title',['form' => __('messages.Receptions')  ])); ?></a>
                           <?php endif; ?>
                           <?php endif; ?>
@@ -37,8 +37,6 @@
 
 
 
-              <a id="quick-action-apply" class="btn btn-primary"
-                  href="<?php echo e(route('ExportExcel')); ?>"><?php echo e(__('messages.Export Excel')); ?></a>
           </div>
 
           </form>

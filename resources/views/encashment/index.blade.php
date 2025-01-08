@@ -114,6 +114,7 @@
 
 
                 <!-- نافذة إضافة الحدث -->
+             
                 <!-- نافذة تعديل الحقول -->
                 <div class="modal fade" id="addEventModal" tabindex="-1" aria-labelledby="addEventModalLabel"
                     aria-hidden="true">
@@ -181,7 +182,7 @@
                         </div>
                     </div>
                 </div>
-
+       
                 <!-- نهاية نافذة الحدث -->
             </div>
         </div>
@@ -337,7 +338,11 @@ buttonText: {
         }
     });
 },
+
+
+
 eventClick: function(event) {
+
     // تعبئة تفاصيل الحدث
     $("#eventCoach").text(event.description.split(", ")[0].split(": ")[1]); // جلب اسم المدرب
     $("#eventClass").text(event.title); // اسم الصف
@@ -350,12 +355,16 @@ eventClick: function(event) {
     // حفظ معرف الحدث لاستخدامه في التعديل أو الحذف
     $("#deleteEventBtn").data("eventId", event.id);
     $("#editEventBtn").data("event", event);
+   
+
 },
+
 
 
 
             select: function (start, end) {
                 // فتح نافذة الإضافة عند اختيار حدث جديد
+              
                 $("#addEventModal").modal("show");
                 $("#addEventForm").data("eventStart", start);
                 $("#addEventForm").data("eventEnd", end);

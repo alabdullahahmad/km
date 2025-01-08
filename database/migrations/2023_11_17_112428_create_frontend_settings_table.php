@@ -34,7 +34,7 @@ class CreateFrontendSettingsTable extends Migration
                 return (string) $id;
             })->toArray();
 
-            $providerIds = User::where('user_type', 'provider')->pluck('id')->take(6)->map(function ($id) {
+            $providerIds = User::pluck('id')->take(6)->map(function ($id) {
                 return (string) $id;
             })->toArray();
             $settingsData = [

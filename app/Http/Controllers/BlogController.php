@@ -46,7 +46,7 @@ class BlogController extends Controller
             })
 
             ->editColumn('title', function($query){
-                if (auth()->user()->can('blog edit')) {
+                if (auth()->user()->can('Calendar edit')) {
                     $link = '<a class="btn-link btn-link-hover" href='.route('blog.create', ['id' => $query->id]).'>'.$query->title.'</a>';
                 } else {
                     $link = $query->title;

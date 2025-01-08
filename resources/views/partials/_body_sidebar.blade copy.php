@@ -312,7 +312,7 @@ $menu->add('<span>'.__('messages.list_form_title',['form' => trans('messages.all
 ->data('permission', 'user list');
 
 
-$menu->add('Transactions', ['class' => 'category-main'])->data('permission', ['tax list','payment list','earning list']);
+$menu->add('Transactions', ['class' => 'category-main'])->data('permission', ['tax list','payment list','bill list']);
 
 $menu->add('<span>'.__('messages.tax').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.tax').'</span></span>', ['route' => 'tax.index'])
 ->prepend('<svg width="15" height="15" class="sidebar-menu-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -343,7 +343,7 @@ $menu->add('<span>'.__('messages.earning').'</span><span class="custom-tooltip">
     <path d="M8 0.5C3.86 0.5 0.5 3.86 0.5 8C0.5 12.14 3.86 15.5 8 15.5C12.14 15.5 15.5 12.14 15.5 8C15.5 3.86 12.14 0.5 8 0.5ZM8 14C4.6925 14 2 11.3075 2 8C2 4.6925 4.6925 2 8 2C11.3075 2 14 4.6925 14 8C14 11.3075 11.3075 14 8 14ZM8.6675 7.325C7.3325 6.8825 6.6875 6.605 6.6875 5.9C6.6875 5.135 7.52 4.8575 8.045 4.8575C9.0275 4.8575 9.3875 5.6 9.47 5.8625L10.655 5.36C10.5425 5.03 10.04 3.9275 8.66 3.6875V2.75H7.3475V3.695C5.3975 4.115 5.3825 5.8325 5.3825 5.915C5.3825 7.6175 7.07 8.0975 7.895 8.3975C9.08 8.8175 9.605 9.2 9.605 9.92C9.605 10.7675 8.8175 11.1275 8.12 11.1275C6.755 11.1275 6.365 9.725 6.32 9.56L5.075 10.0625C5.5475 11.705 6.785 12.1475 7.34 12.2825V13.25H8.6525V12.32C9.0425 12.2525 10.9175 11.8775 10.9175 9.905C10.925 8.8625 10.4675 7.9475 8.6675 7.325Z" fill="#6C757D" />
 </svg>')
 ->nickname('earning')
-->data('permission', 'earning list');
+->data('permission', 'bill list');
 
 $menu->add('<span>'.__('messages.wallet').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.wallet').'</span></span>', ['route' => 'wallet.index'])
 ->prepend('<svg width="15" height="15" class="sidebar-menu-icon" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -16,7 +16,7 @@
                         <div class="d-flex justify-content-between align-items-center p-3 flex-wrap gap-3">
                             <h5 class="font-weight-bold"><?php echo e(__('messages.Cotch_List')); ?></h5>
                             <?php if($list_status != 'unassigned' && $list_status !='request'): ?>
-                            <?php if($auth_user->can('handyman add')): ?>
+                            <?php if($auth_user->can('coaches add')): ?>
                             <a href="<?php echo e(route('handyman.create')); ?>" class="float-right mr-1 btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i> <?php echo e(__('messages.add_form_title',['form' => __('messages.Coaches')  ])); ?></a>
                             <?php endif; ?>
                             <?php endif; ?>

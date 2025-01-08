@@ -13,7 +13,7 @@
                     <div class="card-body p-0">
                         <div class="d-flex justify-content-between align-items-center p-3 flex-wrap gap-3">
                             <h5 class="font-weight-bold">{{ $pageTitle ?? trans('messages.list') }}</h5>
-                            @if($auth_user->can('service add'))
+                            @if($auth_user->can('subscription add'))
                             <a href="{{ route('bank.create',['user_id' => $providerdata->id]) }}" class="float-right mr-1 btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i> {{ trans('messages.add_form_title',['form' => trans('messages.bank')  ]) }}</a>
                             @endif
                         </div>

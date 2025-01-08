@@ -8,10 +8,10 @@ $auth_user= authSession();
 
 
 
-    <?php if($auth_user->can('provider edit')): ?>
+    <?php if($auth_user->can('receptionsedit')): ?>
     <a class="mr-2" href="<?php echo e(route('provider.create',['id' => $provider->id])); ?>" title="<?php echo e(__('messages.update_form_title',['form' => __('messages.provider') ])); ?>"><i class="fas fa-pen text-secondary"></i></a>
     <?php endif; ?>
-    <?php if($auth_user->can('provider delete')): ?>
+    <?php if($auth_user->can('receptionsdelete')): ?>
     <a class="mr-2 text-danger" href="<?php echo e(route('deleteStaf', $provider->id)); ?>" data--submit="provider<?php echo e($provider->id); ?>" 
         data--confirmation='true'
         data--ajax="true"

@@ -61,10 +61,10 @@
                                 </button>
                                 
                             </form>
-   
+                            @if(Auth::user()->isAdmin)
                             <button id="export-excel" class="btn btn-success btn-sm ml-2"><i class="fa fa-file-excel"></i> Export to Excel</button>
                             <button id="export-pdf" class="btn btn-danger btn-sm"><i class="fa fa-file-pdf"></i> Export to PDF</button>
-                       
+                            @endif
                          
                         </div>
                       

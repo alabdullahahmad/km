@@ -76,7 +76,7 @@
    document.addEventListener('DOMContentLoaded', () => {
     window.renderedDataTable = $('#datatable').DataTable({
           processing: true,
-            serverSide: false, // البحث Client-side فقط
+            serverSide: true, // البحث Client-side فقط
             autoWidth: false,
             responsive: true,
             columnDefs: [

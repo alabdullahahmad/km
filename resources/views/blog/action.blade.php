@@ -5,11 +5,11 @@
 {{ Form::open(['route' => ['blog.destroy', $blog->id], 'method' => 'delete','data--submit'=>'blog'.$blog->id]) }}
 <div class="d-flex justify-content-end align-items-center">
     @if(!$blog->trashed())
-         @if($auth_user->can('blog edit'))
+         @if($auth_user->can('Calendar edit'))
         <a class="mr-2" href="{{ route('blog.create',['id' => $blog->id]) }}" title="{{ __('messages.update_form_title',['form' => __('messages.blog') ]) }}"><i class="fas fa-pen text-primary"></i></a>
         @endif 
 
-        @if($auth_user->can('blog delete'))
+        @if($auth_user->can('Calendar delete'))
         <a class="mr-3" href="{{ route('blog.destroy', $blog->id) }}" data--submit="blog{{$blog->id}}" 
             data--confirmation='true'
             data--ajax="true" 

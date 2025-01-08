@@ -5,7 +5,7 @@
 <div class="d-flex justify-content-end align-items-center">
     @if(!$data->trashed())
    
-        @if($auth_user->can('service delete'))
+        @if($auth_user->can('subscription delete'))
         <a class="mr-2" href="{{ route('service.destroy', $data->id) }}" data--submit="service{{$data->id}}" 
             data--confirmation='true' 
             data--ajax="true"

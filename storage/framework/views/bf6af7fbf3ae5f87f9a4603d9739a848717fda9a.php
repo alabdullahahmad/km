@@ -13,7 +13,7 @@
                             <h5 class="font-weight-bold"><?php echo e(__('messages.Add_New_Receptions')); ?></h5>
                             <a href="<?php echo e(route('provider.index')); ?>" class="float-right btn btn-sm btn-primary"><i
                                     class="fa fa-angle-double-left"></i> <?php echo e(__('messages.back')); ?></a>
-                            <?php if($auth_user->can('provider list')): ?>
+                            <?php if($auth_user->can('receptionslist')): ?>
                             <?php endif; ?>
                         </div>
                     </div>

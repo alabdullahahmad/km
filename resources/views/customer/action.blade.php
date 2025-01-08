@@ -9,13 +9,13 @@
     <a class="mr-2" href="{{ route('bank.list',['user_id' => $user->id]) }}" title="{{ __('messages.bank_list',['form' => __('messages.bank_list') ]) }}"><i class="fas fa-university text-primary"></i></a>
    @endif
     <a class="mr-2" href="{{ route('user.getchangepassword',['id' => $user->id]) }}" title="{{ __('messages.change_password',['form' => __('messages.user') ]) }}"><i class="fa fa-lock text-success "></i></a>
-        <!-- @if($auth_user->can('user view'))
+        <!-- @if($auth_user->can('casharchive  view'))
         <a class="mr-2" href="{{ route('user.show',$user->id) }}"><i class="far fa-eye text-secondary"></i></a>
         @endif -->
-        @if($auth_user->can('user edit'))
+        @if($auth_user->can('casharchive  edit'))
         <a class="mr-2" href="{{ route('user.create',['id' => $user->id]) }}" title="{{ __('messages.update_form_title',['form' => __('messages.user') ]) }}"><i class="fas fa-pen text-primary "></i></a>
         @endif
-        @if($auth_user->can('user delete'))
+        @if($auth_user->can('casharchive  delete'))
         <a class="mr-2 text-danger" href="{{ route('user.destroy', $user->id) }}" data--submit="user{{$user->id}}" 
             data--confirmation='true' 
             data--ajax="true"

@@ -6,7 +6,7 @@
                     <div class="card-body p-0">
                         <div class="d-flex justify-content-between align-items-center p-3 flex-wrap gap-3">
                             <h5 class="font-weight-bold">{{ $pageTitle ?? trans('messages.list') }}</h5>
-                            @if($auth_user->can('document list'))
+                            @if($auth_user->can('reportplayer list'))
                                 <a href="{{ route('document.index') }}" class="float-right btn btn-sm btn-primary"><i class="fa fa-angle-double-left"></i> {{ __('messages.back') }}</a>
                             @endif
                         </div>

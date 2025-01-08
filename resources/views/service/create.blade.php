@@ -8,7 +8,7 @@
                             <h5 class="font-weight-bold">{{__('messages.New_bodybuilding_subscription') }}</h5>
                             <a href="{{ route('service.index.id',$categoryId) }}" class="float-right btn btn-sm btn-primary"><i
                                     class="fa fa-angle-double-left"></i> {{ __('messages.back') }}</a>
-                            @if($auth_user->can('service list'))
+                            @if($auth_user->can('subscription list'))
                             @endif
                         </div>
                     </div>
