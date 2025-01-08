@@ -52,7 +52,7 @@ class SubCategoryController extends Controller
 
 
             ->editColumn('name', function($query){
-                if (auth()->user()->can('tagsubscriptions edit')) {
+                if (auth()->user()->can('subcategory edit')) {
                     $link = '<a class="btn-link btn-link-hover" href='.route('subcategory.create', ['id' => $query->id]).'>'.$query->name.'</a>';
                 } else {
                     $link = $query->name;
