@@ -121,4 +121,16 @@ class BillReadRepository extends ReadRepository
         }])->find($billId);
     }
 
+    public function getComplexReport(array $data = null){
+        $model = $this->model->query()->with(['user','subscriptionCoach','staf','coach'=>function($q){return $q->select('id','name')->get();}
+        ,'subscription'=>function($q){return $q->select('id','name','tagId')->with('tag')->get();} , 'userPayment'=>function($q){
+            return $q->select(['id','billId', DB::raw('SUM(amount) as totalAmount')])->groupBy('billId')->first();
+        }]);
+        if ($data) {
+            $model = $model->whereBetween('date', $data);
+        }
+        return $model->where('userId','!=',null)->get();
+    }
+
+
 }
