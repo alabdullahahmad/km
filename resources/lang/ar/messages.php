@@ -1112,7 +1112,8 @@ use App\Http\Core\Const\Messages\Attributes;
 'Comprehensive_report' => 'تقرير شامل',
 "Active-subscriptions-report" =>"تقرير الاشتراكات الفعالة",
 'One_Fund Report' => 'تقرير الصندوق الواحد',
-
+'Update_list' => 'قائمة التعديلات',
+'type_before_modification' => 'طبيعة الاشتراك قبل التعديل',
     )
 
     ?>

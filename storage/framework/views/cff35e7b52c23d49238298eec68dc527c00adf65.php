@@ -1,4 +1,9 @@
-<x-master-layout>
+<?php if (isset($component)) { $__componentOriginalc6e081c8432fe1dd6b4e43af4871c93447ee9b23 = $component; } ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\MasterLayout::class, []); ?>
+<?php $component->withName('master-layout'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes([]); ?>
 <head>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
@@ -9,7 +14,7 @@
                 <div class="card card-block card-stretch">
                     <div class="card-body p-0">
                         <div class="d-flex justify-content-between align-items-center p-3 flex-wrap gap-3">
-                            <h5 class="font-weight-bold">{{__('messages.Update_list') }}</h5>
+                            <h5 class="font-weight-bold"><?php echo e(__('messages.Update_list')); ?></h5>
                        
                         </div>
                         
@@ -55,7 +60,7 @@
 
               ajax: {
                   type: "POST",
-                  url: "{{ route('showBillLog') }}",
+                  url: "<?php echo e(route('showBillLog')); ?>",
                   headers: {
                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                   },
@@ -73,33 +78,33 @@
               columns: [
                   {
                       data: 'subscriptionDateModified',
-                      title: "{{ __('messages.modify_subscription_date') }}"
+                      title: "<?php echo e(__('messages.modify_subscription_date')); ?>"
                   },
                   {
                       data: 'stafId',
-                      title: "{{ __('messages.modified_by') }}"
+                      title: "<?php echo e(__('messages.modified_by')); ?>"
                   },
                   {
                       data: 'startDateAfterEdit',
-                      title: "{{ __('messages.date_after_modification') }}"
+                      title: "<?php echo e(__('messages.date_after_modification')); ?>"
                   },
                 
                   {
                       data: 'isTypeModified',
-                      title: "{{ __('messages.type_modified') }}"
+                      title: "<?php echo e(__('messages.type_modified')); ?>"
                   },
                   {
                       data: 'subscriptionBeforeEdit',
-                      title: "{{ __('messages.type_before_modification') }}"
+                      title: "<?php echo e(__('messages.type_before_modification')); ?>"
                   },
 
                   {
                       data: 'subscriptionAfterEdit',
-                      title: "{{ __('messages.type_after_modification') }}"
+                      title: "<?php echo e(__('messages.type_after_modification')); ?>"
                   },
                   {
                       data: 'created_at',
-                      title: "{{ __('messages.type_modification_date_time') }}"
+                      title: "<?php echo e(__('messages.type_modification_date_time')); ?>"
                   },
                
               ],
@@ -209,4 +214,10 @@
       }
   </style>
 
-</x-master-layout>
+ <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc6e081c8432fe1dd6b4e43af4871c93447ee9b23)): ?>
+<?php $component = $__componentOriginalc6e081c8432fe1dd6b4e43af4871c93447ee9b23; ?>
+<?php unset($__componentOriginalc6e081c8432fe1dd6b4e43af4871c93447ee9b23); ?>
+<?php endif; ?>
+<?php /**PATH C:\Users\USER\Desktop\km\resources\views/handymantype/index.blade.php ENDPATH**/ ?>
