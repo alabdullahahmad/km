@@ -1006,6 +1006,8 @@ use App\Http\Core\Const\Messages\Attributes;
         'old_player' => 'قديم',
         'subscription_period' => 'فترة الاشتراك',
         'coach_name' => 'اسم الكوتش',
+        'Update_list' => 'قائمة التعديلات',
+        'type_before_modification' => 'طبيعة الاشتراك قبل التعديل',
     )
 
     ?>

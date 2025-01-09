@@ -223,6 +223,10 @@
                     {
                         data: (data) => data.isEnd ? "فعال" : "غير فعال",
                         title: "{{ __('messages.status') }}"
+                    },
+                    {
+                        data: (data)=> data.action,
+                        title: 'العمليات'
                     }
                 ],
                 drawCallback: function(settings) {

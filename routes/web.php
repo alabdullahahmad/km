@@ -683,13 +683,13 @@ Route::group(['middleware' => ['auth', 'verified']], function()
     Route::get('handymanpayoutcreate/create/{id}', [HandymanPayoutController::class,'handymanpayoutcreate'])->name('handymanpayoutcreate.create');
 
 
-    Route::group(['middleware' => ['permission:handymantype list']], function () {
+
         Route::resource('handymantype', HandymanTypeController::class);
         Route::get('handyman-index_data',[HandymanTypeController::class,'index_data'])->name('handymantype.index_data');
         Route::post('handymantype-bulk-action', [HandymanTypeController::class, 'bulk_action'])->name('handymantype.bulk-action');
         Route::post('handymantype-action',[HandymanTypeController::class, 'action'])->name('handymantype.action');
         Route::post('handymantype/{id}', [HandymanTypeController::class, 'destroy'])->name('handymantype.destroy');
-    });
+
 
     Route::group(['middleware' => ['permission:servicefaq list']], function () {
         Route::resource('servicefaq', ServiceFaqController::class);

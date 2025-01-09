@@ -1128,6 +1128,7 @@ use App\Http\Core\Const\Messages\Attributes;
 'Comprehensive_report' => 'Comprehensive report',
 "Active-subscriptions-report" =>"Active Subscriptions report",
 'One_Fund Report' => 'One_Fund Report',
+'Update_list' => 'Update_list',
 
 
     )
