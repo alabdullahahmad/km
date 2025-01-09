@@ -110,6 +110,7 @@ use App\Http\Services\Report\FundReport\Controller\FundReportController;
 use App\Http\Services\Report\UserReport\Controller\UserReportController;
 use App\Http\Services\Report\UserReportDetails\Controller\UserReportDetailsController;
 use App\Http\Services\ShowAllUser\Controller\ShowAllUserController;
+use App\Http\Services\ShowBillLog\Controller\ShowBillLogController;
 use App\Http\Services\SubscriptionManagement\AddSubscription\Controller\AddSubscriptionController;
 use App\Http\Services\SubscriptionManagement\ShowSubscription\Controller\ShowSubscriptionController;
 use App\Http\Services\SubscriptionManagement\ViewSubscription\Controller\ViewSubscriptionController;
@@ -877,6 +878,7 @@ Route::group(['prefix' => 'coache', 'middleware' => ['auth']],function(){
 Route::group(['prefix' => 'bill', 'middleware' => ['auth']],function(){
     Route::get('/',ViewBillController::class)->name("Bill");
     Route::get('/show',ShowBillController::class)->name('showBill');
+    Route::get('/show/log',ShowBillLogController::class)->name('showBillLog');
     Route::post('/edit',EditeBillController::class)->name('editBill');
     Route::post('/add',AddBillController::class)->name('addBill');
 });
