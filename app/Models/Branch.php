@@ -22,5 +22,9 @@ class Branch extends Model
             'fundAmount'
         ];
 
+        protected $hidden = [
+            'fundAmount'
+        ];
+
 
 }

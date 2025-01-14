@@ -29,7 +29,8 @@ class AddBranchLogic implements Service {
 
         $response  = new AddBranchOutput($branch ,
         SuccessMessages::getKey(SuccessMessages::$Add,Attributes::Branch)
-        ,viewPath:'branch_management.add_branch'
+        ,viewPath:'coupon.index',
+        status : 302
         );
         return $response->send_as_object();
    }

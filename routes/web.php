@@ -2,10 +2,12 @@
 namespace App\Http\services\RoomManagement\ViewRoom\Controller;
 
 use App\Models\Role;
+use App\Models\User;
 use App\Models\Wallet;
 use App\Models\Setting;
 use App\Models\Category;
 use App\Exports\StafExport;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
@@ -46,23 +48,29 @@ use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\BookingRatingController;
 use App\Http\Controllers\MailTemplatesController;
 use App\Http\Controllers\HandymanPayoutController;
+//jabu
 use App\Http\Controllers\HandymanRatingController;
 use App\Http\Controllers\PaymentGatewayController;
-//jabu
 use App\Http\Controllers\PostJobRequestController;
 use App\Http\Controllers\ProviderPayoutController;
+//owel
 use App\Http\Controllers\ServicePackageController;
 use App\Http\Controllers\FrontendSettingController;
-//owel
 use App\Http\Controllers\UserServiceListController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\ProviderDocumentController;
 use App\Http\Controllers\NotificationTemplatesController;
 use App\Http\Controllers\ProviderAddressMappingController;
+use App\Http\Services\ShowAllUser\Controller\ShowAllUserController;
+use App\Http\Services\ShowBillLog\Controller\ShowBillLogController;
 use App\Http\Services\TagManagement\AddTag\Controller\AddTagController;
+use App\Http\Services\Report\BillReport\Controller\BillReportController;
+use App\Http\Services\Report\FundReport\Controller\FundReportController;
+use App\Http\Services\Report\UserReport\Controller\UserReportController;
 use App\Http\Services\TagManagement\ShowTag\Controller\ShowTagController;
 use App\Http\Services\TagManagement\ViewTag\Controller\ViewTagController;
 use App\Http\Services\BillManagement\AddBill\Controller\AddBillController;
+use App\Http\Services\Report\ClassReport\Controller\ClassReportController;
 use App\Http\Services\RoomManagement\AddRoom\Controller\AddRoomController;
 use App\Http\Services\StafManagement\AddStaf\Controller\AddStafController;
 use App\Http\Services\UserManagement\AddUser\Controller\AddUserController;
@@ -76,46 +84,45 @@ use App\Http\Services\StafManagement\ViewStaf\Controller\ViewStafController;
 use App\Http\Services\UserManagement\ShowUser\Controller\ShowUserController;
 use App\Http\Services\UserManagement\ViewUser\Controller\ViewUserController;
 use App\Http\Services\CoachManagement\AddCoach\Controller\AddCoachController;
+use App\Http\Services\CompletePaymenet\Controller\CompletePaymenetController;
 use App\Http\Services\TagManagement\DeleteTag\Controller\DeleteTagController;
 use App\Http\Services\BillManagement\EditeBill\Controller\EditeBillController;
 use App\Http\Services\RoomManagement\EditeRoom\Controller\EditeRoomController;
 use App\Http\Services\StafManagement\EditeStaf\Controller\EditeStafController;
+use App\Http\Services\UserManagement\EditeUser\Controller\EditeUserController;
+use App\Http\Services\ChangeAdminStatus\Controller\ChangeAdminStatusController;
 use App\Http\Services\CoachManagement\ShowCoach\Controller\ShowCoachController;
 use App\Http\Services\CoachManagement\ViewCoach\Controller\ViewCoachController;
+use App\Http\Services\BranchManagement\AddBranch\Controller\AddBranchController;
 use App\Http\Services\RoomManagement\DeleteRoom\Controller\DeleteRoomController;
 use App\Http\Services\StafManagement\DeleteStaf\Controller\DeleteStafController;
 use App\Http\Services\UserManagement\DeleteUser\Controller\DeleteUserController;
 use App\Http\Services\CoachManagement\EditeCoach\Controller\EditeCoachController;
+use App\Http\Services\BranchManagement\ShowBranch\Controller\ShowBranchController;
+use App\Http\Services\BranchManagement\ViewBranch\Controller\ViewBranchController;
 use App\Http\Services\CoachManagement\DeleteCoach\Controller\DeleteCoachController;
+use App\Http\Services\FundLogManagement\AddFundLog\Controller\AddFundLogController;
+use App\Http\Services\BranchManagement\EditeBranch\Controller\EditeBranchController;
 use App\Http\Services\FundLogManagement\ShowFundLog\Controller\ShowFundLogController;
 use App\Http\Services\FundLogManagement\ViewFundLog\Controller\ViewFundLogController;
 use App\Http\Services\GetCoachSubscription\Controller\GetCoachSubscriptionController;
 use App\Http\Services\CategoryManagement\AddCategory\Controller\AddCategoryController;
+use App\Http\Services\Report\UserReportDetails\Controller\UserReportDetailsController;
 use App\Http\Services\FundLogManagement\EditeFundLog\Controller\EditeFundLogController;
 use App\Http\Services\CategoryManagement\ShowCategory\Controller\ShowCategoryController;
 use App\Http\Services\CategoryManagement\ViewCategory\Controller\ViewCategoryController;
+use App\Http\Services\Report\ClassReportDetails\Controller\ClassReportDetailsController;
 use App\Http\Services\AddSubscriptionToCoach\Controller\AddSubscriptionToCoachController;
 use App\Http\Services\FundLogManagement\DeleteFundLog\Controller\DeleteFundLogController;
 use App\Http\Services\CategoryManagement\EditeCategory\Controller\EditeCategoryController;
 use App\Http\Services\CategoryManagement\DeleteCategory\Controller\DeleteCategoryController;
-use App\Http\Services\ChangeAdminStatus\Controller\ChangeAdminStatusController;
-use App\Http\Services\CompletePaymenet\Controller\CompletePaymenetController;
-use App\Http\Services\FundLogManagement\AddFundLog\Controller\AddFundLogController;
-use App\Http\Services\PlayerLoginLogManagement\AddPlayerLoginLog\Controller\AddPlayerLoginLogController;
-use App\Http\Services\PlayerLoginLogManagement\ShowPlayerLoginLog\Controller\ShowPlayerLoginLogController;
-use App\Http\Services\Report\BillReport\Controller\BillReportController;
-use App\Http\Services\Report\ClassReport\Controller\ClassReportController;
-use App\Http\Services\Report\ClassReportDetails\Controller\ClassReportDetailsController;
-use App\Http\Services\Report\FundReport\Controller\FundReportController;
-use App\Http\Services\Report\UserReport\Controller\UserReportController;
-use App\Http\Services\Report\UserReportDetails\Controller\UserReportDetailsController;
-use App\Http\Services\ShowAllUser\Controller\ShowAllUserController;
-use App\Http\Services\ShowBillLog\Controller\ShowBillLogController;
 use App\Http\Services\SubscriptionManagement\AddSubscription\Controller\AddSubscriptionController;
 use App\Http\Services\SubscriptionManagement\ShowSubscription\Controller\ShowSubscriptionController;
 use App\Http\Services\SubscriptionManagement\ViewSubscription\Controller\ViewSubscriptionController;
 use App\Http\Services\SubscriptionManagement\EditeSubscription\Controller\EditeSubscriptionController;
+use App\Http\Services\PlayerLoginLogManagement\AddPlayerLoginLog\Controller\AddPlayerLoginLogController;
 use App\Http\Services\SubscriptionManagement\DeleteSubscription\Controller\DeleteSubscriptionController;
+use App\Http\Services\PlayerLoginLogManagement\ShowPlayerLoginLog\Controller\ShowPlayerLoginLogController;
 use App\Http\Services\SubscriptionManagement\ViewSubscriptionAll\Controller\ViewSubscriptionAllController;
 use App\Http\Services\SubscriptionCoachManagement\AddSubscriptionCoach\Controller\AddSubscriptionCoachController;
 use App\Http\Services\SubscriptionCoachManagement\ShowSubscriptionCoach\Controller\ShowSubscriptionCoachController;
@@ -123,9 +130,6 @@ use App\Http\Services\SubscriptionCoachManagement\ViewSubscriptionCoach\Controll
 use App\Http\Services\ShowSubscription\Controller\ShowSubscriptionController as ControllerShowSubscriptionController;
 use App\Http\Services\SubscriptionCoachManagement\EditeSubscriptionCoach\Controller\EditeSubscriptionCoachController;
 use App\Http\Services\SubscriptionCoachManagement\DeleteSubscriptionCoach\Controller\DeleteSubscriptionCoachController;
-use App\Http\Services\UserManagement\EditeUser\Controller\EditeUserController;
-use App\Models\User;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -643,7 +647,7 @@ Route::group(['middleware' => ['auth', 'verified']], function()
     Route::post('ratingreview-action',[RatingReviewController::class, 'action'])->name('ratingreview.action');
     Route::get('ratingreview-index-data',[RatingReviewController::class,'index_data'])->name('ratingreview.index_data');
 
-   
+
     Route::resource('handyman-rating', HandymanRatingController::class);
     Route::get('handyman-rating-index-data',[HandymanRatingController::class,'index_data'])->name('handyman-rating.index_data');
     Route::post('handyman-rating-bulk-action', [HandymanRatingController::class, 'bulk_action'])->name('handyman-rating.bulk-action');
@@ -881,6 +885,13 @@ Route::group(['prefix' => 'bill', 'middleware' => ['auth']],function(){
     Route::get('/show/log',ShowBillLogController::class)->name('showBillLog');
     Route::post('/edit',EditeBillController::class)->name('editBill');
     Route::post('/add',AddBillController::class)->name('addBill');
+});
+
+Route::group(['prefix' => 'branch', 'middleware' => ['auth']],function(){
+    Route::get('/',ViewBranchController::class)->name("Branch");
+    Route::get('/show',ShowBranchController::class)->name('showBranch');
+    Route::post('/edit',EditeBranchController::class)->name('editBranch');
+    Route::post('/add',AddBranchController::class)->name('addBranch');
 });
 
 Route::group(['prefix' => 'subscription', 'middleware' => ['auth']],function(){
