@@ -27,6 +27,10 @@ class ViewBranchLogic implements Service {
 
         $branches = $branchRepository->readRepository()->getAllRecords();
 
+        foreach ($branches as $value) {
+            $value->action =  view('coupon.action')->with(['coupon'=>$value])->render();
+        }
+
         $response  = new ViewBranchOutput($branches , SuccessMessages::getKey(SuccessMessages::$show,Attributes::Coache)
         ,viewPath:'branch_management.index_branch');
         return $response->send_as_object();

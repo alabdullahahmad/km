@@ -1025,6 +1025,8 @@ use App\Http\Core\Const\Messages\Attributes;
             'coach_name' => 'Coach Name',
             'Update_list' => 'Update_list',
             'type_before_modification' => 'type_before_modification',
+            'branchName' => 'branchName',
+            'add branchName' => 'add branchName',
             
     )
     ?>

@@ -31,7 +31,8 @@ class EditeBranchLogic implements Service {
         );
 
         $response  = new EditeBranchOutput([] , SuccessMessages::getKey(SuccessMessages::$edit,Attributes::Branch)
-        ,viewPath:'branch_management.edite_branch');
+        ,viewPath:'coupon.index',
+        status : 302);
         return $response->send_as_array();
    }
 }

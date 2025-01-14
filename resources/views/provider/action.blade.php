@@ -3,7 +3,7 @@
 $auth_user= authSession();
 ?>
 {{ Form::open(['route' => ['deleteStaf', $provider->id], 'method' => 'delete','data--submit'=>'provider'.$provider->id]) }}
-<div class="d-flex justify-content-end align-items-center">
+<div class="d-flex  align-items-center">
 {{-- <a class="mr-2" href="{{ route('provider.time-slot',['id' => $provider->id]) }}" title="{{ __('messages.My_time_slot',['form' => __('messages.provider') ]) }}"><i class="fa fa-clock text-primary "></i></a> --}}
 
 

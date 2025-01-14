@@ -1114,6 +1114,8 @@ use App\Http\Core\Const\Messages\Attributes;
 'One_Fund Report' => 'تقرير الصندوق الواحد',
 'Update_list' => 'قائمة التعديلات',
 'type_before_modification' => 'طبيعة الاشتراك قبل التعديل',
+'branchName' => 'اسم الفرع',
+'add branchName' => 'إضافة فرع جديد',
     )
 
     ?>

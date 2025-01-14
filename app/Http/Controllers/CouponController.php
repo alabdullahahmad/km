@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Coupon;
 use App\Http\Requests\CouponRequest;
+use App\Models\Branch;
 use Yajra\DataTables\DataTables;
 use App\Models\Setting;
 
@@ -145,12 +146,12 @@ class CouponController extends Controller
         $id = $request->id;
         $auth_user = authSession();
 
-        $coupondata = Coupon::find($id);
+        $coupondata = Branch::find($id);
         $pageTitle = trans('messages.update_form_title',['form'=>trans('messages.coupon')]);
         
         if($coupondata == null){
             $pageTitle = trans('messages.add_button_form',['form' => trans('messages.coupon')]);
-            $coupondata = new Coupon;
+            $coupondata = new Branch;
         }
         
         return view('coupon.create', compact('pageTitle' ,'coupondata' ,'auth_user' ));
