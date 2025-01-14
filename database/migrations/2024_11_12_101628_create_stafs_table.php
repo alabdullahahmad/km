@@ -25,6 +25,7 @@ return new class extends Migration
             $table->date('birthDay');
             $table->boolean('status')->default(true);
             $table->string('user_type')->default('staf');
+            $table->foreignId('branchId')->references('id')->on('branches')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

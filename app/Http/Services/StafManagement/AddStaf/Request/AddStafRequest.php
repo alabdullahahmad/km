@@ -32,7 +32,8 @@ class AddStafRequest extends BaseRequest
             'gender' => ['required' , 'string' ],
             'birthDay' => ['nullable' , 'date' , 'date_format:Y-m-d'],
             'password'=>['required' ,"string","min:8"],
-            'isAdmin' => ['nullable' , 'boolean']
+            'isAdmin' => ['nullable' , 'boolean'],
+            'branchId' => ['required' , 'integer' , 'exists:branches,id'],
         ];
     }
 

@@ -19,7 +19,8 @@ class Branch extends Model
             'name',
             'address',
             'city',
-            'fundAmount'
+            'fundAmount',
+            'branchId'
         ];
 
         protected $hidden = [

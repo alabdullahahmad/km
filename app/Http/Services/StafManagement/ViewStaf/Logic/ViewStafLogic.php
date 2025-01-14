@@ -25,7 +25,11 @@ class ViewStafLogic implements Service {
         // write your logic code..
         $stafRepository = $this->repository->StafRepository();
 
-        $stafs = $stafRepository->readRepository()->getAllRecords();
+        $stafs = $stafRepository->readRepository()->getAllRecordsWithRelations([
+            'branch' => function($q){
+                return $q->select('id','name');
+            }
+        ]);
         foreach ($stafs as $value) {
             $value->category;
             $value->action =  view('provider.action')->with(['provider'=>$value])->render();

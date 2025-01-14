@@ -26,6 +26,7 @@ class Staf extends Authenticatable implements HasMedia
         'status',
         'user_type',
         'isAdmin',
+        'branchId'
 
     ];
 
@@ -68,5 +69,15 @@ class Staf extends Authenticatable implements HasMedia
         if($user->hasRole('provider')) {
             return $query->where('user_type', 'handyman')->where('provider_id',$user->id);
         }
+    }
+
+    /**
+     * Get the branch that owns the Staf
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class, 'branchId');
     }
 }
