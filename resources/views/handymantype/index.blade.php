@@ -54,7 +54,7 @@
               dom: '<"row align-items-center"><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" l><"col-md-6" p>><"clear">',
 
               ajax: {
-                  type: "POST",
+                  type: "GET",
                   url: "{{ route('showBillLog') }}",
                   headers: {
                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -63,6 +63,7 @@
                       d.search = {
                           value: $('.dt-search').val() || ''
                       };
+                      d.billId = {!! $billId !!};
                       d.filter = {
                           column_status: $('#column_status').val() || 'all'
                       };

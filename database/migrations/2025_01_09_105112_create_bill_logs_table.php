@@ -19,6 +19,7 @@ return new class extends Migration
             $table->boolean('isTypeModified')->default(false);
             $table->foreignId('subscriptionBeforeEdit')->nullable()->references('id')->on('subscriptions')->cascadeOnDelete();
             $table->foreignId('subscriptionAfterEdit')->nullable()->references('id')->on('subscriptions')->cascadeOnDelete();
+            $table->foreignId('billId')->references('id')->on('bills')->cascadeOnDelete();
             $table->timestamps();
         });
     }

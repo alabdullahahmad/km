@@ -22,7 +22,8 @@ class HandymanTypeController extends Controller
         $pageTitle = trans('messages.list_form_title',['form' => trans('messages.handymantype')] );
         $auth_user = authSession();
         $assets = ['datatable'];
-        return view('handymantype.index', compact('pageTitle','auth_user','assets','filter'));
+        $billId = $request->billId;
+        return view('handymantype.index', compact('pageTitle','auth_user','assets','filter','billId'));
     }
 
 

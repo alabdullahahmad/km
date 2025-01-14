@@ -173,38 +173,6 @@
                         title: "{{ __('messages.End_Subscription') }}"
                     },
                     {
-                        data: 'subscriptionDateModified',
-                        title: "{{ __('messages.modify_subscription_date') }}"
-                    },
-                    {
-                        data: 'modifierName',
-                        title: "{{ __('messages.modified_by') }}"
-                    },
-                    {
-                        data: 'modifiedDate',
-                        title: "{{ __('messages.date_after_modification') }}"
-                    },
-                    {
-                        data: 'modificationDate',
-                        title: "{{ __('messages.modification_date_time') }}"
-                    },
-                    {
-                        data: 'isTypeModified',
-                        title: "{{ __('messages.type_modified') }}"
-                    },
-                    {
-                        data: 'modifiedByUser',
-                        title: "{{ __('messages.modified_by') }}"
-                    },
-                    {
-                        data: 'modifiedType',
-                        title: "{{ __('messages.type_after_modification') }}"
-                    },
-                    {
-                        data: 'modificationDateTime',
-                        title: "{{ __('messages.type_modification_date_time') }}"
-                    },
-                    {
                         data: 'isFrozen',
                         title: "{{ __('messages.subscription_frozen') }}"
                     },

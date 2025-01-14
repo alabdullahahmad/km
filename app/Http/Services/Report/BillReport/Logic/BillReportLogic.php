@@ -25,6 +25,12 @@ class BillReportLogic implements Service {
         $billReportRepository = $this->repository->BillRepository();
         $billReport = $billReportRepository->readRepository()->getComplexReport($this->input->toArray());
 
+        foreach ($billReport as  $value) {
+            $value->action = view('service.user_service_action')->with(
+                ['billId'=>$value->id]
+            )->render();
+        }
+
         $response  = new BillReportOutput($billReport ,
         SuccessMessages::getKey(SuccessMessages::$show));
 
