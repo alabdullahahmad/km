@@ -178,38 +178,38 @@
                         data: (data)=> data.endDate,
                         title: "<?php echo e(__('messages.End_Subscription')); ?>"
                     },
-                    {
-                        data: 'subscriptionDateModified',
-                        title: "<?php echo e(__('messages.modify_subscription_date')); ?>"
-                    },
-                    {
-                        data: 'modifierName',
-                        title: "<?php echo e(__('messages.modified_by')); ?>"
-                    },
-                    {
-                        data: 'modifiedDate',
-                        title: "<?php echo e(__('messages.date_after_modification')); ?>"
-                    },
-                    {
-                        data: 'modificationDate',
-                        title: "<?php echo e(__('messages.modification_date_time')); ?>"
-                    },
-                    {
-                        data: 'isTypeModified',
-                        title: "<?php echo e(__('messages.type_modified')); ?>"
-                    },
-                    {
-                        data: 'modifiedByUser',
-                        title: "<?php echo e(__('messages.modified_by')); ?>"
-                    },
-                    {
-                        data: 'modifiedType',
-                        title: "<?php echo e(__('messages.type_after_modification')); ?>"
-                    },
-                    {
-                        data: 'modificationDateTime',
-                        title: "<?php echo e(__('messages.type_modification_date_time')); ?>"
-                    },
+                    // {
+                    //     data: 'subscriptionDateModified',
+                    //     title: "<?php echo e(__('messages.modify_subscription_date')); ?>"
+                    // },
+                    // {
+                    //     data: 'modifierName',
+                    //     title: "<?php echo e(__('messages.modified_by')); ?>"
+                    // },
+                    // {
+                    //     data: 'modifiedDate',
+                    //     title: "<?php echo e(__('messages.date_after_modification')); ?>"
+                    // },
+                    // {
+                    //     data: 'modificationDate',
+                    //     title: "<?php echo e(__('messages.modification_date_time')); ?>"
+                    // },
+                    // {
+                    //     data: 'isTypeModified',
+                    //     title: "<?php echo e(__('messages.type_modified')); ?>"
+                    // },
+                    // {
+                    //     data: 'modifiedByUser',
+                    //     title: "<?php echo e(__('messages.modified_by')); ?>"
+                    // },
+                    // {
+                    //     data: 'modifiedType',
+                    //     title: "<?php echo e(__('messages.type_after_modification')); ?>"
+                    // },
+                    // {
+                    //     data: 'modificationDateTime',
+                    //     title: "<?php echo e(__('messages.type_modification_date_time')); ?>"
+                    // },
                     {
                         data: 'isFrozen',
                         title: "<?php echo e(__('messages.subscription_frozen')); ?>"

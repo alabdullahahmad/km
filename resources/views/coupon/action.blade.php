@@ -3,11 +3,12 @@
     $auth_user= authSession();
 ?>
 {{ Form::open(['route' => ['coupon.destroy', $coupon->id], 'method' => 'delete','data--submit'=>'coupon'.$coupon->id]) }}
-<div class="d-flex justify-content-end align-items-center">
+<div class="d-flex  align-items-center">
+    
     @if(!$coupon->trashed())
-        <!-- @if($auth_user->can('coupon edit'))
+       @if($auth_user->can('coupon edit'))
         <a href="{{ route('coupon.create',['id' => $coupon->id]) }}" title="{{ __('messages.update_form_title',['form' => __('messages.coupon') ]) }}"><i class="fas fa-pen text-primary mr-2"></i></a>
-        @endif -->
+        @endif 
         @if($auth_user->can('coupon delete'))
         <a class=" mr-3" href="{{ route('coupon.destroy', $coupon->id) }}" data--submit="coupon{{$coupon->id}}" 
             title="{{ __('messages.delete_form_title',['form' => __('messages.coupon') ]) }}"

@@ -37,6 +37,10 @@
                                         ]) }}
 
                                 </div>
+                                <div class="form-group col-md-4">
+                                    {{ Form::label('discount_type',__('messages.branchName').' <span class="text-danger">*</span>',['class'=>'form-control-label'],false) }}
+                                    {{ Form::select('discount_type',['fixed' => __('messages.name') , 'percentage' => __('messages.percentage') ],old('status'),[ 'class' =>'form-control select2js','required']) }}
+                                </div>
 
 
 

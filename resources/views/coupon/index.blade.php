@@ -9,9 +9,9 @@
                 <div class="card card-block card-stretch">
                     <div class="card-body p-0">
                         <div class="d-flex justify-content-between align-items-center p-3 flex-wrap gap-3">
-                            <h5 class="font-weight-bold">{{ $pageTitle ?? trans('messages.list') }}</h5>
+                            <h5 class="font-weight-bold">{{ __('messages.branchName') }}</h5>
                             @if($auth_user->can('coupon add'))
-                            <a href="{{ route('coupon.create') }}" class="float-right mr-1 btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i> {{ trans('messages.add_form_title',['form' => trans('messages.coupon')  ]) }}</a>
+                            <a href="{{ route('coupon.create') }}" class="float-right mr-1 btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i> {{ trans('messages.add_form_title',['form' => trans('messages.branchName')  ]) }}</a>
                             @endif
                         </div>
                     </div>
@@ -22,42 +22,9 @@
     <div class="card">
         <div class="card-body">
         <div class="row justify-content-between">
-            <div>
-                <div class="col-md-12">
-                  <form action="{{ route('coupon.bulk-action') }}" id="quick-action-form" class="form-disabled d-flex gap-3 align-items-center">
-                    @csrf
-                  <select name="action_type" class="form-control select2" id="quick-action-type" style="width:100%" disabled>
-                      <option value="">{{__('messages.no_action')}}</option>
-                      <option value="change-status">{{__('messages.status')}}</option>
-                      <option value="delete">{{__('messages.delete')}}</option>
-                      <option value="restore">{{ __('messages.restore') }}</option>
-                      <option value="permanently-delete">{{ __('messages.permanent_dlt') }}</option>
-                  </select>
-                
-                <div class="select-status d-none quick-action-field" id="change-status-action" style="width:100%">
-                    <select name="status" class="form-control select2" id="status" style="width:100%">
-                      <option value="1">{{__('messages.active')}}</option>
-                      <option value="0">{{__('messages.inactive')}}</option>
-                    </select>
-                </div>
-                <button id="quick-action-apply" class="btn btn-primary" data-ajax="true"
-                data--submit="{{ route('coupon.bulk-action') }}"
-                data-datatable="reload" data-confirmation='true'
-                data-title="{{ __('coupon',['form'=>  __('coupon') ]) }}"
-                title="{{ __('coupon',['form'=>  __('coupon') ]) }}"
-                data-message='{{ __("Do you want to perform this action?") }}' disabled>{{__('messages.apply')}}</button>
-            </div>
-          
-            </form>
-          </div>
+         
               <div class="d-flex justify-content-end">
-                <div class="datatable-filter ml-auto">
-                  <select name="column_status" id="column_status" class="select2 form-control" data-filter="select" style="width: 100%">
-                    <option value="">{{__('messages.all')}}</option>
-                    <option value="0" {{$filter['status'] == '0' ? "selected" : ''}}>{{__('messages.inactive')}}</option>
-                    <option value="1" {{$filter['status'] == '1' ? "selected" : ''}}>{{__('messages.active')}}</option>
-                  </select>
-                </div>
+               
                 <div class="input-group ml-2">
                     <span class="input-group-text" id="addon-wrapping"><i class="fas fa-search"></i></span>
                     <input type="text" class="form-control dt-search" placeholder="Search..." aria-label="Search" aria-describedby="addon-wrapping" aria-controls="dataTableBuilder">
@@ -102,31 +69,15 @@
                         orderable: false,
                         searchable: false,
                     },
-                    {
-                        data: 'code',
-                        name: 'code',
-                        title: "{{__('messages.code')}}"
-                    },
-                    {
-                        data: 'discount',
-                        name: 'discount',
-                        title: "{{__('messages.discount')}}"
-                    },
+                  
+                 
                     {
                         data: 'discount_type',
-                        name: 'discount_type',
-                        title: "{{__('messages.discount_type')}}"
+                        name: 'branchName',
+                        title: "{{__('messages.branchName')}}"
                     },
-                    {
-                        data: 'expire_date',
-                        name: 'expire_date',
-                        title: "{{__('messages.expire_date')}}"
-                    },
-                    {
-                        data: 'status',
-                        name: 'status',
-                        title: "{{__('messages.status')}}"
-                    },
+                 
+                  
                     {
                         data: 'action',
                         name: 'action',

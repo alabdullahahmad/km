@@ -1129,6 +1129,8 @@ use App\Http\Core\Const\Messages\Attributes;
 "Active-subscriptions-report" =>"Active Subscriptions report",
 'One_Fund Report' => 'One_Fund Report',
 'Update_list' => 'Update_list',
+'branchName' => 'branchName',
+'add branchName' => 'add branchName',
 
 
     )

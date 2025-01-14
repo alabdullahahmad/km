@@ -81,6 +81,10 @@
                         name: 'name',
                         title: "<?php echo e(__('messages.name')); ?>"
                     },
+                    {
+                    data: 'branchName',
+                    title: 'الفرع'
+                },
 
                     // {
                     //     data: 'status',

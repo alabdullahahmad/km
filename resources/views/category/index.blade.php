@@ -76,6 +76,10 @@
                         name: 'name',
                         title: "{{ __('messages.name') }}"
                     },
+                    {
+                    data: 'branchName',
+                    title: 'الفرع'
+                },
 
                     // {
                     //     data: 'status',

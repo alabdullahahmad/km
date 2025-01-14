@@ -79,6 +79,10 @@
                         name:'category_id',
                         title: "<?php echo e(__('messages.category')); ?>"
                     },
+                    {
+                    data: 'branchName',
+                    title: "<?php echo e(__('messages.branchName')); ?>"
+                },
 
                     {
                         data: 'action',

@@ -74,6 +74,10 @@
                         name:'category_id',
                         title: "{{ __('messages.category') }}"
                     },
+                    {
+                    data: 'branchName',
+                    title: "{{ __('messages.branchName') }}"
+                },
 
                     {
                         data: 'action',

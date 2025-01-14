@@ -126,6 +126,10 @@
                     title: 'الاسم'
                 },
                 {
+                    data: 'branchName',
+                    title: 'الفرع'
+                },
+                {
                     data: 'startDate',
                     title: 'بداية الاشتراك'
                 },
