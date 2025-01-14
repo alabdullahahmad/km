@@ -58,7 +58,7 @@
                 <small class="help-block with-errors text-danger"></small>
             </div>
             
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6" >
                 {{ Form::label('description', __('messages.payment_note') . ' <span class="text-danger">*</span>', ['class' => 'form-control-label'], false) }}
                 {{ Form::text('description', null, ['placeholder' => __('messages.payment_note'), 'class' => 'form-control', 'id' => 'description']) }}
                 <small class="help-block with-errors text-danger"></small>

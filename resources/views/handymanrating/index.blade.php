@@ -2,7 +2,10 @@
 
     <head>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+        <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     </head>
     <div class="container-fluid">
         <div class="row">
@@ -10,7 +13,13 @@
                 <div class="card card-block card-stretch">
                     <div class="card-body p-0">
                         <div class="d-flex justify-content-between align-items-center p-3 flex-wrap gap-3">
-                            <h5 class="font-weight-bold">{{ __('messages.Players_bill') }}</h5>
+                            <h5 class="font-weight-bold">{{ __('messages.Active-subscriptions-report') }}</h5>
+                            <div class="d-flex justify-content-center align-items-center gap-3 mx-auto">
+                                <span class="value-label font-weight-bold">{{ __('messages.num_player') }}</span>
+                                <span class="value-amount font-weight-bold" id="player-count">0</span>
+                              
+                            </div>
+                            <button id="export-excel" class="btn btn-success btn-sm ml-2"><i class="fa fa-file-excel"></i> Export to Excel</button>
                         </div>
                     </div>
                 </div>
@@ -59,10 +68,10 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
-
+    
             window.renderedDataTable = $('#datatable').DataTable({
                 processing: true,
-                serverSide: true,
+                serverSide: true, 
                 autoWidth: false,
                 responsive: true,
                 dom: '<"row align-items-center"><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" l><"col-md-6" p>><"clear">',
@@ -71,109 +80,78 @@
                     "url": '{{ route("usersDues") }}',
                     "data": function(d) {
                         d.search = {
-                            value: $('.dt-search').val()
+                            value: $('.dt-search').val() || ''
                         };
-                        // d.startDate = $('#start_date').val();
-                        // d.endDate = $('#end_date').val();
                     }
                 },
                 columns: [
                     {
-                        data: (data)=>{
-                            return data.staf.name;
+                        data: (data) => {
+                            return data.user.name; // اسم المشترك
                         },
-                        name: 'DT_RowIndex',
-                        title: "{{ __('messages.Reception_name') }}",
-                        exportable: false,
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: (data)=>{
-                            return data.user.name
-                        },
-                        name: 'post_request_id',
+                        name: 'user_name',
                         title: "{{ __('messages.player_name') }}"
                     },
                     {
-                        data: 'startDate',
-                        name: 'provider_id',
-                        title: "{{ __('messages.subscription_start') }}"
-                    },
-                    {
-                        data: (data)=>{
-                            return data.subscription.name
+                        data: (data) => {
+                            return data.subscription.name; // طبيعة الاشتراك
                         },
-                        name: 'customer_id',
-                        title: "{{ __('messages.Subscription_Name') }}"
+                        name: 'subscription_type',
+                        title: "{{ __('messages.Subscription type') }}"
                     },
                     {
-                        data: 'id',
-                        name: 'price',
-                        title: "{{ __('messages.Bill_Number') }}"
+                        data: 'startDate', // تاريخ بداية الاشتراك
+                        name: 'start_date',
+                        title: "{{ __('messages.Start_Subscription') }}"
                     },
                     {
-                        data: (data)=>{
-                            return (data.price ?? data.amount ?? 0)+(data.discountAmount ?? 0)
+                        data: 'endDate', // تاريخ نهاية الاشتراك
+                        name: 'end_date',
+                        title: "{{ __('messages.End_Subscription') }}"
+                    },
+                    {
+                        data: (data) => {
+                            return data.isActive ? "{{ __('messages.active') }}" : "{{ __('messages.inactive') }}"; // الحالة
                         },
-                        name: 'price',
-                        title: "{{ __('messages.Amount_Before_Discount') }}"
-                    },
-                    {
-                        data: 'discountAmount',
-                        name: 'price',
-                        title: "{{ __('messages.discount_value') }}"
-                    },
-                    {
-                        data: 'discountBecouse',
-                        name: 'price',
-                        title: "{{ __('messages.Discount_reason') }}"
-                    },
-                    {
-                        data: (data)=>{
-                            return (data.price ?? data.amount)
-                        },
-                        name: 'price',
-                        title: "{{ __('messages.Amount_After_Discount') }}"
-                    },
-                    {
-                        data: (data)=>{
-                            return data.user_payment?.[0]?.totalAmount ?? 0
-                        },
-                        name: 'price',
-                        title: "{{ __('messages.Received_Amount') }}"
-                    },
-                    {
-                        data: (data)=>
-                        {
-                            return data.price - (data.user_payment?.[0]?.totalAmount ?? 0)
-                        },
-                        name: 'price',
-                        title: "{{ __('messages.Rest_Of_Bill') }}"
-                    },
-                    // {
-                    //     data: 'action',
-                    //     name: 'action',
-                    //     orderable: false,
-                    //     searchable: false,
-                    //     title: "{{ __('messages.action') }}"
-                    // }
+                        name: 'status',
+                        title: "{{ __('messages.status') }}"
+                    }
+                ],
+                drawCallback: function(settings) {
+            const playerCount = settings.json.recordsTotal || 0;
+            $('#player-count').text(playerCount);
+        }
+            });
+    
+        });
+   
 
-                ]
 
+
+
+
+        $('#export-excel').on('click', function() {
+                const wb = XLSX.utils.table_to_book(document.getElementById('datatable'), {sheet: "Sheet JS"});
+                XLSX.writeFile(wb, 'Report.xlsx');
             });
 
-        });
-
-
+            $('#export-pdf').on('click', function() {
+                const element = document.getElementById('datatable');
+                html2pdf(element, {
+                    margin: 1,
+                    filename: 'Report.pdf',
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                });
+            });
         // سكربت لتطبيق فلترة التواريخ
         $('#apply-date-filter').click(function(e) {
             e.preventDefault();
-
+    
             // التحقق من تعبئة كلا الخانتين
             const startDate = $('#start_date').val();
             const endDate = $('#end_date').val();
-
+    
             if (!startDate || !endDate) {
                 Swal.fire({
                     icon: 'warning',
@@ -182,11 +160,12 @@
                 });
                 return;
             }
-
+    
             // إعادة تحميل الجدول
             window.renderedDataTable.ajax.reload();
         });
     </script>
+    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 </x-master-layout>

@@ -11,7 +11,7 @@
                         <div class="d-flex justify-content-between align-items-center p-3 flex-wrap gap-3">
                             <h5 class="font-weight-bold">{{ $pageTitle ?? trans('messages.list') }}</h5>
                             @if($list_status!=='unverified')
-                            @if($auth_user->can('user add'))
+                            @if($auth_user->can('casharchive  add'))
                             <a href="{{ route('user.create') }}" class="float-right mr-1 btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i> {{ __('messages.add_form_title',['form' => __('messages.user')  ]) }}</a>
                             @endif
                             @endif

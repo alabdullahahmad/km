@@ -8,7 +8,7 @@
                             <h5 class="font-weight-bold">{{  __('messages.Add_New_Receptions') }}</h5>
                             <a href="{{ route('provider.index') }}" class="float-right btn btn-sm btn-primary"><i
                                     class="fa fa-angle-double-left"></i> {{ __('messages.back') }}</a>
-                            @if($auth_user->can('provider list'))
+                            @if($auth_user->can('receptionslist'))
                             @endif
                         </div>
                     </div>

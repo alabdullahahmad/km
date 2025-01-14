@@ -1133,7 +1133,7 @@ class PermissionTableSeeder extends Seeder
             122 => 
             array (
                 'id' => 123,
-                'name' => 'earning ',
+                'name' => 'Bills ',
                 'guard_name' => 'web',
                 'parent_id' => NULL,
                 'created_at' => '2022-04-01 04:46:07',
@@ -1142,7 +1142,7 @@ class PermissionTableSeeder extends Seeder
             123 => 
             array (
                 'id' => 124,
-                'name' => 'earning list',
+                'name' => 'bill list',
                 'guard_name' => 'web',
                 'parent_id' => 123,
                 'created_at' => '2022-04-01 04:46:07',

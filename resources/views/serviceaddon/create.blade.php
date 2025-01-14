@@ -7,7 +7,7 @@
                         <div class="d-flex justify-content-between align-items-center p-3 flex-wrap gap-3">
                             <h5 class="font-weight-bold">{{ __('messages.New_Classes_subscription') }}</h5>
                             <a href="{{ route('serviceaddon.index') }}" class="float-right btn btn-sm btn-primary"><i class="fa fa-angle-double-left"></i> {{ __('messages.back') }}</a>
-                            @if($auth_user->can('service list'))
+                            @if($auth_user->can('subscription list'))
                            
                             @endif
                         </div>

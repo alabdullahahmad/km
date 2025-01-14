@@ -11,17 +11,19 @@ use App\Http\Repositories\UserRepositories\UserRepositoryCaller;
 use App\Http\Repositories\AdminRepositories\AdminRepositoryCaller;
 use App\Http\Repositories\CoachRepositories\CoachRepositoryCaller;
 use App\Http\Repositories\branchRepositories\branchRepositoryCaller;
-
+use App\Http\Repositories\FundLogRepositories\FundLogRepositoryCaller;
+use App\Http\Repositories\BillLogRepositories\BillLogRepositoryCaller; 
 use App\Http\Repositories\CategoryRepositories\CategoryRepositoryCaller;
 use App\Http\Repositories\DiscountsRepositories\DiscountsRepositoryCaller;
-use App\Http\Repositories\FundLogRepositories\FundLogRepositoryCaller;
-use App\Http\Repositories\PalyerLoginLogRepositories\PalyerLoginLogRepositoryCaller;
-use App\Http\Repositories\SubscriptionRepositories\SubscriptionRepositoryCaller;
-use App\Http\Repositories\SubscriptionCoachRepositories\SubscriptionCoachRepositoryCaller;
 use App\Http\Repositories\UserPaymentRepositories\UserPaymentRepositoryCaller;
+use App\Http\Repositories\SubscriptionRepositories\SubscriptionRepositoryCaller;
+use App\Http\Repositories\PalyerLoginLogRepositories\PalyerLoginLogRepositoryCaller;
+use App\Http\Repositories\SubscriptionCoachRepositories\SubscriptionCoachRepositoryCaller;
+
 
 class RepositoryCaller {
 
+	static public function BillLogRepository(){return (new BillLogRepositoryCaller);}
 	static public function PalyerLoginLogRepository(){return (new PalyerLoginLogRepositoryCaller);}
 	static public function UserPaymentRepository(){return (new UserPaymentRepositoryCaller);}
     static public function FundLogRepository(){return (new FundLogRepositoryCaller);}

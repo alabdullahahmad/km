@@ -29,7 +29,8 @@ class Bill extends Model
         'coachId',
         'subscriptionId',
         'userId',
-        'isEnd'
+        'isEnd',
+        'subscriptionCoachId'
     ];
 
 
@@ -66,5 +67,9 @@ class Bill extends Model
     public function userPayment()
     {
         return $this->hasMany(UserPayment::class, 'billId' ,'id');
+    }
+
+    public function subscriptionCoach(){
+        return $this->belongsTo(SubscriptionCoach::class,'subscriptionCoachId','id');
     }
 }

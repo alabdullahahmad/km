@@ -23,10 +23,10 @@ $menu->add('<span>'.__('messages.home').'</span><span class="custom-tooltip"><sp
 <path d="M2.5 9H21.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
 </svg>')
 ->nickname('booking')
-->data('permission', 'booking list');
+->data('permission', 'homepage list');
 
 $menu->add(__('messages.sidebar_form_title',['form' => trans('messages.service')]), ['class' => 'category-main'])
-->data('permission', ['category list','subcategory list','service list']);
+->data('permission', ['category list','tagsubscriptions list','subscription list']);
 
 $menu->add('<span>'.__('messages.category').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.category').'</span></span>', ['route' => 'category.index', ])
 ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -43,7 +43,7 @@ $menu->add('<span>'.__('messages.Tag_Subscriptions').'</span><span class="custom
 <path d="M17.8202 13.76C17.4902 13.43 17.0402 13.25 16.5802 13.25H12.9902C12.0302 13.25 11.2402 14.04 11.2402 15V20C11.2402 20.96 12.0302 21.75 12.9902 21.75H18.9902C19.9502 21.75 20.7402 20.96 20.7402 20V17.41C20.7402 16.95 20.5502 16.5 20.2302 16.17L17.8202 13.76ZM19.2502 20C19.2502 20.14 19.1402 20.25 19.0002 20.25H13.0002C12.8602 20.25 12.7502 20.14 12.7502 20V15C12.7502 14.86 12.8602 14.75 13.0002 14.75H16.5902C16.6602 14.75 16.7202 14.78 16.7702 14.82L19.1802 17.23C19.1802 17.23 19.2502 17.34 19.2502 17.41V20Z" fill="currentColor"/>
 <path d="M9 7.75C9.41 7.75 9.75 7.41 9.75 7C9.75 6.59 9.41 6.25 9 6.25H4.75V3C4.75 2.59 4.41 2.25 4 2.25C3.59 2.25 3.25 2.59 3.25 3V15C3.25 16.52 4.48 17.75 6 17.75H9C9.41 17.75 9.75 17.41 9.75 17C9.75 16.59 9.41 16.25 9 16.25H6C5.31 16.25 4.75 15.69 4.75 15V7.75H9Z" fill="currentColor"/>
 </svg>')
-->data('permission', 'subcategory list')
+->data('permission', 'tagsubscriptions list')
 ->link->attr(['class' => '']);
 
 $menu->add('<span>'.trans('messages.Subscriptions').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.services').'</span></span>', ['class' => ''])
@@ -54,7 +54,7 @@ $menu->add('<span>'.trans('messages.Subscriptions').'</span><span class="custom-
 <path d="M13.5 6.5C13.5 4.29086 15.2909 2.5 17.5 2.5C19.7091 2.5 21.5 4.29086 21.5 6.5C21.5 8.70914 19.7091 10.5 17.5 10.5H14.6429C14.5102 10.5 14.4438 10.5 14.388 10.4937C13.9244 10.4415 13.5585 10.0756 13.5063 9.61196C13.5 9.55616 13.5 9.48982 13.5 9.35714V6.5Z" stroke="currentColor" stroke-width="1.5"/>
 </svg>')
 ->nickname('services')
-->data('permission', 'service list')
+->data('permission', 'subscription list')
 ->link->attr(["class" => ""])
 ->href('#services');
 
@@ -67,7 +67,7 @@ foreach (App\Models\Category::all() as  $value) {
     <path d="M13 9L18 9" stroke="#currentColor" stroke-width="1.5" stroke-linecap="round"/>
     <path d="M13 16L18 16" stroke="#currentColor" stroke-width="1.5" stroke-linecap="round"/>
     </svg>')
-    ->data('permission', 'service list')
+    ->data('permission', 'subscription list')
     ->link->attr(['class' => '']);
 }
 
@@ -79,7 +79,7 @@ foreach (App\Models\Category::all() as  $value) {
 // <path d="M13 9L18 9" stroke="#currentColor" stroke-width="1.5" stroke-linecap="round"/>
 // <path d="M13 16L18 16" stroke="#currentColor" stroke-width="1.5" stroke-linecap="round"/>
 // </svg>')
-// ->data('permission', 'service list')
+// ->data('permission', 'subscription list')
 // ->link->attr(['class' => '']);
 
 
@@ -117,16 +117,16 @@ $othersetting = $settings->has('OTHER_SETTING') ? json_decode($settings['OTHER_S
 
 
 if(optional($servicesetting)->post_services == 1){
-$menu->add(__('messages.sidebar_form_title',['form' => trans('messages.Report')]), ['class' => 'category-main'])->data('permission', 'postjob');
+$menu->add(__('messages.sidebar_form_title',['form' => trans('messages.Report')]), ['class' => 'category-main'])->data('permission', 'reportcash');
 
 $menu->add('<span>'.__('messages.Report_cash').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.Report_cash').'</span></span>', ['route' => 'post-job-request.index'])
 ->prepend('<svg width="15" height="15" class="sidebar-menu-icon" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M17.283,5.549h-5.26V4.335c0-0.222-0.183-0.404-0.404-0.404H8.381c-0.222,0-0.404,0.182-0.404,0.404v1.214h-5.26c-0.223,0-0.405,0.182-0.405,0.405v9.71c0,0.223,0.182,0.405,0.405,0.405h14.566c0.223,0,0.404-0.183,0.404-0.405v-9.71C17.688,5.731,17.506,5.549,17.283,5.549 M8.786,4.74h2.428v0.809H8.786V4.74z M16.879,15.26H3.122v-4.046h5.665v1.201c0,0.223,0.182,0.404,0.405,0.404h1.618c0.222,0,0.405-0.182,0.405-0.404v-1.201h5.665V15.26z M9.595,9.583h0.81v2.428h-0.81V9.583zM16.879,10.405h-5.665V9.19c0-0.222-0.183-0.405-0.405-0.405H9.191c-0.223,0-0.405,0.183-0.405,0.405v1.215H3.122V6.358h13.757V10.405z" fill="#6C757D" />
 </svg>')
 ->nickname('post_job')
-->data('permission', 'postjob');
+->data('permission', 'reportcash');
 
-$menu->add('<span>'.__('messages.Report_Bills').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.subcategory').'</span></span>', ['route' => 'service.user-service-list'])
+$menu->add('<span>'.__('messages.Comprehensive_report').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.subcategory').'</span></span>', ['route' => 'service.user-service-list'])
 ->prepend('<svg width="15" height="12" class="sidebar-menu-icon" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M2 4.875C1.3775 4.875 0.875 5.3775 0.875 6C0.875 6.6225 1.3775 7.125 2 7.125C2.6225 7.125 3.125 6.6225 3.125 6C3.125 5.3775 2.6225 4.875 2 4.875ZM2 0.375C1.3775 0.375 0.875 0.8775 0.875 1.5C0.875 2.1225 1.3775 2.625 2 2.625C2.6225 2.625 3.125 2.1225 3.125 1.5C3.125 0.8775 2.6225 0.375 2 0.375ZM2 9.375C1.3775 9.375 0.875 9.885 0.875 10.5C0.875 11.115 1.385 11.625 2 11.625C2.615 11.625 3.125 11.115 3.125 10.5C3.125 9.885 2.6225 9.375 2 9.375ZM4.25 11.25H14.75V9.75H4.25V11.25ZM4.25 6.75H14.75V5.25H4.25V6.75ZM4.25 0.75V2.25H14.75V0.75H4.25Z" fill="#6C757D" />
 </svg>')
@@ -138,14 +138,14 @@ $menu->add('<span>'.trans('messages.list_form_title',['form' => trans('messages.
     <path d="M15.94,10.179l-2.437-0.325l1.62-7.379c0.047-0.235-0.132-0.458-0.372-0.458H5.25c-0.241,0-0.42,0.223-0.373,0.458l1.634,7.376L4.06,10.179c-0.312,0.041-0.446,0.425-0.214,0.649l2.864,2.759l-0.724,3.947c-0.058,0.315,0.277,0.554,0.559,0.401l3.457-1.916l3.456,1.916c-0.419-0.238,0.56,0.439,0.56-0.401l-0.725-3.947l2.863-2.759C16.388,10.604,16.254,10.22,15.94,10.179M10.381,2.778h3.902l-1.536,6.977L12.036,9.66l-1.655-3.546V2.778z M5.717,2.778h3.903v3.335L7.965,9.66L7.268,9.753L5.717,2.778zM12.618,13.182c-0.092,0.088-0.134,0.217-0.11,0.343l0.615,3.356l-2.938-1.629c-0.057-0.03-0.122-0.048-0.184-0.048c-0.063,0-0.128,0.018-0.185,0.048l-2.938,1.629l0.616-3.356c0.022-0.126-0.019-0.255-0.11-0.343l-2.441-2.354l3.329-0.441c0.128-0.017,0.24-0.099,0.295-0.215l1.435-3.073l1.435,3.073c0.055,0.116,0.167,0.198,0.294,0.215l3.329,0.441L12.618,13.182z" fill="#6C757D" />
 </svg>')
 ->nickname('user_ratings')
-->data('permission', 'userrating list');
+->data('permission', 'reportplayer list');
 
-$menu->add('<span>'.trans('messages.list_form_title',['form' => trans('messages.Players_bill')]).'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.Players_bill').'</span></span>', ['route' => 'handyman-rating.index'])
+$menu->add('<span>'.__('messages.Active-subscriptions-report').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.Players_bill').'</span></span>', ['route' => 'handyman-rating.index'])
 ->prepend('<svg width="15" height="15" class="sidebar-menu-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M15.94,10.179l-2.437-0.325l1.62-7.379c0.047-0.235-0.132-0.458-0.372-0.458H5.25c-0.241,0-0.42,0.223-0.373,0.458l1.634,7.376L4.06,10.179c-0.312,0.041-0.446,0.425-0.214,0.649l2.864,2.759l-0.724,3.947c-0.058,0.315,0.277,0.554,0.559,0.401l3.457-1.916l3.456,1.916c-0.419-0.238,0.56,0.439,0.56-0.401l-0.725-3.947l2.863-2.759C16.388,10.604,16.254,10.22,15.94,10.179M10.381,2.778h3.902l-1.536,6.977L12.036,9.66l-1.655-3.546V2.778z M5.717,2.778h3.903v3.335L7.965,9.66L7.268,9.753L5.717,2.778zM12.618,13.182c-0.092,0.088-0.134,0.217-0.11,0.343l0.615,3.356l-2.938-1.629c-0.057-0.03-0.122-0.048-0.184-0.048c-0.063,0-0.128,0.018-0.185,0.048l-2.938,1.629l0.616-3.356c0.022-0.126-0.019-0.255-0.11-0.343l-2.441-2.354l3.329-0.441c0.128-0.017,0.24-0.099,0.295-0.215l1.435-3.073l1.435,3.073c0.055,0.116,0.167,0.198,0.294,0.215l3.329,0.441L12.618,13.182z" fill="#6C757D" />
 </svg>')
 ->nickname('handyman_ratings')
-->data('permission', 'handymanrating list');
+->data('permission', 'subscriptionsreport list');
 
 $menu->add('<span>'.__('messages.Report_classes').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.Report_classes').'</span></span>', ['route' => 'payment.index'])
 ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -156,9 +156,9 @@ $menu->add('<span>'.__('messages.Report_classes').'</span><span class="custom-to
 </svg>
 ')
 ->nickname('payment')
-->data('permission', 'payment list');
+->data('permission', 'reportclasses list');
 
-$menu->add(__('messages.sidebar_form_title',['form' => trans('messages.user')]), ['class' => 'category-main'])->data('permission', ['provider list','handyman list','user list']);
+$menu->add(__('messages.sidebar_form_title',['form' => trans('messages.user')]), ['class' => 'category-main'])->data('permission', ['player-registration','privacy policy','help support','receptions list','coaches list','casharchive list']);
 
 if(auth()->user()->user_type == 'admin' || auth()->user()->user_type == 'demo_admin' || auth()->user()->user_type == 'Depot' || auth()->user()->user_type == 'Neopreneur'){
 $menu->add('<span>'.__('messages.Receptions').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.Receptions').'</span></span>', ['class' => ''])
@@ -167,32 +167,17 @@ $menu->add('<span>'.__('messages.Receptions').'</span><span class="custom-toolti
 <ellipse cx="12" cy="17" rx="7" ry="4" stroke="currentColor" stroke-width="1.5"/>
 </svg>')
 ->nickname('provider')
-->data('permission', 'provider list')
+->data('permission', 'receptions list')
 ->link->attr(["class" => ""])
 ->href('#providers');
 
 $menu->provider->add('<span>'.__('messages.list_form_title',['form' => __('messages.Receptions')]).'</span>', ['class' => 'sidebar-layout' ,'route' => 'provider.index'])
-->data('permission', 'provider list')
+->data('permission', 'receptions list')
 ->prepend('<svg width="15" height="15" class="sidebar-menu-icon" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M2 4.875C1.3775 4.875 0.875 5.3775 0.875 6C0.875 6.6225 1.3775 7.125 2 7.125C2.6225 7.125 3.125 6.6225 3.125 6C3.125 5.3775 2.6225 4.875 2 4.875ZM2 0.375C1.3775 0.375 0.875 0.8775 0.875 1.5C0.875 2.1225 1.3775 2.625 2 2.625C2.6225 2.625 3.125 2.1225 3.125 1.5C3.125 0.8775 2.6225 0.375 2 0.375ZM2 9.375C1.3775 9.375 0.875 9.885 0.875 10.5C0.875 11.115 1.385 11.625 2 11.625C2.615 11.625 3.125 11.115 3.125 10.5C3.125 9.885 2.6225 9.375 2 9.375ZM4.25 11.25H14.75V9.75H4.25V11.25ZM4.25 6.75H14.75V5.25H4.25V6.75ZM4.25 0.75V2.25H14.75V0.75H4.25Z" fill="#6C757D" />
 </svg>')
 ->link->attr(['class' => '']);
 
-
-$menu->add('<span>'.__('messages.plyers').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.plyers').'</span></span>', ['class' => ''])
-->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M5 8C5 5.17157 5 3.75736 5.87868 2.87868C6.75736 2 8.17157 2 11 2H13C15.8284 2 17.2426 2 18.1213 2.87868C19 3.75736 19 5.17157 19 8V16C19 18.8284 19 20.2426 18.1213 21.1213C17.2426 22 15.8284 22 13 22H11C8.17157 22 6.75736 22 5.87868 21.1213C5 20.2426 5 18.8284 5 16V8Z" stroke="currentColor" stroke-width="1.5"/>
-<path d="M5 4.07617C4.02491 4.17208 3.36857 4.38885 2.87868 4.87873C2 5.75741 2 7.17163 2 10.0001V14.0001C2 16.8285 2 18.2427 2.87868 19.1214C3.36857 19.6113 4.02491 19.828 5 19.9239" stroke="currentColor" stroke-width="1.5"/>
-<path d="M19 4.07617C19.9751 4.17208 20.6314 4.38885 21.1213 4.87873C22 5.75741 22 7.17163 22 10.0001V14.0001C22 16.8285 22 18.2427 21.1213 19.1214C20.6314 19.6113 19.9751 19.828 19 19.9239" stroke="currentColor" stroke-width="1.5"/>
-<path d="M9 13H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M9 9H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M9 17H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-</svg>
-')
-->nickname('pages')
-->data('role', 'admin')
-->link->attr(["class" => ""])
-->href('#pages');
 
 ///////////////////////////
 
@@ -258,12 +243,12 @@ $menu->add('<span>'.__('messages.Coaches').'</span><span class="custom-tooltip">
 <path d="M14 20.8344C13.3663 20.9421 12.695 21 12 21C8.13401 21 5 19.2091 5 17C5 14.7909 8.13401 13 12 13C13.7135 13 15.2832 13.3518 16.5 13.9359" stroke="currentColor" stroke-width="1.5"/>
 </svg>')
 ->nickname('handyman')
-->data('permission', 'handyman list')
+->data('permission', 'coaches list')
 ->link->attr(["class" => ""])
 ->href('#handyman');
 
 $menu->handyman->add('<span>'.__('messages.list_form_title',['form' => __('messages.Coaches')]).'</span>', ['class' => 'sidebar-layout' ,'route' => 'handyman.index'])
-->data('permission', 'handyman list')
+->data('permission', 'coaches list')
 ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M4.21533 16.0148C4.21533 16.4737 4.58728 16.8456 5.0461 16.8456H10.0307C10.4895 16.8456 10.8615 16.4737 10.8615 16.0148C10.8615 15.556 10.4895 15.1841 10.0307 15.1841H5.0461C4.58728 15.1841 4.21533 15.556 4.21533 16.0148ZM4.21533 11.0302C4.21533 11.489 4.58728 11.861 5.0461 11.861H15.0153C15.4741 11.861 15.8461 11.489 15.8461 11.0302C15.8461 10.5714 15.4741 10.1995 15.0153 10.1995H5.0461C4.58728 10.1995 4.21533 10.5714 4.21533 11.0302ZM4.21533 6.04561C4.21533 6.50443 4.58728 6.87638 5.0461 6.87638H15.0153C15.4741 6.87638 15.8461 6.50443 15.8461 6.04561C15.8461 5.58679 15.4741 5.21484 15.0153 5.21484H5.0461C4.58728 5.21484 4.21533 5.58679 4.21533 6.04561Z" fill="currentColor"/>
 <path d="M18.7671 13.1096V11.3835C18.7671 7.43151 18.7671 5.45548 17.9005 4.22774C17.0338 3 15.639 3 12.8493 3H7.9178C5.12812 3 3.73328 3 2.86664 4.22774C2 5.45548 2 7.43151 2 11.3835C2 15.3356 2 17.3116 2.86664 18.5394C3.73328 19.7671 5.12812 19.7671 7.9178 19.7671H12.8493H17.4061" stroke="currentColor" stroke-width="1.47945"/>
@@ -336,7 +321,7 @@ $menu->handyman->add('<span>'.__('messages.list_form_title',['form' => __('messa
 // </svg>
 // ')
 // ->nickname('user')
-// ->data('permission', 'user list');
+// ->data('permission', 'casharchive list');
 
 
 
@@ -351,7 +336,7 @@ $menu->handyman->add('<span>'.__('messages.list_form_title',['form' => __('messa
 // </svg>
 // ')
 // ->nickname('user')
-// ->data('permission', 'user list');
+// ->data('permission', 'casharchive list');
 
 // $menu->add(__('messages.sidebar_form_title',['form' => 'Commission']), ['class' => 'category-main'])->data('permission', 'Commission');
 
@@ -377,6 +362,28 @@ $menu->handyman->add('<span>'.__('messages.list_form_title',['form' => __('messa
 // ->nickname('user')
 // ->data('permission', 'tagging list');
 
+
+$menu->add('<span>'.__('messages.plyers').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.plyers').'</span></span>', ['class' => ''])
+->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M5 8C5 5.17157 5 3.75736 5.87868 2.87868C6.75736 2 8.17157 2 11 2H13C15.8284 2 17.2426 2 18.1213 2.87868C19 3.75736 19 5.17157 19 8V16C19 18.8284 19 20.2426 18.1213 21.1213C17.2426 22 15.8284 22 13 22H11C8.17157 22 6.75736 22 5.87868 21.1213C5 20.2426 5 18.8284 5 16V8Z" stroke="currentColor" stroke-width="1.5"/>
+<path d="M5 4.07617C4.02491 4.17208 3.36857 4.38885 2.87868 4.87873C2 5.75741 2 7.17163 2 10.0001V14.0001C2 16.8285 2 18.2427 2.87868 19.1214C3.36857 19.6113 4.02491 19.828 5 19.9239" stroke="currentColor" stroke-width="1.5"/>
+<path d="M19 4.07617C19.9751 4.17208 20.6314 4.38885 21.1213 4.87873C22 5.75741 22 7.17163 22 10.0001V14.0001C22 16.8285 22 18.2427 21.1213 19.1214C20.6314 19.6113 19.9751 19.828 19 19.9239" stroke="currentColor" stroke-width="1.5"/>
+<path d="M9 13H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M9 9H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M9 17H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+</svg>
+')
+->nickname('pages')
+->data('role', ['admin','staf'])
+->link->attr(["class" => ""])
+->href('#pages');
+
+$menu->pages->add('<span>'.__('messages.Player_Registration').'</span>', ['class' => 'sidebar-layout' ,'route' => 'term-condition'])
+->data('permission', 'player-registration')
+->prepend('<svg width="15" height="15" class="sidebar-menu-icon" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M14 1.5H8L6.5 0H2C1.175 0 0.5075 0.675 0.5075 1.5L0.5 10.5C0.5 11.325 1.175 12 2 12H14C14.825 12 15.5 11.325 15.5 10.5V3C15.5 2.175 14.825 1.5 14 1.5ZM14 10.5H2V1.5H5.8775L7.3775 3H14V10.5ZM12.5 6H3.5V4.5H12.5V6ZM9.5 9H3.5V7.5H9.5V9Z" fill="#6C757D" />
+</svg>')
+->link->attr(['class' => '']);
     $menu->add(__('messages.sidebar_form_title',['form' => 'Encashment']), ['class' => 'category-main'])->data('role', ['Depot', 'admin', 'Neopreneur']);
 
 
@@ -390,7 +397,7 @@ $menu->handyman->add('<span>'.__('messages.list_form_title',['form' => __('messa
 // ->nickname('earning_history')
 // ->data('role', ['Depot', 'Neopreneur']);
 
-// $menu->add('Transactions', ['class' => 'category-main'])->data('permission', ['tax list','payment list','earning list']);
+// $menu->add('Transactions', ['class' => 'category-main'])->data('permission', ['tax list','reportclasses list','bill list']);
 
 
 
@@ -401,7 +408,7 @@ $menu->handyman->add('<span>'.__('messages.list_form_title',['form' => __('messa
 // </svg>
 // ')
 // ->nickname('cash_history')
-// ->data('permission', 'payment list');
+// ->data('permission', 'reportclasses list');
 
 
 // $menu->add('<span>'.__('messages.earnings').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.earnings').'</span></span>', ['route' => 'earning'])
@@ -412,7 +419,7 @@ $menu->handyman->add('<span>'.__('messages.list_form_title',['form' => __('messa
 // </svg>
 // ')
 // ->nickname('earning')
-// ->data('permission', 'earning list');
+// ->data('permission', 'bill list');
 
 $menu->add('<span>'.__('messages.Cash_archive').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.Cash_archive').'</span></span>', ['route' => 'user.index'])
 ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -422,7 +429,7 @@ $menu->add('<span>'.__('messages.Cash_archive').'</span><span class="custom-tool
 <path d="M18 14C19.7542 14.3847 21 15.3589 21 16.5C21 17.5293 19.9863 18.4229 18.5 18.8704" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
 </svg>')
 ->nickname('user')
-->data('permission', 'user list');
+->data('permission', 'casharchive list');
 
 $menu->add('<span>'.__('messages.Receiving_Cash').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.Receiving_Cash').'</span></span>', ['route' => 'fundLogAdmin'])
 ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -432,7 +439,7 @@ $menu->add('<span>'.__('messages.Receiving_Cash').'</span><span class="custom-to
 <path d="M18 14C19.7542 14.3847 21 15.3589 21 16.5C21 17.5293 19.9863 18.4229 18.5 18.8704" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
 </svg>')
 ->nickname('user')
-->data('permission', 'user list');
+->data('permission', 'receiving-cash list');
 
 
 // if(optional($othersetting)->wallet == 1){
@@ -445,7 +452,7 @@ $menu->add('<span>'.__('messages.Receiving_Cash').'</span><span class="custom-to
 // </svg>
 // ')
 // ->nickname('walletdepot')
-// ->data('permission', 'depot wallet list');
+// ->data('permission', 'depot bills list');
 
 // }
 
@@ -457,7 +464,7 @@ $menu->add('<span>'.__('messages.Receiving_Cash').'</span><span class="custom-to
 
 // ')
 // ->nickname('walletdepothistory')
-// ->data('permission', 'depot wallet list');
+// ->data('permission', 'depot bills list');
 
 // if(auth()->user()->user_type == 'provider' || auth()->user()->user_type == 'admin' || auth()->user()->user_type == 'demo_admin'){
 // $menu->add('<span>'.__('messages.provider_withdrawal_requests').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.provider_withdrawal_requests').'</span></span>', ['route' => 'wallet_transaction'])
@@ -468,7 +475,7 @@ $menu->add('<span>'.__('messages.Receiving_Cash').'</span><span class="custom-to
 // </svg>
 // ')
 // ->nickname('provider_withdrawal_requests')
-// ->data('permission', 'service list');
+// ->data('permission', 'subscription list');
 // }
 
 // $menu->add(__('messages.promotion'), ['class' => 'category-main'])->data('permission', 'coupon list');
@@ -512,7 +519,7 @@ $menu->add('<span>'.__('messages.Bill').'</span><span class="custom-tooltip"><sp
 </svg>
 ')
 ->nickname('wallet')
-->data('permission', 'wallet list');
+->data('permission', 'bills list');
 }
 
 
@@ -525,12 +532,12 @@ $menu->add('<span>'.__('messages.Rooms').'</span><span class="custom-tooltip"><s
 <path d="M4.75 11.5C4.75 7.02166 4.75 4.78249 5.47362 3.39124C6.19724 2 7.36188 2 9.69118 2H13.8088C16.1381 2 17.3028 2 18.0264 3.39124C18.75 4.78249 18.75 7.02166 18.75 11.5C18.75 15.9783 18.75 18.2175 18.0264 19.6088C17.3028 21 16.1381 21 13.8088 21H9.69118C7.36188 21 6.19724 21 5.47362 19.6088C4.75 18.2175 4.75 15.9783 4.75 11.5Z" stroke="currentColor" stroke-width="1.5"/>
 </svg>')
 ->nickname('sliders')
-->data('permission', 'slider list')
+->data('permission', 'room list')
 ->link->attr(["class" => ""])
 ->href('#sliders');
 
 $menu->sliders->add('<span>'.__('messages.list_form_title',['form' => __('messages.Rooms')]).'</span>', ['class' => 'sidebar-layout' ,'route' => 'slider.index'])
-->data('permission', 'slider list')
+->data('permission', 'room list')
 ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z" stroke="#currentColor" stroke-width="1.5"/>
 <path d="M6 15.8L7.14286 17L10 14" stroke="#currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -548,17 +555,19 @@ $menu->sliders->add('<span>'.__('messages.add_form_title',['form' => __('message
 </svg>')
 ->link->attr(['class' => '']);
 
-$menu->add('<span>'.__('messages.Calendar').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.booking').'</span></span>', ['route' => 'encashment'])
+if(optional($othersetting)->blog == 1){
+    $menu->add('<span>'.__('messages.Calendar').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.booking').'</span></span>', ['route' => 'encashment'])
+->data('permission', 'Calendar list')
 ->prepend('<svg width="15" height="15" class="sidebar-menu-icon" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M12.25 2H11.5V0.5H10V2H4V0.5H2.5V2H1.75C0.9175 2 0.2575 2.675 0.2575 3.5L0.25 14C0.25 14.825 0.9175 15.5 1.75 15.5H12.25C13.075 15.5 13.75 14.825 13.75 14V3.5C13.75 2.675 13.075 2 12.25 2ZM12.25 14H1.75V6.5H12.25V14ZM12.25 5H1.75V3.5H12.25V5ZM7 8.75H10.75V12.5H7V8.75Z" fill="#6C757D" />
 </svg>')
-->nickname('encashment')
-->data('role', ['Depot', 'admin', 'Neopreneur']);
+->link->attr(['class' => '']);
+}
 
 
 
 $menu->add(__('messages.sidebar_form_title',['form' => trans('messages.system')]), ['class' => 'category-main'])
-->data('permission', ['terms condition','privacy policy','help support','refund cancellation policy','document list']);
+->data('permission', ['refund cancellation policy','document list']);
 if(default_earning_type() === 'subscription'){
 $menu->add('<span>'.__('messages.plan').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.plan').'</span></span>', ['route' => 'plans.index'])
 ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -591,30 +600,18 @@ $menu->add('<span>'.__('messages.plan').'</span><span class="custom-tooltip"><sp
 // ->data('permission', 'religion list');
 
 
-if(optional($othersetting)->blog == 1){
-$menu->add('<span>'.__('messages.Discounts').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.Discounts').'</span></span>', ['route' => 'blog.index'])
-->data('role', ['admin','demo_admin'])
-->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M18.18 8.03933L18.6435 7.57589C19.4113 6.80804 20.6563 6.80804 21.4241 7.57589C22.192 8.34374 22.192 9.58868 21.4241 10.3565L20.9607 10.82M18.18 8.03933C18.18 8.03933 18.238 9.02414 19.1069 9.89309C19.9759 10.762 20.9607 10.82 20.9607 10.82M18.18 8.03933L13.9194 12.2999C13.6308 12.5885 13.4865 12.7328 13.3624 12.8919C13.2161 13.0796 13.0906 13.2827 12.9882 13.4975C12.9014 13.6797 12.8368 13.8732 12.7078 14.2604L12.2946 15.5L12.1609 15.901M20.9607 10.82L16.7001 15.0806C16.4115 15.3692 16.2672 15.5135 16.1081 15.6376C15.9204 15.7839 15.7173 15.9094 15.5025 16.0118C15.3203 16.0986 15.1268 16.1632 14.7396 16.2922L13.5 16.7054L13.099 16.8391M13.099 16.8391L12.6979 16.9728C12.5074 17.0363 12.2973 16.9867 12.1553 16.8447C12.0133 16.7027 11.9637 16.4926 12.0272 16.3021L12.1609 15.901M13.099 16.8391L12.1609 15.901" stroke="currentColor" stroke-width="1.5"/>
-<path d="M8 13H10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M8 9H14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M8 17H9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M19.8284 3.17157C18.6569 2 16.7712 2 13 2H11C7.22876 2 5.34315 2 4.17157 3.17157C3 4.34315 3 6.22876 3 10V14C3 17.7712 3 19.6569 4.17157 20.8284C5.34315 22 7.22876 22 11 22H13C16.7712 22 18.6569 22 19.8284 20.8284C20.7715 19.8853 20.9554 18.4796 20.9913 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-</svg>
-')
-->link->attr(['class' => '']);
-}
 
-$menu->add('<span>'.__('messages.pushnotification_settings').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.pushnotification_settings').'</span></span>', ['route' => 'pushNotification.index'])
-->data('role', ['admin','demo_admin'])
-->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M22 10.5V12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2H13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-<circle cx="19" cy="5" r="3" stroke="currentColor" stroke-width="1.5"/>
-<path d="M7 14H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M7 17.5H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-</svg>
-')
-->link->attr(['class' => '']);
+
+// $menu->add('<span>'.__('messages.pushnotification_settings').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.pushnotification_settings').'</span></span>', ['route' => 'pushNotification.index'])
+// ->data('role', ['admin','demo_admin'])
+// ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+// <path d="M22 10.5V12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2H13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+// <circle cx="19" cy="5" r="3" stroke="currentColor" stroke-width="1.5"/>
+// <path d="M7 14H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+// <path d="M7 17.5H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+// </svg>
+// ')
+// ->link->attr(['class' => '']);
 
 // $menu->add('<span>'.__('messages.notification_templates').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.notification_templates').'</span></span>', ['route' => 'notification-templates.index'])
 // ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -628,27 +625,27 @@ $menu->add('<span>'.__('messages.pushnotification_settings').'</span><span class
 // ->link->attr(["class" => ""]);
 
 
-$menu->add('<span>'.__('messages.plyers').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.plyers').'</span></span>', ['class' => ''])
-->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M5 8C5 5.17157 5 3.75736 5.87868 2.87868C6.75736 2 8.17157 2 11 2H13C15.8284 2 17.2426 2 18.1213 2.87868C19 3.75736 19 5.17157 19 8V16C19 18.8284 19 20.2426 18.1213 21.1213C17.2426 22 15.8284 22 13 22H11C8.17157 22 6.75736 22 5.87868 21.1213C5 20.2426 5 18.8284 5 16V8Z" stroke="currentColor" stroke-width="1.5"/>
-<path d="M5 4.07617C4.02491 4.17208 3.36857 4.38885 2.87868 4.87873C2 5.75741 2 7.17163 2 10.0001V14.0001C2 16.8285 2 18.2427 2.87868 19.1214C3.36857 19.6113 4.02491 19.828 5 19.9239" stroke="currentColor" stroke-width="1.5"/>
-<path d="M19 4.07617C19.9751 4.17208 20.6314 4.38885 21.1213 4.87873C22 5.75741 22 7.17163 22 10.0001V14.0001C22 16.8285 22 18.2427 21.1213 19.1214C20.6314 19.6113 19.9751 19.828 19 19.9239" stroke="currentColor" stroke-width="1.5"/>
-<path d="M9 13H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M9 9H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M9 17H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-</svg>
-')
-->nickname('pages')
-->data('role', ['admin','staf'])
-->link->attr(["class" => ""])
-->href('#pages');
+// $menu->add('<span>'.__('messages.plyers').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.plyers').'</span></span>', ['class' => ''])
+// ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+// <path d="M5 8C5 5.17157 5 3.75736 5.87868 2.87868C6.75736 2 8.17157 2 11 2H13C15.8284 2 17.2426 2 18.1213 2.87868C19 3.75736 19 5.17157 19 8V16C19 18.8284 19 20.2426 18.1213 21.1213C17.2426 22 15.8284 22 13 22H11C8.17157 22 6.75736 22 5.87868 21.1213C5 20.2426 5 18.8284 5 16V8Z" stroke="currentColor" stroke-width="1.5"/>
+// <path d="M5 4.07617C4.02491 4.17208 3.36857 4.38885 2.87868 4.87873C2 5.75741 2 7.17163 2 10.0001V14.0001C2 16.8285 2 18.2427 2.87868 19.1214C3.36857 19.6113 4.02491 19.828 5 19.9239" stroke="currentColor" stroke-width="1.5"/>
+// <path d="M19 4.07617C19.9751 4.17208 20.6314 4.38885 21.1213 4.87873C22 5.75741 22 7.17163 22 10.0001V14.0001C22 16.8285 22 18.2427 21.1213 19.1214C20.6314 19.6113 19.9751 19.828 19 19.9239" stroke="currentColor" stroke-width="1.5"/>
+// <path d="M9 13H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+// <path d="M9 9H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+// <path d="M9 17H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+// </svg>
+// ')
+// ->nickname('pages')
+// ->data('role', ['admin','staf'])
+// ->link->attr(["class" => ""])
+// ->href('#pages');
 
-$menu->pages->add('<span>'.__('messages.Player_Registration').'</span>', ['class' => 'sidebar-layout' ,'route' => 'term-condition'])
-->data('permission', 'terms condition')
-->prepend('<svg width="15" height="15" class="sidebar-menu-icon" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M14 1.5H8L6.5 0H2C1.175 0 0.5075 0.675 0.5075 1.5L0.5 10.5C0.5 11.325 1.175 12 2 12H14C14.825 12 15.5 11.325 15.5 10.5V3C15.5 2.175 14.825 1.5 14 1.5ZM14 10.5H2V1.5H5.8775L7.3775 3H14V10.5ZM12.5 6H3.5V4.5H12.5V6ZM9.5 9H3.5V7.5H9.5V9Z" fill="#6C757D" />
-</svg>')
-->link->attr(['class' => '']);
+// $menu->pages->add('<span>'.__('messages.Player_Registration').'</span>', ['class' => 'sidebar-layout' ,'route' => 'term-condition'])
+// ->data('permission', 'player-registration')
+// ->prepend('<svg width="15" height="15" class="sidebar-menu-icon" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+//     <path d="M14 1.5H8L6.5 0H2C1.175 0 0.5075 0.675 0.5075 1.5L0.5 10.5C0.5 11.325 1.175 12 2 12H14C14.825 12 15.5 11.325 15.5 10.5V3C15.5 2.175 14.825 1.5 14 1.5ZM14 10.5H2V1.5H5.8775L7.3775 3H14V10.5ZM12.5 6H3.5V4.5H12.5V6ZM9.5 9H3.5V7.5H9.5V9Z" fill="#6C757D" />
+// </svg>')
+// ->link->attr(['class' => '']);
 
 // $menu->pages->add('<span>'.__('messages.privacy_policy').'</span>', ['class' => 'sidebar-layout' ,'route' => 'privacy-policy'])
 // ->data('permission', 'privacy policy')
@@ -724,14 +721,14 @@ $menu->pages->add('<span>'.__('messages.Player_Registration').'</span>', ['class
 // ->link->attr(["class" => ""]);
 
 
-// $menu->add('<span>'.__('messages.Settings').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.Settings').'</span></span>', ['route' => 'setting.index'])
-// ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-// <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/>
-// <path d="M13.7654 2.15224C13.3978 2 12.9319 2 12 2C11.0681 2 10.6022 2 10.2346 2.15224C9.74457 2.35523 9.35522 2.74458 9.15223 3.23463C9.05957 3.45834 9.0233 3.7185 9.00911 4.09799C8.98826 4.65568 8.70226 5.17189 8.21894 5.45093C7.73564 5.72996 7.14559 5.71954 6.65219 5.45876C6.31645 5.2813 6.07301 5.18262 5.83294 5.15102C5.30704 5.08178 4.77518 5.22429 4.35436 5.5472C4.03874 5.78938 3.80577 6.1929 3.33983 6.99993C2.87389 7.80697 2.64092 8.21048 2.58899 8.60491C2.51976 9.1308 2.66227 9.66266 2.98518 10.0835C3.13256 10.2756 3.3397 10.437 3.66119 10.639C4.1338 10.936 4.43789 11.4419 4.43786 12C4.43783 12.5581 4.13375 13.0639 3.66118 13.3608C3.33965 13.5629 3.13248 13.7244 2.98508 13.9165C2.66217 14.3373 2.51966 14.8691 2.5889 15.395C2.64082 15.7894 2.87379 16.193 3.33973 17C3.80568 17.807 4.03865 18.2106 4.35426 18.4527C4.77508 18.7756 5.30694 18.9181 5.83284 18.8489C6.07289 18.8173 6.31632 18.7186 6.65204 18.5412C7.14547 18.2804 7.73556 18.27 8.2189 18.549C8.70224 18.8281 8.98826 19.3443 9.00911 19.9021C9.02331 20.2815 9.05957 20.5417 9.15223 20.7654C9.35522 21.2554 9.74457 21.6448 10.2346 21.8478C10.6022 22 11.0681 22 12 22C12.9319 22 13.3978 22 13.7654 21.8478C14.2554 21.6448 14.6448 21.2554 14.8477 20.7654C14.9404 20.5417 14.9767 20.2815 14.9909 19.902C15.0117 19.3443 15.2977 18.8281 15.781 18.549C16.2643 18.2699 16.8544 18.2804 17.3479 18.5412C17.6836 18.7186 17.927 18.8172 18.167 18.8488C18.6929 18.9181 19.2248 18.7756 19.6456 18.4527C19.9612 18.2105 20.1942 17.807 20.6601 16.9999C21.1261 16.1929 21.3591 15.7894 21.411 15.395C21.4802 14.8691 21.3377 14.3372 21.0148 13.9164C20.8674 13.7243 20.6602 13.5628 20.3387 13.3608C19.8662 13.0639 19.5621 12.558 19.5621 11.9999C19.5621 11.4418 19.8662 10.9361 20.3387 10.6392C20.6603 10.4371 20.8675 10.2757 21.0149 10.0835C21.3378 9.66273 21.4803 9.13087 21.4111 8.60497C21.3592 8.21055 21.1262 7.80703 20.6602 7C20.1943 6.19297 19.9613 5.78945 19.6457 5.54727C19.2249 5.22436 18.693 5.08185 18.1671 5.15109C17.9271 5.18269 17.6837 5.28136 17.3479 5.4588C16.8545 5.71959 16.2644 5.73002 15.7811 5.45096C15.2977 5.17191 15.0117 4.65566 14.9909 4.09794C14.9767 3.71848 14.9404 3.45833 14.8477 3.23463C14.6448 2.74458 14.2554 2.35523 13.7654 2.15224Z" stroke="currentColor" stroke-width="1.5"/>
-// </svg>
-// ')
-// ->nickname('setting')
-// ->data('role',  ['admin','demo_admin']);
+$menu->add('<span>'.__('messages.Settings').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.Settings').'</span></span>', ['route' => 'setting.index'])
+->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/>
+<path d="M13.7654 2.15224C13.3978 2 12.9319 2 12 2C11.0681 2 10.6022 2 10.2346 2.15224C9.74457 2.35523 9.35522 2.74458 9.15223 3.23463C9.05957 3.45834 9.0233 3.7185 9.00911 4.09799C8.98826 4.65568 8.70226 5.17189 8.21894 5.45093C7.73564 5.72996 7.14559 5.71954 6.65219 5.45876C6.31645 5.2813 6.07301 5.18262 5.83294 5.15102C5.30704 5.08178 4.77518 5.22429 4.35436 5.5472C4.03874 5.78938 3.80577 6.1929 3.33983 6.99993C2.87389 7.80697 2.64092 8.21048 2.58899 8.60491C2.51976 9.1308 2.66227 9.66266 2.98518 10.0835C3.13256 10.2756 3.3397 10.437 3.66119 10.639C4.1338 10.936 4.43789 11.4419 4.43786 12C4.43783 12.5581 4.13375 13.0639 3.66118 13.3608C3.33965 13.5629 3.13248 13.7244 2.98508 13.9165C2.66217 14.3373 2.51966 14.8691 2.5889 15.395C2.64082 15.7894 2.87379 16.193 3.33973 17C3.80568 17.807 4.03865 18.2106 4.35426 18.4527C4.77508 18.7756 5.30694 18.9181 5.83284 18.8489C6.07289 18.8173 6.31632 18.7186 6.65204 18.5412C7.14547 18.2804 7.73556 18.27 8.2189 18.549C8.70224 18.8281 8.98826 19.3443 9.00911 19.9021C9.02331 20.2815 9.05957 20.5417 9.15223 20.7654C9.35522 21.2554 9.74457 21.6448 10.2346 21.8478C10.6022 22 11.0681 22 12 22C12.9319 22 13.3978 22 13.7654 21.8478C14.2554 21.6448 14.6448 21.2554 14.8477 20.7654C14.9404 20.5417 14.9767 20.2815 14.9909 19.902C15.0117 19.3443 15.2977 18.8281 15.781 18.549C16.2643 18.2699 16.8544 18.2804 17.3479 18.5412C17.6836 18.7186 17.927 18.8172 18.167 18.8488C18.6929 18.9181 19.2248 18.7756 19.6456 18.4527C19.9612 18.2105 20.1942 17.807 20.6601 16.9999C21.1261 16.1929 21.3591 15.7894 21.411 15.395C21.4802 14.8691 21.3377 14.3372 21.0148 13.9164C20.8674 13.7243 20.6602 13.5628 20.3387 13.3608C19.8662 13.0639 19.5621 12.558 19.5621 11.9999C19.5621 11.4418 19.8662 10.9361 20.3387 10.6392C20.6603 10.4371 20.8675 10.2757 21.0149 10.0835C21.3378 9.66273 21.4803 9.13087 21.4111 8.60497C21.3592 8.21055 21.1262 7.80703 20.6602 7C20.1943 6.19297 19.9613 5.78945 19.6457 5.54727C19.2249 5.22436 18.693 5.08185 18.1671 5.15109C17.9271 5.18269 17.6837 5.28136 17.3479 5.4588C16.8545 5.71959 16.2644 5.73002 15.7811 5.45096C15.2977 5.17191 15.0117 4.65566 14.9909 4.09794C14.9767 3.71848 14.9404 3.45833 14.8477 3.23463C14.6448 2.74458 14.2554 2.35523 13.7654 2.15224Z" stroke="currentColor" stroke-width="1.5"/>
+</svg>
+')
+->nickname('setting')
+->data('role',  ['admin','demo_admin']);
 
 
 

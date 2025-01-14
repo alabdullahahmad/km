@@ -5,10 +5,10 @@
 <?php echo e(Form::open(['route' => ['deleteSubscription', $data->id], 'method' => 'delete','data--submit'=>'service'.$data->id])); ?>
 
 <div class="d-flex justify-content-end align-items-center">
-    <?php if($auth_user->can('service edit')): ?>
+    <?php if($auth_user->can('subscription edit')): ?>
     <a class="mr-2" href="<?php echo e(route('service.creat.id',[$data->categoryId,'id' => $data->id])); ?>" title="<?php echo e(__('messages.update_form_title',['form' => __('messages.service') ])); ?>"><i class="fas fa-pen text-secondary"></i></a>
     <?php endif; ?>
-        <?php if($auth_user->can('service delete')): ?>
+        <?php if($auth_user->can('subscription delete')): ?>
         <a class="mr-2" href="<?php echo e(route('deleteSubscription', $data->id)); ?>" data--submit="service<?php echo e($data->id); ?>"
             data--confirmation='true'
             data--ajax="true"

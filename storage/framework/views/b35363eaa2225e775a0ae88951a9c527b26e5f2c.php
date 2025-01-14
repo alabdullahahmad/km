@@ -19,32 +19,7 @@
     <div class="card">
         <div class="card-body">
         <div class="row justify-content-between">
-            <div>
-                <div class="col-md-12">
-                  <form action="<?php echo e(route('role.bulk-action')); ?>" id="quick-action-form" class="form-disabled d-flex gap-3 align-items-center">
-                    <?php echo csrf_field(); ?>
-                  <select name="action_type" class="form-control select2" id="quick-action-type" style="width:100%" disabled>
-                      <option value=""><?php echo e(__('messages.no_action')); ?></option>
-                      <option value="change-status"><?php echo e(__('messages.status')); ?></option>
-                      <option value="delete"><?php echo e(__('messages.delete')); ?></option>
-                  </select>
-                
-                <div class="select-status d-none quick-action-field" id="change-status-action" style="width:100%">
-                    <select name="status" class="form-control select2" id="status" style="width:100%">
-                      <option value="1"><?php echo e(__('messages.active')); ?></option>
-                      <option value="0"><?php echo e(__('messages.inactive')); ?></option>
-                    </select>
-                </div>
-                <button id="quick-action-apply" class="btn btn-primary" data-ajax="true"
-                data--submit="<?php echo e(route('role.bulk-action')); ?>"
-                data-datatable="reload" data-confirmation='true'
-                data-title="<?php echo e(__('role',['form'=>  __('role') ])); ?>"
-                title="<?php echo e(__('role',['form'=>  __('role') ])); ?>"
-                data-message='<?php echo e(__("Do you want to perform this action?")); ?>' disabled><?php echo e(__('messages.apply')); ?></button>
-            </div>
-          
-            </form>
-          </div>
+            
               <div class="d-flex justify-content-end">
                 <div class="datatable-filter ml-auto">
                   <select name="column_status" id="column_status" class="select2 form-control" data-filter="select" style="width: 100%">

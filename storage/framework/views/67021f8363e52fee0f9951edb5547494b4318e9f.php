@@ -15,7 +15,7 @@
                     <div class="card-body p-0">
                         <div class="d-flex justify-content-between align-items-center p-3 flex-wrap gap-3">
                             <h5 class="font-weight-bold"><?php echo e(__('messages.Tag_Subscriptions')); ?></h5>
-                            <?php if($auth_user->can('subcategory add')): ?>
+                            <?php if($auth_user->can('tagsubscriptions add')): ?>
                             <a href="<?php echo e(route('subcategory.create')); ?>" class="float-right mr-1 btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i> <?php echo e(trans('messages.add_form_title',['form' => trans('messages.Tag_Subscriptions')  ])); ?></a>
                             <?php endif; ?>
                         </div>

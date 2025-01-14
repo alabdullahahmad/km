@@ -153,7 +153,7 @@ use Lavary\Menu\Menu;
         $menu->add('<span>'.__('messages.earning').'</span>', ['route' => 'earning'])
                 ->prepend('<i class="fas fa-money-bill-alt"></i>')
                 ->nickname('earning')
-                ->data('permission', 'earning list');
+                ->data('permission', 'bill list');
 
         $menu->add('<span>'.__('messages.document').'</span>', ['class' => ''])
                 ->prepend('<i class="ri-shopping-basket-2-line"></i>')

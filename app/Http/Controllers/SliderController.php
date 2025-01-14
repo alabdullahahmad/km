@@ -44,7 +44,7 @@ class SliderController extends Controller
             })
 
             ->editColumn('title', function($query){
-                if (auth()->user()->can('slider edit')) {
+                if (auth()->user()->can('room edit')) {
                     $link = '<a class="btn-link btn-link-hover" href='.route('slider.create', ['id' => $query->id]).'>'.$query->title.'</a>';
                 } else {
                     $link = $query->title;

@@ -11,7 +11,7 @@
                       <div class="d-flex justify-content-between align-items-center p-3 flex-wrap gap-3">
                           <h5 class="font-weight-bold">{{ __('messages.Receptions') }}</h5>
                           @if($list_status != 'pending')
-                          @if($auth_user->can('provider add'))
+                          @if($auth_user->can('receptions add'))
                           <a href="{{ route('provider.create') }}" class="float-right mr-1 btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i> {{ __('messages.add_form_title',['form' => __('messages.Receptions')  ]) }}</a>
                           @endif
                           @endif
@@ -31,9 +31,9 @@
                   @csrf
 
 
-
+{{-- 
               <a id="quick-action-apply" class="btn btn-primary"
-                  href="{{ route('ExportExcel') }}">{{ __('messages.Export Excel') }}</a>
+                  href="{{ route('ExportExcel') }}">{{ __('messages.Export Excel') }}</a> --}}
           </div>
 
           </form>

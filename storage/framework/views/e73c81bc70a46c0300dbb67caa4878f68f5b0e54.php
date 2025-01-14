@@ -67,6 +67,8 @@
         <button id="helpBtn"><span><?php echo e(__('messages.e_Subscription')); ?></span></button>
 
     </div>
+
+    
    
 
     <div id="demoSidebar" class="sidebar" dir="ltr">

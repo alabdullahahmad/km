@@ -47,13 +47,13 @@ use Lavary\Menu\Menu;
         $menu->add('<span>'.trans('messages.service').'</span>', ['class' => ''])
                 ->prepend('<i class="ri-service-line"></i>')
                 ->nickname('service')
-                ->data('permission', 'service list')
+                ->data('permission', 'subscription list')
                 ->link->attr(["class" => ""])
                 ->href('#services');
     
                 $menu->service->add('<span>'.trans('messages.list_form_title',['form' => trans('messages.service')]).'</span>', ['class' => 'sidebar-layout' ,'route' => 'service.index'])
                     ->prepend('<i class="ri-list-unordered"></i>')
-                    ->data('permission', 'service list')
+                    ->data('permission', 'subscription list')
                     ->link->attr(['class' => '']);
 
                 $menu->service->add('<span>'.trans('messages.add_form_title',['form' => trans('messages.service')]).'</span>', ['class' => 'sidebar-layout' ,'route' => 'service.create'])
@@ -63,7 +63,7 @@ use Lavary\Menu\Menu;
 
                 $menu->service->add('<span>'.trans('messages.list_form_title',['form' => trans('messages.rating')]).'</span>', ['class' => 'sidebar-layout' ,'route' => 'ratingreview.index'])
                     ->prepend('<i class="ri-list-unordered"></i>')
-                    ->data('permission', 'service list')
+                    ->data('permission', 'subscription list')
                     ->link->attr(['class' => '']);
 
         $menu->add('<span>'.__('messages.provider').'</span>', ['class' => ''])

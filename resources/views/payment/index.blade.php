@@ -9,7 +9,7 @@
                 <div class="card card-block card-stretch">
                     <div class="card-body p-0">
                         <div class="d-flex justify-content-between align-items-center p-3">
-                            <h5 class="font-weight-bold">{{ __('messages.Report_classes') }}</h5>
+                            <h5 class="font-weight-bold">{{ __('messages.Coach_Percentage_Total') }}</h5>
                         </div>
 
                     </div>
@@ -101,7 +101,7 @@
                             return data.subscription.name
                         },
                         name: 'subscriptionNamw',
-                        title: "{{__('messages.player_name')}}"
+                        title: "{{__('messages.Subscription_Name')}}"
                     },
                     {
                         data: 'total',

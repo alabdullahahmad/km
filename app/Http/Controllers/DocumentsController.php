@@ -45,7 +45,7 @@ class DocumentsController extends Controller
             })
          
             ->editColumn('name', function($query){                
-                if (auth()->user()->can('document edit')) {
+                if (auth()->user()->can('reportplayer edit')) {
                     $link = '<a class="btn-link btn-link-hover" href='.route('document.create', ['id' => $query->id]).'>'.$query->name.'</a>';
                 } else {
                     $link = $query->name; 

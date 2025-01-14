@@ -273,7 +273,7 @@ class HomeController extends Controller
     public function encashment($data)
     {
         $coaches = Coach::all();
-        return view('encashment.index', compact('data','coaches'));
+        return view('blog.index', compact('data','coaches'));
     }
     public function encashment_table(DataTables $datatable, Request $request){
         $query = User::query();

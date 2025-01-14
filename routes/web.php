@@ -2,10 +2,12 @@
 namespace App\Http\services\RoomManagement\ViewRoom\Controller;
 
 use App\Models\Role;
+use App\Models\User;
 use App\Models\Wallet;
 use App\Models\Setting;
 use App\Models\Category;
 use App\Exports\StafExport;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
@@ -46,23 +48,29 @@ use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\BookingRatingController;
 use App\Http\Controllers\MailTemplatesController;
 use App\Http\Controllers\HandymanPayoutController;
+//jabu
 use App\Http\Controllers\HandymanRatingController;
 use App\Http\Controllers\PaymentGatewayController;
-//jabu
 use App\Http\Controllers\PostJobRequestController;
 use App\Http\Controllers\ProviderPayoutController;
+//owel
 use App\Http\Controllers\ServicePackageController;
 use App\Http\Controllers\FrontendSettingController;
-//owel
 use App\Http\Controllers\UserServiceListController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\ProviderDocumentController;
 use App\Http\Controllers\NotificationTemplatesController;
 use App\Http\Controllers\ProviderAddressMappingController;
+use App\Http\Services\ShowAllUser\Controller\ShowAllUserController;
+use App\Http\Services\ShowBillLog\Controller\ShowBillLogController;
 use App\Http\Services\TagManagement\AddTag\Controller\AddTagController;
+use App\Http\Services\Report\BillReport\Controller\BillReportController;
+use App\Http\Services\Report\FundReport\Controller\FundReportController;
+use App\Http\Services\Report\UserReport\Controller\UserReportController;
 use App\Http\Services\TagManagement\ShowTag\Controller\ShowTagController;
 use App\Http\Services\TagManagement\ViewTag\Controller\ViewTagController;
 use App\Http\Services\BillManagement\AddBill\Controller\AddBillController;
+use App\Http\Services\Report\ClassReport\Controller\ClassReportController;
 use App\Http\Services\RoomManagement\AddRoom\Controller\AddRoomController;
 use App\Http\Services\StafManagement\AddStaf\Controller\AddStafController;
 use App\Http\Services\UserManagement\AddUser\Controller\AddUserController;
@@ -76,45 +84,45 @@ use App\Http\Services\StafManagement\ViewStaf\Controller\ViewStafController;
 use App\Http\Services\UserManagement\ShowUser\Controller\ShowUserController;
 use App\Http\Services\UserManagement\ViewUser\Controller\ViewUserController;
 use App\Http\Services\CoachManagement\AddCoach\Controller\AddCoachController;
+use App\Http\Services\CompletePaymenet\Controller\CompletePaymenetController;
 use App\Http\Services\TagManagement\DeleteTag\Controller\DeleteTagController;
 use App\Http\Services\BillManagement\EditeBill\Controller\EditeBillController;
 use App\Http\Services\RoomManagement\EditeRoom\Controller\EditeRoomController;
 use App\Http\Services\StafManagement\EditeStaf\Controller\EditeStafController;
+use App\Http\Services\UserManagement\EditeUser\Controller\EditeUserController;
+use App\Http\Services\ChangeAdminStatus\Controller\ChangeAdminStatusController;
 use App\Http\Services\CoachManagement\ShowCoach\Controller\ShowCoachController;
 use App\Http\Services\CoachManagement\ViewCoach\Controller\ViewCoachController;
+use App\Http\Services\BranchManagement\AddBranch\Controller\AddBranchController;
 use App\Http\Services\RoomManagement\DeleteRoom\Controller\DeleteRoomController;
 use App\Http\Services\StafManagement\DeleteStaf\Controller\DeleteStafController;
 use App\Http\Services\UserManagement\DeleteUser\Controller\DeleteUserController;
 use App\Http\Services\CoachManagement\EditeCoach\Controller\EditeCoachController;
+use App\Http\Services\BranchManagement\ShowBranch\Controller\ShowBranchController;
+use App\Http\Services\BranchManagement\ViewBranch\Controller\ViewBranchController;
 use App\Http\Services\CoachManagement\DeleteCoach\Controller\DeleteCoachController;
+use App\Http\Services\FundLogManagement\AddFundLog\Controller\AddFundLogController;
+use App\Http\Services\BranchManagement\EditeBranch\Controller\EditeBranchController;
 use App\Http\Services\FundLogManagement\ShowFundLog\Controller\ShowFundLogController;
 use App\Http\Services\FundLogManagement\ViewFundLog\Controller\ViewFundLogController;
 use App\Http\Services\GetCoachSubscription\Controller\GetCoachSubscriptionController;
 use App\Http\Services\CategoryManagement\AddCategory\Controller\AddCategoryController;
+use App\Http\Services\Report\UserReportDetails\Controller\UserReportDetailsController;
 use App\Http\Services\FundLogManagement\EditeFundLog\Controller\EditeFundLogController;
 use App\Http\Services\CategoryManagement\ShowCategory\Controller\ShowCategoryController;
 use App\Http\Services\CategoryManagement\ViewCategory\Controller\ViewCategoryController;
+use App\Http\Services\Report\ClassReportDetails\Controller\ClassReportDetailsController;
 use App\Http\Services\AddSubscriptionToCoach\Controller\AddSubscriptionToCoachController;
 use App\Http\Services\FundLogManagement\DeleteFundLog\Controller\DeleteFundLogController;
 use App\Http\Services\CategoryManagement\EditeCategory\Controller\EditeCategoryController;
 use App\Http\Services\CategoryManagement\DeleteCategory\Controller\DeleteCategoryController;
-use App\Http\Services\ChangeAdminStatus\Controller\ChangeAdminStatusController;
-use App\Http\Services\CompletePaymenet\Controller\CompletePaymenetController;
-use App\Http\Services\FundLogManagement\AddFundLog\Controller\AddFundLogController;
-use App\Http\Services\PlayerLoginLogManagement\AddPlayerLoginLog\Controller\AddPlayerLoginLogController;
-use App\Http\Services\PlayerLoginLogManagement\ShowPlayerLoginLog\Controller\ShowPlayerLoginLogController;
-use App\Http\Services\Report\BillReport\Controller\BillReportController;
-use App\Http\Services\Report\ClassReport\Controller\ClassReportController;
-use App\Http\Services\Report\ClassReportDetails\Controller\ClassReportDetailsController;
-use App\Http\Services\Report\FundReport\Controller\FundReportController;
-use App\Http\Services\Report\UserReport\Controller\UserReportController;
-use App\Http\Services\Report\UserReportDetails\Controller\UserReportDetailsController;
-use App\Http\Services\ShowAllUser\Controller\ShowAllUserController;
 use App\Http\Services\SubscriptionManagement\AddSubscription\Controller\AddSubscriptionController;
 use App\Http\Services\SubscriptionManagement\ShowSubscription\Controller\ShowSubscriptionController;
 use App\Http\Services\SubscriptionManagement\ViewSubscription\Controller\ViewSubscriptionController;
 use App\Http\Services\SubscriptionManagement\EditeSubscription\Controller\EditeSubscriptionController;
+use App\Http\Services\PlayerLoginLogManagement\AddPlayerLoginLog\Controller\AddPlayerLoginLogController;
 use App\Http\Services\SubscriptionManagement\DeleteSubscription\Controller\DeleteSubscriptionController;
+use App\Http\Services\PlayerLoginLogManagement\ShowPlayerLoginLog\Controller\ShowPlayerLoginLogController;
 use App\Http\Services\SubscriptionManagement\ViewSubscriptionAll\Controller\ViewSubscriptionAllController;
 use App\Http\Services\SubscriptionCoachManagement\AddSubscriptionCoach\Controller\AddSubscriptionCoachController;
 use App\Http\Services\SubscriptionCoachManagement\ShowSubscriptionCoach\Controller\ShowSubscriptionCoachController;
@@ -122,9 +130,6 @@ use App\Http\Services\SubscriptionCoachManagement\ViewSubscriptionCoach\Controll
 use App\Http\Services\ShowSubscription\Controller\ShowSubscriptionController as ControllerShowSubscriptionController;
 use App\Http\Services\SubscriptionCoachManagement\EditeSubscriptionCoach\Controller\EditeSubscriptionCoachController;
 use App\Http\Services\SubscriptionCoachManagement\DeleteSubscriptionCoach\Controller\DeleteSubscriptionCoachController;
-use App\Http\Services\UserManagement\EditeUser\Controller\EditeUserController;
-use App\Models\User;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -423,7 +428,7 @@ Route::group(['middleware' => ['auth', 'verified']], function()
 
     });
 
-    Route::group(['middleware' => ['permission:service list']], function () {
+    Route::group(['middleware' => ['permission:subscription list']], function () {
         Route::resource('service', ServiceController::class);
         Route::get('service/category/{serviceId}', [ServiceController::class,'indexService'])->name('service.index.id');
         Route::get('service/category/create/{serviceId}', [ServiceController::class,'createService'])->name('service.creat.id');
@@ -440,7 +445,7 @@ Route::group(['middleware' => ['auth', 'verified']], function()
     Route::get('provider-time-slot/{id}',[ProviderController::class,'getProviderTimeSlot'])->name('provider.time-slot');
     Route::get('provider-edit-time-slot',[ProviderController::class,'editProviderTimeSlot'])->name('provider.edit-time-slot');
     Route::post('provider-save-slot', [ProviderSlotController::class, 'store'] )->name('providerslot.store');
-    Route::group(['middleware' => ['permission:provider list']], function () {
+    Route::group(['middleware' => ['permission:receptions list']], function () {
         Route::resource('provider', ProviderController::class);
         Route::get('provider/list/{status?}', [ProviderController::class,'index'])->name('provider.pending');
         Route::get('provider-index-data',[ProviderController::class,'index_data'])->name('provider.index_data');
@@ -467,7 +472,7 @@ Route::group(['middleware' => ['auth', 'verified']], function()
     });
     Route::get('handyman-change-password', [ HandymanController::class , 'getChangePassword'])->name('handyman.getchangepassword');
     Route::post('handyman-change-password', [ HandymanController::class , 'changePassword'])->name('handyman.changepassword');
-    Route::group(['middleware' => ['permission:handyman list']], function () {
+    Route::group(['middleware' => ['permission:coaches list']], function () {
         Route::resource('handyman', HandymanController::class);
         Route::get('handyman/list/{status?}', [HandymanController::class,'index'])->name('handyman.pending');
         Route::get('handyman-index-data',[HandymanController::class,'index_data'])->name('handyman.index_data');
@@ -488,7 +493,7 @@ Route::group(['middleware' => ['auth', 'verified']], function()
         Route::post('coupon/{id}', [CouponController::class, 'destroy'])->name('coupon.destroy');
     });
 
-    Route::group(['middleware' => ['permission:booking list']], function () {
+    Route::group(['middleware' => ['permission:homepage list']], function () {
         Route::resource('booking', BookingController::class);
         Route::get('booking-index-data',[BookingController::class,'index_data'])->name('booking.index_data');
         Route::post('booking-bulk-action', [BookingController::class, 'bulk_action'])->name('booking.bulk-action');
@@ -500,7 +505,7 @@ Route::group(['middleware' => ['auth', 'verified']], function()
         Route::get('jabubooking',[BookingController::class,'jabu'])->name('booking.jabu');
     });
 
-    Route::group(['middleware' => ['permission:slider list']], function () {
+    Route::group(['middleware' => ['permission:room list']], function () {
         Route::resource('slider', SliderController::class);
         Route::get('slider-index-data',[SliderController::class,'index_data'])->name('slider.index_data');
         Route::post('slider-bulk-action', [SliderController::class, 'bulk_action'])->name('slider.bulk-action');
@@ -527,7 +532,7 @@ Route::group(['middleware' => ['auth', 'verified']], function()
     //jabu reset pass
     Route::get('user-reset-password', [ CustomerController::class , 'userResetPassword'])->name('user.userResetPassword');
     //end reset pass
-    Route::group(['middleware' => ['permission:user list']], function () {
+    Route::group(['middleware' => ['permission:casharchive list']], function () {
         Route::resource('user', CustomerController::class);
         Route::get('user/list/{status?}', [CustomerController::class,'index'])->name('user.all');
         Route::get('user-index-data',[CustomerController::class,'index_data'])->name('user.index_data');
@@ -589,7 +594,7 @@ Route::group(['middleware' => ['auth', 'verified']], function()
     Route::post('get-lang-file', [ App\Http\Controllers\LanguageController::class, 'getFile' ] )->name('getLangFile');
     Route::post('save-lang-file', [ App\Http\Controllers\LanguageController::class, 'saveFileContent' ] )->name('saveLangContent');
 
-    Route::group(['middleware' => ['permission:terms condition']], function () {
+    Route::group(['middleware' => ['permission:player-registration']], function () {
         Route::get('pages/term-condition',[ SettingController::class, 'termAndCondition'])->name('term-condition');
         Route::post('term-condition-save',[ SettingController::class, 'saveTermAndCondition'])->name('term-condition-save');
     });
@@ -624,23 +629,24 @@ Route::group(['middleware' => ['auth', 'verified']], function()
         Route::post('document/{id}', [DocumentsController::class, 'destroy'])->name('document.destroy');
     });
 
-    Route::group(['middleware' => ['permission:providerdocument list']], function () {
+    Route::group(['middleware' => ['permission:reportplayer list']], function () {
         Route::resource('providerdocument', ProviderDocumentController::class);
         Route::get('providerdocument-index-data',[ProviderDocumentController::class,'index_data'])->name('providerdocument.index_data');
         Route::post('providerdocument-bulk-action', [ProviderDocumentController::class, 'bulk_action'])->name('providerdocument.bulk-action');
         Route::post('providerdocument-action',[ProviderDocumentController::class, 'action'])->name('providerdocument.action');
         Route::post('providerdocument/{id}', [ProviderDocumentController::class, 'destroy'])->name('providerdocument.destroy');
+
+        Route::resource('booking-rating', BookingRatingController::class);
+        Route::get('booking-rating-index-data',[BookingRatingController::class,'index_data'])->name('booking-rating.index_data');
+        Route::post('booking-rating-bulk-action', [BookingRatingController::class, 'bulk_action'])->name('booking-rating.bulk-action');
+        Route::post('booking-rating/{id}', [BookingController::class, 'destroy'])->name('booking-rating.destroy');
+        Route::post('booking-rating-action',[CouponController::class, 'action'])->name('booking-rating.action');
     });
 
     Route::resource('ratingreview', RatingReviewController::class);
     Route::post('ratingreview-action',[RatingReviewController::class, 'action'])->name('ratingreview.action');
     Route::get('ratingreview-index-data',[RatingReviewController::class,'index_data'])->name('ratingreview.index_data');
 
-    Route::resource('booking-rating', BookingRatingController::class);
-    Route::get('booking-rating-index-data',[BookingRatingController::class,'index_data'])->name('booking-rating.index_data');
-    Route::post('booking-rating-bulk-action', [BookingRatingController::class, 'bulk_action'])->name('booking-rating.bulk-action');
-    Route::post('booking-rating/{id}', [BookingController::class, 'destroy'])->name('booking-rating.destroy');
-    Route::post('booking-rating-action',[CouponController::class, 'action'])->name('booking-rating.action');
 
     Route::resource('handyman-rating', HandymanRatingController::class);
     Route::get('handyman-rating-index-data',[HandymanRatingController::class,'index_data'])->name('handyman-rating.index_data');
@@ -681,13 +687,13 @@ Route::group(['middleware' => ['auth', 'verified']], function()
     Route::get('handymanpayoutcreate/create/{id}', [HandymanPayoutController::class,'handymanpayoutcreate'])->name('handymanpayoutcreate.create');
 
 
-    Route::group(['middleware' => ['permission:handymantype list']], function () {
+
         Route::resource('handymantype', HandymanTypeController::class);
         Route::get('handyman-index_data',[HandymanTypeController::class,'index_data'])->name('handymantype.index_data');
         Route::post('handymantype-bulk-action', [HandymanTypeController::class, 'bulk_action'])->name('handymantype.bulk-action');
         Route::post('handymantype-action',[HandymanTypeController::class, 'action'])->name('handymantype.action');
         Route::post('handymantype/{id}', [HandymanTypeController::class, 'destroy'])->name('handymantype.destroy');
-    });
+
 
     Route::group(['middleware' => ['permission:servicefaq list']], function () {
         Route::resource('servicefaq', ServiceFaqController::class);
@@ -726,7 +732,7 @@ Route::group(['middleware' => ['auth', 'verified']], function()
     Route::get('withdrawal-request-payout/{id}', [WalletController::class, 'wallet_transaction_payout'])->name('wallet.wallet_transaction_payout');
 
 
-    Route::group(['middleware' => ['permission:subcategory list']], function () {
+    Route::group(['middleware' => ['permission:tagsubscriptions list']], function () {
         Route::resource('subcategory', SubCategoryController::class);
         Route::get('sub-index-data',[SubCategoryController::class,'index_data'])->name('subcategory.sub-index-data');
         Route::post('sub-bulk-action', [SubCategoryController::class, 'bulk_action'])->name('sub-bulk-action');
@@ -753,7 +759,7 @@ Route::group(['middleware' => ['auth', 'verified']], function()
     Route::post('/booking-layout-page/{id}',[ BookingController::class, 'bookingstatus'])->name('booking_layout_page');
     Route::get('/invoice_pdf/{id}', [BookingController::class, 'createPDF'])->name('invoice_pdf');
 
-    Route::group(['middleware' => ['permission:postjob list']], function () {
+    Route::group(['middleware' => ['permission:reportcash list']], function () {
         Route::resource('post-job-request', PostJobRequestController::class);
         Route::get('post-job-index-data',[PostJobRequestController::class,'index_data'])->name('post-job.index_data');
         Route::post('post-job-bulk-action', [PostJobRequestController::class, 'bulk_action'])->name('post-job.bulk-action');
@@ -769,7 +775,7 @@ Route::group(['middleware' => ['auth', 'verified']], function()
         Route::post('servicepackage-action',[ServicePackageController::class, 'action'])->name('servicepackage.action');
     });
 
-    Route::group(['middleware' => ['permission:blog list']], function () {
+    Route::group(['middleware' => ['permission:Calendar list']], function () {
         Route::resource('blog', BlogController::class);
         Route::get('blog-index-data',[BlogController::class,'index_data'])->name('blog.index_data');
         Route::post('blog-bulk-action', [BlogController::class, 'bulk_action'])->name('blog.bulk-action');
@@ -777,7 +783,7 @@ Route::group(['middleware' => ['auth', 'verified']], function()
         Route::post('blog/{id}', [BlogController::class, 'destroy'])->name('blog.destroy');
     });
 
-    Route::group(['middleware' => ['permission:service list']], function () {
+    Route::group(['middleware' => ['permission:subscription list']], function () {
         Route::resource('serviceaddon', ServiceAddonController::class);
         Route::get('serviceaddon-index-data',[ServiceAddonController::class,'index_data'])->name('serviceaddon.index-data');
         Route::post('serviceaddon-bulk-action', [ServiceAddonController::class, 'bulk_action'])->name('serviceaddon.bulk-action');
@@ -876,8 +882,16 @@ Route::group(['prefix' => 'coache', 'middleware' => ['auth']],function(){
 Route::group(['prefix' => 'bill', 'middleware' => ['auth']],function(){
     Route::get('/',ViewBillController::class)->name("Bill");
     Route::get('/show',ShowBillController::class)->name('showBill');
+    Route::get('/show/log',ShowBillLogController::class)->name('showBillLog');
     Route::post('/edit',EditeBillController::class)->name('editBill');
     Route::post('/add',AddBillController::class)->name('addBill');
+});
+
+Route::group(['prefix' => 'branch', 'middleware' => ['auth']],function(){
+    Route::get('/',ViewBranchController::class)->name("Branch");
+    Route::get('/show',ShowBranchController::class)->name('showBranch');
+    Route::post('/edit',EditeBranchController::class)->name('editBranch');
+    Route::post('/add',AddBranchController::class)->name('addBranch');
 });
 
 Route::group(['prefix' => 'subscription', 'middleware' => ['auth']],function(){

@@ -80,7 +80,7 @@ class ServiceController extends Controller
             })
 
             ->editColumn('name', function($query){
-                if (auth()->user()->can('service edit')) {
+                if (auth()->user()->can('subscription edit')) {
                     $link =  '<a class="btn-link btn-link-hover" href='.route('service.create', ['id' => $query->id]).'>'.$query->name.'</a>';
                 } else {
                     $link = $query->name;

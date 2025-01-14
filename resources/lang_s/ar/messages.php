@@ -1002,7 +1002,12 @@ use App\Http\Core\Const\Messages\Attributes;
        'pushnotification_settings' => 'إرسال الإشعارات',
        'Receiving_Cash' => 'استلام الصندوق',
        'category_list' => 'قائمة التصنيفات',
-
+       'new_player'=> 'جديد',
+        'old_player' => 'قديم',
+        'subscription_period' => 'فترة الاشتراك',
+        'coach_name' => 'اسم الكوتش',
+        'Update_list' => 'قائمة التعديلات',
+        'type_before_modification' => 'طبيعة الاشتراك قبل التعديل',
     )
 
     ?>

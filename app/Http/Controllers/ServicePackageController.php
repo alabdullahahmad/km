@@ -58,7 +58,7 @@ class ServicePackageController extends Controller
             
 
             ->editColumn('name', function($query){                
-                if (auth()->user()->can('service list')) {
+                if (auth()->user()->can('subscription list')) {
                     $link ='<a class="btn-link btn-link-hover"  href='.route('servicepackage.service',$query->id).'>'.$query->name.'</a>';
                 } else {
                     $link = $query->name; 

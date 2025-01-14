@@ -3,18 +3,18 @@
     $auth_user= authSession();
 ?>
 {{ Form::open(['route' => ['deleteRoom', $slider->id], 'method' => 'delete','data--submit'=>'slider'.$slider->id]) }}
-<div class="d-flex justify-content-end align-items-center">
+<div class="d-flex  align-items-center">
 
    
 
 
 
     
-        @if($auth_user->can('slider edit'))
+        @if($auth_user->can('room edit'))
         <a class="mr-2" href="{{ route('slider.create',['id' => $slider->id]) }}" title="{{ __('messages.update_form_title',['form' => __('messages.slider') ]) }}"><i class="fas fa-pen text-primary"></i></a>
         @endif 
    
-    @if($auth_user->can('slider delete'))
+    @if($auth_user->can('room delete'))
         <a class="mr-3 text-danger" href="{{ route('deleteRoom', $slider->id) }}" data--submit="slider{{$slider->id}}" 
             data--confirmation='true' 
             data--ajax="true"

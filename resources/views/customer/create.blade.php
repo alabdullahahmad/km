@@ -8,7 +8,7 @@
                             <h5 class="font-weight-bold">{{ $pageTitle ?? __('messages.list') }}</h5>
                             <a href="{{ route('user.index') }}" class="float-right btn btn-sm btn-primary"><i
                                     class="fa fa-angle-double-left"></i> {{ __('messages.back') }}</a>
-                            @if($auth_user->can('user list'))
+                            @if($auth_user->can('casharchive  list'))
                             @endif
                         </div>
                     </div>

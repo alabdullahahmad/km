@@ -5,11 +5,11 @@
 {{ Form::open(['route' => ['document.destroy', $document->id], 'method' => 'delete','data--submit'=>'document'.$document->id]) }}
 <div class="d-flex justify-content-end align-items-center">
     @if(!$document->trashed())
-        <!-- @if($auth_user->can('document edit'))
+        <!-- @if($auth_user->can('reportplayer edit'))
         <a class="mr-2" href="{{ route('document.create',['id' => $document->id]) }}" title="{{ __('messages.update_form_title',['form' => __('messages.document') ]) }}"><i class="fas fa-pen text-primary"></i></a>
         @endif -->
 
-        @if($auth_user->can('document delete'))
+        @if($auth_user->can('reportplayer delete'))
         <a class="mr-3" href="{{ route('document.destroy', $document->id) }}" data--submit="document{{$document->id}}" 
             data--confirmation='true' 
             data--ajax="true"

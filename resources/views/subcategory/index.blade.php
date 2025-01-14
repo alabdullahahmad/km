@@ -10,7 +10,7 @@
                     <div class="card-body p-0">
                         <div class="d-flex justify-content-between align-items-center p-3 flex-wrap gap-3">
                             <h5 class="font-weight-bold">{{ __('messages.Tag_Subscriptions') }}</h5>
-                            @if($auth_user->can('subcategory add'))
+                            @if($auth_user->can('tagsubscriptions add'))
                             <a href="{{ route('subcategory.create') }}" class="float-right mr-1 btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i> {{ trans('messages.add_form_title',['form' => trans('messages.Tag_Subscriptions')  ]) }}</a>
                             @endif
                         </div>

@@ -6,7 +6,7 @@
                     <div class="card-body p-0">
                         <div class="d-flex justify-content-between align-items-center p-3">
                             <h5 class="font-weight-bold">{{ $pageTitle ?? __('messages.list') }}</h5>
-                            <h5 class="font-weight-bold">v{{ config('app.version') }}</h5>
+                            {{-- <h5 class="font-weight-bold">v{{ config('app.version') }}</h5> --}}
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                                         @endrole
                                     @else
                                         @hasanyrole('admin|demo_admin')
-                                            <li class="nav-item">
+                                            {{-- <li class="nav-item">
                                                 <a href="javascript:void(0)" data-href="{{ route('layout_page') }}?page=general-setting" data-target=".paste_here" class="nav-link {{$page=='general-setting'?'active':''}}"  data-toggle="tabajax" rel="tooltip"> {{ __('messages.general_settings') }}</a>
                                             </li>
                                             <li class="nav-item">
@@ -59,7 +59,7 @@
                                             </li>
                                             <li class="nav-item">
                                                 <a href="javascript:void(0)" data-href="{{ route('layout_page') }}?page=cookie-setup" data-target=".paste_here" class="nav-link {{$page=='cookie-setup'?'active':''}}"  data-toggle="tabajax" rel="tooltip"> {{ __('messages.cookie_setup') }}</a>
-                                            </li>
+                                            </li> --}}
                                             <!-- <li class="nav-item">
                                                 <a href="javascript:void(0)" data-href="{{ route('layout_page') }}?page=sliders" data-target=".paste_here" class="nav-link {{$page=='sliders'?'active':''}}"  data-toggle="tabajax" rel="tooltip"> {{ __('messages.sliders') }}</a>
                                             </li>
@@ -69,7 +69,7 @@
                                             <li class="nav-item">
                                                 <a href="javascript:void(0)" data-href="{{ route('layout_page') }}?page=role-permission-setup" data-target=".paste_here" class="nav-link {{$page=='role-permission-setup'?'active':''}}"  data-toggle="tabajax" rel="tooltip"> {{ __('messages.role_permission_setup') }}</a>
                                             </li>
-                                            <li class="nav-item">
+                                            {{-- <li class="nav-item">
                                                 <a href="javascript:void(0)" data-href="{{ route('layout_page') }}?page=language-setting" data-target=".paste_here" class="nav-link {{$page=='language-setting'?'active':''}}"  data-toggle="tabajax" rel="tooltip"> {{ __('messages.language_settings') }}</a>
                                             </li>
                                             <li class="nav-item">
@@ -84,7 +84,7 @@
                                             </li> -->
                                             <li class="nav-item">
                                                 <a href="javascript:void(0)" data-href="{{ route('layout_page') }}?page=earning-setting" data-target=".paste_here" class="nav-link {{$page=='earning-setting'?'active':''}}"  data-toggle="tabajax" rel="tooltip"> {{ __('messages.earning_setting') }}</a>
-                                            </li>
+                                            </li> --}}
                                         @endhasanyrole
                                     @endif
                                 </ul>

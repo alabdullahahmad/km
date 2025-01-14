@@ -6,7 +6,7 @@
 
 <div class="justify-content-end align-items-center">
     <a class="mr-2" href="<?php echo e(route('subcategory.create',['id' => $data->id])); ?>" title="<?php echo e(__('messages.update_form_title',['form' => __('messages.subcategory') ])); ?>"><i class="fas fa-pen text-secondary"></i></a>
-        <?php if($auth_user->can('subcategory delete')): ?>
+        <?php if($auth_user->can('tagsubscriptions delete')): ?>
         <a class="mr-3" style="margin: 5%" href="<?php echo e(route('deleteTag', $data->id)); ?>" data--submit="subcategory<?php echo e($data->id); ?>"
             data--confirmation='true'
             data--ajax="true"

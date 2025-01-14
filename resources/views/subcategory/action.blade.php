@@ -5,7 +5,7 @@
 {{ Form::open(['route' => ['deleteTag', $data->id], 'method' => 'delete','data--submit'=>'subcategory'.$data->id]) }}
 <div class="justify-content-end align-items-center">
     <a class="mr-2" href="{{ route('subcategory.create',['id' => $data->id]) }}" title="{{ __('messages.update_form_title',['form' => __('messages.subcategory') ]) }}"><i class="fas fa-pen text-secondary"></i></a>
-        @if($auth_user->can('subcategory delete'))
+        @if($auth_user->can('tagsubscriptions delete'))
         <a class="mr-3" style="margin: 5%" href="{{ route('deleteTag', $data->id) }}" data--submit="subcategory{{$data->id}}"
             data--confirmation='true'
             data--ajax="true"
