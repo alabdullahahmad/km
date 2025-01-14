@@ -11,7 +11,7 @@ $auth_user= authSession();
     <a class="mr-2" href="{{ route('provider.create',['id' => $provider->id]) }}" title="{{ __('messages.update_form_title',['form' => __('messages.provider') ]) }}"><i class="fas fa-pen text-secondary"></i></a>
     @endif
     @if($auth_user->can('receptions delete'))
-    <a class="mr-2 text-danger" href="{{ route('deleteStaf', $provider->id) }}" data--submit="provider{{$provider->id}}" 
+    <a class="mr-2 text-danger" href="{{ route('deleteStaf', $provider->id) }}" data--submit="provider{{$provider->id}}"
         data--confirmation='true'
         data--ajax="true"
         data-datatable="reload"

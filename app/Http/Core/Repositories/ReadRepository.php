@@ -38,7 +38,7 @@ abstract class ReadRepository
         return $model = $this->model->query()->get();
     }
 
-    public function getAllRecordsWithRelations(array $relations,$conditions){
+    public function getAllRecordsWithRelations(array $relations,$conditions = null){
         return $model = $this->model->query()->with($relations)->where($conditions)->get();
     }
 

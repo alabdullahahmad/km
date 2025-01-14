@@ -15,6 +15,7 @@ class EditeStafInput implements InputServiceInterface
     public ?string $birthDay;
     public ?string $password;
     public ?string $phoneNumber;
+    public int $branchId;
 
     // public bool $isAdmin;
 
@@ -28,6 +29,7 @@ class EditeStafInput implements InputServiceInterface
         $this->birthDay = $input->birthDay;
         $this->password = $input->password;
         $this->phoneNumber = $input->phoneNumber;
+        $this->branchId = $this->branchId;
         // $this->isAdmin = $input->isAdmin ;
     }
 
@@ -42,7 +44,8 @@ class EditeStafInput implements InputServiceInterface
             'gender' => $this->gender ?? $staf->gender,
             'birthDay' => $this->birthDay ?? $staf->birthDay,
             'password' => $this->password ? Hash::make($this->password) : $staf->password,
-            'phoneNumber' => $this->phoneNumber ?? $staf->phoneNumber
+            'phoneNumber' => $this->phoneNumber ?? $staf->phoneNumber,
+            'branchId' => $this->branchId
             // 'isAdmin' => $this->isAdmin
         ];
     }
