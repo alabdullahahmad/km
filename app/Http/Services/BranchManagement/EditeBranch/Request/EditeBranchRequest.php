@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Services\BranchManagement\AddBranch\Request;
+namespace App\Http\Services\BranchManagement\EditeBranch\Request;
 
 use App\Http\Core\Request\BaseRequest;
 

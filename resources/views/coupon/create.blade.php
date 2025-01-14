@@ -16,14 +16,27 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        {{ Form::model($coupondata,['method' => 'POST','route'=>'coupon.store', 'data-toggle'=>"validator" ,'id'=>'coupon'] ) }}
+            
+                        {{ Form::model($coupondata,['method' => 'POST','route'=>(isset($coupondata->id))?'editBranch':'addBranch', 'data-toggle'=>"validator" ,'id'=>'coupon'] ) }}
                         {{ Form::hidden('id') }}
+                        {{ Form::hidden('','coupon') }}
+                        {!!  isset($coupondata->id) ? "<input type=hidden name=branchId value=$coupondata->id>":""!!}
                         <div class="row">
                            
 
                             <div class="form-group col-md-4">
                                 {{ Form::label('name',__('messages.branchName').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
                                 {{ Form::text('name',old('name'),['placeholder' => __('messages.name'),'class' =>'form-control','required']) }}
+                                <small class="help-block with-errors text-danger"></small>
+                            </div>
+                            <div class="form-group col-md-4">
+                                {{ Form::label('city',__('messages.city').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
+                                {{ Form::text('city',old('city'),['placeholder' => __('messages.city'),'class' =>'form-control','required']) }}
+                                <small class="help-block with-errors text-danger"></small>
+                            </div>
+                            <div class="form-group col-md-4">
+                                {{ Form::label('address',__('messages.address').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
+                                {{ Form::text('address',old('address'),['placeholder' => __('messages.address'),'class' =>'form-control','required']) }}
                                 <small class="help-block with-errors text-danger"></small>
                             </div>
 

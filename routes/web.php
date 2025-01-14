@@ -113,6 +113,7 @@ use App\Http\Services\CategoryManagement\ShowCategory\Controller\ShowCategoryCon
 use App\Http\Services\CategoryManagement\ViewCategory\Controller\ViewCategoryController;
 use App\Http\Services\Report\ClassReportDetails\Controller\ClassReportDetailsController;
 use App\Http\Services\AddSubscriptionToCoach\Controller\AddSubscriptionToCoachController;
+use App\Http\Services\BranchManagement\DeleteBranch\Controller\DeleteBranchController;
 use App\Http\Services\FundLogManagement\DeleteFundLog\Controller\DeleteFundLogController;
 use App\Http\Services\CategoryManagement\EditeCategory\Controller\EditeCategoryController;
 use App\Http\Services\CategoryManagement\DeleteCategory\Controller\DeleteCategoryController;
@@ -892,6 +893,7 @@ Route::group(['prefix' => 'branch', 'middleware' => ['auth']],function(){
     Route::get('/show',ShowBranchController::class)->name('showBranch');
     Route::post('/edit',EditeBranchController::class)->name('editBranch');
     Route::post('/add',AddBranchController::class)->name('addBranch');
+    Route::delete('/delete',DeleteBranchController::class)->name('deleteBranch');
 });
 
 Route::group(['prefix' => 'subscription', 'middleware' => ['auth']],function(){

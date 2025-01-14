@@ -55,6 +55,17 @@
                                 }}
                             </div>
                             <div class="form-group col-md-4">
+                                {{ Form::label('name', __('messages.select_name',[ 'select' => __('messages.branchName') ]).' <span class="text-danger">*</span>',['class'=>'form-control-label'],false) }}
+                                <br />
+                                {{ Form::select('barnchId', [optional($providerdata->branch)->id => optional($providerdata->branch)->name], optional($providerdata->branch)->id, [
+                                        'class' => 'select2js form-group category',
+                                        'required',
+                                        'data-placeholder' => __('messages.select_name',[ 'select' => __('messages.branchName') ]),
+                                        'data-ajax--url' => route('ajax-list', ['type' => 'branch']),
+                                    ]) }}
+
+                            </div>
+                            <div class="form-group col-md-4">
                                 {{ Form::label('birthDay',__('messages.birthday').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
                                 {{ Form::text('birthDay',old('birthDay'),['placeholder' => __('messages.birthday'),'class' =>'form-control datepicker','required']) }}
                                 <small class="help-block with-errors text-danger"></small>

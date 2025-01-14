@@ -12,9 +12,10 @@ class EditeBranchInput implements InputServiceInterface
 
     public function __construct( $input)
     {
-        $this->branchId = $input->branchId;
-        $this->name = $input->name;
-        $this->address = $input->address;
+        $this->branchId = $input['branchId'];
+        $this->name = $input['name'];
+        $this->address = $input['address'];
+        $this->city = $input['city'];
     }
 
     // write your input function here..

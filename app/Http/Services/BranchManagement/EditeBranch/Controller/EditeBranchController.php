@@ -5,7 +5,7 @@ use App\Http\Services\BranchManagement\EditeBranch\Logic\EditeBranchInput;
 use App\Http\Services\BranchManagement\EditeBranch\Logic\EditeBranchLogic;
 use App\Http\Controllers\Controller;
 use App\Http\Core\Response\SendResponse;
-use App\Http\Services\BranchManagement\AddBranch\Request\EditeBranchRequest;
+use App\Http\Services\BranchManagement\EditeBranch\Request\EditeBranchRequest;
 use Illuminate\Http\Request;
 
 class EditeBranchController extends Controller

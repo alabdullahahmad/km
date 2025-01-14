@@ -50,7 +50,7 @@
                 dom: '<"row align-items-center"><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" l><"col-md-6" p>><"clear">',
                 ajax: {
                   "type"   : "GET",
-                  "url"    : '{{ route("coupon.index_data") }}',
+                  "url"    : '{{ route("Branch") }}',
                   "data"   : function( d ) {
                     d.search = {
                       value: $('.dt-search').val()
@@ -60,21 +60,21 @@
                     }
                   },
                 },
-                columns: [
+                columns: [                 
                     {
-                        name: 'check',
-                        data: 'check',
-                        title: '<input type="checkbox" class="form-check-input" name="select_all_table" id="select-all-table" data-type="coupon" onclick="selectAllTable(this)">',
-                        exportable: false,
-                        orderable: false,
-                        searchable: false,
-                    },
-                  
-                 
-                    {
-                        data: 'discount_type',
+                        data: 'name',
                         name: 'branchName',
                         title: "{{__('messages.branchName')}}"
+                    },
+                    {
+                        data: 'city',
+                        name: 'city',
+                        title: "{{__('messages.city')}}"
+                    },
+                    {
+                        data: 'address',
+                        name: 'address',
+                        title: "{{__('messages.address')}}"
                     },
                  
                   
