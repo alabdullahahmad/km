@@ -29,7 +29,7 @@ class EditeStafInput implements InputServiceInterface
         $this->birthDay = $input->birthDay;
         $this->password = $input->password;
         $this->phoneNumber = $input->phoneNumber;
-        $this->branchId = $this->branchId;
+        $this->branchId = $input->branchId;
         // $this->isAdmin = $input->isAdmin ;
     }
 
