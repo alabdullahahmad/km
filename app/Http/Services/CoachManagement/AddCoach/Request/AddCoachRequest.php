@@ -35,6 +35,7 @@ class AddCoachRequest extends BaseRequest
             'percentage' => ['required' , 'integer' , 'min:0' , 'max:100'],
             // 'password'=>['required' ,"string","min:8"],
             'class.*' => ['required' , 'integer'],
+            'branchId' => ['required' , 'integer' , 'exists:branches,id'],
 
         ];
     }

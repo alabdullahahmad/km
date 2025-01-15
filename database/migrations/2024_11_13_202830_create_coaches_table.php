@@ -24,6 +24,7 @@ return new class extends Migration
             $table->date("birthDay");
             $table->integer("percentage");
             $table->json("class")->nullable();
+            $table->foreignId('branchId')->references('id')->on('branches')->onDelete('cascade');
             $table->timestamps();
         });
     }

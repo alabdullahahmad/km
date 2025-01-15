@@ -34,6 +34,7 @@ class EditeCoachRequest extends BaseRequest
             'gender' => ['required' , 'string' , ],
             'birthDay' => ['nullable' , 'date' , 'date_format:Y-m-d'],
             'percentage' => ['required' , 'integer' , 'min:0' , 'max:100'],
+            'branchId' => ['required' , 'integer' , 'exists:branches,id'],
         ];
     }
 
