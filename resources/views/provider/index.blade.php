@@ -88,7 +88,7 @@
                     title: "{{ __('messages.name') }}"
                 },
                 {
-                    data: 'name',
+                    data: (data)=>data.branch.name,
                     name: 'branchName',
                     title: "{{ __('messages.branchName') }}"
                 },

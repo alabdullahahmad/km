@@ -1028,6 +1028,9 @@ class HomeController extends Controller
                 case 'subscription':
                     $items = \App\Models\Subscription::query()->select(['id', 'name as text'])->get();
                 break;
+                case 'branch':
+                    $items = \App\Models\Branch::query()->select(['id', 'name as text'])->get();
+                    break;
                  case 'subcategory':
                 $items = \App\Models\SubCategory::select('id', 'name as text')->where('status', 1);
 
