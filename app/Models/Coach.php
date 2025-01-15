@@ -23,7 +23,8 @@ class Coach extends Model
         'birthDay',
         'percentage',
         'password',
-        'class'
+        'class',
+        'branchId'
     ];
 
     protected $hidden = [
@@ -38,5 +39,15 @@ class Coach extends Model
     public function calander()
     {
         return $this->hasMany(SubscriptionCoach::class, 'coachId');
+    }
+
+    /**
+     * Get the branch that owns the Coach
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class, 'branchId');
     }
 }

@@ -25,7 +25,12 @@ class ViewCoachLogic implements Service {
         // write your logic code..
         $coacheRepository = $this->repository->CoachRepository();
 
-        $coaches = $coacheRepository->readRepository()->getAllRecords();
+        $coaches = $coacheRepository->readRepository()->getAllRecordsWithRelations([
+            'branch' => function($q){
+                return $q->select('id','name');
+            }
+        ]);
+        
         foreach ($coaches as $value) {
             $value->category;
             $value->action =  view('handyman.action')->with(['handyman'=>$value])->render();

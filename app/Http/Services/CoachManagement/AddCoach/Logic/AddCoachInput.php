@@ -16,6 +16,7 @@ class AddCoachInput implements InputServiceInterface
     public ?string $birthDay;
     public int $percentage;
     public array $class;
+    public int $branchId;
 
     public function __construct( $input)
     {
@@ -29,6 +30,7 @@ class AddCoachInput implements InputServiceInterface
         $this->birthDay = $input->birthDay;
         $this->percentage = $input->percentage;
         $this->class = $input->class;
+        $this->branchId = $input->branchId;
     }
 
     // write your input function here..
@@ -44,7 +46,8 @@ class AddCoachInput implements InputServiceInterface
             'gender' => $this->gender,
             'birthDay'=>$this->birthDay,
             'percentage'=>$this->percentage,
-            'class'=>$this->getClass()
+            'class'=>$this->getClass(),
+            'branchId' => $this->branchId
         ];
     }
 
