@@ -25,7 +25,9 @@ class ViewSubscriptionLogic implements Service {
         // write your Logic code..
         $subscriptionRepository = $this->repository->SubscriptionRepository();
 
-        $subscriptions = $subscriptionRepository->readRepository()->getByConditions([
+        $subscriptions = $subscriptionRepository->readRepository()->getAllRecordsWithRelations([
+            'branch'
+        ],[
             'categoryId' => $this->input->categoryId
         ]);
 

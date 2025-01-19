@@ -19,6 +19,7 @@ class Subscription extends Model
             'numOfDays',
             'numOfSessions',
             'description',
+            'branchId'
         ];
 
             /**
@@ -59,5 +60,14 @@ class Subscription extends Model
         public function calander()
         {
             return $this->hasMany(SubscriptionCoach::class, 'foreign_key', 'local_key');
+        }
+        /**
+         * Get the branch that owns the Subscription
+         *
+         * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+         */
+        public function branch()
+        {
+            return $this->belongsTo(Branch::class, 'branchId');
         }
 }

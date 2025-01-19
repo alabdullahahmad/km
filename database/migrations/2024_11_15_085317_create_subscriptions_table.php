@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('numOfDays');
             $table->integer('numOfSessions');
             $table->text('description');
+            $table->foreignId('branchId')->references('id')->on('branches')->onDelete('cascade');
             $table->timestamps();
         });
     }

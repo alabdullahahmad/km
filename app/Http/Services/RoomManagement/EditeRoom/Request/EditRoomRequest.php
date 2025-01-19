@@ -26,7 +26,9 @@ class EditRoomRequest extends BaseRequest
         [
             'roomId'=>['required' , 'integer' , 'exists:rooms,id'],
             'name' => ['required' , 'string'],
-            'capacity' => ['required' , 'integer']
+            'capacity' => ['required' , 'integer'],
+            'branchId' => ['required' , 'integer' , 'exists:branches,id'],
+
         ];
     }
 

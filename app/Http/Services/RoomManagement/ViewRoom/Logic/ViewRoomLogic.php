@@ -24,7 +24,11 @@ class ViewRoomLogic implements Service {
 
         // write your logic code..
         $roomRepository = $this->repository->RoomRepository();
-        $rooms = $roomRepository->readRepository()->getAllRecords();
+        $rooms = $roomRepository->readRepository()->getAllRecordsWithRelations([
+            'branch' => function($q){
+                return $q->select('id','name');
+            }
+        ]);
 
         foreach ($rooms as $value) {
             $value->category;

@@ -12,6 +12,8 @@ class AddSubscriptionInput implements InputServiceInterface
     public int $numOfDays;
     public int $numOfSessions;
     public string $description;
+    public int $branchId;
+
     public function __construct( array $input)
     {
         $this->tagId = $input['tagId'];
@@ -21,6 +23,7 @@ class AddSubscriptionInput implements InputServiceInterface
         $this->numOfDays = $input['numOfDays'];
         $this->numOfSessions = $input['numOfSessions'];
         $this->description = $input['description'] ?? '';
+        $this->branchId = $input['branchId'];
     }
 
     // write your input function here..
@@ -33,7 +36,8 @@ class AddSubscriptionInput implements InputServiceInterface
             'price' => $this->price,
             'numOfDays' => $this->numOfDays,
             'numOfSessions' => $this->numOfSessions,
-            'description' => $this->description
+            'description' => $this->description,
+            'branchId' => $this->branchId
         ];
     }
 }

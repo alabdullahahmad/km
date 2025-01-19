@@ -851,7 +851,7 @@ Route::group(['prefix' => 'tag', 'middleware' => ['auth']],function(){
 
 Route::group(['prefix' => 'room', 'middleware' => ['auth']],function(){
     Route::get('/',ViewRoomController::class)->name('Room');
-    Route::get('/{roomId}',ShowRoomController::class);
+    Route::get('/{branchId}',ShowRoomController::class)->name('RoomBranch');
     Route::delete('/delete/{roomId}',DeleteRoomController::class)->name('deleteRoom');
     Route::post('/edit',EditeRoomController::class)->name('editRoom');
     Route::post('/add',AddRoomController::class)->name('addRoom');

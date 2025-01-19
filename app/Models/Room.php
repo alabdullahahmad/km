@@ -18,6 +18,7 @@ class Room extends Model
     protected $fillable = [
         'name',
         'capacity',
+        'branchId'
     ];
 
     /**
@@ -28,5 +29,15 @@ class Room extends Model
     public function calendars()
     {
         return $this->hasMany(User::class, 'foreign_key', 'local_key');
+    }
+
+    /**
+     * Get the brnach that owns the Room
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class, 'branchId');
     }
 }
