@@ -49,6 +49,21 @@
       <div class="row">
           <!-- قسم إضافي للتقويم -->
           <div class="col-md-12">
+            <div class="d-flex flex-column">
+                <!-- التابات الخاصة بالفروع -->
+                <ul class="nav nav-tabs" id="branchTabs" role="tablist">
+                    <!-- يتم ملء التابات ديناميكيًا -->
+                </ul>
+                
+                <!-- محتوى التابات الخاصة بالفروع -->
+                <div class="tab-content" id="branchTabsContent">
+                    <!-- يتم ملء محتوى التابات ديناميكيًا -->
+                </div>
+            </div>
+            
+
+
+
               <div class="col-md-12">
                   <!-- التابات الخاصة بالغرف -->
                   <ul class="nav nav-tabs" id="roomTabs" role="tablist">
@@ -193,76 +208,153 @@
       <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/fullcalendar.min.js"></script>
 
       <script>
+// جلب قائمة الفروع عبر API
+$.ajax({
+    url: "{{ route('Branch') }}", // تأكد من إعداد المسار الصحيح
+    type: "GET",
+    success: function(response) {
+        if (response.status === 200) {
+            const branches = response.data;
 
-          $(document).ready(function () {
-  const eventColors = ['#3f51b5', '#e91e63', '#ff9800', '#4caf50', '#9c27b0', '#009688', '#2196f3'];
+            if (branches.length === 0) {
+                // عرض رسالة في حالة عدم وجود فروع
+                $("#branchTabs").html(`
+                    <li class="nav-item">
+                        <span class="nav-link text-danger font-weight-bold">
+                            {{ __('messages.no_branches') }}
+                        </span>
+                    </li>
+                `);
+                return;
+            }
 
-  // جلب قائمة الغرف عبر API
-  $.ajax({
-      url: "{{ route('Room') }}", // تأكد من إعداد هذا المسار
-      type: "GET",
-      success: function (response) {
-          if (response.status === 200) {
-              const rooms = response.data;
+            // إنشاء التابات الخاصة بالفروع
+            let tabsHtml = "";
+            let contentHtml = "";
+            branches.forEach((branch, index) => {
+                const isActive = index === 0 ? "active" : "";
+                tabsHtml += `
+                    <li class="nav-item">
+                        <a class="nav-link ${isActive}" id="branch-tab-${branch.id}" 
+                           data-toggle="tab" href="#branch-${branch.id}" role="tab" 
+                           aria-controls="branch-${branch.id}" 
+                           aria-selected="${index === 0}">
+                            ${branch.name}
+                        </a>
+                    </li>
+                `;
 
-              if (rooms.length === 0) {
+                contentHtml += `
+                    <div class="tab-pane fade ${isActive ? "show active" : ""}" id="branch-${branch.id}" 
+                         role="tabpanel" aria-labelledby="branch-tab-${branch.id}">
+                        <div id="branch-rooms-${branch.id}" class="mt-3">
+                            <!-- سيتم تحميل الغرف هنا -->
+                        </div>
+                    </div>
+                `;
+            });
 
-              const noRoomsHtml = `
-                  <div class="d-flex justify-content-center align-items-center" style="height: 300px;">
-                      <div class="alert alert-warning text-center" role="alert" style="font-size: 1.5rem; font-weight: bold;">
-                          {{ __('messages.no_rooms') }}
-                      </div>
-                  </div>
-              `;
+            $("#branchTabs").html(tabsHtml);
+            $("#branchTabsContent").html(contentHtml);
 
-              $("#roomTabsContent").html(noRoomsHtml);
-              return;
-          }
+            // جلب الغرف للفرع الأول تلقائيًا
+            if (branches.length > 0) {
+                fetchRoomsByBranch(branches[0].id);
+            }
 
-              // إنشاء التابات ومحتوى التاب لكل غرفة
-              let tabsHtml = "";
-              let contentHtml = "";
-              rooms.forEach((room, index) => {
-                  const isActive = index === 0 ? "active" : "";
-                  tabsHtml += `
-                      <li class="nav-item">
-                          <a class="nav-link ${isActive}" id="room-tab-${room.id}"
-                              data-toggle="tab" href="#room-${room.id}" role="tab"
-                              aria-controls="room-${room.id}" aria-selected="${index === 0}">
-                              ${room.name}
-                          </a>
-                      </li>
-                  `;
+            // التعامل مع تبديل الفروع
+            $("a[data-toggle='tab']").on("shown.bs.tab", function(e) {
+                const branchId = $(e.target).attr("href").replace("#branch-", "");
+                fetchRoomsByBranch(branchId);
+            });
+        }
+    },
+    error: function(error) {
+        console.error("Error fetching branches:", error);
+    }
+});
 
-                  contentHtml += `
-                      <div class="tab-pane fade ${isActive ? "show active" : ""}" id="room-${room.id}"
-                          role="tabpanel" aria-labelledby="room-tab-${room.id}">
-                          <div class="card">
-                              <div class="card-body">
-                                  <div id="calendar-room-${room.id}"></div>
-                              </div>
-                          </div>
-                      </div>
-                  `;
-              });
 
-              $("#roomTabs").html(tabsHtml);
-              $("#roomTabsContent").html(contentHtml);
 
-              // تهيئة تقاويم الغرف
-              rooms.forEach((room) => {
-                  initializeCalendar(room.id);
-              });
 
-              // إعادة تحميل التقويم عند التبديل بين التابات
-              $('a[data-toggle="tab"]').on("shown.bs.tab", function (e) {
-                  const roomId = $(e.target).attr("href").replace("#room-", "");
-                  $(`#calendar-room-${roomId}`).fullCalendar("render");
-              });
-          }
-      },
-  });
+  
+        const eventColors = ['#3f51b5', '#e91e63', '#ff9800', '#4caf50', '#9c27b0', '#009688', '#2196f3'];
+        function fetchRoomsByBranch(branchId) {
+            $.ajax({
+                url: "{{ route('RoomBranch') }}", // تأكد من إعداد المسار الصحيح
+                type: "post",
+                data: { branchId: branchId }, // إرسال معرف الفرع كمعيار
+                headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                success: function(response) {
+                    if (response.status === 200) {
+                        const rooms = response.data;
 
+                        const branchRoomsContainer = $(`#branch-rooms-${branchId}`);
+                        branchRoomsContainer.empty();
+
+                        if (rooms.length === 0) {
+                            branchRoomsContainer.html(`
+                                <div class="d-flex justify-content-center align-items-center" style="height: 300px;">
+                                    <div class="alert alert-warning text-center" role="alert" style="font-size: 1.5rem; font-weight: bold;">
+                                        {{ __('messages.no_rooms') }}
+                                    </div>
+                                </div>
+                            `);
+                            return;
+                        }
+
+                // إنشاء التابات ومحتوى التاب لكل غرفة
+                let tabsHtml = '<ul class="nav nav-tabs" id="roomTabs" role="tablist">';
+                let contentHtml = '<div class="tab-content" id="roomTabsContent">';
+
+                rooms.forEach((room, index) => {
+                    const isActive = index === 0 ? "active" : "";
+                    tabsHtml += `
+                        <li class="nav-item">
+                            <a class="nav-link ${isActive}" id="room-tab-${room.id}"
+                               data-toggle="tab" href="#room-${room.id}" role="tab"
+                               aria-controls="room-${room.id}" aria-selected="${index === 0}">
+                                ${room.name}
+                            </a>
+                        </li>
+                    `;
+
+                    contentHtml += `
+                        <div class="tab-pane fade ${isActive ? "show active" : ""}" id="room-${room.id}"
+                             role="tabpanel" aria-labelledby="room-tab-${room.id}">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div id="calendar-room-${room.id}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                tabsHtml += '</ul>';
+                contentHtml += '</div>';
+
+                branchRoomsContainer.html(tabsHtml + contentHtml);
+
+                // تهيئة تقاويم الغرف
+                rooms.forEach((room) => {
+                    initializeCalendar(room.id);
+                });
+
+                // إعادة تحميل التقويم عند التبديل بين التابات
+                $('a[data-toggle="tab"]').on("shown.bs.tab", function(e) {
+                    const roomId = $(e.target).attr("href").replace("#room-", "");
+                    $(`#calendar-room-${roomId}`).fullCalendar("render");
+                });
+            }
+        },
+        error: function(error) {
+            console.error("Error fetching rooms:", error);
+        }
+    });
+}
   // تهيئة التقويم لغرفة معينة
   function initializeCalendar(roomId) {
       $(`#calendar-room-${roomId}`).fullCalendar({
@@ -434,7 +526,7 @@ eventClick: function(event) {
           },
       });
   });
-});
+
 
 // حذف الحدث
 $("#deleteEventBtn").on("click", function() {

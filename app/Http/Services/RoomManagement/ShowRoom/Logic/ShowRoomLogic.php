@@ -24,11 +24,12 @@ class ShowRoomLogic implements Service {
 
         // write your logic code..
         $roomRepository = $this->repository->RoomRepository();
-        $room = $roomRepository->readRepository()->find($this->input->getRoomId());
+        $room = $roomRepository->readRepository()->getByConditions($this->input->toArray());
 
         $response  = new ShowRoomOutput($room ,
         SuccessMessages::getKey(SuccessMessages::$show,Attributes::Room)
         ,viewPath:'room_management.show_room');
-        return $response->send_as_array();
-   }
+        return $response->send_as_object();
+    }
+
 }

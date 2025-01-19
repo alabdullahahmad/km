@@ -5,37 +5,35 @@ use App\Http\Core\InternalInterface\InputServiceInterface;
 
 class ShowRoomInput implements InputServiceInterface
 {
-    private int $roomId;
+    private int $branchId;
     public function __construct( array $input)
     {
-        $this->roomId = $input['roomId'];
+        $this->branchId = $input['branchId'] ?? auth()->branchId;
     }
 
     // write your input function here..
 
     public function toArray(){
         return [
-            ''=>''
+            'branchId'=>$this->branchId
         ];
     }
 
     /**
-     * Get the value of roomId
+     * Get the value of branchId
      */
     public function getRoomId()
     {
-        return $this->roomId;
+        return $this->branchId;
     }
 
     /**
-     * Set the value of roomId
+     * Set the value of branchId
      *
      * @return  self
      */
-    public function setRoomId($roomId)
+    public function setRoomId($branchId)
     {
-        $this->roomId = $roomId;
-
-        return $this;
+        $this->branchId = $branchId;
     }
 }

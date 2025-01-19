@@ -1,9 +1,9 @@
 <?php
-namespace App\Http\Services\RoomManagement\AddRoom\Request;
+namespace App\Http\Services\RoomManagement\ShowRoom\Request;
 
 use App\Http\Core\Request\BaseRequest;
 
-class AddRoomRequest extends BaseRequest
+class ShowRoomRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,7 @@ class AddRoomRequest extends BaseRequest
     {
         return
         [
-            'name' => ['required' , 'string'],
-            'capacity' => ['required' , 'integer'],
-            'branchId' => ['required' , 'integer' , 'exists:branches,id'],
+            'branchId' => ['nullable' , 'integer' , 'exists:branches,id'],
         ];
     }
 

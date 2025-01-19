@@ -31,6 +31,8 @@ class AddSubscriptionRequest extends BaseRequest
             'numOfSessions' => ['required' , 'integer'],
             'description' => ['nullable' , 'string'],
             'categoryId' => ['required', 'integer' , 'exists:categories,id'],
+            'branchId' => ['required' , 'integer' , 'exists:branches,id'],
+
         ];
     }
 
