@@ -67,9 +67,9 @@
                     title: "{{ __('messages.name') }}"
                 },
                 {
-                    data: 'price',
-                    name: 'price',
-                    title: "{{ __('messages.price') }}"
+                    data: (data)=>data.branch.name,
+                    name: 'branchName',
+                    title: "{{ __('messages.branchName') }}"
                 },
                 {
                     data: 'numOfDays',

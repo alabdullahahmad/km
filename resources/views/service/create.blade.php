@@ -28,6 +28,17 @@
                                 {{ Form::text('name', old('name'), ['placeholder' => __('messages.name'), 'class' => 'form-control', 'title' => 'Please enter alphabetic characters and spaces only']) }}
                                 <small class="help-block with-errors text-danger"></small>
                             </div>
+                            <div class="form-group col-md-4">
+                                {{ Form::label('name', __('messages.select_name',[ 'select' => __('messages.branchName') ]).' <span class="text-danger">*</span>',['class'=>'form-control-label'],false) }}
+                                <br />
+                                {{ Form::select('branchId', [optional($servicedata->branch)->id => optional($servicedata->branch)->name], optional($servicedata->branch)->id, [
+                                        'class' => 'select2js form-group category',
+                                        'required',
+                                        'data-placeholder' => __('messages.select_name',[ 'select' => __('messages.branchName') ]),
+                                        'data-ajax--url' => route('ajax-list', ['type' => 'branch']),
+                                    ]) }}
+
+                            </div>
                             <div class="form-group col-md-4" id="numOfDays_div">
                                 {{ Form::label('numOfDays',__('messages.number_day').' <span class="text-danger">*</span>',['class'=>'form-control-label'],false) }}
                                 {{ Form::text('numOfDays',null, [ 'min' => 1, 'step' => 'any' , 'placeholder' => __('messages.number_day'),'class' =>'form-control', 'required','id' => 'numOfDays',  'pattern' => '^\\d+(\\.\\d{1,2})?$' ]) }}

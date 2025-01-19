@@ -26,6 +26,17 @@
                                     {{ Form::text('name',old('name'),['placeholder' => __('messages.name'),'class' =>'form-control','required']) }}
                                     <small class="help-block with-errors text-danger"></small>
                                 </div>
+                                <div class="form-group col-md-4">
+                                    {{ Form::label('name', __('messages.select_name',[ 'select' => __('messages.branchName') ]).' <span class="text-danger">*</span>',['class'=>'form-control-label'],false) }}
+                                    <br />
+                                    {{ Form::select('branchId', [optional($sliderdata->branch)->id => optional($sliderdata->branch)->name], optional($sliderdata->branch)->id, [
+                                            'class' => 'select2js form-group category',
+                                            'required',
+                                            'data-placeholder' => __('messages.select_name',[ 'select' => __('messages.branchName') ]),
+                                            'data-ajax--url' => route('ajax-list', ['type' => 'branch']),
+                                        ]) }}
+    
+                                </div>
 
                                 <div class="form-group col-md-4">
                                     {{ Form::label('capacity',__('messages.Capacity').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
