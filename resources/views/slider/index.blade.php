@@ -75,6 +75,11 @@
                         title: "{{__('messages.name')}}"
                     },
                     {
+                    data: (data)=>data.branch.name,
+                    name: 'branchName',
+                    title: "{{ __('messages.branchName') }}"
+                },
+                    {
                         data: 'capacity',
                         name: 'type_id',
                         title: "{{__('messages.Capacity')}}"
