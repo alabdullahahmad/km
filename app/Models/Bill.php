@@ -30,7 +30,8 @@ class Bill extends Model
         'subscriptionId',
         'userId',
         'isEnd',
-        'subscriptionCoachId'
+        'subscriptionCoachId',
+        'branchId'
     ];
 
 
@@ -71,5 +72,15 @@ class Bill extends Model
 
     public function subscriptionCoach(){
         return $this->belongsTo(SubscriptionCoach::class,'subscriptionCoachId','id');
+    }
+
+    /**
+     * Get the branch that owns the Bill
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class, 'branchId');
     }
 }

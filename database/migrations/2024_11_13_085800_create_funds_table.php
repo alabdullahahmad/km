@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('funds', function (Blueprint $table) {
             $table->id();
             $table->string('amount')->default(0);
-            // $table->foreignId('branchId')->references('id')->on('branches')->cascadeOnDelete();
+            $table->foreignId('branchId')->references('id')->on('branches')->cascadeOnDelete();
             $table->timestamps();
         });
     }

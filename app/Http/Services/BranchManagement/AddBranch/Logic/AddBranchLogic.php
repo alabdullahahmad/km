@@ -27,6 +27,10 @@ class AddBranchLogic implements Service {
 
         $branch = $branchRepository->createRepository()->create($this->input->toArray());
 
+        $this->repository->fundRepository()->createRepository()->create([
+            'branchId' => $branch->id,
+        ]);
+        
         $response  = new AddBranchOutput($branch ,
         SuccessMessages::getKey(SuccessMessages::$Add,Attributes::Branch)
         ,viewPath:'coupon.index',

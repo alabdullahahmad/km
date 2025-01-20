@@ -26,7 +26,15 @@ class FundReportLogic implements Service {
 
         $fundRepot = $fundReportRepository->readRepository()->getGroupByForFund(
             $this->input->toArray()
-        );
+        ,[
+            'date',
+            'branchId'
+        ],
+        with:[
+                'branch' => function($q){
+                    return $q->select('id','name');
+                }
+        ]);
 
         foreach ($fundRepot as  $value) {
             info($value->date);

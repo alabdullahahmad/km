@@ -62,7 +62,7 @@ class AddBillLogic implements Service {
             $fund = $this->repository->fundRepository()->readRepository()->getFirstWithLock();
 
             $this->repository->fundRepository()->updateRepository()->update(
-                null,
+                [ 'branchId' => auth()->user()->branchId],
                 [ 'amount' => ($this->input->payType == "in")?
                     $fund->amount + $this->input->amount
                     :$fund->amount - $this->input->amount

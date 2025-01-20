@@ -11,11 +11,12 @@ class BillReadRepository extends ReadRepository
         $this->model = new Bill();
     }
 
-    public function getGroupByForFund(array $data =null ,$groupBy ='date'){
+    public function getGroupByForFund(array $data =null ,$groupBy ='date',$with=[]){
         $model = $this->model->query()
         ->join('user_payments' , 'user_payments.billId' , '=' , 'bills.id')->select(
             [
                 'bills.date',
+                'branchId',
                 DB::raw("SUM(CASE WHEN bills.payType = 'in' THEN user_payments.amount ELSE 0 END) AS cashIn"),
                 DB::raw("SUM(CASE WHEN bills.payType = 'out' THEN user_payments.amount ELSE 0 END) AS cashOut")
             ]
@@ -23,7 +24,7 @@ class BillReadRepository extends ReadRepository
         if ($data) {
             $model = $model->whereBetween('date', $data);
         }
-        return $model->groupBy($groupBy)->get();
+        return $model->with($with)->groupBy($groupBy)->get();
     }
 
     public function getBillReport(array $data = null){
@@ -42,7 +43,11 @@ class BillReadRepository extends ReadRepository
 
         $model = $this->model->query()->with(['user','subscription', 'userPayment'=>function($q){
             return $q->select(['id','billId', DB::raw('SUM(amount) as totalAmount')])->groupBy('billId')->first();
-        }])->where(
+        },
+        'branch' => function($q){
+            return $q->select('id','name');
+        }
+        ])->where(
             'userId' , "!=" , null
         )->where($data);
         return $model->orderby('created_at','DESC')->get();
@@ -76,7 +81,8 @@ class BillReadRepository extends ReadRepository
                 DB::raw("SUM(CASE WHEN price IS NOT NULL THEN price ELSE 0 END) AS total"),
                 DB::raw("SUM(CASE WHEN price IS NOT NULL THEN price * (coaches.percentage / 100) ELSE 0 END) AS totalPercentage"),
                 'coachId',
-                'subscriptionId'
+                'subscriptionId',
+                'branchId'
             ]
         );
 
@@ -88,6 +94,9 @@ class BillReadRepository extends ReadRepository
             return $q->select('id','name');
         },
         'subscription'=>function($q){
+            return $q->select('id','name');
+        },
+        'branch' => function($q){
             return $q->select('id','name');
         }
         ])->where('coachId','!=',null)->groupBy(['coachId','subscriptionId'])->get();
@@ -107,7 +116,11 @@ class BillReadRepository extends ReadRepository
         $model = $this->model->query()->with(['user:id,name','staf:id,name',
         'subscription:id,name', 'userPayment'=>function($q){
             return $q->select(['id','billId', DB::raw('SUM(amount) as totalAmount')])->groupBy('billId')->first();
-        }]);
+        },
+            'branch' => function($q){
+                return $q->select('id','name');
+            }
+        ]);
 
         if ($data) {
             $model = $model->whereBetween('date', $data);
@@ -121,7 +134,7 @@ class BillReadRepository extends ReadRepository
         }])->find($billId);
     }
 
-    public function getComplexReport(array $data = null){
+    public function getComplexReport(array $data = null , $with = []){
         $model = $this->model->query()->with(['user','subscriptionCoach','staf','coach'=>function($q){return $q->select('id','name')->get();}
         ,'subscription'=>function($q){return $q->select('id','name','tagId')->with('tag')->get();} , 'userPayment'=>function($q){
             return $q->select(['id','billId', DB::raw('SUM(amount) as totalAmount')])->groupBy('billId')->first();
@@ -129,7 +142,7 @@ class BillReadRepository extends ReadRepository
         if ($data) {
             $model = $model->whereBetween('date', $data);
         }
-        return $model->where('userId','!=',null)->get();
+        return $model->with($with)/*->where('userId','!=',null)*/->get();
     }
 
 

@@ -19,7 +19,7 @@
     </div>
     <div class="card">
         <div class="card-body">
-            
+
                 <div class="row justify-content-between">
                     <div>
                         <div class="col-md-12">
@@ -36,22 +36,22 @@
                                 {{__('messages.apply')}}
                             </button>
                     </div>
-                  
+
                     </form>
                   </div>
                       <div class="d-flex justify-content-end">
-                       
+
                         <div class="input-group ml-2">
                             <span class="input-group-text" id="addon-wrapping"><i class="fas fa-search"></i></span>
                             <input type="text" class="form-control dt-search" placeholder="Search..." aria-label="Search" aria-describedby="addon-wrapping" aria-controls="dataTableBuilder">
                           </div>
                       </div>
-               
+
               <div class="table-responsive">
                 <table id="datatable" class="table table-striped border">
                 </table>
               </div>
-           
+
         </div>
     </div>
     <script>
@@ -97,6 +97,11 @@
                          orderable: false,
                     },
                     {
+                    data: (data)=>data.branch.name,
+                    name: 'branchName',
+                    title: "{{ __('messages.branchName') }}"
+                },
+                    {
                         data: (data)=>{
                             return data.subscription.name
                         },
@@ -113,7 +118,7 @@
                         name: 'totalPercentage',
                         title: "{{__('messages.Coach_Percentage_Total')}}"
                     },
-                
+
                     {
                         data: 'action',
                         name: 'action',
@@ -121,20 +126,20 @@
                         searchable: false,
                         title: "{{__('messages.action')}}",
                     }
-                    
+
                 ]
-                
+
             });
       });
 
             // سكربت لتطبيق فلترة التواريخ
             $('#apply-date-filter').click(function (e) {
             e.preventDefault();
-            
+
             // التحقق من تعبئة كلا الخانتين
             const startDate = $('#start_date').val();
             const endDate = $('#end_date').val();
-            
+
             if (!startDate || !endDate) {
             Swal.fire({
             icon: 'warning',
@@ -143,7 +148,7 @@
             });
             return;
             }
-            
+
             // إعادة تحميل الجدول
             window.renderedDataTable.ajax.reload();
             });

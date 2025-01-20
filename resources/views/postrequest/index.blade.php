@@ -131,6 +131,11 @@
                         title: "{{__('messages.Cash_out')}}"
                     },
                     {
+                    data: (data)=>data.branch.name,
+                    name: 'branchName',
+                    title: "{{ __('messages.branchName') }}"
+                },
+                    {
                         data: (data)=>{
                             return data.cashIn - data.cashOut;
                         },

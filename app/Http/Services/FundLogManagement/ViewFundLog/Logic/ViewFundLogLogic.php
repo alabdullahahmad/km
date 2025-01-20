@@ -25,9 +25,15 @@ class ViewFundLogLogic implements Service {
         // write your Logic code..
         $fundRepository = $this->repository->fundLogRepository();
 
-        $fundLog = $fundRepository->readRepository()->getByConditions([
+        $fundLog = $fundRepository->readRepository()->getAllRecordsWithRelations(
+        conditions:[
             'adminRecipient' => false,
             'stafRecipient' => true,        
+        ],
+        relations:[
+            "branch" => function ($q){
+                return $q->select('id','name');
+            }
         ]);
 
         foreach ($fundLog as $value) {

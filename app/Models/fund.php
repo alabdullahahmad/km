@@ -17,7 +17,7 @@ class fund extends Model
          */
         protected $fillable = [
             'amount',
-            // 'branchId',
+            'branchId',
         ];
 
         /**
@@ -25,8 +25,8 @@ class fund extends Model
          *
          * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
          */
-        // public function branch()
-        // {
-        //     return $this->belongsTo(Branch::class, 'branchId');
-        // }
+        public function branch()
+        {
+            return $this->belongsTo(Branch::class, 'branchId');
+        }
 }

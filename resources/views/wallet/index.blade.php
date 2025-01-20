@@ -28,10 +28,10 @@
                         <input type="text" class="form-control dt-search" placeholder="Search..." aria-label="Search" aria-describedby="addon-wrapping" aria-controls="dataTableBuilder">
                     </div>
                 </div>
-    
+
                 <div class="table-responsive">
                     <table id="datatable" class="table table-striped border">
-                      
+
                     </table>
                 </div>
             </div>
@@ -83,6 +83,11 @@
                         title: "{{__('messages.amount')}}"
                     },
                     {
+                    data: (data)=>data.branch.name,
+                    name: 'branchName',
+                    title: "{{ __('messages.branchName') }}"
+                    },
+                    {
                         data: (data) => data.description ?? '', // التعامل مع القيم الفارغة
                         name: 'description',
                         title: "{{__('messages.description')}}"
@@ -96,11 +101,11 @@
                     }
                 ]
             });
-    
+
             // البحث الدقيق على الحقول
             $('.dt-search').on('keyup', function () {
                 const searchTerm = this.value.toLowerCase();
-    
+
                 // تصفية البيانات حسب الحقول
                 dataTable.rows().every(function () {
                     const rowData = this.data();
@@ -112,7 +117,7 @@
                         (rowData.user_payment?.[0]?.totalAmount ?? 0).toString(), // قيمة الدفع (تشمل 0)
                         rowData.description ?? ''     // الوصف
                     ];
-    
+
                     // التحقق من وجود نص البحث في أي من الحقول
                     const matchFound = searchableFields.some(field => {
                         if (field !== undefined && field !== null) {
@@ -120,7 +125,7 @@
                         }
                         return false;
                     });
-    
+
                     // إظهار أو إخفاء الصف بناءً على المطابقة
                     if (matchFound) {
                         $(this.node()).show();
@@ -131,9 +136,8 @@
             });
         });
     </script>
-    
-    
-    
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     </x-master-layout>
-    

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('amount');
             $table->boolean('adminRecipient')->default(false);
             $table->boolean('stafRecipient')->default(true);
+            $table->foreignId('branchId')->references('id')->on('branches')->cascadeOnDelete();
             $table->timestamps();
         });
     }

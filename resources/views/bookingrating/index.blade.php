@@ -42,7 +42,7 @@
                                 {{__('messages.apply')}}
                             </button>
                         </form>
-                        
+
                         <div class="d-flex align-items-center gap-3 mt-3">
                             <form id="filter-form" class="form-disabled d-flex gap-3 align-items-center">
                                 <select name="gender_filter" id="gender_filter" class="select2 form-control" data-filter="select" style="width: auto">
@@ -59,17 +59,17 @@
                                 <button id="apply-filters" class="btn btn-primary">
                                     {{__('messages.apply')}}
                                 </button>
-                                
+
                             </form>
                             @if(Auth::user()->isAdmin)
                             <button id="export-excel" class="btn btn-success btn-sm ml-2"><i class="fa fa-file-excel"></i> Export to Excel</button>
                             <button id="export-pdf" class="btn btn-danger btn-sm"><i class="fa fa-file-pdf"></i> Export to PDF</button>
                             @endif
-                         
+
                         </div>
-                      
-                         
-                       
+
+
+
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -114,6 +114,7 @@
                         title: "{{ __('messages.player_name') }}"
                     },
                     {
+
                         data: 'status',
                         name: 'status',
                         title: "{{ __('messages.status') }}",

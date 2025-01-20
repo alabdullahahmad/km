@@ -12,6 +12,7 @@ class FundLog extends Model
         'date',
         'adminRecipient',
         'stafRecipient',
+        'branchId',
     ];
 
     /**
@@ -23,4 +24,15 @@ class FundLog extends Model
     {
         return $this->belongsTo(Staf::class, 'stafId');
     }
+
+    
+        /**
+         * Get the brand that owns the fund
+         *
+         * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+         */
+        public function branch()
+        {
+            return $this->belongsTo(Branch::class, 'branchId');
+        }
 }

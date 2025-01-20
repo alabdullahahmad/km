@@ -31,6 +31,7 @@ return new class extends Migration
             $table->foreignId('subscriptionId')->nullable()->references('id')->on('subscriptions')->cascadeOnDelete();
             $table->foreignId('userId')->nullable()->references('id')->on('users')->cascadeOnDelete();
             $table->foreignId('subscriptionCoachId')->nullable()->references('id')->on('subscription_coaches')->cascadeOnDelete();
+            $table->foreignId('branchId')->references('id')->on('branches')->onDelete('cascade');
             $table->timestamps();
         });
     }

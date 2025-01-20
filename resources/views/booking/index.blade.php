@@ -5,7 +5,7 @@
         <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     </head>
       @if(!Auth::user()->isAdmin)
-    
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
@@ -37,7 +37,7 @@
     <div class="card">
         <div class="card-body">
             <div class="row justify-content-between">
-               
+
                 <div class="d-flex justify-content-end">
                     {{-- <div class="datatable-filter ml-auto">
                   <select name="column_status" id="column_status" class="select2 form-control" data-filter="select" style="width: 100%">
@@ -69,8 +69,8 @@
 
     </div>
 
-    
-   
+
+
 
     <div id="demoSidebar" class="sidebar" dir="ltr">
         <button class="close-btn" onclick="closeSidebar()">×</button>
@@ -127,8 +127,9 @@
                     title: 'الاسم'
                 },
                 {
-                    data: 'branchName',
-                    title: 'الفرع'
+                    data: (data)=>data.branch.name,
+                    name: 'branchName',
+                    title: "{{ __('messages.branchName') }}"
                 },
                 {
                     data: 'startDate',

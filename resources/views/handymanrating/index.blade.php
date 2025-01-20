@@ -17,7 +17,7 @@
                             <div class="d-flex justify-content-center align-items-center gap-3 mx-auto">
                                 <span class="value-label font-weight-bold">{{ __('messages.num_player') }}</span>
                                 <span class="value-amount font-weight-bold" id="player-count">0</span>
-                              
+
                             </div>
                             <button id="export-excel" class="btn btn-success btn-sm ml-2"><i class="fa fa-file-excel"></i> Export to Excel</button>
                         </div>
@@ -68,10 +68,10 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
-    
+
             window.renderedDataTable = $('#datatable').DataTable({
                 processing: true,
-                serverSide: true, 
+                serverSide: true,
                 autoWidth: false,
                 responsive: true,
                 dom: '<"row align-items-center"><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" l><"col-md-6" p>><"clear">',
@@ -92,6 +92,11 @@
                         name: 'user_name',
                         title: "{{ __('messages.player_name') }}"
                     },
+                    {
+                    data: (data)=>data.branch.name,
+                    name: 'branchName',
+                    title: "{{ __('messages.branchName') }}"
+                },
                     {
                         data: (data) => {
                             return data.subscription.name; // طبيعة الاشتراك
@@ -122,9 +127,9 @@
             $('#player-count').text(playerCount);
         }
             });
-    
+
         });
-   
+
 
 
 
@@ -147,11 +152,11 @@
         // سكربت لتطبيق فلترة التواريخ
         $('#apply-date-filter').click(function(e) {
             e.preventDefault();
-    
+
             // التحقق من تعبئة كلا الخانتين
             const startDate = $('#start_date').val();
             const endDate = $('#end_date').val();
-    
+
             if (!startDate || !endDate) {
                 Swal.fire({
                     icon: 'warning',
@@ -160,12 +165,12 @@
                 });
                 return;
             }
-    
+
             // إعادة تحميل الجدول
             window.renderedDataTable.ajax.reload();
         });
     </script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 </x-master-layout>

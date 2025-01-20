@@ -50,7 +50,7 @@ class EditeBillLogic implements Service {
             $fund = $this->repository->fundRepository()->readRepository()->getFirstWithLock();
 
             $this->repository->fundRepository()->updateRepository()->update(
-                null,
+                [ 'branchId' => auth()->user()->branchId ],
                 [
                      'amount' => ($fund->amount - $oldAmount) + $newAmount
                 ]

@@ -25,7 +25,8 @@ class ShowBillLogic implements Service {
         // write your logic code..
         $billRepository = $this->repository->BillRepository();
 
-        $bills = $billRepository->readRepository()->getUsersBill();
+        $condation = (auth()->user()->isAdmin) ? [] : ['branchId' => auth()->user()->branchId];
+        $bills = $billRepository->readRepository()->getUsersBill($condation);
 
         foreach ($bills as $bill) {
             $bill->action  = view('booking.action')->with(['booking'=>$bill])->render();

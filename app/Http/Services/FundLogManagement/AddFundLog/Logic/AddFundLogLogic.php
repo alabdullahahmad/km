@@ -28,8 +28,9 @@ class AddFundLogLogic implements Service {
 
         $fund = $fundLogRepository->createRepository()->create($this->input->toArray());
 
-        $this->repository->fundRepository()->updateRepository()->updateFirst(
-            ['amount' => 0]
+        $this->repository->fundRepository()->updateRepository()->update(
+            [ 'branchId' => auth()->user()->branchId],
+            ['amount' => 0 ],
         );
 
         // Auth::logout();

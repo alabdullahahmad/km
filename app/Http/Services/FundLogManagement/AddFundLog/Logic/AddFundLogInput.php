@@ -20,7 +20,8 @@ class AddFundLogInput implements InputServiceInterface
         return [
             'amount' => $this->amount,
             'date' => $this->getDate(),
-            'stafId' => $this->stafId
+            'stafId' => $this->stafId,
+            'branchId' => auth()->user()->branchId
         ];
     }
 

@@ -23,7 +23,11 @@ class BillReportLogic implements Service {
 
         // write your Logic code..
         $billReportRepository = $this->repository->BillRepository();
-        $billReport = $billReportRepository->readRepository()->getComplexReport($this->input->toArray());
+        $billReport = $billReportRepository->readRepository()->getComplexReport($this->input->toArray(),[
+                'branch' => function($q){
+                    return $q->select('id','name');
+                }
+        ]);
 
         foreach ($billReport as  $value) {
             $value->action = view('service.user_service_action')->with(

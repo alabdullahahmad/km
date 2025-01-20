@@ -110,6 +110,11 @@
                         title: "{{ __('messages.player_name') }}"
                     },
                     {
+                    data: (data)=>data.branch.name,
+                    name: 'branchName',
+                    title: "{{ __('messages.branchName') }}"
+                },
+                    {
                         data: (data) => data.subscription?.type ?? 'No Type',
                         title: "{{ __('messages.Subscription type') }}"
                     },

@@ -19,6 +19,7 @@
 
                                 <div class="service-man-list__item_body">
                                     <p class="service-man-amount">{{ __('messages.amount_due') }}: {{ $handyman->amount ?? '-' }}</p>
+                                    <p class="service-man-amount">{{ __('messages.branchName') }}: {{ $handyman->branch->name ?? '-' }}</p>
                                     @if ($is_ready_to_receive)
                                         <form action="{{ route('editFundLog') }}" method="POST">
                                             @csrf

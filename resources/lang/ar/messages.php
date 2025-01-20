@@ -467,7 +467,7 @@ use App\Http\Core\Const\Messages\Attributes;
         'extra_charge' => 'Extra Charges',
         'collect_cash' => 'Collect Cash From Provider',
         'bank_name' => 'Bank Name',
-        'branch_name' => 'Branch Name',
+        'branch_name' => 'اسم الفرع',
         'ifsc_no' => 'IFSC Code',
         'mobile_no' => 'Mobile Number',
         'pan_no' => 'PAN Number',

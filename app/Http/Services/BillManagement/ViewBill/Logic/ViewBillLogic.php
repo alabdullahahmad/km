@@ -24,14 +24,20 @@ class ViewBillLogic implements Service {
 
     public function execute (): ResponseModel {
 
+        $condation = (auth()->user()->isAdmin) ? [] : ['branchId' => auth()->user()->branchId , 'stafId' => Auth::user()->id];
+
         // write your logic code..
         $billRepository = $this->repository->BillRepository();
 
         $bills = $billRepository->readRepository()->getAllRecordsWithRelations(
             ['userPayment'=>function($q){
                 return $q->select('id','billId', DB::raw('SUM(amount) as totalAmount'))->groupBy('billId');
-            }]
-        ,(Auth::user()->isAdmin) ? null : ['stafId' => Auth::user()->id]);
+            },
+            'branch' => function($q){
+                return $q->select('id','name')->get();
+            }
+            ]
+        ,$condation);
 
         foreach ($bills as  $value) {
             $value->staf = $this->repository->StafRepository()->readRepository()->find($value->stafId);
