@@ -7,10 +7,12 @@ class BillReportInput implements InputServiceInterface
 {
     public ?string $startDate;
     public ?string $endDate;
+    public ?int $branchId;
     public function __construct( array $input)
     {
         $this->startDate = $input['startDate'] ?? null;
         $this->endDate = $input['endDate'] ?? null;
+        $this->branchId = $input['branchId'] ?? null;
     }
 
     // write your input function here..

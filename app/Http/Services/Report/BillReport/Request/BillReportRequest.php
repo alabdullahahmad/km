@@ -25,7 +25,8 @@ class BillReportRequest extends BaseRequest
         return
         [
             'startDate' => ['nullable' , 'date_format:Y-m-d'],
-            'endDate' => ['nullable' , 'date_format:Y-m-d']
+            'endDate' => ['nullable' , 'date_format:Y-m-d'],
+            'branchId' => ['nullable' , 'integer' , 'exists:branches,id']
         ];
     }
 

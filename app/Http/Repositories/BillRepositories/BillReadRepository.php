@@ -134,7 +134,7 @@ class BillReadRepository extends ReadRepository
         }])->find($billId);
     }
 
-    public function getComplexReport(array $data = null , $with = []){
+    public function getComplexReport(array $data = null , $with = [],$condation = []){
         $model = $this->model->query()->with(['user','subscriptionCoach','staf','coach'=>function($q){return $q->select('id','name')->get();}
         ,'subscription'=>function($q){return $q->select('id','name','tagId')->with('tag')->get();} , 'userPayment'=>function($q){
             return $q->select(['id','billId', DB::raw('SUM(amount) as totalAmount')])->groupBy('billId')->first();
@@ -142,7 +142,7 @@ class BillReadRepository extends ReadRepository
         if ($data) {
             $model = $model->whereBetween('date', $data);
         }
-        return $model->with($with)/*->where('userId','!=',null)*/->get();
+        return $model->where($condation)->with($with)/*->where('userId','!=',null)*/->get();
     }
 
 

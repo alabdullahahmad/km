@@ -27,7 +27,9 @@ class BillReportLogic implements Service {
                 'branch' => function($q){
                     return $q->select('id','name');
                 }
-        ]);
+            ],
+            condation:($this->input->branchId)?['branchId'=>$this->input->branchId]:[]
+        );
 
         foreach ($billReport as  $value) {
             $value->action = view('service.user_service_action')->with(
