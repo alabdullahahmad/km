@@ -1133,6 +1133,9 @@ use App\Http\Core\Const\Messages\Attributes;
 'add branchName' => 'add branchName',
 'branch'=> 'branch',
 'Settings' => 'Settings',
+'Update_subscription' => 'Update subscription ',
+'change_subscription' => 'change date subscription',
+'subscription_date' => 'subscription date',
 
     )
     ?>

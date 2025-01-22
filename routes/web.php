@@ -117,6 +117,8 @@ use App\Http\Services\BranchManagement\DeleteBranch\Controller\DeleteBranchContr
 use App\Http\Services\FundLogManagement\DeleteFundLog\Controller\DeleteFundLogController;
 use App\Http\Services\CategoryManagement\EditeCategory\Controller\EditeCategoryController;
 use App\Http\Services\CategoryManagement\DeleteCategory\Controller\DeleteCategoryController;
+use App\Http\Services\EditBillDate\Controller\EditBillDateController;
+use App\Http\Services\EditUserBill\Controller\EditUserBillController;
 use App\Http\Services\SubscriptionManagement\AddSubscription\Controller\AddSubscriptionController;
 use App\Http\Services\SubscriptionManagement\ShowSubscription\Controller\ShowSubscriptionController;
 use App\Http\Services\SubscriptionManagement\ViewSubscription\Controller\ViewSubscriptionController;
@@ -886,6 +888,8 @@ Route::group(['prefix' => 'bill', 'middleware' => ['auth']],function(){
     Route::get('/show/log',ShowBillLogController::class)->name('showBillLog');
     Route::post('/edit',EditeBillController::class)->name('editBill');
     Route::post('/add',AddBillController::class)->name('addBill');
+    Route::post('/edit/subscription',EditUserBillController::class)->name('editSubscriptionBill');
+    Route::post('/edit/date',EditBillDateController::class)->name('editDateBill');
 });
 
 Route::group(['prefix' => 'branch', 'middleware' => ['auth']],function(){
@@ -965,7 +969,8 @@ Route::group(['prefix' => 'report' , 'middleware' => ['auth'] ],function () {
 
 Route::get('show/booking/page',function(Request $request){
     $user = User::query()->find($request->data);
-    return view('setting.privacy_policy_form',compact('user'));
+    $billId = $request->billId;
+    return view('setting.privacy_policy_form',compact('user','billId'));
 })->name('show.booking.page');
 
 

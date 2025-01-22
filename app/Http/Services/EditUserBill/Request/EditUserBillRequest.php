@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Services\BillManagement\EditUserBill\Request;
+namespace App\Http\Services\EditUserBill\Request;
 
 use Illuminate\Validation\Rule;
 use App\Http\Core\Request\BaseRequest;
@@ -27,9 +27,10 @@ class EditUserBillRequest extends BaseRequest
         return
         [
             'billId' => ['required', 'integer' , 'exists:bills,id'],
-            'subscriptionId' => ['nullable' , 'integer' , 'exists:subscriptions,id'],
+            'subscriptionId' => ['required' , 'integer' , 'exists:subscriptions,id'],
             'coachId' => ['nullable' , 'integer' , 'exists:coaches,id'],
-            'subscriptionCoachId' => ['nullable' , 'integer' , 'exists:subscription_coaches,id']
+            'subscriptionCoachId' => ['nullable' , 'integer' , 'exists:subscription_coaches,id'],
+            'price' => ['required' , 'integer']
         ];
     }
 

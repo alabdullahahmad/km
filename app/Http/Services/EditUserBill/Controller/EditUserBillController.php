@@ -1,12 +1,12 @@
 <?php
-namespace App\Http\Services\BillManagement\EditUserBill\Controller;
+namespace App\Http\Services\EditUserBill\Controller;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Core\Response\SendResponse;
-use App\Http\Services\BillManagement\EditUserBill\Logic\EditUserBillInput;
-use App\Http\Services\BillManagement\EditUserBill\Logic\EditUserBillLogic;
-use App\Http\Services\BillManagement\EditUserBill\Request\EditUserBillRequest;
+use App\Http\Services\EditUserBill\Logic\EditUserBillInput;
+use App\Http\Services\EditUserBill\Logic\EditUserBillLogic;
+use App\Http\Services\EditUserBill\Request\EditUserBillRequest;
 
 class EditUserBillController extends Controller
 {

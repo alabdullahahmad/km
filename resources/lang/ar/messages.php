@@ -1118,6 +1118,10 @@ use App\Http\Core\Const\Messages\Attributes;
 'add branchName' => 'إضافة فرع جديد',
 'branch'=> 'الفروع',
 'Settings' => 'الاعدادات',
+'Update_subscription' => 'تعديل الاشتراك',
+'change_subscription' => 'تغيير تاريخ الاشتراك',
+'subscription_date' => 'تاريخ الاشتراك',
+
     )
 
     ?>

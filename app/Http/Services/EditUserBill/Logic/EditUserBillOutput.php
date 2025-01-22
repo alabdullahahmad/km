@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Services\BillManagement\EditUserBill\Logic;
+namespace App\Http\Services\EditUserBill\Logic;
 
 use App\Http\Core\InternalInterface\OutputServiceInterface;
 use App\Http\Core\Response\Adapter\PresentersModels\ResponseModel;

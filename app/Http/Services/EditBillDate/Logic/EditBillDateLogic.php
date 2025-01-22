@@ -32,7 +32,7 @@ class EditBillDateLogic implements Service {
             $billBefor = $billRepository->readRepository()->find($this->input->getBillId());
 
             $data = $this->input->toArray();
-            $data['endDate'] = $this->input->getEndDate($billBefor->subscription->numofDays,$data['startDate']);
+            $data['endDate'] = $this->input->getEndDate($billBefor->subscription->numOfDays,$data['startDate']);
 
             $bill = $billRepository->updateRepository()->update(
                 ['id' => $this->input->getBillId()] ,

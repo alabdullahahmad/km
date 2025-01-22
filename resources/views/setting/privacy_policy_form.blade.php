@@ -43,9 +43,12 @@
     </div>
     <br>
     <div class="col-lg-12">
-        {{ Form::open(['method' => 'POST', 'route' => 'addBill', 'enctype' => 'multipart/form-data', 'data-toggle' => "validator", 'id' => 'addBillForm']) }}
+        {{ Form::open(['method' => 'POST', 'route' => ($billId)?'editSubscriptionBill':'addBill', 'enctype' => 'multipart/form-data', 'data-toggle' => "validator", 'id' => 'addBillForm']) }}
+        
+
         <div class="row">
             <!-- الحقول الأساسية -->
+            @if (!$billId)
             <div class="form-group col-md-6">
                 {{ Form::label('discountAmount', __('messages.discount_value') . ' <span class="text-danger">*</span>', ['class' => 'form-control-label'], false) }}
                 {{ Form::text('discountAmount', null, ['placeholder' => __('messages.discount_value'), 'class' => 'form-control', 'id' => 'discountAmount']) }}
@@ -63,17 +66,6 @@
                 {{ Form::text('description', null, ['placeholder' => __('messages.payment_note'), 'class' => 'form-control', 'id' => 'description']) }}
                 <small class="help-block with-errors text-danger"></small>
             </div>
-
-            <!-- الحقول المخفية: إدخال البيانات التي تم اختيارها -->
-            {{ Form::hidden('categoryId', '', ['id' => 'category_id']) }}
-            {{ Form::hidden('subscriptionId', '', ['id' => 'subscription_id']) }}
-            {{ Form::hidden('coachId', '', ['id' => 'coach_id']) }}
-            {{ Form::hidden('shifts', '', ['id' => 'shifts']) }}
-            {{ Form::hidden('tags', '', ['id' => 'tags']) }}
-            {{ Form::hidden('userId', $user->id) }}
-            {{ Form::hidden('price', '' , ['id' => 'subsceriptionPrice']) }}
-            {{ Form::hidden('numOfDays', '' , ['id' => 'numOfDays']) }}
-
             <div class="form-group col-md-4">
                 {{ Form::label('amount', __('messages.Amount_Due :') , [ 'id' => 'amountDue', 'class' => 'form-control-label'], false) }}
                 {{ Form::number('amount', null, ['placeholder' => __('messages.Enter_Amount_Due'), 'class' => 'form-control', 'step' => '0.01', 'required']) }}
@@ -87,6 +79,25 @@
                 </div>
 
             </div>
+            @endif
+            <!-- الحقول المخفية: إدخال البيانات التي تم اختيارها -->
+            {{ Form::hidden('subscriptionId', '', ['id' => 'subscription_id']) }}
+            {{ Form::hidden('coachId', '', ['id' => 'coach_id']) }}
+            {{ Form::hidden('shifts', '', ['id' => 'shifts']) }}
+            {{ Form::hidden('price', '' , ['id' => 'subsceriptionPrice']) }}
+         
+        
+            @if (!$billId)
+                {{ Form::hidden('categoryId', '', ['id' => 'category_id']) }}
+                {{ Form::hidden('tags', '', ['id' => 'tags']) }}
+                {{ Form::hidden('userId', $user->id) }}
+                {{ Form::hidden('numOfDays', '' , ['id' => 'numOfDays']) }} 
+            @else
+                {{ Form::hidden('billId', $billId, ['id' => 'bill_id']) }}
+            @endif
+
+
+           
 
 
         </div>
@@ -268,7 +279,9 @@ $(document).ready(function () {
             $.ajax({
                 url: '{{ route("tagSubscriptions") }}', // رابط الراوت
                 type: 'GET', // نوع الطلب (GET)
-                data : { 'tagId' : tagId },
+                data : { 'tagId' : tagId ,
+                   @if($billId) 'billId' : {!! $billId !!} @endif
+                },
                // إرسال الـ tag_id في البيانات
                 success: function (response) {
                     console.log("Subscription data fetched successfully:", response);
@@ -366,7 +379,9 @@ $(document).ready(function () {
                 });
 
                 // مراقبة التغير في حقل الحسم
+                @if(!$billId)
                 document.getElementById('discountAmount').addEventListener('input', updateAmountDue);
+                @endif
 
 
         // طلب AJAX
@@ -498,6 +513,8 @@ $(document).ready(function () {
 
     $('#addBillForm').on('submit', function (e) {
     e.preventDefault(); // منع الإرسال الافتراضي
+
+    @if(!$billId)
     let isValid = true;
     let errorMessage = '';
 
@@ -535,6 +552,12 @@ $(document).ready(function () {
     const updatedAmount = subscriptionPrice - discountAmount;
 
     $('#subsceriptionPrice').val(updatedAmount);
+
+
+    @endif
+
+
+
 
 
     // إرسال النموذج إذا كانت البيانات صحيحة

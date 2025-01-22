@@ -13,7 +13,8 @@ class BillLog extends Model
         'startDateAfterEdit',
         'isTypeModified',
         'subscriptionBeforeEdit',
-        'subscriptionAfterEdit'
+        'subscriptionAfterEdit',
+        'billId'
     ];
 
     /**

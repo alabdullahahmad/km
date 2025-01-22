@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Services\BillManagement\EditUserBill\Logic;
+namespace App\Http\Services\EditUserBill\Logic;
 
 use Illuminate\Support\Facades\DB;
 use App\Http\Repositories\RepositoryCaller;
@@ -38,6 +38,7 @@ class EditUserBillLogic implements Service {
 
             $this->repository->BillLogRepository()
             ->createRepository()->create([
+                'billId'=>$billBefor->id,
                 'stafId' => auth()->id(),
                 'isTypeModified' => true,
                 'subscriptionBeforeEdit' => $billBefor->subscriptionId,
@@ -48,7 +49,7 @@ class EditUserBillLogic implements Service {
         // write your logic code..
 
         $response  = new EditUserBillOutput($bill , SuccessMessages::getKey(SuccessMessages::$edit,Attributes::Bill)
-        ,viewPath:'wallet.index'
+        ,viewPath:'booking.index'
         ,status:302);
 
         return $response->send_as_object();

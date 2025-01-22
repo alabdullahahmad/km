@@ -62,6 +62,7 @@
                         <span >{{ __('messages.subscription_end') }}: {{ $bill->endDate }}</span>
                         
                         <span>{{ $bill->subscription->name }}</span>
+                        
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered text-center">
@@ -91,7 +92,12 @@
                         title="{{ $bill->price - $bill->amount <= 0 ? __('messages.cannot_complete_bill_zero_value') : '' }}">
                         {{ __('messages.complete_bill') }}
                     </button>
-                    
+                         
+                    <a href="{{ route('show.booking.page', ['billId' => $bill->id, 'data' => $data['user']->id]) }}" class="btn btn-danger mx-1">{{ __('messages.Update_subscription') }}</a>
+                    <button class="btn btn-warning mx-1" id="change-subscription-btn" data-id="{{ $bill->id }}">{{ __('messages.change_subscription') }}</button>
+
+
+
                         <button class="btn btn-info freeze-bill-btn" data-id="{{ $bill->id }}">{{ __('messages.freeze') }}</button>
                         
                     </div>
@@ -99,6 +105,45 @@
             </div>
         @endforeach
         
+ 
+            {{-- ////////////////// date///////////// --}}
+<!-- Modal for Changing Subscription Date -->
+<div class="modal fade" id="changeSubscriptionModal" tabindex="-1" role="dialog" aria-labelledby="changeSubscriptionModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changeSubscriptionModalLabel">{{ __('messages.change_subscription') }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="new-subscription-date">{{ __('messages.subscription_date') }}</label>
+                    <input type="date" class="form-control" id="new-subscription-date" min="{{ \Carbon\Carbon::today()->toDateString() }}">
+                </div>
+                
+                <small class="text-danger" id="change-error-message"></small>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('messages.close') }}</button>
+                <button type="button" class="btn btn-primary" id="save-change">{{ __('messages.save') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
             {{-- ////////////////// completeBillModal///////////// --}}
             <div class="modal fade" id="completeBillModal" tabindex="-1" role="dialog" aria-labelledby="completeBillModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -219,6 +264,48 @@
     </div>
     @section('bottom_script')
    <script>
+            $(document).ready(function () {
+            let currentBillId = null;
+
+            // عند الضغط على زر تغيير الاشتراك
+            $('#change-subscription-btn').on('click', function () {
+                currentBillId = $(this).data('id');
+                $('#changeSubscriptionModal').modal('show');
+            });
+
+            // عند الضغط على زر حفظ التغيير
+            $('#save-change').on('click', function () {
+                const newSubscriptionDate = $('#new-subscription-date').val();
+
+                if (!newSubscriptionDate) {
+                    $('#change-error-message').text('الرجاء إدخال تاريخ الاشتراك.');
+                    return;
+                }
+            
+                $.ajax({
+                   
+                    url:  '{{ route("editDateBill") }}',
+                    type: 'POST',
+                    data: {
+                        billId: currentBillId,
+                        date: newSubscriptionDate,
+                        _token: '{{ csrf_token() }}',
+                    },
+                
+                    success: function (response) {
+                       
+                        $('#changeSubscriptionModal').modal('hide');
+                        location.reload();
+                    },
+                    error: function (xhr) {
+                        alert('حدث خطأ أثناء معالجة الطلب.');
+                    }
+                });
+          
+                
+            });
+        });
+
 $(document).ready(function () {
     $('#display-checkin-btn').on('click', function () {
         const userId = $(this).data('user-id'); // الحصول على معرف اللاعب
