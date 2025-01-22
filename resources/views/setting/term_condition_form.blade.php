@@ -20,30 +20,24 @@
                         <div class="row">
                             <div class="form-group col-md-4">
                                 {{ Form::label('name', __('messages.name') . ' <span class="text-danger">*</span>', ['class' => 'form-control-label'], false) }}
-                                {{ Form::text('name', 'John Doe', ['placeholder' => __('messages.name'), 'class' => 'form-control', 'required']) }}
+                                {{ Form::text('name', old('name'), ['placeholder' => __('messages.name'), 'class' => 'form-control', 'required']) }}
                                 <small class="help-block with-errors text-danger"></small>
                             </div>
-
-                            {{-- <div class="form-group col-md-4">
-                                {{ Form::label('password', __('messages.password') . ' <span class="text-danger">*</span>', ['class' => 'form-control-label'], false) }}
-                                {{ Form::password('password', ['class' => 'form-control', 'placeholder' => __('messages.password'), 'required', 'autocomplete' => 'new-password']) }}
-                                <small class="help-block with-errors text-danger"></small>
-                            </div> --}}
-
+                        
                             <div class="form-group col-md-4">
                                 {{ Form::label('gender', __('messages.select_gender', ['select' => __('messages.gender')]) . ' <span class="text-danger">*</span>', ['class' => 'form-control-label'], false) }}
-                                {{ Form::select('gender', ['male' => 'Male', 'female' => 'Female'], 'male', ['class' => 'form-control select2js', 'required']) }}
+                                {{ Form::select('gender', ['male' => 'Male', 'female' => 'Female'], old('gender'), ['class' => 'form-control select2js', 'required']) }}
                             </div>
-
+                        
                             <div class="form-group col-md-4">
                                 {{ Form::label('birthDay', __('messages.birthday') . ' <span class="text-danger">*</span>', ['class' => 'form-control-label'], false) }}
-                                {{ Form::text('birthDay', '2000-01-01', ['placeholder' => __('messages.birthday'), 'class' => 'form-control datepicker', 'required']) }}
+                                {{ Form::text('birthDay', old('birthDay'), ['placeholder' => __('messages.birthday'), 'class' => 'form-control datepicker', 'required']) }}
                                 <small class="help-block with-errors text-danger"></small>
                             </div>
-
+                        
                             <div class="form-group col-md-4">
                                 {{ Form::label('phoneNumber', __('messages.phone') . ' <span class="text-danger">*</span>', ['class' => 'form-control-label'], false) }}
-                                {{ Form::text('phoneNumber', '1234567890', ['placeholder' => __('messages.phone'), 'class' => 'form-control contact_number', 'required']) }}
+                                {{ Form::text('phoneNumber', old('phoneNumber'), ['placeholder' => __('messages.phone'), 'class' => 'form-control contact_number', 'required']) }}
                                 <small class="help-block with-errors text-danger" id="contact_number_err"></small>
                             </div>
                             {{-- <div class="form-group col-md-4">

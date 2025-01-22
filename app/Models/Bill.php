@@ -30,6 +30,7 @@ class Bill extends Model
         'subscriptionId',
         'userId',
         'isEnd',
+        'price',
         'subscriptionCoachId',
         'branchId'
     ];

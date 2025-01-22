@@ -125,6 +125,7 @@
         });
     </script>
     
+
     <script>
 
 
@@ -337,7 +338,37 @@ $(document).ready(function () {
         $('#subsceriptionPrice').val(subscriptionPrice);
         $('#subscription_id').val(subscriptionId);
         $('#numOfDays').val(numOfDays);
-        $("#amountDue").text(`{{  __('messages.Amount_Due :')}} ${subscriptionPrice}`)
+        $("#amountDue").text(`{{  __('messages.Amount_Due :')}} ${subscriptionPrice}`);
+    
+        function updateAmountDue() {
+          
+                    const subscriptionPrice = parseFloat(document.getElementById('subsceriptionPrice').value) || 0;
+                    let discountAmount = parseFloat(document.getElementById('discountAmount').value) || 0;
+
+                    // إذا تجاوز الحسم قيمة الاشتراك، يتم ضبطه على قيمة الاشتراك
+                    if (discountAmount > subscriptionPrice) {
+                        discountAmount = subscriptionPrice;
+                        document.getElementById('discountAmount').value = discountAmount.toFixed(2); // تحديث حقل الحسم
+                    }
+
+                    const updatedAmount = subscriptionPrice - discountAmount;
+
+                    // تحديث النص الظاهر لقيمة المستحق للدفع
+                    $("#amountDue").text(` {{  __('messages.Amount_Due :')}} ${updatedAmount.toFixed(2)}`);
+                }
+
+                // عند النقر على بطاقة الاشتراك
+                $(document).on('click', '.card', function () {
+                    const subscriptionPrice = $(this).data('subscription-price');
+                    $('#subsceriptionPrice').val(subscriptionPrice);
+                    document.getElementById('discountAmount').value = ''; // إعادة تعيين قيمة الحسم
+                    updateAmountDue(); // تحديث القيمة المستحقة
+                });
+
+                // مراقبة التغير في حقل الحسم
+                document.getElementById('discountAmount').addEventListener('input', updateAmountDue);
+
+
         // طلب AJAX
         $.ajax({
             url: '{{ route("calanderSubscription") }}',
@@ -497,6 +528,14 @@ $(document).ready(function () {
         alert(errorMessage); // استبدل بـ toastr أو sweetalert إذا كنت تستخدمهما
         return false; // منع الإرسال
     }
+
+    const subscriptionPrice = parseFloat(document.getElementById('subsceriptionPrice').value) || 0;
+    let discountAmount = parseFloat(document.getElementById('discountAmount').value) || 0;
+
+    const updatedAmount = subscriptionPrice - discountAmount;
+
+    $('#subsceriptionPrice').val(updatedAmount);
+
 
     // إرسال النموذج إذا كانت البيانات صحيحة
     this.submit();

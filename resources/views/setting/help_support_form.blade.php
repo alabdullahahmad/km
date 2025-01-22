@@ -77,10 +77,10 @@
         
                         <table class="table table-bordered text-center">
                             <tbody>
-                                <td><strong>{{ __('messages.bill_before_discount') }}</strong><br><small>{{ $bill->price + $bill->discountAmount }}</small></td>
+                                <td><strong>{{ __('messages.bill_before_discount') }}</strong><br><small>{{ ($bill->price ?? $bill->amount) + $bill->discountAmount }}</small></td>
                                 <td><strong>{{ __('messages.discount_value') }}</strong><br><small>{{ $bill->discountAmount }}</small></td>
                                 <td><strong>{{ __('messages.amount_paid') }}</strong><br><small>{{ optional($bill->userPayment->first())->totalAmount ?? 0 }}</small></td>
-                                <td><strong>{{ __('messages.remaining_balance') }}</strong><br><small>{{ $bill->price - (optional($bill->userPayment->first())->totalAmount ?? 0) }}</small></td>
+                                <td><strong>{{ __('messages.remaining_balance') }}</strong><br><small>{{ ($bill->price ?? $bill->amount) - (optional($bill->userPayment->first())->totalAmount ?? 0) }}</small></td>
                             </tbody>
                         </table>
                     </div>
@@ -93,6 +93,7 @@
                     </button>
                     
                         <button class="btn btn-info freeze-bill-btn" data-id="{{ $bill->id }}">{{ __('messages.freeze') }}</button>
+                        
                     </div>
                 </div>
             </div>

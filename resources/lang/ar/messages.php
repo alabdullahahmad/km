@@ -1117,6 +1117,7 @@ use App\Http\Core\Const\Messages\Attributes;
 'branchName' => 'اسم الفرع',
 'add branchName' => 'إضافة فرع جديد',
 'branch'=> 'الفروع',
+'Settings' => 'الاعدادات',
     )
 
     ?>

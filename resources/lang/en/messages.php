@@ -579,7 +579,7 @@ use App\Http\Core\Const\Messages\Attributes;
         'invoice' => 'Invoice',
         'overview'=> 'Overview',
         'Bookings' => 'Bookings',
-        'Settings' => 'Settings',
+       
         'Bank_info' => 'Bank Information',
         'Reviews' => 'Reviews',
         'reset_password_info' => "Enter your email address and we'll send you an email with instructions to reset your password",
@@ -1132,6 +1132,7 @@ use App\Http\Core\Const\Messages\Attributes;
 'branchName' => 'branchName',
 'add branchName' => 'add branchName',
 'branch'=> 'branch',
+'Settings' => 'Settings',
 
     )
     ?>

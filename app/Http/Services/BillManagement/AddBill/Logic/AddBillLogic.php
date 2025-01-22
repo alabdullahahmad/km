@@ -48,7 +48,7 @@ class AddBillLogic implements Service {
                 $data = $this->input->toArray();
                 $data['isCompletePayment'] = ($this->input->amount == $this->input->price);
 
-                $bill = $billRepository->createRepository()->create($this->input->toArray());
+                $bill = $billRepository->createRepository()->create($data);
 
                 $this->repository->UserPaymentRepository()->createRepository()->create([
                     'billId' => $bill->id,

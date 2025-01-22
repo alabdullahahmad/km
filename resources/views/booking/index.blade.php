@@ -124,7 +124,7 @@
             columns: [
                 {
                     data: (data) => data.user.name ?? '', // التحقق من وجود الاسم
-                    title: 'الاسم'
+                    title: "{{ __('messages.name') }}"
                 },
                 {
                     data: (data)=>data.branch.name,
@@ -133,31 +133,31 @@
                 },
                 {
                     data: 'startDate',
-                    title: 'بداية الاشتراك'
+                    title: "{{ __('messages.subscription_start') }}"
                 },
                 {
                     data: 'endDate',
-                    title: 'نهاية الاشتراك'
+                    title: "{{ __('messages.subscription_end') }}"
                 },
                 {
                     data: (data) => data.subscription.name ?? '', // اسم الاشتراك
-                    title: 'اسم الاشتراك'
+                    title: "{{ __('messages.Subscription_Name') }}"
                 },
                 {
-                    data: (data) => (data.isEnd == 1) ? "غير فعال" : "فعال", // حالة الاشتراك
-                    title: 'الحالة'
+                    data: (data) => (data.isEnd == 1) ? "{{ __('messages.inactive') }}" : "{{ __('messages.active') }}" , // حالة الاشتراك
+                     title: "{{ __('messages.status') }}"
                 },
                 {
                     data: (data) => data.subscription.numOfSessions ?? 0, // عدد الجلسات
-                    title: 'عدد الجلسات'
+                    title: "{{ __('messages.Number_sessions') }}"
                 },
                 {
                     data: (data) => data.subscription.numOfDays ?? 0, // عدد الأيام
-                    title: 'عدد الأيام'
+                    title: "{{ __('messages.number_day') }}"
                 },
                 {
                     data: 'action',
-                    title: 'العمليات'
+                    title: "{{ __('messages.action') }}"
                 },
             ],
         });
