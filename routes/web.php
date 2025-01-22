@@ -486,7 +486,7 @@ Route::group(['middleware' => ['auth', 'verified']], function()
     });
 
 
-    Route::group(['middleware' => ['permission:coupon list']], function () {
+    Route::group(['middleware' => ['permission:branch list']], function () {
         Route::resource('coupon', CouponController::class);
         Route::get('coupon-index_data',[CouponController::class,'index_data'])->name('coupon.index_data');
         Route::post('coupon-bulk-action', [CouponController::class, 'bulk_action'])->name('coupon.bulk-action');
@@ -942,7 +942,7 @@ Route::group(['prefix' => 'report' , 'middleware' => ['auth'] ],function () {
 
     Route::get('fund/details',function (Request $request){
         return view('service.bill_for_fund_report')
-        ->with(['startDate'=>$request->startDate,'endDate'=>$request->endDate]);
+        ->with(['startDate'=>$request->startDate,'endDate'=>$request->endDate,'branchId'=>$request->branchId]);
     })->name('fundReportDetails');
 
     Route::get('user/details',function (Request $request){

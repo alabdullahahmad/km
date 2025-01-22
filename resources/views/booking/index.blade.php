@@ -21,7 +21,7 @@
                                         class="value-label font-weight-bold">{{ __('messages.Box_Value:') }}</label>
                                     <input readonly id="amountInput" class="value-amount font-weight-bold"
                                         style="border: 0px ;width: fit-content" name="amount"
-                                        value="{{ App\Models\fund::first()->amount }}">
+                                        value="{{ App\Models\fund::where([ 'branchId' => auth()->user()->branchId])->first()->amount }}">
                                 </div>
                                 <button
                                     class="btn btn-success btn-deliver-box">{{ __('messages.Deliver_Box') }}</button>

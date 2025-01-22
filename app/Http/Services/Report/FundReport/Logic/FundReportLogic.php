@@ -38,7 +38,7 @@ class FundReportLogic implements Service {
 
         foreach ($fundRepot as  $value) {
             info($value->date);
-            $value->action = view('postrequest.action')->with(['date'=>$value->date,])->render();
+            $value->action = view('postrequest.action')->with(['date'=>$value->date,'branchId'=>$value->branchId])->render();
         }
 
         $response  = new FundReportOutput($fundRepot ,

@@ -50,7 +50,7 @@ class CouponController extends Controller
           
 
             ->editColumn('code', function($query){                
-                if (auth()->user()->can('coupon edit')) {
+                if (auth()->user()->can('branch edit')) {
                     $link = '<a class="btn-link btn-link-hover" href='.route('coupon.create', ['id' => $query->id]).'>'.$query->code.'</a>';
                 } else {
                     $link = $query->code; 

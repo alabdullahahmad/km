@@ -1116,6 +1116,7 @@ use App\Http\Core\Const\Messages\Attributes;
 'type_before_modification' => 'طبيعة الاشتراك قبل التعديل',
 'branchName' => 'اسم الفرع',
 'add branchName' => 'إضافة فرع جديد',
+'branch'=> 'الفروع',
     )
 
     ?>

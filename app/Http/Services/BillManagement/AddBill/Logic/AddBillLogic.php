@@ -59,7 +59,9 @@ class AddBillLogic implements Service {
             }
 
 
-            $fund = $this->repository->fundRepository()->readRepository()->getFirstWithLock();
+            $fund = $this->repository->fundRepository()->readRepository()->getFirstWithLock(
+                [ 'branchId' => auth()->user()->branchId],
+            );
 
             $this->repository->fundRepository()->updateRepository()->update(
                 [ 'branchId' => auth()->user()->branchId],

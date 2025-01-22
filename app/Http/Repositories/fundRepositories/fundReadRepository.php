@@ -10,8 +10,8 @@ class fundReadRepository extends ReadRepository
         $this->model = new fund();
     }
 
-    public function getFirstWithLock(){
-        return  $this->model->query()->LockForUpdate()->first();
+    public function getFirstWithLock($condation =[]){
+        return  $this->model->query()->LockForUpdate()->where($condation)->first();
     }
 
 }

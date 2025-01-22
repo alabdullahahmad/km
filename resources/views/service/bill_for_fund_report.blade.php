@@ -84,6 +84,7 @@
                     data: function(d) {
                         d.startDate = "{{ $startDate ?? '' }}";
                         d.endDate = "{{ $endDate ?? '' }}";
+                        d.branchId = "{{ $branchId ?? '' }}";
                     },
                 },
                 columns: [

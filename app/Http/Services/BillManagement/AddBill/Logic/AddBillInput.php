@@ -42,7 +42,7 @@ class AddBillInput implements InputServiceInterface
         $this->userId = $input['userId'] ?? null;
         $this->price = $input['price'] ?? $this->amount;
         $this->numOfDays = $input['numOfDays'] ?? 0;
-        $this->subscriptionCoachId = $input['subscriptionCoachId'] ;
+        $this->subscriptionCoachId = $input['subscriptionCoachId'] ?? null;
     }
 
     // write your input function here..
@@ -64,7 +64,8 @@ class AddBillInput implements InputServiceInterface
             'subscriptionId' => $this->subscriptionId,
             'userId' => $this->userId,
             'price' => $this->price,
-            'subscriptionCoachId' => $this->subscriptionCoachId
+            'subscriptionCoachId' => $this->subscriptionCoachId,
+            'branchId' => auth()->user()->branchId
         ];
     }
 
