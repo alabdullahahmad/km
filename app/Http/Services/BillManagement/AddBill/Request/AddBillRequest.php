@@ -37,6 +37,7 @@ class AddBillRequest extends BaseRequest
             'paymrentNote' => ['nullable' , 'string'],
             'coachId' => ['nullable' , 'integer' , 'exists:coaches,id'],
             'subscriptionId' => ['nullable' , 'integer' , 'exists:subscriptions,id'],
+            'subscriptionCoachId' => ['nullable' , 'integer' , 'exists:subscription_coaches,id'],
             'userId' => ['nullable' , 'integer' , 'exists:users,id'],
             'numOfDays' => ['nullable' , 'integer'],
             'price' => ['nullable' , 'integer']

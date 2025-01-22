@@ -25,4 +25,15 @@ class SubscriptionReadRepository extends ReadRepository
         return $this->model->whereIn('id', $ids)->get();
     }
 
+    public function getByTagId( $conditions , $lastSubscriptionPrice = null ) {
+        if($lastSubscriptionPrice){
+            $model = $this->model
+            ->where($conditions)->where('price',">=",$lastSubscriptionPrice)->get();
+            return $model;
+        }
+        $model = $this->model
+        ->where($conditions)->get();
+        return $model;
+    }
+
 }

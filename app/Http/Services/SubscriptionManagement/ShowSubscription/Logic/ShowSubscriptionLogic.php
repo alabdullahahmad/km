@@ -23,10 +23,17 @@ class ShowSubscriptionLogic implements Service {
     public function execute (): ResponseModel {
 
         // write your Logic code..
-        $subscritptionRepository = $this->repository->SubscriptionRepository();
 
-        $subscritption = $subscritptionRepository->readRepository()->getByConditions(
-            ['tagId' => $this->input->getTagId()]
+        $lastSubscriptionPrice = null;
+        if ($this->input->billId) {
+            $lastSubscriptionPrice  = $this->repository
+            ->BillRepository()->readRepository()->find($this->input->billId)
+            ->subscription->price;
+        }
+        
+        $subscritptionRepository = $this->repository->SubscriptionRepository();
+        $subscritption = $subscritptionRepository->readRepository()->getByTagId(
+            ['tagId' => $this->input->getTagId()] , $lastSubscriptionPrice
         );
 
         $response  = new ShowSubscriptionOutput($subscritption , SuccessMessages::getKey(SuccessMessages::$show,Attributes::Subscription)

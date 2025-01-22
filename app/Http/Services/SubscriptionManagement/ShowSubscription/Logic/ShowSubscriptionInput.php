@@ -6,9 +6,11 @@ use App\Http\Core\InternalInterface\InputServiceInterface;
 class ShowSubscriptionInput implements InputServiceInterface
 {
     private int $tagId;
+    public ?int $billId;
     public function __construct( array $input)
     {
         $this->tagId = $input['tagId'];
+        $this->billId = $input['billId'] ?? null;
     }
 
     // write your input function here..
