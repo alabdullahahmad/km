@@ -113,6 +113,7 @@ use App\Http\Services\CategoryManagement\ShowCategory\Controller\ShowCategoryCon
 use App\Http\Services\CategoryManagement\ViewCategory\Controller\ViewCategoryController;
 use App\Http\Services\Report\ClassReportDetails\Controller\ClassReportDetailsController;
 use App\Http\Services\AddSubscriptionToCoach\Controller\AddSubscriptionToCoachController;
+use App\Http\Services\BillManagement\DeleteBill\Controller\DeleteBillController;
 use App\Http\Services\BranchManagement\DeleteBranch\Controller\DeleteBranchController;
 use App\Http\Services\FundLogManagement\DeleteFundLog\Controller\DeleteFundLogController;
 use App\Http\Services\CategoryManagement\EditeCategory\Controller\EditeCategoryController;
@@ -133,6 +134,7 @@ use App\Http\Services\SubscriptionCoachManagement\ViewSubscriptionCoach\Controll
 use App\Http\Services\ShowSubscription\Controller\ShowSubscriptionController as ControllerShowSubscriptionController;
 use App\Http\Services\SubscriptionCoachManagement\EditeSubscriptionCoach\Controller\EditeSubscriptionCoachController;
 use App\Http\Services\SubscriptionCoachManagement\DeleteSubscriptionCoach\Controller\DeleteSubscriptionCoachController;
+use Google\Service\DriveActivity\Delete;
 
 /*
 |--------------------------------------------------------------------------
@@ -885,6 +887,7 @@ Route::group(['prefix' => 'coache', 'middleware' => ['auth']],function(){
 Route::group(['prefix' => 'bill', 'middleware' => ['auth']],function(){
     Route::get('/',ViewBillController::class)->name("Bill");
     Route::get('/show',ShowBillController::class)->name('showBill');
+    Route::post('/delete',DeleteBillController::class)->name('delelteBill');
     Route::get('/show/log',ShowBillLogController::class)->name('showBillLog');
     Route::post('/edit',EditeBillController::class)->name('editBill');
     Route::post('/add',AddBillController::class)->name('addBill');
