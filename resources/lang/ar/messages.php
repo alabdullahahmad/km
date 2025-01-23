@@ -1121,6 +1121,11 @@ use App\Http\Core\Const\Messages\Attributes;
 'Update_subscription' => 'تعديل الاشتراك',
 'change_subscription' => 'تغيير تاريخ الاشتراك',
 'subscription_date' => 'تاريخ الاشتراك',
+'role_permission_setup' => 'إعداد الأدوار والصلاحيات',
+'role' => 'دور',
+'permission' => 'صلاحيات',
+'YES' => 'نعم',
+'NO' => 'لا',
 
     )
 

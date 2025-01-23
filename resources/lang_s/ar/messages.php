@@ -10,7 +10,7 @@ use App\Http\Core\Const\Messages\Attributes;
         'user' => 'User',
         'user_information' => 'User Information',
         'srno' => 'No',
-        'permission' => 'Permission',
+        
         'parent_permission' => 'Parent Permission',
         'role' => 'Role',
         // 'name' => 'Name',
@@ -813,7 +813,7 @@ use App\Http\Core\Const\Messages\Attributes;
         'cookie_setup' => 'Cookie Setup',
         'sliders' => 'Sliders',
         'taxes' => 'Taxes',
-        'role_permission_setup' => 'Role & Permission Setup',
+    
         'payment_configuration' => 'Payment Configuration',
         'phone' => 'Phone',
         'zipcode' => 'ZipCode',
@@ -1011,6 +1011,11 @@ use App\Http\Core\Const\Messages\Attributes;
         'branchName' => 'اسم الفرع',
         'add branchName' => 'إضافة فرع جديد',
         'branch'=> 'الفروع',
+        'role_permission_setup' => 'إعداد الأدوار والصلاحيات',
+        'role' => 'دور',
+        'permission' => 'صلاحيات',
+        'YES' => 'نعم',
+        'NO' => 'لا',
     )
 
     ?>

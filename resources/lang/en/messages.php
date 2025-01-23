@@ -1136,6 +1136,8 @@ use App\Http\Core\Const\Messages\Attributes;
 'Update_subscription' => 'Update subscription ',
 'change_subscription' => 'change date subscription',
 'subscription_date' => 'subscription date',
+'YES' => 'YES',
+ 'NO' => 'NO',
 
     )
     ?>

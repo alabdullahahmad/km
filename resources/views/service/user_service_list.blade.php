@@ -195,21 +195,24 @@
                         title: "{{ __('messages.End_Subscription') }}"
                     },
                     {
-                        data: 'isFrozen',
-                        title: "{{ __('messages.subscription_frozen') }}"
+                    data: (data) => {
+                        return data.startDateFreeze && data.endDateFreeze ? "{{ __('messages.YES') }}" : "{{ __('messages.NO') }}";
                     },
-                    {
-                        data: 'frozenByUser',
-                        title: "{{ __('messages.modified_by') }}"
-                    },
-                    {
-                        data: (data)=>data.startDateFreeze ?? "___",
-                        title: "{{ __('messages.freeze_start_date') }}"
-                    },
-                    {
-                        data: (data)=> data.endDateFreeze ?? "___",
-                        title: "{{ __('messages.freeze_end_date') }}"
-                    },
+                    title: "{{ __('messages.subscription_frozen') }}"
+                },
+                // {
+                //     data: 'frozenByUser',
+                //     title: "{{ __('messages.modified_by') }}"
+                // },
+                {
+                    data: (data) => data.startDateFreeze ?? "___",
+                    title: "{{ __('messages.freeze_start_date') }}"
+                },
+                {
+                    data: (data) => data.endDateFreeze ?? "___",
+                    title: "{{ __('messages.freeze_end_date') }}"
+                },
+
                     {
                         data: (data) => data.isEnd ? "فعال" : "غير فعال",
                         title: "{{ __('messages.status') }}"

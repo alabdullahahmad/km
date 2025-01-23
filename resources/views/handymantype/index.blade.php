@@ -72,36 +72,63 @@
                   }
               },
               columns: [
+                {
+                    data: (data) => {
+                        return data.subscriptionDateModified === 1 ? "{{ __('messages.YES') }}" : "{{ __('messages.NO') }}";
+                    },
+                    title: "{{ __('messages.modify_subscription_date') }}"
+                },
+
                   {
-                      data: 'subscriptionDateModified',
-                      title: "{{ __('messages.modify_subscription_date') }}"
-                  },
-                  {
-                      data: 'stafId',
+                    data: (data)=>data.staf.name,
                       title: "{{ __('messages.modified_by') }}"
                   },
                   {
-                      data: 'startDateAfterEdit',
+                    data: (data)=>data.startDateAfterEdit?? '___',
+                    
                       title: "{{ __('messages.date_after_modification') }}"
                   },
                 
                   {
-                      data: 'isTypeModified',
+                    data: (data) => {
+                        return data.isTypeModified === 1 ? "{{ __('messages.YES') }}" : "{{ __('messages.NO') }}";
+                    },
+                    
                       title: "{{ __('messages.type_modified') }}"
                   },
                   {
-                      data: 'subscriptionBeforeEdit',
+                    data: (data)=>data.subscription_before?.name?? '___',
+                     
                       title: "{{ __('messages.type_before_modification') }}"
                   },
 
                   {
-                      data: 'subscriptionAfterEdit',
+                    data: (data)=>data.subscription_after?.name ?? '___',
+                    
                       title: "{{ __('messages.type_after_modification') }}"
                   },
+                 
                   {
-                      data: 'created_at',
-                      title: "{{ __('messages.type_modification_date_time') }}"
-                  },
+                        data: (data) => {
+                        const date = new Date(data.created_at); // تحويل النص إلى كائن تاريخ
+
+                        // استخراج السنة، الشهر، اليوم، الساعة، والدقائق
+                        const year = date.getFullYear();
+                        const month = String(date.getMonth() + 1).padStart(2, '0'); // إضافة صفر إلى الشهر إذا كان أقل من 10
+                        const day = String(date.getDate()).padStart(2, '0'); // إضافة صفر إلى اليوم إذا كان أقل من 10
+
+                        // تنسيق الوقت بصيغة 12 ساعة مع AM/PM
+                        let hours = date.getHours();
+                        const minutes = String(date.getMinutes()).padStart(2, '0'); // إضافة صفر إلى الدقائق إذا كانت أقل من 10
+                        const amPm = hours >= 12 ? 'PM' : 'AM'; // تحديد AM أو PM
+                        hours = hours % 12 || 12; // تحويل الساعة إلى صيغة 12 ساعة
+
+                        // دمج التاريخ والوقت بالشكل المطلوب
+                        return `${year}-${month}-${day}, ${String(hours).padStart(2, '0')}:${minutes} ${amPm}`;
+                    },
+                    title: "{{ __('messages.type_modification_date_time') }}"
+
+                   },      
                
               ],
               drawCallback: function(settings) {

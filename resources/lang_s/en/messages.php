@@ -1028,6 +1028,8 @@ use App\Http\Core\Const\Messages\Attributes;
             'branchName' => 'branchName',
             'add branchName' => 'add branchName',
             'branch'=> 'branch',
+            'YES' => 'YES',
+ 'NO' => 'NO',
             
     )
     ?>

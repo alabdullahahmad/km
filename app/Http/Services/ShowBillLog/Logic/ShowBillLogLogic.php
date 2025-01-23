@@ -27,10 +27,13 @@ class ShowBillLogLogic implements Service {
         $billLog = $this->repository->BillLogRepository()->readRepository()
         ->getAllRecordsWithRelations([
             'subscription_befor'=>function($q){
-                return $q->selecte('id,name');
+                return $q->select('id','name');
             },
             'subscription_after'=>function($q){
-                return $q->selecte('id,name');
+                return $q->select('id','name');
+            },
+            'staf'=>function($q){
+                return $q->select('id','name');
             }
         ],['billId' => $this->input->getBillId()]);
         
