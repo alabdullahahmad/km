@@ -1126,6 +1126,9 @@ use App\Http\Core\Const\Messages\Attributes;
 'permission' => 'صلاحيات',
 'YES' => 'نعم',
 'NO' => 'لا',
+'isEnd' => 'يتعذر الدخول يرجى تجديد الاشتراك',
+'isFreeze' => 'يتعذر الدخول الاشتراك مجمد',
+
 
     )
 

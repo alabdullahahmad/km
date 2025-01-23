@@ -1030,6 +1030,8 @@ use App\Http\Core\Const\Messages\Attributes;
             'branch'=> 'branch',
             'YES' => 'YES',
  'NO' => 'NO',
+  'isEnd' => 'Sorry, please renew your subscription :(',
+'isFreeze' => 'Unable to log in. Subscription is frozen :('
             
     )
     ?>

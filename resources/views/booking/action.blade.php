@@ -5,13 +5,13 @@ $auth_user = authSession();
     <a class="mr-3" href="{{ route('showUserDetails', ['userId' => $booking->user->id]) }}">
         <i class="far fa-eye"></i>
     </a>
-    <a class="mr-3" href="#" onclick="recordEntry('<?php echo $booking->subscription->name; ?>', '<?php echo $booking->user->id; ?>')">
+    <a class="mr-3" href="#" onclick="recordEntry('<?php echo $booking->subscription->name; ?>', '<?php echo $booking->user->id; ?>' ,'<?php echo $booking->id; ?>')">
         <i class="fas fa-door-open text-success"></i>
     </a>
 </div>
 
 <script>
-    function recordEntry(name, userId) {
+    function recordEntry(name, userId ,billId) {
         // إرسال البيانات إلى الخادم باستخدام AJAX
         $.ajax({
             url: "{{ route('addPlayerLoginLog') }}",
@@ -20,7 +20,7 @@ $auth_user = authSession();
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             contentType: "application/json",
-            data: JSON.stringify({ subscription_name: name, user_id: userId }),
+            data: JSON.stringify({ subscription_name: name, user_id: userId , billId : billId }),
             success: function (data) {
                 console.log(data);
                 
@@ -30,10 +30,16 @@ $auth_user = authSession();
                     alert('حدث خطأ أثناء تسجيل الدخول');
                 }
             },
-            error: function (xhr, status, error) {
-                console.error('Error:', error);
-                alert('حدث خطأ أثناء الاتصال بالخادم');
+            error: function (xhr) {
+            try {
+                var response = JSON.parse(xhr.responseText);
+                alert(response.message);
+            } catch (e) {
+                alert("خطأ غير متوقع.");
             }
+            }
+
+
         });
     }
 </script>

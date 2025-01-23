@@ -1138,6 +1138,9 @@ use App\Http\Core\Const\Messages\Attributes;
 'subscription_date' => 'subscription date',
 'YES' => 'YES',
  'NO' => 'NO',
+ 'isEnd' => 'Sorry, please renew your subscription :(',
+'isFreeze' => 'Unable to log in. Subscription is frozen :(',
+'Error: ' => 'Error: ',
 
     )
     ?>
