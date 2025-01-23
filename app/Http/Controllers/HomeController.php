@@ -1031,6 +1031,9 @@ class HomeController extends Controller
                 case 'branch':
                     $items = \App\Models\Branch::query()->select(['id', 'name as text'])->get();
                     break;
+                case 'role':
+                    $items = \App\Models\Role::query()->select(['id', 'name as text'])->get();
+                    break;
                  case 'subcategory':
                 $items = \App\Models\SubCategory::select('id', 'name as text')->where('status', 1);
 

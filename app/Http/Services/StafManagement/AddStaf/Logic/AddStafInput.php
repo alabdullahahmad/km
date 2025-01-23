@@ -15,6 +15,7 @@ class AddStafInput implements InputServiceInterface
     public ?string $birthDay;
     public ?bool $isAdmin;
     public int $branchId;
+    public int $roleId;
 
     public function __construct( $input)
     {
@@ -27,6 +28,7 @@ class AddStafInput implements InputServiceInterface
         $this->birthDay = $input->birthDay;
         $this->isAdmin = $input->isAdmin ?? false;
         $this->branchId = $input->branchId;
+        $this->roleId = $input->roleId;
     }
 
     // write your input function here..
@@ -41,7 +43,7 @@ class AddStafInput implements InputServiceInterface
             'gender' => $this->gender,
             'birthDay'=>$this->birthDay,
             'isAdmin' => $this->isAdmin,
-            'branchId' => $this->branchId
+            'branchId' => $this->branchId,
         ];
     }
 }

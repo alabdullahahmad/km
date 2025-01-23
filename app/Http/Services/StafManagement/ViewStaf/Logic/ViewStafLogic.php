@@ -28,7 +28,8 @@ class ViewStafLogic implements Service {
         $stafs = $stafRepository->readRepository()->getAllRecordsWithRelations([
             'branch' => function($q){
                 return $q->select('id','name');
-            }
+            },
+            'roles'
         ]);
         foreach ($stafs as $value) {
             $value->category;

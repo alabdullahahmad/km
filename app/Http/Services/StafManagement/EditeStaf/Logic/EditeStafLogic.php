@@ -7,6 +7,7 @@ use App\Http\Core\Const\Messages\SuccessMessages;
 use App\Http\Repositories\RepositoryCaller;
 use App\Http\Core\InternalInterface\Service;
 use App\Http\Core\Response\Adapter\PresentersModels\ResponseModel;
+use App\Models\Role;
 
 class EditeStafLogic implements Service {
 
@@ -48,6 +49,19 @@ class EditeStafLogic implements Service {
             ['id' => $this->input->getStafId()] ,
             $this->input->toArray($staf)
         );
+
+        $role = Role::query()->find($this->input->roleId);
+
+        $staf->syncRoles([$role->name]);
+
+        if ($role->name == "admin") {
+            $staf->isAdmin = true;
+            $staf->save();
+        }
+        else {
+            $staf->isAdmin = false;
+            $staf->save();        
+        }
 
         $response  = new EditeStafOutput($coacheRepository,  SuccessMessages::getKey(SuccessMessages::$edit,Attributes::Staf)
         ,viewPath:'provider.index'

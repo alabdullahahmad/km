@@ -34,6 +34,7 @@ class AddStafRequest extends BaseRequest
             'password'=>['required' ,"string","min:8"],
             'isAdmin' => ['nullable' , 'boolean'],
             'branchId' => ['required' , 'integer' , 'exists:branches,id'],
+            'roleId' => ['required' , 'integer' , 'exists:roles,id'],
         ];
     }
 

@@ -16,6 +16,8 @@ class EditeStafInput implements InputServiceInterface
     public ?string $password;
     public ?string $phoneNumber;
     public int $branchId;
+    public int $roleId;
+
 
     // public bool $isAdmin;
 
@@ -30,6 +32,8 @@ class EditeStafInput implements InputServiceInterface
         $this->password = $input->password;
         $this->phoneNumber = $input->phoneNumber;
         $this->branchId = $input->branchId;
+        $this->roleId = $input->roleId;
+
         // $this->isAdmin = $input->isAdmin ;
     }
 

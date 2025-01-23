@@ -231,27 +231,13 @@
                                 {{ Form::text('phoneNumber', $data['user']->phoneNumber, ['placeholder' => __('messages.phone'), 'class' => 'form-control contact_number', 'required']) }}
                                 <small class="help-block with-errors text-danger" id="contact_number_err"></small>
                             </div>
-                            <div class="form-group col-md-4">
-                                {{ Form::label('familyNumber', __('messages.phone_family') . ' <span class="text-danger">*</span>', ['class' => 'form-control-label'], false) }}
-                                {{ Form::text('familyNumber', $data['user']->familyNumber, ['placeholder' => __('messages.phone_family'), 'class' => 'form-control contact_number', 'required']) }}
-                                <small class="help-block with-errors text-danger" id="contact_number_err"></small>
-                            </div>
+                        
                             {{-- <div class="form-group col-md-4">
                                 {{ Form::label('telephone', __('messages.telephone') . ' <span class="text-danger">*</span>', ['class' => 'form-control-label'], false) }}
                                 {{ Form::text('telephone', '', ['placeholder' => __('messages.telephone'), 'class' => 'form-control contact_number', 'required']) }}
                                 <small class="help-block with-errors text-danger" id="contact_number_err"></small>
                             </div> --}}
 
-                            <div class="form-group col-md-4">
-                                {{ Form::label('homeNumber', __('messages.National_Id') . ' <span class="text-danger">*</span>', ['class' => 'form-control-label'], false) }}
-                                {{ Form::text('homeNumber', $data['user']->homeNumber, ['placeholder' => __('messages.National_Id'), 'class' => 'form-control National_Id', 'required']) }}
-                                <small class="help-block with-errors text-danger" id="National_Id_err"></small>
-                            </div>
-
-                            <div class="form-group col-md-12">
-                                {{ Form::label('address', __('messages.Address'), ['class' => 'form-control-label']) }}
-                                {{ Form::textarea('address',$data['user']->address, ['class' => "form-control textarea", 'rows' => 3, 'placeholder' => __('messages.Address')]) }}
-                            </div>
                         </div>
                         {{ Form::submit(__('messages.Update'), ['class' => 'btn btn-md btn-primary float-right mx-1']) }}
                         {{ Form::close() }}

@@ -6,6 +6,7 @@ use App\Http\Core\Const\Messages\SuccessMessages;
 use App\Http\Repositories\RepositoryCaller;
 use App\Http\Core\InternalInterface\Service;
 use App\Http\Core\Response\Adapter\PresentersModels\ResponseModel;
+use App\Models\Role;
 
 class AddStafLogic implements Service {
 
@@ -27,7 +28,14 @@ class AddStafLogic implements Service {
 
         $staf = $stafRepository->createRepository()->create($this->input->toArray());
 
-        $staf->assignRole('staf');
+        $role = Role::query()->find($this->input->roleId);
+
+        $staf->assignRole($role->name);
+
+        if ($role->name == "admin") {
+            $staf->isAdmin = true;
+            $staf->save();
+        }
         
         $response  = new AddStafOutput($staf ,
         SuccessMessages::getKey(SuccessMessages::$Add,Attributes::Staf)

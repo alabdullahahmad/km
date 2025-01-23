@@ -113,29 +113,9 @@
                     title: "{{ __('messages.phone') }}"
                 },
                 {
-                    data: 'isAdmin',
-                    name: 'isAdmin',
-                    title: "{{ __('messages.isAdmin') }}",
-                    render: function (data, type, row) {
-                        return `
-                            <div class="custom-control custom-switch custom-switch-text custom-switch-color custom-control-inline">
-                                <div class="custom-switch-inner">
-                                    <input type="checkbox"
-                                           class="custom-control-input change_status"
-                                           data-type="isAdmin"
-                                           value="${row.id}"
-                                           data-id="${row.id}"
-                                           ${data == 1 ? 'checked' : ''}
-                                           id="switch-${row.id}"
-                                           onchange="handleIsAdminChange(this)">
-                                    <label class="custom-control-label"
-                                           for="switch-${row.id}"
-                                           data-on-label=""
-                                           data-off-label="">
-                                    </label>
-                                </div>
-                            </div>`;
-                    }
+                    data: (data)=>data.roles[0]?.name ?? "___",
+                    name: 'Role',
+                    title: "{{ __('messages.role') }}",
                 },
                 {
                     data: 'action',
