@@ -71,6 +71,11 @@
             serverSide: false, // البحث Client-side فقط
             autoWidth: false,
             responsive: true,
+            columnDefs: [{
+                    targets: '_all',
+                    className: 'text-wrap',
+                    width: '20%'
+                }],
             dom: '<"row align-items-center"><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" l><"col-md-6" p>><"clear">',
             ajax: {
                 type: "GET",
@@ -266,4 +271,25 @@ $(document).on('update_quick_action', function() {
 
   </script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <style>
+    .dataTables_wrapper .dataTable th,
+    .dataTables_wrapper .dataTable td {
+        white-space: nowrap !important;
+        text-overflow: ellipsis !important;
+        overflow: hidden !important;
+        text-align: center !important;
+        /* يجعل النصوص والأرقام في منتصف الأعمدة */
+        vertical-align: middle !important;
+        /* يضمن توسيط النصوص عموديًا أيضًا */
+    }
+
+    /* .dataTables_wrapper .dataTable td.text-wrap {
+        white-space: normal !important;
+    } */
+
+    .text-center {
+        text-align: center !important;
+        vertical-align: middle !important;
+    }
+</style>
 </x-master-layout>

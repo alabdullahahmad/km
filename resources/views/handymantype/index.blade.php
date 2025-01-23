@@ -227,9 +227,9 @@
           /* يضمن توسيط النصوص عموديًا أيضًا */
       }
 
-      .dataTables_wrapper .dataTable td.text-wrap {
+      /* .dataTables_wrapper .dataTable td.text-wrap {
           white-space: normal !important;
-      }
+      } */
 
       .text-center {
           text-align: center !important;

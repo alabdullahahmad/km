@@ -105,6 +105,11 @@
             serverSide: false, // Client-side فقط
             autoWidth: false,
             responsive: true,
+            columnDefs: [{
+                    targets: '_all',
+                    className: 'text-wrap',
+                    width: '20%'
+                }],
             ajax: {
                 type: "get",
                 url: '{{ route("showBill") }}',
@@ -259,6 +264,27 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </x-master-layout>
 
+<style>
+    .dataTables_wrapper .dataTable th,
+    .dataTables_wrapper .dataTable td {
+        white-space: nowrap !important;
+        text-overflow: ellipsis !important;
+        overflow: hidden !important;
+        text-align: center !important;
+        /* يجعل النصوص والأرقام في منتصف الأعمدة */
+        vertical-align: middle !important;
+        /* يضمن توسيط النصوص عموديًا أيضًا */
+    }
+
+    /* .dataTables_wrapper .dataTable td.text-wrap {
+        white-space: normal !important;
+    } */
+
+    .text-center {
+        text-align: center !important;
+        vertical-align: middle !important;
+    }
+</style>
 
 <style>
     .card.subscription-card .card-body {
