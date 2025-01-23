@@ -150,9 +150,26 @@
                         title: "{{ __('messages.Reception_name') }}"
                     },
                     {
-                        data: (data) => data.created_at,
-                        title: "{{ __('messages.payment_date_time') }}"
+                        data: (data) => {
+                        const date = new Date(data.created_at); // تحويل النص إلى كائن تاريخ
+
+                        // استخراج السنة، الشهر، اليوم، الساعة، والدقائق
+                        const year = date.getFullYear();
+                        const month = String(date.getMonth() + 1).padStart(2, '0'); // إضافة صفر إلى الشهر إذا كان أقل من 10
+                        const day = String(date.getDate()).padStart(2, '0'); // إضافة صفر إلى اليوم إذا كان أقل من 10
+
+                        // تنسيق الوقت بصيغة 12 ساعة مع AM/PM
+                        let hours = date.getHours();
+                        const minutes = String(date.getMinutes()).padStart(2, '0'); // إضافة صفر إلى الدقائق إذا كانت أقل من 10
+                        const amPm = hours >= 12 ? 'PM' : 'AM'; // تحديد AM أو PM
+                        hours = hours % 12 || 12; // تحويل الساعة إلى صيغة 12 ساعة
+
+                        // دمج التاريخ والوقت بالشكل المطلوب
+                        return `${year}-${month}-${day}, ${String(hours).padStart(2, '0')}:${minutes} ${amPm}`;
                     },
+                    title: "{{ __('messages.payment_date_time') }}"
+
+                   },      
                     {
                         data: (data) => data.user_payment?.[0]?.totalAmount ?? 0,
                         title: "{{ __('messages.payment_amount') }}"
@@ -312,9 +329,9 @@
             /* يضمن توسيط النصوص عموديًا أيضًا */
         }
 
-        .dataTables_wrapper .dataTable td.text-wrap {
+        /* .dataTables_wrapper .dataTable td.text-wrap {
             white-space: normal !important;
-        }
+        } */
 
         .text-center {
             text-align: center !important;
