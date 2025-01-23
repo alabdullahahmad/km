@@ -27,4 +27,25 @@ class BillLog extends Model
         return $this->belongsTo(Staf::class, 'stafId');
     }
 
+    /**
+     * Get the user that owns the BillLog
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function subscription_befor()
+    {
+        return $this->belongsTo(Subscription::class, 'subscriptionBeforeEdit');
+    }
+
+        /**
+     * Get the user that owns the BillLog
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function subscription_after()
+    {
+        return $this->belongsTo(Subscription::class, 'subscriptionAfterEdit');
+    }
+
+
 }

@@ -25,7 +25,14 @@ class ShowBillLogLogic implements Service {
         // write your logic code..
 
         $billLog = $this->repository->BillLogRepository()->readRepository()
-        ->getByConditions(['billId' => $this->input->getBillId()]);
+        ->getAllRecordsWithRelations([
+            'subscription_befor'=>function($q){
+                return $q->selecte('id,name');
+            },
+            'subscription_after'=>function($q){
+                return $q->selecte('id,name');
+            }
+        ],['billId' => $this->input->getBillId()]);
         
         $response  = new ShowBillLogOutput($billLog ,
         SuccessMessages::getKey(SuccessMessages::$Add,Attributes::Bill)
