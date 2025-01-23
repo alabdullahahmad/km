@@ -420,12 +420,12 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            url: '/api/freeze-bill', // مسار API الخاص بالتجميد
+            url: "{{ route('freezeBill') }}", // مسار API الخاص بالتجميد
             type: 'POST',
             data: {
-                bill_id: currentBillId,
-                start_date: startDate,
-                end_date: endDate,
+                billId: currentBillId,
+                startDateFreeze: startDate,
+                endDateFreeze: endDate,
                 _token: '{{ csrf_token() }}',
             },
             success: function (response) {

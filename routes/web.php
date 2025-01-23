@@ -119,6 +119,7 @@ use App\Http\Services\FundLogManagement\DeleteFundLog\Controller\DeleteFundLogCo
 use App\Http\Services\CategoryManagement\EditeCategory\Controller\EditeCategoryController;
 use App\Http\Services\CategoryManagement\DeleteCategory\Controller\DeleteCategoryController;
 use App\Http\Services\EditBillDate\Controller\EditBillDateController;
+use App\Http\Services\EditBillFreeze\Controller\EditBillFreezeController;
 use App\Http\Services\EditUserBill\Controller\EditUserBillController;
 use App\Http\Services\SubscriptionManagement\AddSubscription\Controller\AddSubscriptionController;
 use App\Http\Services\SubscriptionManagement\ShowSubscription\Controller\ShowSubscriptionController;
@@ -888,6 +889,7 @@ Route::group(['prefix' => 'bill', 'middleware' => ['auth']],function(){
     Route::get('/',ViewBillController::class)->name("Bill");
     Route::get('/show',ShowBillController::class)->name('showBill');
     Route::post('/delete',DeleteBillController::class)->name('delelteBill');
+    Route::post('/freeze',EditBillFreezeController::class)->name('freezeBill');
     Route::get('/show/log',ShowBillLogController::class)->name('showBillLog');
     Route::post('/edit',EditeBillController::class)->name('editBill');
     Route::post('/add',AddBillController::class)->name('addBill');

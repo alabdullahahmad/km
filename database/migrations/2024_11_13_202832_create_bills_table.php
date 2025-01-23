@@ -24,6 +24,8 @@ return new class extends Migration
             $table->text('discountBecouse')->nullable();
             $table->string('startDate')->nullable();
             $table->string('endDate')->nullable();
+            $table->string('startDateFreeze')->nullable();
+            $table->string('endDateFreeze')->nullable();
             $table->text('paymrentNote')->nullable();
             $table->boolean('isEnd')->default(false);
             $table->boolean('isCompletePayment')->default(false);

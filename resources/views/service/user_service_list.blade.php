@@ -106,7 +106,7 @@
                     }
                 },
                 columns: [{
-                        data: (data) => data.user?.name ?? 'No Name',
+                        data: (data) => data.user?.name ?? '___',
                         title: "{{ __('messages.player_name') }}"
                     },
                     {
@@ -115,11 +115,11 @@
                     title: "{{ __('messages.branchName') }}"
                 },
                     {
-                        data: (data) => data.subscription?.type ?? 'No Type',
+                        data: (data) => data.subscription?.name ?? '___',
                         title: "{{ __('messages.Subscription type') }}"
                     },
                     {
-                        data: (data)=> data.subscription_coach?.period,
+                        data: (data)=> data.subscription_coach?.period ?? "___",
                         title: "{{ __('messages.subscription_period') }}"
                     },
                     {
@@ -134,11 +134,11 @@
                         title: "{{ __('messages.Amount_Before_Discount') }}"
                     },
                     {
-                        data: 'discountAmount',
+                        data: (data)=> data.discountAmount ?? 0,
                         title: "{{ __('messages.Discount_Percentage') }}"
                     },
                     {
-                        data: (data) => data.discountBecouse,
+                        data: (data) => data.discountBecouse ?? "___",
                         title: "{{ __('messages.Discount_reason') }}"
                     },
                     {
@@ -146,7 +146,7 @@
                         title: "{{ __('messages.Amount_After_Discount') }}"
                     },
                     {
-                        data: (data) => data.user?.name ?? 'No User',
+                        data: (data) => data.staf?.name ?? '___',
                         title: "{{ __('messages.Reception_name') }}"
                     },
                     {
@@ -179,7 +179,7 @@
                         title: "{{ __('messages.Description') }}"
                     },
                     {
-                        data: (data) => (data.price ?? data.amount ?? 0 - data.user_payment?.[0]?.totalAmount ?? 0 ),
+                        data: (data) => ((data.price ?? data.amount ?? 0) - (data.user_payment?.[0]?.totalAmount ?? 0) ),
                         title: "{{ __('messages.remaining_balance') }}"
                     },
                     {
@@ -187,11 +187,11 @@
                         title: "{{ __('messages.Bill_Number') }}"
                     },
                     {
-                        data: (data) => data.startDate,
+                        data: (data) => data.startDate ?? "___",
                         title: "{{ __('messages.Start_Subscription') }}"
                     },
                     {
-                        data: (data)=> data.endDate,
+                        data: (data)=> data.endDate ?? "___",
                         title: "{{ __('messages.End_Subscription') }}"
                     },
                     {
@@ -203,11 +203,11 @@
                         title: "{{ __('messages.modified_by') }}"
                     },
                     {
-                        data: 'frozenStartDate',
+                        data: (data)=>data.startDateFreeze ?? "___",
                         title: "{{ __('messages.freeze_start_date') }}"
                     },
                     {
-                        data: 'frozenEndDate',
+                        data: (data)=> data.endDateFreeze ?? "___",
                         title: "{{ __('messages.freeze_end_date') }}"
                     },
                     {

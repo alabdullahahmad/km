@@ -24,6 +24,8 @@ class Bill extends Model
         'discountBecouse',
         'startDate',
         'endDate',
+        'endDateFreeze',
+        'startDateFreeze',
         'paymrentNote',
         'isCompletePayment',
         'coachId',
