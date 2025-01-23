@@ -8,7 +8,7 @@ class ShowRoomInput implements InputServiceInterface
     private int $branchId;
     public function __construct( array $input)
     {
-        $this->branchId = $input['branchId'] ?? auth()->branchId;
+        $this->branchId = $input['branchId'] ?? auth()->user()->branchId;
     }
 
     // write your input function here..
