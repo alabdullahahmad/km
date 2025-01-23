@@ -25,7 +25,8 @@ class AddPlayerLoginLogRequest extends BaseRequest
         return
         [
             'user_id' => ['required' , 'integer','exists:users,id'],
-            'subscription_name' => ['required' , 'string' ]
+            'subscription_name' => ['required' , 'string' ],
+            'billId' => ['required' , 'integer' , 'exists:bills,id'],
         ];
     }
 
