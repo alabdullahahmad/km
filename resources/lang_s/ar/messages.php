@@ -217,7 +217,7 @@ use App\Http\Core\Const\Messages\Attributes;
         'pending_trans'=>'Pending Transactions',
         'token_generated' => 'Token Generated',
         'service_detail' => 'Service Detail',
-        'change_password' => 'Change Password',
+       
         'service_advanced_payment' => 'Service Advanced Payment',
         'record_not_found' => 'Record not found',
         'complete' => 'Complete :name',
@@ -1016,6 +1016,7 @@ use App\Http\Core\Const\Messages\Attributes;
         'permission' => 'صلاحيات',
         'YES' => 'نعم',
         'NO' => 'لا',
+        
     )
 
     ?>

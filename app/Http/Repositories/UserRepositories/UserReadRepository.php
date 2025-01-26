@@ -11,13 +11,13 @@ class UserReadRepository extends ReadRepository
     }
 
 
-    public function getUserReport(array $data = null){
+    public function getUserReport(array $data = null , $condation = []){
         $model = $this->model->query()->withCount('bills');
 
         if ($data) {
             $model = $model->whereBetween('created_at', $data);
         }
 
-        return $model->get();
+        return $model->where($condation)->get();
     }
 }

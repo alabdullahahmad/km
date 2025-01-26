@@ -51,6 +51,11 @@
         serverSide: true,
         autoWidth: false,
         responsive: true,
+        columnDefs: [{
+                    targets: '_all',
+                    className: 'text-wrap',
+                    width: '20%'
+                }],
         dom: '<"row align-items-center"><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" l><"col-md-6" p>><"clear">',
         ajax: {
             "type": "post",
@@ -76,34 +81,34 @@
             {
                 data: 'name',
                 name: 'name',
-                title: "{{('messages.player_name')}}"
+                title: "{{ __('messages.player_name') }}" 
             },
             {
                 data: 'gender',
                 name: 'gender',
-                title: "{{('messages.gender')}}"
+                title: "{{ __('messages.gender') }}"
             },
             {
                 data: 'birthDay',
                 name: 'birthDay',
-                title: "{{('messages.birthday')}}"
+                title: "{{ __('messages.birthday') }}"
             },
             {
                 data: 'phoneNumber',
                 name: 'phoneNumber',
-                title: "{{('messages.phone')}}"
+                title: "{{ __('messages.phone') }}"
             },
             {
                 data: 'bills_count',
                 name: 'bills_count',
-                title: "{{('messages.Subscription_Count')}}"
+                title: "{{ __('messages.Subscription_Count') }}"
             },
             {
                 data: 'action',
                 name: 'action',
                 orderable: false,
                 searchable: false,
-                title: "{{('messages.action')}}"
+                title: "{{ __('messages.action') }}"
             }
         ],
         drawCallback: function(settings) {
@@ -140,5 +145,25 @@
             form.submit();
         });
     </script>
+  <style>
+    .dataTables_wrapper .dataTable th,
+    .dataTables_wrapper .dataTable td {
+        white-space: nowrap !important;
+        text-overflow: ellipsis !important;
+        overflow: hidden !important;
+        text-align: center !important;
+        /* يجعل النصوص والأرقام في منتصف الأعمدة */
+        vertical-align: middle !important;
+        /* يضمن توسيط النصوص عموديًا أيضًا */
+    }
 
+    /* .dataTables_wrapper .dataTable td.text-wrap {
+        white-space: normal !important;
+    } */
+
+    .text-center {
+        text-align: center !important;
+        vertical-align: middle !important;
+    }
+</style>
 </x-master-layout>

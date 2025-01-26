@@ -11,7 +11,7 @@
                 <div class="card card-block card-stretch">
                     <div class="card-body p-0">
                         <div class="d-flex justify-content-between align-items-center p-3 flex-wrap gap-3">
-                            <h5 class="font-weight-bold">{{ __('messages.Bills') }}</h5>
+                            <h5 class="font-weight-bold">{{ __('messages.Bill') }}</h5>
                         </div>
                     </div>
                 </div>
@@ -51,6 +51,11 @@
                 serverSide: true,
                 autoWidth: false,
                 responsive: true,
+                columnDefs: [{
+                    targets: '_all',
+                    className: 'text-wrap',
+                    width: '20%'
+                }],
                 dom: '<"row align-items-center"><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" l><"col-md-6" p>><"clear">',
                 ajax: {
                     "type": "post",
@@ -136,9 +141,9 @@
                     },
                     {
                         data: (data)=>{
-                            return (data.isEnd == 1) ?"غير فعال":"فعال"
+                            return (data.isEnd == 1) ?{{ __('messages.inactive') }}:"{{ __('messages.active') }}"
                         },
-                        title: 'الحالة'
+                        title: "{{ __('messages.action') }}"
                     },
                 ]
             });
@@ -171,5 +176,25 @@
             form.submit();
         });
     </script>
+  <style>
+    .dataTables_wrapper .dataTable th,
+    .dataTables_wrapper .dataTable td {
+        white-space: nowrap !important;
+        text-overflow: ellipsis !important;
+        overflow: hidden !important;
+        text-align: center !important;
+        /* يجعل النصوص والأرقام في منتصف الأعمدة */
+        vertical-align: middle !important;
+        /* يضمن توسيط النصوص عموديًا أيضًا */
+    }
 
+    /* .dataTables_wrapper .dataTable td.text-wrap {
+        white-space: normal !important;
+    } */
+
+    .text-center {
+        text-align: center !important;
+        vertical-align: middle !important;
+    }
+</style>
 </x-master-layout>

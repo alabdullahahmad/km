@@ -16,13 +16,13 @@ class BillReadRepository extends ReadRepository
         ->join('user_payments' , 'user_payments.billId' , '=' , 'bills.id')->select(
             [
                 'bills.date',
-                'branchId',
+                'bills.branchId',
                 DB::raw("SUM(CASE WHEN bills.payType = 'in' THEN user_payments.amount ELSE 0 END) AS cashIn"),
                 DB::raw("SUM(CASE WHEN bills.payType = 'out' THEN user_payments.amount ELSE 0 END) AS cashOut")
             ]
             );
         if ($data) {
-            $model = $model->whereBetween('date', $data);
+            $model = $model->whereBetween('bills.date', $data);
         }
         return $model->with($with)->groupBy($groupBy)->get();
     }
@@ -80,14 +80,15 @@ class BillReadRepository extends ReadRepository
             [
                 DB::raw("SUM(CASE WHEN price IS NOT NULL THEN price ELSE 0 END) AS total"),
                 DB::raw("SUM(CASE WHEN price IS NOT NULL THEN price * (coaches.percentage / 100) ELSE 0 END) AS totalPercentage"),
-                'coachId',
-                'subscriptionId',
-                'branchId'
+                'bills.coachId',
+                'bills.subscriptionId',
+                'bills.branchId',
+                'bills.created_at'
             ]
         );
 
         if ($data) {
-            $model = $model->whereBetween('date',$data);
+            $model = $model->whereBetween('bills.created_at',$data);
         }
 
         return $model->with(['coach'=>function($q){
@@ -140,7 +141,7 @@ class BillReadRepository extends ReadRepository
             return $q->select(['id','billId', DB::raw('SUM(amount) as totalAmount')])->groupBy('billId')->first();
         }]);
         if ($data) {
-            $model = $model->whereBetween('date', $data);
+            $model = $model->whereBetween('date', $data);   
         }
         return $model->where($condation)->with($with)/*->where('userId','!=',null)*/->get();
     }

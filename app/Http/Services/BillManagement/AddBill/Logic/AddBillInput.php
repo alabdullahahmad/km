@@ -29,7 +29,7 @@ class AddBillInput implements InputServiceInterface
     {
         // $this->branchId = $input['branchId'];
         $this->payType = $input['payType'] ?? 'in';
-        $this->date = $input['date'] ?? date("Y-m-d");
+        $this->date = $input['date'] ?? date("Y-m-d H:i");
         $this->amount = $input['amount'];
         $this->description = $input['description'];
         $this->stafId = Auth::id();

@@ -15,7 +15,7 @@ class EditeBillInput implements InputServiceInterface
     {
         $this->billId = $input['billId'];
         $this->payType = $input['payType'];
-        $this->date = $input['date'] ?? date("Y-m-d");
+        $this->date = $input['date'] ?? date("Y-m-d H:i");
         $this->amount = $input['amount'];
         $this->description = $input['description'];
     }

@@ -4,7 +4,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
         <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> --}}
     </head>
     <div class="container-fluid">
         <div class="row">
@@ -28,7 +28,7 @@
             <div class="row justify-content-between">
                 <div>
                     <div class="col-md-10">
-                        <form  id="date-filter-form" class="form-disabled d-flex gap-3 align-items-center">
+                        <form action="{{ route('user.bulk-action') }}" id="quick-action-form" class="form-disabled d-flex gap-3 align-items-center">
                             @csrf
                             <div class="input-group">
                                 <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
@@ -38,25 +38,22 @@
                                 <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
                                 <input type="text" class="form-control datepicker" id="endDate" name="endDate" placeholder="{{ __('messages.Select_End_Date') }}">
                             </div>
-                            <button id="apply-date-filter" class="btn btn-primary">
+                            <button id="quick-action-apply" class="btn btn-primary" data-ajax="true" data--submit="{{ route('user.bulk-action') }}" data-datatable="reload" title="{{ __('user',['form'=>  __('user') ]) }}">
                                 {{__('messages.apply')}}
                             </button>
                         </form>
 
                         <div class="d-flex align-items-center gap-3 mt-3">
-                            <form id="filter-form" class="form-disabled d-flex gap-3 align-items-center">
-                                <select name="gender_filter" id="gender_filter" class="select2 form-control" data-filter="select" style="width: auto">
+                            <form action="{{ route('user.bulk-action') }}"    class="form-disabled d-flex gap-3 align-items-center">
+                                @csrf
+                                <select name="gender" id="gender_filter" class="select2 form-control" data-filter="select" style="width: auto">
                                     <option value="">{{ __('messages.gender') }}</option>
-                                    <option value="0" {{$filter['status'] == '0' ? "selected" : ''}}>{{ __('messages.male') }}</option>
-                                    <option value="1" {{$filter['status'] == '1' ? "selected" : ''}}>{{ __('messages.female') }}</option>
+                                    <option value="male" {{$filter['status'] == '0' ? "selected" : ''}}>{{ __('messages.male') }}</option>
+                                    <option value="female" {{$filter['status'] == '1' ? "selected" : ''}}>{{ __('messages.female') }}</option>
                                 </select>
 
-                                <select name="status_filter" id="status_filter" class="select2 form-control" data-filter="select" style="width: auto">
-                                    <option value="">{{ __('messages.status') }}</option>
-                                    <option value="0" {{$filter['status'] == '0' ? "selected" : ''}}>{{ __('messages.new_player') }}</option>
-                                    <option value="1" {{$filter['status'] == '1' ? "selected" : ''}}>{{ __('messages.old_player') }}</option>
-                                </select>
-                                <button id="apply-filters" class="btn btn-primary">
+                
+                                <button id="quick-gender-apply" class="btn btn-primary" data-ajax="true" data--submit="{{ route('user.bulk-action') }}" data-datatable="reload" title="{{ __('user',['form'=>  __('user') ]) }}">
                                     {{__('messages.apply')}}
                                 </button>
 
@@ -97,14 +94,10 @@
                         d.search = {
                             value: $('.dt-search').val()
                         };
-                        d.filter = {
-                            gender: $('#gender_filter').val(),
-                            status: $('#status_filter').val(),
-                            start_date: $('#start_date').val(),
-                            end_date: $('#end_date').val()
-                        }
+                      
                         d.startDate = $('#startDate').val();
                         d.endDate = $('#endDate').val();
+                        d.gender = $('#gender_filter').val();
                     },
                 },
                 columns: [
@@ -150,22 +143,63 @@
             });
         });
 
-        $('#apply-date-filter').click(function (e) {
-            e.preventDefault();
+        $('#gender_filter').change(function() {
+              // إذا كان هناك تاريخ تم تحديده، نفعّل الزر
+                  $('#quick-gender-apply').prop('disabled', false);  // تمكين الزر
+              // تحديث الجدول بناءً على الفلترة
+          });
+        // التأكد من تعبئة كلا التاريخين قبل تفعيل الزر
+        function checkDatesFilled() {
+    const startDate = $('#startDate').val(); // قيمة تاريخ البداية
+    const endDate = $('#endDate').val(); // قيمة تاريخ النهاية
+   
 
-            const startDate = $('#startDate').val();
-            const endDate = $('#endDate').val();
+    // تفعيل الزر فقط إذا كان كلا الحقلين غير فارغين
+    if (startDate && endDate) {
+        $('#quick-action-apply').prop('disabled', false); // تمكين الزر
+    } else {
+        $('#quick-action-apply').prop('disabled', true); // تعطيل الزر
+    }
+}
 
-            if (!startDate || !endDate) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: '{{ __("messages.warning") }}',
-                    text: '{{ __("messages.fill_both_dates") }}',
-                });
-                return;
-            }
+// الحدث عند تغيير تاريخ البداية
+$('#startDate').on('change', function () {
+    checkDatesFilled(); // التحقق من الحقول
+});
 
-            window.renderedDataTable.ajax.reload();
+
+$('.dt-search').on('keyup', function() {
+            renderedDataTable.draw();
         });
+        
+// الحدث عند تغيير تاريخ النهاية
+$('#endDate').on('change', function () {
+    checkDatesFilled(); // التحقق من الحقول
+});
+
+// منع النقر على الزر إذا كان معطلاً
+$(document).on('click', '[data-ajax="true"]', function (e) {
+    if ($('#quick-action-apply').prop('disabled')) {
+        e.preventDefault(); // إلغاء الحدث إذا كان الزر معطلاً
+        return false;
+    }
+
+
+
+    // إذا كان الزر مفعلاً، يتم إعادة تحميل الجدول
+    renderedDataTable.draw();
+});
+
+$(document).on('click', '#quick-gender-apply', function (e) {
+    // منع السلوك الافتراضي للزر
+    if ($('#quick-gender-apply').prop('disabled')) {
+        e.preventDefault();
+        return false; // إذا كان الزر معطلاً، ألغِ الإجراء
+    }
+
+    // تحديث الجدول بناءً على الفلترة
+    renderedDataTable.draw();
+});
+
     </script>
 </x-master-layout>

@@ -56,9 +56,7 @@ use App\Http\Core\Const\Messages\Attributes;
         'attachments' => 'Attachments',
         'profile_image' => 'Profile Image',
         'image' => 'Image',
-        'old_password' => 'Old Password',
-        'new_password' => 'New Password',
-        'confirm_new_password' => 'Confirm New Password',
+      
         'update' => 'Update',
         'profile' => 'Profile',
         'demo_permission_denied' => "Demo User Don't have permission for this action.",
@@ -116,7 +114,7 @@ use App\Http\Core\Const\Messages\Attributes;
         'last_name' => 'Last Name',
         'country' => 'Country',
         'state' => 'State',
-        'city' => 'City',
+     
         'providertype' => 'Provider Type',
         'commission' => 'Commission',
         'username' => 'Username',
@@ -1051,6 +1049,7 @@ use App\Http\Core\Const\Messages\Attributes;
 'Players_bill' => 'تقرير اللاعبين الذين عليهم دفعات',
 'Report_classes' => 'تقرير الكلاسات',
 'Coach_Percentage_Total' => 'نسبة المدرب من الاشتراك',
+'create_subscription' =>  'إنشاء الاشتراك',
 'Player_Registration' => 'تسجيل اللاعب',
 'phone_family' => 'رقم موبايل العائلة',
 'telephone' => 'الهاتف الارضي',
@@ -1128,7 +1127,13 @@ use App\Http\Core\Const\Messages\Attributes;
 'NO' => 'لا',
 'isEnd' => 'يتعذر الدخول يرجى تجديد الاشتراك',
 'isFreeze' => 'يتعذر الدخول الاشتراك مجمد',
-
+'city' => 'مدينة',
+'address' => 'العنوان',
+'change_password' => 'تغيير كلمة السر',
+'Logout' => 'تسجيل خروج',
+'old_password' => 'كلمة السر القديمة',
+'new_password' => 'كلمة السر الجديدة',
+'confirm_new_password' => 'تأكيد كلمة السر',
 
     )
 

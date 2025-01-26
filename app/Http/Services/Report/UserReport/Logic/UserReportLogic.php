@@ -23,7 +23,8 @@ class UserReportLogic implements Service {
 
         // write your Logic code..
         $userReportRepository = $this->repository->UserRepository();
-        $userReport = $userReportRepository->readRepository()->getUserReport($this->input->toArray());
+        $userReport = $userReportRepository->readRepository()->getUserReport($this->input->toArray()
+    ,($this->input->gender)?["gender"=>$this->input->gender]:[]);
 
         foreach ($userReport as  $value) {
             $value->action = view('bookingrating.action')->with(

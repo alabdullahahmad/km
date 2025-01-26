@@ -23,16 +23,17 @@
                 <div class="row justify-content-between">
                     <div>
                         <div class="col-md-12">
-                          <form id="date-filter-form" class="form-disabled d-flex gap-3 align-items-center">
+                            <form action="{{ route('user.bulk-action') }}" id="quick-action-form" class="form-disabled d-flex gap-3 align-items-center">
+                                @csrf
                             <div class="input-group" >
                                 <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
-                                <input type="text" class="form-control datepicker" id="start_date" name="start_date" placeholder="{{ __('messages.Select_Start_Date') }}">
+                                <input type="text" class="form-control datepicker" id="startDate" name="startDate" placeholder="{{ __('messages.Select_Start_Date') }}">
                             </div>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
-                                <input type="text" class="form-control datepicker" id="end_date" name="end_date" placeholder="{{ __('messages.Select_End_Date') }}">
+                                <input type="text" class="form-control datepicker" id="endDate" name="endDate" placeholder="{{ __('messages.Select_End_Date') }}">
                             </div>
-                            <button id="apply-date-filter" class="btn btn-primary">
+                            <button id="quick-action-apply" class="btn btn-primary" data-ajax="true" data--submit="{{ route('user.bulk-action') }}" data-datatable="reload" title="{{ __('user',['form'=>  __('user') ]) }}">
                                 {{__('messages.apply')}}
                             </button>
                     </div>
@@ -78,10 +79,8 @@
                     d.search = {
                       value: $('.dt-search').val()
                     };
-                    d.filter = {
-                        start_date: $('#start_date').val(),
-                        end_date: $('#end_date').val(),
-                    }
+                    d.startDate = $('#startDate').val() || null;
+                    d.endDate = $('#endDate').val() || null;
                   },
                 },
                 columns: [
@@ -138,29 +137,45 @@
       });
 
             // سكربت لتطبيق فلترة التواريخ
-            $('#apply-date-filter').click(function (e) {
-            e.preventDefault();
+            function checkDatesFilled() {
+    const startDate = $('#startDate').val(); // قيمة تاريخ البداية
+    const endDate = $('#endDate').val(); // قيمة تاريخ النهاية
 
-            // التحقق من تعبئة كلا الخانتين
-            const startDate = $('#start_date').val();
-            const endDate = $('#end_date').val();
+    // تفعيل الزر فقط إذا كان كلا الحقلين غير فارغين
+    if (startDate && endDate) {
+        $('#quick-action-apply').prop('disabled', false); // تمكين الزر
+    } else {
+        $('#quick-action-apply').prop('disabled', true); // تعطيل الزر
+    }
+}
 
-            if (!startDate || !endDate) {
-            Swal.fire({
-            icon: 'warning',
-            title: '{{ __("messages.warning") }}',
-            text: '{{ __("messages.fill_both_dates") }}',
-            });
-            return;
-            }
+// الحدث عند تغيير تاريخ البداية
+$('#startDate').on('change', function () {
+    checkDatesFilled(); // التحقق من الحقول
+});
 
-            // إعادة تحميل الجدول
-            window.renderedDataTable.ajax.reload();
-            });
+$('.dt-search').on('keyup', function() {
+            renderedDataTable.draw();
+        });
+// الحدث عند تغيير تاريخ النهاية
+$('#endDate').on('change', function () {
+    checkDatesFilled(); // التحقق من الحقول
+});
+
+// منع النقر على الزر إذا كان معطلاً
+$(document).on('click', '[data-ajax="true"]', function (e) {
+    if ($('#quick-action-apply').prop('disabled')) {
+        e.preventDefault(); // إلغاء الحدث إذا كان الزر معطلاً
+        return false;
+    }
+
+    // إذا كان الزر مفعلاً، يتم إعادة تحميل الجدول
+    renderedDataTable.draw();
+});
 
 
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> --}}
     <style>
         .dataTables_wrapper .dataTable th,
         .dataTables_wrapper .dataTable td {

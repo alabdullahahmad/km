@@ -25,7 +25,8 @@ class UserReportRequest extends BaseRequest
         return
         [
             'startDate' => ['nullable' , 'date_format:Y-m-d'],
-            'endDate' => ['nullable' , 'date_format:Y-m-d']
+            'endDate' => ['nullable' , 'date_format:Y-m-d'],
+            'gender' => ['nullable' , 'string' , 'in:male,female,']
         ];
     }
 

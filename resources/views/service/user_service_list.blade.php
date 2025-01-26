@@ -5,7 +5,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
         <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> --}}
     </head>
 
     <div class="container-fluid">
@@ -30,24 +30,24 @@
         <div class="card-body">
             <div class="row justify-content-between">
                 <div class="col-md-10">
-                    <form action="{{ route('user.bulk-action') }}" id="quick-action-form"
-                        class="form-disabled d-flex gap-3 align-items-center">
+                    <form action="{{ route('user.bulk-action') }}" id="quick-action-form" class="form-disabled d-flex gap-3 align-items-center">
                         @csrf
                         <div class="input-group ml-2">
                             <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
-                            <input type="text" class="form-control datepicker" id="expire_date" name="expire_date"
-                                placeholder="{{ __('messages.Select_Date') }}">
+                            <input type="text" class="form-control  datepicker"   id="startDate" name="startDate" placeholder= {{__('messages.Select_Date')}} required>
                         </div>
                         <div class="input-group ml-2">
-                            <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
-                            <input type="text" class="form-control datepicker" id="expire_date" name="expire_date"
-                                placeholder="{{ __('messages.Select_Date') }}">
-                        </div>
-                        <button id="quick-action-apply" class="btn btn-primary" data-ajax="true"
-                            data--submit="{{ route('user.bulk-action') }}" data-datatable="reload"
-                            title="{{ __('user', ['form' => __('user')]) }}">
-                            {{ __('messages.apply') }}
+                          <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                          <input type="text" class="form-control datepicker"  id="endDate" name="endDate" placeholder= {{__('messages.Select_Date')}} required>
+                      </div>
+    
+                        <button id="quick-action-apply" class="btn btn-primary" data-ajax="true" data--submit="{{ route('user.bulk-action') }}" data-datatable="reload" title="{{ __('user',['form'=>  __('user') ]) }}">
+                            {{__('messages.apply')}}
                         </button>
+                        {{-- <div class="input-group ml-2">
+                          <span class="input-group-text" id="addon-wrapping"><i class="fas fa-search"></i></span>
+                          <input type="text" class="form-control dt-search" placeholder="Search..." aria-label="Search" aria-describedby="addon-wrapping" aria-controls="dataTableBuilder">
+                        </div> --}}
                     </form>
 
                     <!-- استخدام Flexbox لترتيب حقل البحث وselect بجانب بعضهما -->
@@ -214,12 +214,12 @@
                 },
 
                     {
-                        data: (data) => data.isEnd ? "فعال" : "غير فعال",
+                        data: (data) => data.isEnd ? "{{ __('messages.active') }}" : "{{ __('messages.inactive') }}" ,
                         title: "{{ __('messages.status') }}"
                     },
                     {
                         data: (data)=> data.action,
-                        title: 'العمليات'
+                        title: "{{ __('messages.action') }}"
                     }
                 ],
                 drawCallback: function(settings) {
@@ -303,21 +303,63 @@
 
 
 
-        // Event Listeners:
-        $('#expire_date').change(function() {
-            $('#quick-action-apply').prop('disabled', !$('#expire_date').val());
+        // // Event Listeners:
+        // $('#startDate').change(function() {
+        //       // إذا كان هناك تاريخ تم تحديده، نفعّل الزر
+        //           $('#quick-action-apply').prop('disabled', false);  // تمكين الزر
+        //       // تحديث الجدول بناءً على الفلترة
+        //   });
+
+
+        //   $('#endDate').change(function() {
+        //       // إذا كان هناك تاريخ تم تحديده، نفعّل الزر
+        //           $('#quick-action-apply').prop('disabled', false);  // تمكين الزر
+        //       // تحديث الجدول بناءً على الفلترة
+        //   });
+
+    
+
+        // $(document).on('click', '[data-ajax="true"]', function (e) {
+        // renderedDataTable.draw();
+        // });
+
+        // التأكد من تعبئة كلا التاريخين قبل تفعيل الزر
+function checkDatesFilled() {
+    const startDate = $('#startDate').val(); // قيمة تاريخ البداية
+    const endDate = $('#endDate').val(); // قيمة تاريخ النهاية
+
+    // تفعيل الزر فقط إذا كان كلا الحقلين غير فارغين
+    if (startDate && endDate) {
+        $('#quick-action-apply').prop('disabled', false); // تمكين الزر
+    } else {
+        $('#quick-action-apply').prop('disabled', true); // تعطيل الزر
+    }
+}
+
+// الحدث عند تغيير تاريخ البداية
+$('#startDate').on('change', function () {
+    checkDatesFilled(); // التحقق من الحقول
+});
+
+$('.dt-search').on('keyup', function() {
             renderedDataTable.draw();
         });
+// الحدث عند تغيير تاريخ النهاية
+$('#endDate').on('change', function () {
+    checkDatesFilled(); // التحقق من الحقول
+});
 
-        $('.dt-search').on('keyup', function() {
-            renderedDataTable.draw();
-        });
+// منع النقر على الزر إذا كان معطلاً
+$(document).on('click', '[data-ajax="true"]', function (e) {
+    if ($('#quick-action-apply').prop('disabled')) {
+        e.preventDefault(); // إلغاء الحدث إذا كان الزر معطلاً
+        return false;
+    }
 
-        $(document).on('click', '[data-ajax="true"]', function(e) {
-            e.preventDefault();
-            const submitUrl = $(this).data('submit');
-            $(this).closest('form').attr('action', submitUrl).submit();
-        });
+    // إذا كان الزر مفعلاً، يتم إعادة تحميل الجدول
+    renderedDataTable.draw();
+});
+
     </script>
 
     <style>

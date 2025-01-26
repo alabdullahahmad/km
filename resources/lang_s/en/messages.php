@@ -1031,7 +1031,9 @@ use App\Http\Core\Const\Messages\Attributes;
             'YES' => 'YES',
  'NO' => 'NO',
   'isEnd' => 'Sorry, please renew your subscription :(',
-'isFreeze' => 'Unable to log in. Subscription is frozen :('
+'isFreeze' => 'Unable to log in. Subscription is frozen :(',
+'player_name' => 'player Name',
+
             
     )
     ?>

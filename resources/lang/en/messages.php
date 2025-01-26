@@ -293,7 +293,7 @@ use App\Http\Core\Const\Messages\Attributes;
         'rate_now' => 'Rate Now',
         'payment_summary' => 'Payment Summary',
         'address_required' => 'Address Required',
-        'logout' => 'Logout',
+        
         'files_not_allowed' => 'This type of files are not allowed',
         'download' => 'Download',
         'helpline_number' => 'Helpline Number',
@@ -1064,12 +1064,12 @@ use App\Http\Core\Const\Messages\Attributes;
 'Rest_Of_Bill' => 'Rest_Of_Bill',
 'Players_bill' => 'Players  bill to pay report',
 'Report_classes' => 'Report Classes',
-'Coach_Percentage_Total' => 'Coach_Percentage_Total',
+'Coach_Percentage_Total' => 'Coach Percentage Total',
 'Player_Registration' => 'Player Registration',
 'phone_family' => 'phone family',
 'telephone' => 'telephone',
 'create_subscription' =>  'create subscription',
-'player_name:' => 'player Name :',
+'player_name :' => 'player Name :',
 'Amount_Due :' => 'Amount Due :',
 'Enter_Amount_Due' => 'Enter Amount Due',
 'Display_checkin' => 'Display last CheckIn',
@@ -1141,6 +1141,7 @@ use App\Http\Core\Const\Messages\Attributes;
  'isEnd' => 'Sorry, please renew your subscription :(',
 'isFreeze' => 'Unable to log in. Subscription is frozen :(',
 'Error: ' => 'Error: ',
+'Logout' => 'Log out',
 
     )
     ?>

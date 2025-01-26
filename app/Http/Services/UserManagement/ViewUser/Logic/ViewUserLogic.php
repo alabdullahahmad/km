@@ -25,7 +25,9 @@ class ViewUserLogic implements Service {
         // write your logic code..
         $userRepository = $this->repository->BillRepository();
 
-        $users = $userRepository->readRepository()->getUsersDues();
+        $users = $userRepository->readRepository()->getUsersDues(
+            $this->input->toArray()
+        );
 
         // foreach ($users as $user) {
         //     $user->action =  view('handymanrating.action')->with(['bill'=>$user])->render();

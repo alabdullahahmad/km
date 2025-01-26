@@ -135,7 +135,8 @@
                                         </svg>
                                         <a class="logout-link" href="javascript:void(0)" onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                                            {{ __('Log out') }}
+                                        {{ __('messages.Logout') }}
+                                            
                                         </a>
                                     </form>
                                 </li>

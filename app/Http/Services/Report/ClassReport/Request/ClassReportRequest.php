@@ -24,7 +24,8 @@ class ClassReportRequest extends BaseRequest
     {
         return
         [
-            // write your rules here..
+            'startDate' => ['nullable' , 'date_format:Y-m-d'],
+            'endDate' => ['nullable' , 'date_format:Y-m-d']
         ];
     }
 
