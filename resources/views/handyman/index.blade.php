@@ -84,11 +84,6 @@
                       title: "{{ __('messages.birthday') }}"
                   },
                   {
-                      data: 'phoneNumber',
-                      name: 'contact_number',
-                      title: "{{ __('messages.phone') }}"
-                  },
-                  {
                       data: 'address',
                       name: 'wallet',
                       title: "{{ __('messages.Address') }}"

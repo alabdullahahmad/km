@@ -5,14 +5,6 @@ $MyNavBar = \Menu::make('MenuList', function ($menu) use($url){
 
 $menu->add('<span>'.__('messages.main').'</span>', ['class' => 'category-main']);
 
-// $menu->add('<span>'.__('messages.dashboard').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.dashboard').'</span></span>', ['route' => 'home'])
-// ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-// <path d="M13.5 15.5C13.5 13.6144 13.5 12.6716 14.0858 12.0858C14.6716 11.5 15.6144 11.5 17.5 11.5C19.3856 11.5 20.3284 11.5 20.9142 12.0858C21.5 12.6716 21.5 13.6144 21.5 15.5V17.5C21.5 19.3856 21.5 20.3284 20.9142 20.9142C20.3284 21.5 19.3856 21.5 17.5 21.5C15.6144 21.5 14.6716 21.5 14.0858 20.9142C13.5 20.3284 13.5 19.3856 13.5 17.5V15.5Z" stroke="currentColor" stroke-width="1.5"/>
-// <path d="M2 8.5C2 10.3856 2 11.3284 2.58579 11.9142C3.17157 12.5 4.11438 12.5 6 12.5C7.88562 12.5 8.82843 12.5 9.41421 11.9142C10 11.3284 10 10.3856 10 8.5V6.5C10 4.61438 10 3.67157 9.41421 3.08579C8.82843 2.5 7.88562 2.5 6 2.5C4.11438 2.5 3.17157 2.5 2.58579 3.08579C2 3.67157 2 4.61438 2 6.5V8.5Z" stroke="currentColor" stroke-width="1.5"/>
-// <path d="M13.5 5.5C13.5 4.56812 13.5 4.10218 13.6522 3.73463C13.8552 3.24458 14.2446 2.85523 14.7346 2.65224C15.1022 2.5 15.5681 2.5 16.5 2.5H18.5C19.4319 2.5 19.8978 2.5 20.2654 2.65224C20.7554 2.85523 21.1448 3.24458 21.3478 3.73463C21.5 4.10218 21.5 4.56812 21.5 5.5C21.5 6.43188 21.5 6.89782 21.3478 7.26537C21.1448 7.75542 20.7554 8.14477 20.2654 8.34776C19.8978 8.5 19.4319 8.5 18.5 8.5H16.5C15.5681 8.5 15.1022 8.5 14.7346 8.34776C14.2446 8.14477 13.8552 7.75542 13.6522 7.26537C13.5 6.89782 13.5 6.43188 13.5 5.5Z" stroke="currentColor" stroke-width="1.5"/>
-// <path d="M2 18.5C2 19.4319 2 19.8978 2.15224 20.2654C2.35523 20.7554 2.74458 21.1448 3.23463 21.3478C3.60218 21.5 4.06812 21.5 5 21.5H7C7.93188 21.5 8.39782 21.5 8.76537 21.3478C9.25542 21.1448 9.64477 20.7554 9.84776 20.2654C10 19.8978 10 19.4319 10 18.5C10 17.5681 10 17.1022 9.84776 16.7346C9.64477 16.2446 9.25542 15.8552 8.76537 15.6522C8.39782 15.5 7.93188 15.5 7 15.5H5C4.06812 15.5 3.60218 15.5 3.23463 15.6522C2.74458 15.8552 2.35523 16.2446 2.15224 16.7346C2 17.1022 2 17.5681 2 18.5Z" stroke="currentColor" stroke-width="1.5"/>
-// </svg>')
-// ->link->attr(['class' => '']);
 
 $menu->add('<span>'.__('messages.home').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.bookings').'</span></span>', ['route' => 'booking.index'])
 ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -71,16 +63,6 @@ foreach (App\Models\Category::all() as  $value) {
     ->link->attr(['class' => '']);
 }
 
-// $menu->services->add('<span>' . trans('messages.Bodybuilding') . '</span>', [ 'class' => 'sidebar-layout', 'route' => 'service.index'])
-// ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-// <path d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z" stroke="#currentColor" stroke-width="1.5"/>
-// <path d="M6 15.8L7.14286 17L10 14" stroke="#currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-// <path d="M6 8.8L7.14286 10L10 7" stroke="#currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-// <path d="M13 9L18 9" stroke="#currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <path d="M13 16L18 16" stroke="#currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// </svg>')
-// ->data('permission', 'subscription list')
-// ->link->attr(['class' => '']);
 
 
 $settings = App\Models\Setting::whereIn('type', ['service-configurations','OTHER_SETTING'])
@@ -91,29 +73,6 @@ $settings = App\Models\Setting::whereIn('type', ['service-configurations','OTHER
 $servicesetting = $settings->has('service-configurations') ? json_decode($settings['service-configurations']->value) : null;
 $othersetting = $settings->has('OTHER_SETTING') ? json_decode($settings['OTHER_SETTING']->value) : null;
 
-// if(optional($servicesetting)->service_packages == 1){
-// $menu->services->add('<span>'.trans('messages.Tools').'</span>', ['class' => 'sidebar-layout' ,'route' => 'servicepackage.index'])
-// ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-// <path d="M15.5777 3.38197L17.5777 4.43152C19.7294 5.56066 20.8052 6.12523 21.4026 7.13974C22 8.15425 22 9.41667 22 11.9415V12.0585C22 14.5833 22 15.8458 21.4026 16.8603C20.8052 17.8748 19.7294 18.4393 17.5777 19.5685L15.5777 20.618C13.8221 21.5393 12.9443 22 12 22C11.0557 22 10.1779 21.5393 8.42229 20.618L6.42229 19.5685C4.27063 18.4393 3.19479 17.8748 2.5974 16.8603C2 15.8458 2 14.5833 2 12.0585V11.9415C2 9.41667 2 8.15425 2.5974 7.13974C3.19479 6.12523 4.27063 5.56066 6.42229 4.43152L8.42229 3.38197C10.1779 2.46066 11.0557 2 12 2C12.9443 2 13.8221 2.46066 15.5777 3.38197Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <path d="M21 7.5L17 9.5M12 12L3 7.5M12 12V21.5M12 12C12 12 14.7426 10.6287 16.5 9.75C16.6953 9.65237 17 9.5 17 9.5M17 9.5V13M17 9.5L7.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// </svg>
-// ')
-// ->data('permission', 'servicepackage list' )
-// ->link->attr(['class' => '']);
-// }
-
-// if(optional($servicesetting)->service_addons == 1){
-// $menu->services->add('<span>'.trans('messages.Classes').'</span>', ['class' => 'sidebar-layout' ,'route' => 'serviceaddon.index'])
-// ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-// <path d="M14.5 6.5H17.5M17.5 6.5H20.5M17.5 6.5V9.5M17.5 6.5V3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <path d="M2.5 6.5C2.5 4.61438 2.5 3.67157 3.08579 3.08579C3.67157 2.5 4.61438 2.5 6.5 2.5C8.38562 2.5 9.32843 2.5 9.91421 3.08579C10.5 3.67157 10.5 4.61438 10.5 6.5C10.5 8.38562 10.5 9.32843 9.91421 9.91421C9.32843 10.5 8.38562 10.5 6.5 10.5C4.61438 10.5 3.67157 10.5 3.08579 9.91421C2.5 9.32843 2.5 8.38562 2.5 6.5Z" stroke="currentColor" stroke-width="1.5"/>
-// <path d="M13.5 17.5C13.5 15.6144 13.5 14.6716 14.0858 14.0858C14.6716 13.5 15.6144 13.5 17.5 13.5C19.3856 13.5 20.3284 13.5 20.9142 14.0858C21.5 14.6716 21.5 15.6144 21.5 17.5C21.5 19.3856 21.5 20.3284 20.9142 20.9142C20.3284 21.5 19.3856 21.5 17.5 21.5C15.6144 21.5 14.6716 21.5 14.0858 20.9142C13.5 20.3284 13.5 19.3856 13.5 17.5Z" stroke="currentColor" stroke-width="1.5"/>
-// <path d="M2.5 17.5C2.5 15.6144 2.5 14.6716 3.08579 14.0858C3.67157 13.5 4.61438 13.5 6.5 13.5C8.38562 13.5 9.32843 13.5 9.91421 14.0858C10.5 14.6716 10.5 15.6144 10.5 17.5C10.5 19.3856 10.5 20.3284 9.91421 20.9142C9.32843 21.5 8.38562 21.5 6.5 21.5C4.61438 21.5 3.67157 21.5 3.08579 20.9142C2.5 20.3284 2.5 19.3856 2.5 17.5Z" stroke="currentColor" stroke-width="1.5"/>
-// </svg>
-// ')
-// ->data('permission', ['service add on list'])
-// ->link->attr(['class' => '']);
-// }
 
 
 if(optional($servicesetting)->post_services == 1){
@@ -158,7 +117,7 @@ $menu->add('<span>'.__('messages.Report_classes').'</span><span class="custom-to
 ->nickname('payment')
 ->data('permission', 'reportclasses list');
 
-$menu->add(__('messages.sidebar_form_title',['form' => trans('messages.user')]), ['class' => 'category-main'])->data('permission', ['player-registration','privacy policy','help support','receptions list','coaches list','casharchive list']);
+$menu->add(__('messages.sidebar_form_title',['form' => trans('messages.user')]), ['class' => 'category-main'])->data('permission', ['player-registration','privacy policy','help support','receptions list','coaches list','casharchive list',]);
 
 if(auth()->user()->user_type == 'admin' || auth()->user()->user_type == 'demo_admin' || auth()->user()->user_type == 'Depot' || auth()->user()->user_type == 'Neopreneur'){
 $menu->add('<span>'.__('messages.Receptions').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.Receptions').'</span></span>', ['class' => ''])
@@ -177,50 +136,6 @@ $menu->provider->add('<span>'.__('messages.list_form_title',['form' => __('messa
     <path d="M2 4.875C1.3775 4.875 0.875 5.3775 0.875 6C0.875 6.6225 1.3775 7.125 2 7.125C2.6225 7.125 3.125 6.6225 3.125 6C3.125 5.3775 2.6225 4.875 2 4.875ZM2 0.375C1.3775 0.375 0.875 0.8775 0.875 1.5C0.875 2.1225 1.3775 2.625 2 2.625C2.6225 2.625 3.125 2.1225 3.125 1.5C3.125 0.8775 2.6225 0.375 2 0.375ZM2 9.375C1.3775 9.375 0.875 9.885 0.875 10.5C0.875 11.115 1.385 11.625 2 11.625C2.615 11.625 3.125 11.115 3.125 10.5C3.125 9.885 2.6225 9.375 2 9.375ZM4.25 11.25H14.75V9.75H4.25V11.25ZM4.25 6.75H14.75V5.25H4.25V6.75ZM4.25 0.75V2.25H14.75V0.75H4.25Z" fill="#6C757D" />
 </svg>')
 ->link->attr(['class' => '']);
-
-
-///////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-////////////////
-
-
-// $menu->provider->add('<span>'.__('messages.list_form_title',['form' => __('messages.providerrequest')]).'</span>', ['class' => 'sidebar-layout' ,'route' => ['provider.pending','pending']])
-// ->data('permission', 'pending provider')
-// ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-// <path fill-rule="evenodd" clip-rule="evenodd" d="M4.21533 16.0148C4.21533 16.4737 4.58728 16.8456 5.0461 16.8456H10.0307C10.4895 16.8456 10.8615 16.4737 10.8615 16.0148C10.8615 15.556 10.4895 15.1841 10.0307 15.1841H5.0461C4.58728 15.1841 4.21533 15.556 4.21533 16.0148ZM4.21533 11.0302C4.21533 11.489 4.58728 11.861 5.0461 11.861H15.0153C15.4741 11.861 15.8461 11.489 15.8461 11.0302C15.8461 10.5714 15.4741 10.1995 15.0153 10.1995H5.0461C4.58728 10.1995 4.21533 10.5714 4.21533 11.0302ZM4.21533 6.04561C4.21533 6.50443 4.58728 6.87638 5.0461 6.87638H15.0153C15.4741 6.87638 15.8461 6.50443 15.8461 6.04561C15.8461 5.58679 15.4741 5.21484 15.0153 5.21484H5.0461C4.58728 5.21484 4.21533 5.58679 4.21533 6.04561Z" fill="currentColor"/>
-// <path d="M18.7671 13.1096V11.3835C18.7671 7.43151 18.7671 5.45548 17.9005 4.22774C17.0338 3 15.639 3 12.8493 3H7.9178C5.12812 3 3.73328 3 2.86664 4.22774C2 5.45548 2 7.43151 2 11.3835C2 15.3356 2 17.3116 2.86664 18.5394C3.73328 19.7671 5.12812 19.7671 7.9178 19.7671H12.8493H16.5479" stroke="currentColor" stroke-width="1.47945"/>
-// <path d="M18.5216 21.0774H18.5217C19.7185 21.0759 20.8659 20.5996 21.7121 19.7532C22.5582 18.9068 23.0342 17.7593 23.0354 16.5625V16.5624C23.0354 15.6693 22.7706 14.7963 22.2744 14.0538C21.7783 13.3113 21.073 12.7326 20.2479 12.3909C19.4229 12.0492 18.515 11.9598 17.6391 12.1342C16.7632 12.3085 15.9587 12.7386 15.3273 13.3702C14.6959 14.0017 14.266 14.8063 14.0919 15.6823C13.9179 16.5582 14.0074 17.466 14.3494 18.291C14.6913 19.116 15.2702 19.8211 16.0128 20.3171C16.7555 20.8131 17.6285 21.0777 18.5216 21.0774ZM16.7501 13.9125C17.2744 13.5623 17.8909 13.3756 18.5215 13.3758L18.5215 13.3758C19.3664 13.3767 20.1764 13.7127 20.7738 14.3101C21.3712 14.9076 21.7073 15.7176 21.7082 16.5625C21.7084 17.193 21.5216 17.8095 21.1714 18.3339C20.8212 18.8583 20.3234 19.267 19.7408 19.5085C19.1583 19.7499 18.5172 19.8131 17.8988 19.6901C17.2803 19.5672 16.7122 19.2635 16.2663 18.8176C15.8204 18.3718 15.5168 17.8036 15.3938 17.1852C15.2708 16.5667 15.3341 15.9256 15.5755 15.3431C15.8169 14.7606 16.2257 14.2627 16.7501 13.9125Z" fill="currentColor" stroke="currentColor" stroke-width="0.153424"/>
-// <path d="M18.0562 17.9518C17.9345 17.952 17.8165 17.9096 17.7227 17.832C17.6289 17.7544 17.5653 17.6464 17.5427 17.5267C17.5202 17.4071 17.5402 17.2833 17.5993 17.1769C17.6584 17.0704 17.7528 16.988 17.8663 16.9439L18.4924 16.6997V15.4914C18.4924 15.3531 18.5473 15.2204 18.6452 15.1225C18.743 15.0247 18.8757 14.9697 19.0141 14.9697C19.1524 14.9697 19.2851 15.0247 19.383 15.1225C19.4808 15.2204 19.5358 15.3531 19.5358 15.4914V17.0566C19.5359 17.1616 19.5042 17.2642 19.445 17.351C19.3858 17.4377 19.3018 17.5046 19.204 17.5428L18.2461 17.9174C18.1855 17.9405 18.1211 17.9521 18.0562 17.9518Z" fill="currentColor"/>
-// </svg>')
-// ->link->attr(['class' => '']);
-
-
-
-// $menu->provider->add('<span>'.__('messages.list_form_title',['form' => __('messages.providertype')]).'</span>', ['class' => 'sidebar-layout' ,'route' => 'providertype.index'])
-// ->data('permission', 'providertype list')
-// ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-// <circle cx="9" cy="6" r="4" stroke="currentColor" stroke-width="1.5"/>
-// <path d="M15 9C16.6569 9 18 7.65685 18 6C18 4.34315 16.6569 3 15 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <ellipse cx="9" cy="17" rx="7" ry="4" stroke="currentColor" stroke-width="1.5"/>
-// <path d="M18 14C19.7542 14.3847 21 15.3589 21 16.5C21 17.5293 19.9863 18.4229 18.5 18.8704" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// </svg>')
-// ->link->attr(['class' => '']);
-
-
 
 
 if(default_earning_type() === 'subscription'){
@@ -257,112 +172,6 @@ $menu->handyman->add('<span>'.__('messages.list_form_title',['form' => __('messa
 </svg>')
 ->link->attr(['class' => '']);
 
-// $menu->handyman->add('<span>'.__('messages.list_form_title',['form' => __('messages.handymanrequest')]).'</span>', ['class' => 'sidebar-layout' ,'route' => ['handyman.pending','request']])
-// ->data('permission', 'pending handyman')
-// ->prepend('<svg width="15" height="15" class="sidebar-menu-icon" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-//     <g clip-path="url(#clip0_2357_772)">
-//         <path d="M12.75 9C10.68 9 9 10.68 9 12.75C9 14.82 10.68 16.5 12.75 16.5C14.82 16.5 16.5 14.82 16.5 12.75C16.5 10.68 14.82 9 12.75 9ZM13.9875 14.5125L12.375 12.9V10.5H13.125V12.5925L14.5125 13.98L13.9875 14.5125ZM13.5 2.25H11.115C10.8 1.38 9.975 0.75 9 0.75C8.025 0.75 7.2 1.38 6.885 2.25H4.5C3.675 2.25 3 2.925 3 3.75V15C3 15.825 3.675 16.5 4.5 16.5H9.0825C8.64 16.0725 8.28 15.5625 8.0175 15H4.5V3.75H6V6H12V3.75H13.5V7.56C14.0325 7.635 14.535 7.7925 15 8.01V3.75C15 2.925 14.325 2.25 13.5 2.25ZM9 3.75C8.5875 3.75 8.25 3.4125 8.25 3C8.25 2.5875 8.5875 2.25 9 2.25C9.4125 2.25 9.75 2.5875 9.75 3C9.75 3.4125 9.4125 3.75 9 3.75Z" fill="#6C757D" />
-//     </g>
-//     <defs>
-//         <clipPath id="clip0_2357_772">
-//             <rect width="18" height="18" fill="white" />
-//         </clipPath>
-//     </defs>
-// </svg>')
-// ->link->attr(['class' => '']);
-
-// $menu->handyman->add('<span>'.__('messages.unassigned_list_form_title',['form' => __('messages.handyman')]).'</span>', ['class' => 'sidebar-layout' ,'route' => ['handyman.pending','unassigned']])
-// ->data('permission', 'pending handyman')
-// ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-// <path fill-rule="evenodd" clip-rule="evenodd" d="M4.21533 16.0148C4.21533 16.4737 4.58728 16.8456 5.0461 16.8456H10.0307C10.4895 16.8456 10.8615 16.4737 10.8615 16.0148C10.8615 15.556 10.4895 15.1841 10.0307 15.1841H5.0461C4.58728 15.1841 4.21533 15.556 4.21533 16.0148ZM4.21533 11.0302C4.21533 11.489 4.58728 11.861 5.0461 11.861H15.0153C15.4741 11.861 15.8461 11.489 15.8461 11.0302C15.8461 10.5714 15.4741 10.1995 15.0153 10.1995H5.0461C4.58728 10.1995 4.21533 10.5714 4.21533 11.0302ZM4.21533 6.04561C4.21533 6.50443 4.58728 6.87638 5.0461 6.87638H15.0153C15.4741 6.87638 15.8461 6.50443 15.8461 6.04561C15.8461 5.58679 15.4741 5.21484 15.0153 5.21484H5.0461C4.58728 5.21484 4.21533 5.58679 4.21533 6.04561Z" fill="currentColor"/>
-// <path d="M18.7671 13.1096V11.3835C18.7671 7.43151 18.7671 5.45548 17.9005 4.22774C17.0338 3 15.639 3 12.8493 3H7.9178C5.12812 3 3.73328 3 2.86664 4.22774C2 5.45548 2 7.43151 2 11.3835C2 15.3356 2 17.3116 2.86664 18.5394C3.73328 19.7671 5.12812 19.7671 7.9178 19.7671H12.8493H16.5479" stroke="currentColor" stroke-width="1.47945"/>
-// <path d="M18.5216 21.0774H18.5217C19.7185 21.0759 20.8659 20.5996 21.7121 19.7532C22.5582 18.9068 23.0342 17.7593 23.0354 16.5625V16.5624C23.0354 15.6693 22.7706 14.7963 22.2744 14.0538C21.7783 13.3113 21.073 12.7326 20.2479 12.3909C19.4229 12.0492 18.515 11.9598 17.6391 12.1342C16.7632 12.3085 15.9587 12.7386 15.3273 13.3702C14.6959 14.0017 14.266 14.8063 14.0919 15.6823C13.9179 16.5582 14.0074 17.466 14.3494 18.291C14.6913 19.116 15.2702 19.8211 16.0128 20.3171C16.7555 20.8131 17.6285 21.0777 18.5216 21.0774ZM16.7501 13.9125C17.2744 13.5623 17.8909 13.3756 18.5215 13.3758L18.5215 13.3758C19.3664 13.3767 20.1764 13.7127 20.7738 14.3101C21.3712 14.9076 21.7073 15.7176 21.7082 16.5625C21.7084 17.193 21.5216 17.8095 21.1714 18.3339C20.8212 18.8583 20.3234 19.267 19.7408 19.5085C19.1583 19.7499 18.5172 19.8131 17.8988 19.6901C17.2803 19.5672 16.7122 19.2635 16.2663 18.8176C15.8204 18.3718 15.5168 17.8036 15.3938 17.1852C15.2708 16.5667 15.3341 15.9256 15.5755 15.3431C15.8169 14.7606 16.2257 14.2627 16.7501 13.9125Z" fill="currentColor" stroke="currentColor" stroke-width="0.153424"/>
-// <path d="M18.0562 17.9518C17.9345 17.952 17.8165 17.9096 17.7227 17.832C17.6289 17.7544 17.5653 17.6464 17.5427 17.5267C17.5202 17.4071 17.5402 17.2833 17.5993 17.1769C17.6584 17.0704 17.7528 16.988 17.8663 16.9439L18.4924 16.6997V15.4914C18.4924 15.3531 18.5473 15.2204 18.6452 15.1225C18.743 15.0247 18.8757 14.9697 19.0141 14.9697C19.1524 14.9697 19.2851 15.0247 19.383 15.1225C19.4808 15.2204 19.5358 15.3531 19.5358 15.4914V17.0566C19.5359 17.1616 19.5042 17.2642 19.445 17.351C19.3858 17.4377 19.3018 17.5046 19.204 17.5428L18.2461 17.9174C18.1855 17.9405 18.1211 17.9521 18.0562 17.9518Z" fill="currentColor"/>
-// </svg>')
-// ->link->attr(['class' => '']);
-
-// $menu->handyman->add('<span>'.__('messages.list_form_title',['form' => __('messages.handyman_earning')]).'</span>', ['class' => 'sidebar-layout' ,'route' => 'handymanEarning'])
-// ->data('role', 'provider')
-// ->prepend('<svg width="15" height="15" class="sidebar-menu-icon" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-//     <g clip-path="url(#clip0_2357_751)">
-//         <path d="M8.84999 8.175C7.14749 7.7325 6.59999 7.275 6.59999 6.5625C6.59999 5.745 7.35749 5.175 8.62499 5.175C9.95999 5.175 10.455 5.8125 10.5 6.75H12.1575C12.105 5.46 11.3175 4.275 9.74999 3.8925V2.25H7.49999V3.87C6.04499 4.185 4.87499 5.13 4.87499 6.5775C4.87499 8.31 6.30749 9.1725 8.39999 9.675C10.275 10.125 10.65 10.785 10.65 11.4825C10.65 12 10.2825 12.825 8.62499 12.825C7.07999 12.825 6.47249 12.135 6.38999 11.25H4.73999C4.82999 12.8925 6.05999 13.815 7.49999 14.1225V15.75H9.74999V14.1375C11.2125 13.86 12.375 13.0125 12.375 11.475C12.375 9.345 10.5525 8.6175 8.84999 8.175Z" fill="#6C757D" />
-//     </g>
-//     <defs>
-//         <clipPath id="clip0_2357_751">
-//             <rect width="18" height="18" fill="white" />
-//         </clipPath>
-//     </defs>
-// </svg>')
-// ->link->attr(['class' => '']);
-
-// $menu->handyman->add('<span>'.__('messages.list_form_title',['form' => __('messages.handymantype')]).'</span>', ['class' => 'sidebar-layout' ,'route' => 'handymantype.index'])
-// ->data('permission', 'handymantype list')
-// ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-// <path d="M14 20.8344C13.3663 20.9421 12.695 21 12 21C8.13401 21 5 19.2091 5 17C5 14.7909 8.13401 13 12 13C13.7135 13 15.2832 13.3518 16.5 13.9359" stroke="currentColor" stroke-width="1.5"/>
-// <g clip-path="url(#clip0_10_6123)">
-// <circle cx="17" cy="18" r="1.25" stroke="currentColor" stroke-width="1.36364"/>
-// <path d="M17.7358 13.8974C17.5826 13.834 17.3885 13.834 17.0002 13.834C16.6119 13.834 16.4178 13.834 16.2646 13.8974C16.0604 13.982 15.8982 14.1442 15.8136 14.3484C15.775 14.4416 15.7599 14.55 15.754 14.7081C15.7453 14.9405 15.6261 15.1556 15.4248 15.2719C15.2234 15.3881 14.9775 15.3838 14.772 15.2751C14.6321 15.2012 14.5306 15.1601 14.4306 15.1469C14.2115 15.1181 13.9899 15.1774 13.8145 15.312C13.683 15.4129 13.5859 15.581 13.3918 15.9173C13.1977 16.2536 13.1006 16.4217 13.079 16.586C13.0501 16.8052 13.1095 17.0268 13.244 17.2021C13.3054 17.2821 13.3917 17.3494 13.5257 17.4336C13.7226 17.5573 13.8493 17.7681 13.8493 18.0007C13.8493 18.2332 13.7226 18.444 13.5257 18.5677C13.3917 18.6518 13.3054 18.7191 13.244 18.7992C13.1094 18.9745 13.0501 19.1961 13.0789 19.4152C13.1005 19.5796 13.1976 19.7477 13.3918 20.084C13.5859 20.4202 13.683 20.5884 13.8145 20.6893C13.9898 20.8238 14.2114 20.8832 14.4306 20.8544C14.5306 20.8412 14.632 20.8001 14.7719 20.7262C14.9775 20.6175 15.2234 20.6131 15.4247 20.7294C15.6261 20.8457 15.7453 21.0608 15.754 21.2932C15.7599 21.4513 15.775 21.5597 15.8136 21.6529C15.8982 21.8571 16.0604 22.0193 16.2646 22.1039C16.4178 22.1673 16.6119 22.1673 17.0002 22.1673C17.3885 22.1673 17.5826 22.1673 17.7358 22.1039C17.94 22.0193 18.1022 21.8571 18.1868 21.6529C18.2254 21.5597 18.2405 21.4513 18.2464 21.2931C18.2551 21.0608 18.3742 20.8457 18.5756 20.7294C18.777 20.6131 19.0229 20.6175 19.2285 20.7261C19.3684 20.8001 19.4698 20.8412 19.5698 20.8543C19.7889 20.8832 20.0105 20.8238 20.1859 20.6893C20.3174 20.5884 20.4145 20.4202 20.6086 20.084C20.8027 19.7477 20.8998 19.5796 20.9214 19.4152C20.9503 19.1961 20.8909 18.9745 20.7564 18.7991C20.695 18.7191 20.6086 18.6518 20.4747 18.5677C20.2778 18.4439 20.1511 18.2332 20.1511 18.0006C20.1511 17.7681 20.2778 17.5574 20.4747 17.4336C20.6087 17.3495 20.695 17.2822 20.7564 17.2021C20.891 17.0268 20.9503 16.8052 20.9215 16.5861C20.8999 16.4217 20.8028 16.2536 20.6086 15.9173C20.4145 15.5811 20.3174 15.4129 20.1859 15.312C20.0106 15.1775 19.789 15.1181 19.5698 15.1469C19.4698 15.1601 19.3684 15.2012 19.2285 15.2751C19.0229 15.3838 18.777 15.3882 18.5757 15.2719C18.3743 15.1556 18.2551 14.9405 18.2464 14.7081C18.2405 14.55 18.2254 14.4416 18.1868 14.3484C18.1022 14.1442 17.94 13.982 17.7358 13.8974Z" stroke="currentColor" stroke-width="1.5"/>
-// </g>
-// <circle cx="12" cy="6" r="4" stroke="currentColor" stroke-width="1.5"/>
-// <defs>
-// <clipPath id="clip0_10_6123">
-// <rect x="12" y="13" width="10" height="10" rx="4.54545" fill="white"/>
-// </clipPath>
-// </defs>
-// </svg>')
-// ->link->attr(['class' => '']);
-
-// $menu->add('<span>'.__('messages.unverified').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.unverified').'</span></span>', ['route' => ['user.all','unverified']])
-// ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-// <circle cx="12" cy="6" r="4" stroke="currentColor" stroke-width="1.5"/>
-// <path d="M15 13.3271C14.0736 13.1162 13.0609 13 12 13C7.58172 13 4 15.0147 4 17.5C4 19.9853 4 22 12 22C17.6874 22 19.3315 20.9817 19.8068 19.5" stroke="currentColor" stroke-width="1.5"/>
-// <circle cx="18" cy="16" r="4" stroke="currentColor" stroke-width="1.5"/>
-// <path d="M16.6665 14.6665L19.3332 17.3332M19.3335 14.6665L16.6668 17.3332" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-// </svg>
-// ')
-// ->nickname('user')
-// ->data('permission', 'casharchive list');
-
-
-
-// $menu->add('<span>'.__('messages.all_user').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.users').'</span></span>', ['route' => ['user.all','all']])
-// ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-// <circle cx="12" cy="6" r="4" stroke="currentColor" stroke-width="1.5"/>
-// <path d="M18 9C19.6569 9 21 7.88071 21 6.5C21 5.11929 19.6569 4 18 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <path d="M6 9C4.34315 9 3 7.88071 3 6.5C3 5.11929 4.34315 4 6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <ellipse cx="12" cy="17" rx="6" ry="4" stroke="currentColor" stroke-width="1.5"/>
-// <path d="M20 19C21.7542 18.6153 23 17.6411 23 16.5C23 15.3589 21.7542 14.3847 20 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <path d="M4 19C2.24575 18.6153 1 17.6411 1 16.5C1 15.3589 2.24575 14.3847 4 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// </svg>
-// ')
-// ->nickname('user')
-// ->data('permission', 'casharchive list');
-
-// $menu->add(__('messages.sidebar_form_title',['form' => 'Commission']), ['class' => 'category-main'])->data('permission', 'Commission');
-
-// $menu->add('<span>'.__('Commission').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.booking').'</span></span>', ['route' => 'commission.com'])
-// ->prepend('<svg width="15" height="15" class="sidebar-menu-icon" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-//     <path d="M12.25 2H11.5V0.5H10V2H4V0.5H2.5V2H1.75C0.9175 2 0.2575 2.675 0.2575 3.5L0.25 14C0.25 14.825 0.9175 15.5 1.75 15.5H12.25C13.075 15.5 13.75 14.825 13.75 14V3.5C13.75 2.675 13.075 2 12.25 2ZM12.25 14H1.75V6.5H12.25V14ZM12.25 5H1.75V3.5H12.25V5ZM7 8.75H10.75V12.5H7V8.75Z" fill="#6C757D" />
-// </svg>')
-// ->nickname('commission')
-// ->data('permission', 'Commission');
-
-// $menu->add(__('messages.sidebar_form_title',['form' => 'Users Tagging']), ['class' => 'category-main'])->data('permission', ['tagging list']);
-
-// $menu->add('<span>'.__('messages.list_form_title',['form' => 'Users']).'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.users').'</span></span>', ['route' => ['tag.all','all']])
-// ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-// <circle cx="12" cy="6" r="4" stroke="currentColor" stroke-width="1.5"/>
-// <path d="M18 9C19.6569 9 21 7.88071 21 6.5C21 5.11929 19.6569 4 18 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <path d="M6 9C4.34315 9 3 7.88071 3 6.5C3 5.11929 4.34315 4 6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <ellipse cx="12" cy="17" rx="6" ry="4" stroke="currentColor" stroke-width="1.5"/>
-// <path d="M20 19C21.7542 18.6153 23 17.6411 23 16.5C23 15.3589 21.7542 14.3847 20 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <path d="M4 19C2.24575 18.6153 1 17.6411 1 16.5C1 15.3589 2.24575 14.3847 4 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// </svg>
-// ')
-// ->nickname('user')
-// ->data('permission', 'tagging list');
-
-
 $menu->add('<span>'.__('messages.plyers').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.plyers').'</span></span>', ['class' => ''])
 ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M5 8C5 5.17157 5 3.75736 5.87868 2.87868C6.75736 2 8.17157 2 11 2H13C15.8284 2 17.2426 2 18.1213 2.87868C19 3.75736 19 5.17157 19 8V16C19 18.8284 19 20.2426 18.1213 21.1213C17.2426 22 15.8284 22 13 22H11C8.17157 22 6.75736 22 5.87868 21.1213C5 20.2426 5 18.8284 5 16V8Z" stroke="currentColor" stroke-width="1.5"/>
@@ -384,42 +193,18 @@ $menu->pages->add('<span>'.__('messages.Player_Registration').'</span>', ['class
     <path d="M14 1.5H8L6.5 0H2C1.175 0 0.5075 0.675 0.5075 1.5L0.5 10.5C0.5 11.325 1.175 12 2 12H14C14.825 12 15.5 11.325 15.5 10.5V3C15.5 2.175 14.825 1.5 14 1.5ZM14 10.5H2V1.5H5.8775L7.3775 3H14V10.5ZM12.5 6H3.5V4.5H12.5V6ZM9.5 9H3.5V7.5H9.5V9Z" fill="#6C757D" />
 </svg>')
 ->link->attr(['class' => '']);
+
+$menu->add('<span>'.__('messages.Player_list').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.taxes').'</span></span>', ['route' => 'tax.index'])
+->prepend('<svg width="15" height="15" class="sidebar-menu-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5.17194 7.17188C5.5675 7.17188 5.95418 7.05458 6.28308 6.83482C6.61198 6.61505 6.86832 6.3027 7.0197 5.93724C7.17107 5.57179 7.21068 5.16966 7.13351 4.7817C7.05634 4.39373 6.86586 4.03737 6.58615 3.75766C6.30645 3.47796 5.95008 3.28748 5.56212 3.21031C5.17416 3.13314 4.77202 3.17274 4.40657 3.32412C4.04112 3.47549 3.72876 3.73184 3.509 4.06074C3.28924 4.38963 3.17194 4.77631 3.17194 5.17188C3.17252 5.70213 3.38342 6.2105 3.75836 6.58545C4.13331 6.9604 4.64168 7.1713 5.17194 7.17188V7.17188ZM5.17194 4.50521C5.30379 4.50521 5.43269 4.54431 5.54232 4.61756C5.65195 4.69082 5.7374 4.79494 5.78786 4.91675C5.83832 5.03857 5.85152 5.17262 5.82579 5.30194C5.80007 5.43126 5.73658 5.55005 5.64334 5.64328C5.55011 5.73652 5.43132 5.80001 5.302 5.82573C5.17268 5.85146 5.03863 5.83825 4.91682 5.7878C4.795 5.73734 4.69088 5.65189 4.61762 5.54226C4.54437 5.43262 4.50527 5.30373 4.50527 5.17188C4.50539 4.9951 4.57567 4.8256 4.70066 4.7006C4.82566 4.5756 4.99516 4.50533 5.17194 4.50521V4.50521ZM10.8282 8.82813C10.4326 8.82813 10.0459 8.94543 9.71705 9.16519C9.38815 9.38495 9.13181 9.69731 8.98043 10.0628C8.82906 10.4282 8.78945 10.8303 8.86662 11.2183C8.94379 11.6063 9.13427 11.9626 9.41398 12.2423C9.69368 12.522 10.05 12.7125 10.438 12.7897C10.826 12.8669 11.2281 12.8273 11.5936 12.6759C11.959 12.5245 12.2714 12.2682 12.4911 11.9393C12.7109 11.6104 12.8282 11.2237 12.8282 10.8281C12.8276 10.2979 12.6167 9.7895 12.2418 9.41456C11.8668 9.03961 11.3584 8.82871 10.8282 8.82813V8.82813ZM10.8282 11.4948C10.6963 11.4948 10.5674 11.4557 10.4578 11.3824C10.3482 11.3092 10.2627 11.2051 10.2123 11.0833C10.1618 10.9614 10.1486 10.8274 10.1743 10.6981C10.2001 10.5687 10.2636 10.45 10.3568 10.3567C10.45 10.2635 10.5688 10.2 10.6981 10.1743C10.8275 10.1485 10.9615 10.1618 11.0833 10.2122C11.2051 10.2627 11.3093 10.3481 11.3825 10.4577C11.4558 10.5674 11.4949 10.6963 11.4949 10.8281C11.4947 11.0049 11.4245 11.1744 11.2995 11.2994C11.1745 11.4244 11.005 11.4947 10.8282 11.4948V11.4948ZM13.1381 2.862C13.0762 2.80008 13.0027 2.75096 12.9218 2.71745C12.8409 2.68394 12.7543 2.66669 12.6667 2.66669C12.5792 2.66669 12.4925 2.68394 12.4116 2.71745C12.3307 2.75096 12.2572 2.80008 12.1954 2.862L2.86202 12.1953C2.79949 12.2571 2.74978 12.3306 2.71577 12.4117C2.68175 12.4927 2.6641 12.5797 2.66382 12.6676C2.66355 12.7554 2.68066 12.8425 2.71416 12.9238C2.74767 13.005 2.79692 13.0789 2.85907 13.141C2.92122 13.2031 2.99505 13.2524 3.0763 13.2859C3.15755 13.3194 3.24463 13.3365 3.33252 13.3362C3.42041 13.3359 3.50738 13.3183 3.58842 13.2843C3.66946 13.2503 3.74298 13.2005 3.80473 13.138L13.1381 3.80467C13.2 3.74278 13.2491 3.6693 13.2826 3.58843C13.3161 3.50756 13.3334 3.42088 13.3334 3.33334C13.3334 3.2458 13.3161 3.15911 13.2826 3.07824C13.2491 2.99737 13.2 2.92389 13.1381 2.862V2.862Z" fill="#6C757D" />
+</svg>')
+->data('permission', 'Player list')
+->link->attr(['class' => '']);
+
     $menu->add(__('messages.sidebar_form_title',['form' => 'Encashment']), ['class' => 'category-main'])->data('role', ['Depot', 'admin', 'Neopreneur']);
 
+   
 
-
-// $menu->add(__('messages.sidebar_form_title',['form' => 'Earning History']), ['class' => 'category-main'])->data('role', ['Depot', 'Neopreneur']);
-
-// $menu->add('<span>'.__('Earning History').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.booking').'</span></span>', ['route' => 'earning_history'])
-// ->prepend('<svg width="15" height="15" class="sidebar-menu-icon" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-//     <path d="M12.25 2H11.5V0.5H10V2H4V0.5H2.5V2H1.75C0.9175 2 0.2575 2.675 0.2575 3.5L0.25 14C0.25 14.825 0.9175 15.5 1.75 15.5H12.25C13.075 15.5 13.75 14.825 13.75 14V3.5C13.75 2.675 13.075 2 12.25 2ZM12.25 14H1.75V6.5H12.25V14ZM12.25 5H1.75V3.5H12.25V5ZM7 8.75H10.75V12.5H7V8.75Z" fill="#6C757D" />
-// </svg>')
-// ->nickname('earning_history')
-// ->data('role', ['Depot', 'Neopreneur']);
-
-// $menu->add('Transactions', ['class' => 'category-main'])->data('permission', ['tax list','reportclasses list','bill list']);
-
-
-
-
-// $menu->add('<span>'.__('messages.cash_payments').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.cash_payments').'</span></span>', ['route' => 'cash.list'])
-// ->prepend('<svg width="15" height="15" class="sidebar-menu-icon" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-//     <path d="M14 0H2C1.1675 0 0.5075 0.6675 0.5075 1.5L0.5 10.5C0.5 11.3325 1.1675 12 2 12H14C14.8325 12 15.5 11.3325 15.5 10.5V1.5C15.5 0.6675 14.8325 0 14 0ZM14 10.5H2V6H14V10.5ZM14 3H2V1.5H14V3Z" fill="#6C757D" />
-// </svg>
-// ')
-// ->nickname('cash_history')
-// ->data('permission', 'reportclasses list');
-
-
-// $menu->add('<span>'.__('messages.earnings').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.earnings').'</span></span>', ['route' => 'earning'])
-// ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-// <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/>
-// <path d="M12 6V18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <path d="M15 9.5C15 8.11929 13.6569 7 12 7C10.3431 7 9 8.11929 9 9.5C9 10.8807 10.3431 12 12 12C13.6569 12 15 13.1193 15 14.5C15 15.8807 13.6569 17 12 17C10.3431 17 9 15.8807 9 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// </svg>
-// ')
-// ->nickname('earning')
-// ->data('permission', 'bill list');
 
 $menu->add('<span>'.__('messages.Cash_archive').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.Cash_archive').'</span></span>', ['route' => 'user.index'])
 ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -441,42 +226,6 @@ $menu->add('<span>'.__('messages.Receiving_Cash').'</span><span class="custom-to
 ->nickname('user')
 ->data('permission', 'receiving-cash list');
 
-
-// if(optional($othersetting)->wallet == 1){
-// $menu->add('<span>'.__('Depot Wallet').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('Depot Wallet').'</span></span>', ['route' => 'walletdepot.index'])
-// ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-// <path d="M6 8H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-// <path d="M20.8333 9H18.2308C16.4465 9 15 10.3431 15 12C15 13.6569 16.4465 15 18.2308 15H20.8333C20.9167 15 20.9583 15 20.9935 14.9979C21.5328 14.965 21.9623 14.5662 21.9977 14.0654C22 14.0327 22 13.994 22 13.9167V10.0833C22 10.006 22 9.96726 21.9977 9.9346C21.9623 9.43384 21.5328 9.03496 20.9935 9.00214C20.9583 9 20.9167 9 20.8333 9Z" stroke="currentColor" stroke-width="1.5"/>
-// <path d="M20.965 9C20.8873 7.1277 20.6366 5.97975 19.8284 5.17157C18.6569 4 16.7712 4 13 4L10 4C6.22876 4 4.34315 4 3.17157 5.17157C2 6.34315 2 8.22876 2 12C2 15.7712 2 17.6569 3.17157 18.8284C4.34315 20 6.22876 20 10 20H13C16.7712 20 18.6569 20 19.8284 18.8284C20.6366 18.0203 20.8873 16.8723 20.965 15" stroke="currentColor" stroke-width="1.5"/>
-// <path d="M17.9912 12H18.0002" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-// </svg>
-// ')
-// ->nickname('walletdepot')
-// ->data('permission', 'depot bills list');
-
-// }
-
-
-// $menu->add('<span>'.__('Depot Wallet History').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('Depot Wallet').'</span></span>', ['route' => 'walletdepot.history_index'])
-// ->prepend('<svg class="mr-2 w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24">
-//   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 9h6m-6 3h6m-6 3h6M6.996 9h.01m-.01 3h.01m-.01 3h.01M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/>
-// </svg>
-
-// ')
-// ->nickname('walletdepothistory')
-// ->data('permission', 'depot bills list');
-
-// if(auth()->user()->user_type == 'provider' || auth()->user()->user_type == 'admin' || auth()->user()->user_type == 'demo_admin'){
-// $menu->add('<span>'.__('messages.provider_withdrawal_requests').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.provider_withdrawal_requests').'</span></span>', ['route' => 'wallet_transaction'])
-// ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-// <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/>
-// <path d="M12 6V18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <path d="M15 9.5C15 8.11929 13.6569 7 12 7C10.3431 7 9 8.11929 9 9.5C9 10.8807 10.3431 12 12 12C13.6569 12 15 13.1193 15 14.5C15 15.8807 13.6569 17 12 17C10.3431 17 9 15.8807 9 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// </svg>
-// ')
-// ->nickname('provider_withdrawal_requests')
-// ->data('permission', 'subscription list');
-// }
 
 $menu->add(__('messages.promotion'), ['class' => 'category-main'])->data('permission', 'branch list');
 
@@ -501,13 +250,7 @@ $menu->coupon->add('<span>'.__('messages.list_form_title',['form' => __('message
 </svg>')
 ->link->attr(['class' => '']);
 
-// $menu->coupon->add('<span>'.__('messages.add_form_title',['form' => __('messages.coupon')]).'</span>', ['class' => 'sidebar-layout' ,'route' => 'coupon.create'])
-// ->data('permission', 'coupon add')
-// ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-// <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/>
-// <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// </svg>')
-// ->link->attr(['class' => '']);
+
 
 if(optional($othersetting)->wallet == 1){
 $menu->add('<span>'.__('messages.Bill').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.Bill').'</span></span>', ['route' => 'wallet.index'])
@@ -579,146 +322,9 @@ $menu->add('<span>'.__('messages.plan').'</span><span class="custom-tooltip"><sp
 ->nickname('plan')
 ->data('permission', 'plan list');
 }
-// $menu->add('<span>'.__('messages.taxes').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.taxes').'</span></span>', ['route' => 'tax.index'])
-// ->prepend('<svg width="15" height="15" class="sidebar-menu-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-//     <path d="M5.17194 7.17188C5.5675 7.17188 5.95418 7.05458 6.28308 6.83482C6.61198 6.61505 6.86832 6.3027 7.0197 5.93724C7.17107 5.57179 7.21068 5.16966 7.13351 4.7817C7.05634 4.39373 6.86586 4.03737 6.58615 3.75766C6.30645 3.47796 5.95008 3.28748 5.56212 3.21031C5.17416 3.13314 4.77202 3.17274 4.40657 3.32412C4.04112 3.47549 3.72876 3.73184 3.509 4.06074C3.28924 4.38963 3.17194 4.77631 3.17194 5.17188C3.17252 5.70213 3.38342 6.2105 3.75836 6.58545C4.13331 6.9604 4.64168 7.1713 5.17194 7.17188V7.17188ZM5.17194 4.50521C5.30379 4.50521 5.43269 4.54431 5.54232 4.61756C5.65195 4.69082 5.7374 4.79494 5.78786 4.91675C5.83832 5.03857 5.85152 5.17262 5.82579 5.30194C5.80007 5.43126 5.73658 5.55005 5.64334 5.64328C5.55011 5.73652 5.43132 5.80001 5.302 5.82573C5.17268 5.85146 5.03863 5.83825 4.91682 5.7878C4.795 5.73734 4.69088 5.65189 4.61762 5.54226C4.54437 5.43262 4.50527 5.30373 4.50527 5.17188C4.50539 4.9951 4.57567 4.8256 4.70066 4.7006C4.82566 4.5756 4.99516 4.50533 5.17194 4.50521V4.50521ZM10.8282 8.82813C10.4326 8.82813 10.0459 8.94543 9.71705 9.16519C9.38815 9.38495 9.13181 9.69731 8.98043 10.0628C8.82906 10.4282 8.78945 10.8303 8.86662 11.2183C8.94379 11.6063 9.13427 11.9626 9.41398 12.2423C9.69368 12.522 10.05 12.7125 10.438 12.7897C10.826 12.8669 11.2281 12.8273 11.5936 12.6759C11.959 12.5245 12.2714 12.2682 12.4911 11.9393C12.7109 11.6104 12.8282 11.2237 12.8282 10.8281C12.8276 10.2979 12.6167 9.7895 12.2418 9.41456C11.8668 9.03961 11.3584 8.82871 10.8282 8.82813V8.82813ZM10.8282 11.4948C10.6963 11.4948 10.5674 11.4557 10.4578 11.3824C10.3482 11.3092 10.2627 11.2051 10.2123 11.0833C10.1618 10.9614 10.1486 10.8274 10.1743 10.6981C10.2001 10.5687 10.2636 10.45 10.3568 10.3567C10.45 10.2635 10.5688 10.2 10.6981 10.1743C10.8275 10.1485 10.9615 10.1618 11.0833 10.2122C11.2051 10.2627 11.3093 10.3481 11.3825 10.4577C11.4558 10.5674 11.4949 10.6963 11.4949 10.8281C11.4947 11.0049 11.4245 11.1744 11.2995 11.2994C11.1745 11.4244 11.005 11.4947 10.8282 11.4948V11.4948ZM13.1381 2.862C13.0762 2.80008 13.0027 2.75096 12.9218 2.71745C12.8409 2.68394 12.7543 2.66669 12.6667 2.66669C12.5792 2.66669 12.4925 2.68394 12.4116 2.71745C12.3307 2.75096 12.2572 2.80008 12.1954 2.862L2.86202 12.1953C2.79949 12.2571 2.74978 12.3306 2.71577 12.4117C2.68175 12.4927 2.6641 12.5797 2.66382 12.6676C2.66355 12.7554 2.68066 12.8425 2.71416 12.9238C2.74767 13.005 2.79692 13.0789 2.85907 13.141C2.92122 13.2031 2.99505 13.2524 3.0763 13.2859C3.15755 13.3194 3.24463 13.3365 3.33252 13.3362C3.42041 13.3359 3.50738 13.3183 3.58842 13.2843C3.66946 13.2503 3.74298 13.2005 3.80473 13.138L13.1381 3.80467C13.2 3.74278 13.2491 3.6693 13.2826 3.58843C13.3161 3.50756 13.3334 3.42088 13.3334 3.33334C13.3334 3.2458 13.3161 3.15911 13.2826 3.07824C13.2491 2.99737 13.2 2.92389 13.1381 2.862V2.862Z" fill="#6C757D" />
-// </svg>')
-// ->nickname('tax')
-// ->data('permission', 'tax list');
-
-
-// $menu->add('<span>'.__('Religion').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('Religion').'</span></span>', ['route' => 'religion.index'])
-// ->prepend('<svg width="15" height="15" class="sidebar-menu-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-//     <path d="M14.023,12.154c1.514-1.192,2.488-3.038,2.488-5.114c0-3.597-2.914-6.512-6.512-6.512
-// 								c-3.597,0-6.512,2.916-6.512,6.512c0,2.076,0.975,3.922,2.489,5.114c-2.714,1.385-4.625,4.117-4.836,7.318h1.186
-// 								c0.229-2.998,2.177-5.512,4.86-6.566c0.853,0.41,1.804,0.646,2.813,0.646c1.01,0,1.961-0.236,2.812-0.646
-// 								c2.684,1.055,4.633,3.568,4.859,6.566h1.188C18.648,16.271,16.736,13.539,14.023,12.154z M10,12.367
-// 								c-2.943,0-5.328-2.385-5.328-5.327c0-2.943,2.385-5.328,5.328-5.328c2.943,0,5.328,2.385,5.328,5.328
-// 								C15.328,9.982,12.943,12.367,10,12.367z" fill="#6C757D" />
-// </svg>')
-// ->nickname('religion')
-// ->data('permission', 'religion list');
 
 
 
-
-// $menu->add('<span>'.__('messages.pushnotification_settings').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.pushnotification_settings').'</span></span>', ['route' => 'pushNotification.index'])
-// ->data('role', ['admin','demo_admin'])
-// ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-// <path d="M22 10.5V12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2H13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <circle cx="19" cy="5" r="3" stroke="currentColor" stroke-width="1.5"/>
-// <path d="M7 14H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <path d="M7 17.5H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// </svg>
-// ')
-// ->link->attr(['class' => '']);
-
-// $menu->add('<span>'.__('messages.notification_templates').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.notification_templates').'</span></span>', ['route' => 'notification-templates.index'])
-// ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-// <path d="M15.5 9L15.6716 9.17157C17.0049 10.5049 17.6716 11.1716 17.6716 12C17.6716 12.8284 17.0049 13.4951 15.6716 14.8284L15.5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <path d="M13.2939 7.16992L11.9998 11.9996L10.7058 16.8292" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <path d="M8.50019 9L8.32861 9.17157C6.99528 10.5049 6.32861 11.1716 6.32861 12C6.32861 12.8284 6.99528 13.4951 8.32861 14.8284L8.50019 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <path d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z" stroke="currentColor" stroke-width="1.5"/>
-// </svg>')
-// ->nickname('notification_template')
-// ->data('role', ['admin','demo_admin'])
-// ->link->attr(["class" => ""]);
-
-
-// $menu->add('<span>'.__('messages.plyers').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.plyers').'</span></span>', ['class' => ''])
-// ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-// <path d="M5 8C5 5.17157 5 3.75736 5.87868 2.87868C6.75736 2 8.17157 2 11 2H13C15.8284 2 17.2426 2 18.1213 2.87868C19 3.75736 19 5.17157 19 8V16C19 18.8284 19 20.2426 18.1213 21.1213C17.2426 22 15.8284 22 13 22H11C8.17157 22 6.75736 22 5.87868 21.1213C5 20.2426 5 18.8284 5 16V8Z" stroke="currentColor" stroke-width="1.5"/>
-// <path d="M5 4.07617C4.02491 4.17208 3.36857 4.38885 2.87868 4.87873C2 5.75741 2 7.17163 2 10.0001V14.0001C2 16.8285 2 18.2427 2.87868 19.1214C3.36857 19.6113 4.02491 19.828 5 19.9239" stroke="currentColor" stroke-width="1.5"/>
-// <path d="M19 4.07617C19.9751 4.17208 20.6314 4.38885 21.1213 4.87873C22 5.75741 22 7.17163 22 10.0001V14.0001C22 16.8285 22 18.2427 21.1213 19.1214C20.6314 19.6113 19.9751 19.828 19 19.9239" stroke="currentColor" stroke-width="1.5"/>
-// <path d="M9 13H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <path d="M9 9H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <path d="M9 17H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// </svg>
-// ')
-// ->nickname('pages')
-// ->data('role', ['admin','staf'])
-// ->link->attr(["class" => ""])
-// ->href('#pages');
-
-// $menu->pages->add('<span>'.__('messages.Player_Registration').'</span>', ['class' => 'sidebar-layout' ,'route' => 'term-condition'])
-// ->data('permission', 'player-registration')
-// ->prepend('<svg width="15" height="15" class="sidebar-menu-icon" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-//     <path d="M14 1.5H8L6.5 0H2C1.175 0 0.5075 0.675 0.5075 1.5L0.5 10.5C0.5 11.325 1.175 12 2 12H14C14.825 12 15.5 11.325 15.5 10.5V3C15.5 2.175 14.825 1.5 14 1.5ZM14 10.5H2V1.5H5.8775L7.3775 3H14V10.5ZM12.5 6H3.5V4.5H12.5V6ZM9.5 9H3.5V7.5H9.5V9Z" fill="#6C757D" />
-// </svg>')
-// ->link->attr(['class' => '']);
-
-// $menu->pages->add('<span>'.__('messages.privacy_policy').'</span>', ['class' => 'sidebar-layout' ,'route' => 'privacy-policy'])
-// ->data('permission', 'privacy policy')
-// ->prepend('<svg width="15" height="15" class="sidebar-menu-icon" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-//     <path d="M7 0.75L0.25 3.75V8.25C0.25 12.4125 3.13 16.305 7 17.25C10.87 16.305 13.75 12.4125 13.75 8.25V3.75L7 0.75ZM12.25 8.25C12.25 11.64 10.015 14.7675 7 15.6975C3.985 14.7675 1.75 11.64 1.75 8.25V4.725L7 2.3925L12.25 4.725V8.25ZM3.5575 8.6925L2.5 9.75L5.5 12.75L11.5 6.75L10.4425 5.685L5.5 10.6275L3.5575 8.6925Z" fill="#6C757D" />
-// </svg>')
-// ->link->attr(['class' => '']);
-
-// $menu->pages->add('<span>'.__('messages.help_support').'</span>', ['class' => 'sidebar-layout' ,'route' => 'help-support'])
-// ->data('permission', 'Help and support')
-// ->prepend('<svg width="15" height="15" class="sidebar-menu-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-//     <path d="M2 3.5H0.5V14C0.5 14.825 1.175 15.5 2 15.5H12.5V14H2V3.5ZM14 0.5H5C4.175 0.5 3.5 1.175 3.5 2V11C3.5 11.825 4.175 12.5 5 12.5H14C14.825 12.5 15.5 11.825 15.5 11V2C15.5 1.175 14.825 0.5 14 0.5ZM14 11H5V2H14V11ZM9.1325 6.62C9.44 6.0725 10.0175 5.75 10.355 5.27C10.715 4.76 10.5125 3.815 9.5 3.815C8.84 3.815 8.51 4.3175 8.375 4.7375L7.3475 4.31C7.6325 3.47 8.39 2.75 9.4925 2.75C10.415 2.75 11.0525 3.17 11.375 3.695C11.6525 4.145 11.81 4.9925 11.3825 5.6225C10.91 6.32 10.46 6.53 10.2125 6.98C10.115 7.16 10.0775 7.28 10.0775 7.865H8.9375C8.945 7.5575 8.8925 7.055 9.1325 6.62ZM8.7125 9.4625C8.7125 9.02 9.065 8.6825 9.5 8.6825C9.9425 8.6825 10.28 9.02 10.28 9.4625C10.28 9.8975 9.95 10.25 9.5 10.25C9.065 10.25 8.7125 9.8975 8.7125 9.4625Z" fill="#6C757D" />
-// </svg>')
-// ->link->attr(['class' => '']);
-
-// $menu->pages->add('<span>'.__('messages.refund_cancellation_policy').'</span>', ['class' => 'sidebar-layout' ,'route' => 'refund-cancellation-policy'])
-// ->data('permission', 'Refund and Cancellation Policy')
-// ->prepend('<svg width="15" height="15" class="sidebar-menu-icon" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-//     <path d="M6.4075 14H1.75V6.5H12.25V9.785L13.75 8.285V3.5C13.75 2.675 13.075 2 12.25 2H11.5V0.5H10V2H4V0.5H2.5V2H1.75C0.9175 2 0.2575 2.675 0.2575 3.5L0.25 14C0.25 14.825 0.9175 15.5 1.75 15.5H7.9075L6.4075 14ZM1.75 3.5H12.25V5H1.75V3.5ZM10.405 15.875L7.75 13.22L8.8075 12.1625L10.3975 13.7525L13.5775 10.5725L14.635 11.63L10.405 15.875ZM5.8075 9.5L7 10.6925L5.9425 11.75L4.75 10.5575L3.5575 11.75L2.5 10.6925L3.6925 9.5L2.5 8.3075L3.5575 7.25L4.75 8.4425L5.9425 7.25L7 8.3075L5.8075 9.5Z" fill="#6C757D" />
-// </svg>')
-// ->link->attr(['class' => '']);
-
-// $menu->pages->add('<span>'.__('messages.data_deletion_request').'</span>', ['class' => 'sidebar-layout' ,'route' => 'data-deletion-request'])
-// ->prepend('<svg width="15" height="15" class="sidebar-menu-icon" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-//     <path d="M6.4075 14H1.75V6.5H12.25V9.785L13.75 8.285V3.5C13.75 2.675 13.075 2 12.25 2H11.5V0.5H10V2H4V0.5H2.5V2H1.75C0.9175 2 0.2575 2.675 0.2575 3.5L0.25 14C0.25 14.825 0.9175 15.5 1.75 15.5H7.9075L6.4075 14ZM1.75 3.5H12.25V5H1.75V3.5ZM10.405 15.875L7.75 13.22L8.8075 12.1625L10.3975 13.7525L13.5775 10.5725L14.635 11.63L10.405 15.875ZM5.8075 9.5L7 10.6925L5.9425 11.75L4.75 10.5575L3.5575 11.75L2.5 10.6925L3.6925 9.5L2.5 8.3075L3.5575 7.25L4.75 8.4425L5.9425 7.25L7 8.3075L5.8075 9.5Z" fill="#6C757D" />
-// </svg>')
-// ->link->attr(['class' => '']);
-
-
-// $menu->add('<span>'.__('messages.documents').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.documents').'</span></span>', ['class' => ''])
-// ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-// <path d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z" stroke="currentColor" stroke-width="1.5"/>
-// <path d="M7 17H11.9846M7 7.03078H16.9692M7 12.0154H16.9692" stroke="currentColor" stroke-width="1.66154" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-// </svg>')
-// ->nickname('document')
-// ->data('permission', 'document list')
-// ->link->attr(["class" => ""])
-// ->href('#document');
-
-// $menu->document->add('<span>'.__('messages.list_form_title',['form' => trans('messages.document') ]).'</span>', [ 'class' => 'sidebar-layout' , 'route' => ['document.index']])
-// ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-// <path d="M16 4.00195C18.175 4.01406 19.3529 4.11051 20.1213 4.87889C21 5.75757 21 7.17179 21 10.0002V16.0002C21 18.8286 21 20.2429 20.1213 21.1215C19.2426 22.0002 17.8284 22.0002 15 22.0002H9C6.17157 22.0002 4.75736 22.0002 3.87868 21.1215C3 20.2429 3 18.8286 3 16.0002V10.0002C3 7.17179 3 5.75757 3.87868 4.87889C4.64706 4.11051 5.82497 4.01406 8 4.00195" stroke="currentColor" stroke-width="1.5"/>
-// <path d="M10.5 14L17 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <path d="M7 14H7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <path d="M7 10.5H7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <path d="M7 17.5H7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <path d="M10.5 10.5H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <path d="M10.5 17.5H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <path d="M8 3.5C8 2.67157 8.67157 2 9.5 2H14.5C15.3284 2 16 2.67157 16 3.5V4.5C16 5.32843 15.3284 6 14.5 6H9.5C8.67157 6 8 5.32843 8 4.5V3.5Z" stroke="currentColor" stroke-width="1.5"/>
-// </svg>
-// ')
-// ->data('permission', 'document list')
-// ->link->attr(array('class' => ''));
-
-// $menu->document->add('<span>'.__('messages.add_form_title',['form' => trans('messages.document')]).'</span>', array( 'class' => 'sidebar-layout', 'route' => 'document.create'))
-// ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-// <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/>
-// <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// </svg>')
-// ->data('permission', 'document add')
-// ->link->attr(['class' => '']);
-
-
-// $menu->add('<span>'.__('messages.frontend_setting').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.frontend_setting').'</span></span>', ['route' => 'frontend_setting.index'])
-// ->prepend('<svg class="mr-2" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-// <path d="M15.5 9L15.6716 9.17157C17.0049 10.5049 17.6716 11.1716 17.6716 12C17.6716 12.8284 17.0049 13.4951 15.6716 14.8284L15.5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <path d="M13.2939 7.16992L11.9998 11.9996L10.7058 16.8292" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <path d="M8.50019 9L8.32861 9.17157C6.99528 10.5049 6.32861 11.1716 6.32861 12C6.32861 12.8284 6.99528 13.4951 8.32861 14.8284L8.50019 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-// <path d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z" stroke="currentColor" stroke-width="1.5"/>
-// </svg>')
-// ->nickname('frontend_setting')
-// ->data('role', ['admin','demo_admin'])
-// ->link->attr(["class" => ""]);
 
 
 $menu->add('<span>'.__('messages.Settings').'</span><span class="custom-tooltip"><span class="tooltip-text">'.__('messages.Settings').'</span></span>', ['route' => 'setting.index'])

@@ -114,6 +114,7 @@ use App\Http\Services\CategoryManagement\ViewCategory\Controller\ViewCategoryCon
 use App\Http\Services\Report\ClassReportDetails\Controller\ClassReportDetailsController;
 use App\Http\Services\AddSubscriptionToCoach\Controller\AddSubscriptionToCoachController;
 use App\Http\Services\BillManagement\DeleteBill\Controller\DeleteBillController;
+use App\Http\Services\BranchManagement\BranchCalander\Controller\BranchCalanderController;
 use App\Http\Services\BranchManagement\DeleteBranch\Controller\DeleteBranchController;
 use App\Http\Services\FundLogManagement\DeleteFundLog\Controller\DeleteFundLogController;
 use App\Http\Services\CategoryManagement\EditeCategory\Controller\EditeCategoryController;
@@ -903,6 +904,7 @@ Route::group(['prefix' => 'branch', 'middleware' => ['auth']],function(){
     Route::post('/edit',EditeBranchController::class)->name('editBranch');
     Route::post('/add',AddBranchController::class)->name('addBranch');
     Route::delete('/delete',DeleteBranchController::class)->name('deleteBranch');
+    Route::get('/calander/get',BranchCalanderController::class)->name("BranchCalander");
 });
 
 Route::group(['prefix' => 'subscription', 'middleware' => ['auth']],function(){
@@ -959,10 +961,10 @@ Route::group(['prefix' => 'report' , 'middleware' => ['auth'] ],function () {
         ->with(['userId'=>$request->userId]);
     })->name('userReportDetails');
 
-    Route::get('class/details',function (Request $request){
+    Route::get('class/details/show',function (Request $request){
         return view('service.bill_for_class_report')
         ->with(['coachId'=>$request->coachId,'subscriptionId'=>$request->subscriptionId]);
-    })->name('classReportDetails');
+    })->name('classReportDetailsShow');
 
     Route::post('user',UserReportController::class)->name('userReport');
     Route::post('user/details',UserReportDetailsController::class)->name('userReportDetails');

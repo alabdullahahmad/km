@@ -24,10 +24,6 @@ class User extends Authenticatable implements HasMedia
         'birthDay',
         'gender',
         'phoneNumber',
-        'familyNumber',
-        'homeNumber',
-        'address',
-        'personalid',
         'password',
         'qr'
     ];

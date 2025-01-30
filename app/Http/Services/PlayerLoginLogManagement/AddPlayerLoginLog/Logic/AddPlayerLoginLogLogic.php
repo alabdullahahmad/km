@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Services\PlayerLoginLogManagement\AddPlayerLoginLog\Logic;
+namespace App\Http\Services\PlayerLoginLogManagement\AddPlayerLoginLog\logic;
 
 use App\Http\Core\Const\Messages\SuccessMessages;
 use App\Http\Repositories\RepositoryCaller;

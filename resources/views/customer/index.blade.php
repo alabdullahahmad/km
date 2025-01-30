@@ -20,7 +20,7 @@
   <div class="card">
       <div class="card-body">
           <div class="row justify-content-between">
-              <div>
+              {{-- <div>
                   <div class="col-md-12">
                       <form action="{{ route('user.bulk-action') }}" id="quick-action-form" class="form-disabled d-flex gap-3 align-items-center">
                           @csrf
@@ -33,7 +33,7 @@
                           </button>
                       </form>
                   </div>
-              </div>
+              </div> --}}
               <div class="d-flex justify-content-end">
                   <div class="input-group ml-2">
                       <span class="input-group-text" id="addon-wrapping"><i class="fas fa-search"></i></span>
@@ -79,11 +79,9 @@
                     title: "{{ __('messages.date') }}"
                 },
                 {
-                    data: (data) => {
-                        return data.staf.phoneNumber;
-                    },
-                    name: 'contact_number',
-                    title: "{{ __('messages.phone') }}"
+                    data: (data)=>data.branch?.name ?? "__",
+                    name: 'branchName',
+                    title: "{{ __('messages.branchName') }}"
                 },
                 {
                     data: 'amount',

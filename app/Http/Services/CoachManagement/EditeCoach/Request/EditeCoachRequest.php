@@ -28,7 +28,6 @@ class EditeCoachRequest extends BaseRequest
             'coacheId' => ['required' , 'integer' , 'exists:coaches,id'],
             'name'=>['required' ,"string","min:3","max:20"],
             'photo'=>['nullable', 'image' , 'mimes:png,jpg'],
-            'phoneNumber'=>['required' , 'string', 'min:10','max:10'  ],
             'address' => ['nullable','string', 'min:3' , 'max:50'],
             // 'personalid' => ['nullable' , 'string' , 'min:11','max:11'],
             'gender' => ['required' , 'string' , ],

@@ -20,11 +20,6 @@
                     {{ Form::hidden('id') }}
                          {!!  isset($wallet->id) ? "<input type=hidden name=billId value=$wallet->id>":"" !!}
                         <div class="row">
-                            <div class="form-group col-md-4">
-                                {{ Form::label('cash', __('messages.select_cash',[ 'select' => __('messages.cash') ]).' <span class="text-danger">*</span>',['class'=>'form-control-label'],false) }}
-                                <br />
-                                {{ Form::select('cash',['cash' => __('messages.cash') /*, 'fixed' => __('messages.fixed')*/ ],old('cash'),[ 'id' => 'type' ,'class' =>'form-control select2js','required']) }}
-                            </div>
 
                             <div class="form-group col-md-4">
                                 {{ Form::label('payType',__('messages.type').' <span class="text-danger">*</span>',['class'=>'form-control-label'],false) }}

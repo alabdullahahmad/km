@@ -27,7 +27,7 @@ class UserReportLogic implements Service {
     ,($this->input->gender)?["gender"=>$this->input->gender]:[]);
 
         foreach ($userReport as  $value) {
-            $value->action = view('bookingrating.action')->with(
+            $value->action = view('taxes.action')->with(
                 ['userId'=>$value->id]
             )->render();
         }

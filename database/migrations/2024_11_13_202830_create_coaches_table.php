@@ -14,11 +14,10 @@ return new class extends Migration
     {
         Schema::create('coaches', function (Blueprint $table) {
             $table->id();
-            $table->text('photo')->nullable();
             $table->string('name');
             // $table->string('password');
             $table->string('phoneNumber')->unique();
-            $table->string('address');
+            $table->string('address')->nullable();
             // $table->string('personalid');
             $table->enum('gender',GendorOptions::$gendor);
             $table->date("birthDay");

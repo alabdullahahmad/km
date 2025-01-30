@@ -20,9 +20,11 @@
                     <form method="POST" action="{{ route('login') }}" data-toggle="validator">
                         {{csrf_field()}}
                       <div class="row">
-                         <div class="col-lg-12">
+                         <div class="col-lg-12 ">
                             <div class="form-group">
+                              <div class="d-flex justify-content-between align-items-center">
                                <label class="text-secondary">{{__('messages.phone')}} <span class="text-danger">*</span></label>
+                              </div>
                                <input id="phoneNumber" name="phoneNumber" value="{{request('phoneNumber')}}" class="form-control" type="phoneNumber" placeholder="{{ __('auth.enter_name',['name' => __('messages.phone')]) }}" required autofocus>
                                <small class="help-block with-errors text-danger"></small>
                             </div>

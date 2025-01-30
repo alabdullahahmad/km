@@ -11,7 +11,7 @@
                 <div class="card card-block card-stretch">
                     <div class="card-body p-0">
                         <div class="d-flex justify-content-between align-items-center p-3 flex-wrap gap-3">
-                            <h5 class="font-weight-bold">{{ __('messages.Report_classes') }}</h5>
+                            <h5 class="font-weight-bold">{{ __('messages.Bill_coaches') }}</h5>
                         </div>
                     </div>
                 </div>
@@ -45,78 +45,90 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
-
-    window.renderedDataTable = $('#datatable').DataTable({
-        processing: true,
-        serverSide: true,
-        autoWidth: false,
-        responsive: true,
-        columnDefs: [{
+            
+            window.renderedDataTable = $('#datatable').DataTable({
+                processing: true,
+                serverSide: true,
+                autoWidth: false,
+                responsive: true,
+                columnDefs: [{
                     targets: '_all',
                     className: 'text-wrap',
                     width: '20%'
                 }],
-        dom: '<"row align-items-center"><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" l><"col-md-6" p>><"clear">',
-        ajax: {
-            "type": "post",
-            "url": '{{ route("userReport") }}',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            "data": function(d) {
-                d.search = {
-                    value: $('.dt-search').val()
-                };
-                d.filter = {
-                    gender: $('#gender_filter').val(),
-                    status: $('#status_filter').val(),
-                    start_date: $('#start_date').val(),
-                    end_date: $('#end_date').val()
-                }
-                d.startDate = $('#startDate').val();
-                d.endDate = $('#endDate').val();
-            },
-        },
-        columns: [
-            {
-                data: 'name',
-                name: 'name',
-                title: "{{ __('messages.player_name') }}" 
-            },
-            {
-                data: 'gender',
-                name: 'gender',
-                title: "{{ __('messages.gender') }}"
-            },
-            {
-                data: 'birthDay',
-                name: 'birthDay',
-                title: "{{ __('messages.birthday') }}"
-            },
-            {
-                data: 'phoneNumber',
-                name: 'phoneNumber',
-                title: "{{ __('messages.phone') }}"
-            },
-            {
-                data: 'bills_count',
-                name: 'bills_count',
-                title: "{{ __('messages.Subscription_Count') }}"
-            },
-            {
-                data: 'action',
-                name: 'action',
-                orderable: false,
-                searchable: false,
-                title: "{{ __('messages.action') }}"
-            }
-        ],
-        drawCallback: function(settings) {
-            const playerCount = settings.json.recordsTotal || 0; 
-            $('#player-count').text(playerCount); 
-        }
-    });
-});
+                dom: '<"row align-items-center"><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" l><"col-md-6" p>><"clear">',
+                ajax: {
+                    "type": "post",
+                    "url": "{{ route('classReportDetails') }}",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    "data": function(d) {
+                        d.search = {
+                            value: $('.dt-search').val()
+                        };
+                        d.filter = {
+                            column_status: $('#column_status').val()
+                        };
+                        d.subscriptionId = "{{ $subscriptionId }}";
+                        d.coachId = "{{ $coachId }}";
+                    },
+                },
+                columns: [{
+                        name: 'stafName',
+                        data: (data)=>{
+                            return data.staf?.name ?? "__"
+                        },
+                        title: "{{ __('messages.Reception_name') }}",
+                        exportable: false,
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: (data)=>{
+                            return data.subscription?.name ?? ''
+                        },
+                        name: 'subscription',
+                        title: "{{ __('messages.Subscription_Name') }}"
+                    },
+                    {
+                        data: (data)=>{
+                            return data.subscription?.price ?? ''
+                        },
+                        name: 'subscription',
+                        title: "{{ __('messages.price') }}"
+                    },
+                    {
+                        name: 'stafName',
+                        data: (data)=>{
+                            return data.user?.name ?? "__"
+                        },
+                        title: "{{ __('messages.player_name') }}",
+                        exportable: false,
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                    data: (data)=>data.branch.name,
+                    name: 'branchName',
+                    title: "{{ __('messages.branchName') }}"
+                   },
+                   {
+                        data: (data) => data.user_payment?.[0]?.totalAmount ?? 0,
+                        name: 'amount',
+                        title: "{{ __('messages.Received_Amount') }}"
+                    },
+                  
+                    
+                    {
+                        data: (data)=>{
+                            return (data.isEnd == 1) ?"{{ __('messages.inactive') }}":"{{ __('messages.active') }}"
+                        },
+                        title: "{{ __('messages.action') }}"
+                    },
+                ]
+            });
+        });
 
         $('#expire_date').change(function() {
             if ($('#expire_date').val()) {

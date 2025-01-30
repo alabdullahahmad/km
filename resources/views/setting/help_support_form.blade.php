@@ -81,10 +81,17 @@
                                 <td><strong>{{ __('messages.bill_before_discount') }}</strong><br><small>{{ ($bill->price ?? $bill->amount) + $bill->discountAmount }}</small></td>
                                 <td><strong>{{ __('messages.discount_value') }}</strong><br><small>{{ $bill->discountAmount }}</small></td>
                                 <td><strong>{{ __('messages.amount_paid') }}</strong><br><small>{{ optional($bill->userPayment->first())->totalAmount ?? 0 }}</small></td>
-                                <td><strong>{{ __('messages.remaining_balance') }}</strong><br><small>{{ ($bill->price ?? $bill->amount) - (optional($bill->userPayment->first())->totalAmount ?? 0) }}</small></td>
+                                <td><strong>{{ __('messages.remaining_balance') }}</strong><br><small>{{ ($bill->price ?? $bill->amount) - (int)(optional($bill->userPayment->first())->totalAmount ?? 0) }}</small></td>
                             </tbody>
                         </table>
                     </div>
+                    {{-- "user_payment": [
+                        {
+                          "id": 14,
+                          "billId": 23,
+                          "totalAmount": "574232"
+                        }
+                      ] --}}
                     <div class="card-footer d-flex justify-content-between">
                         <button class="btn btn-secondary complete-bill-btn"
                         data-id="{{ $bill->id }}" 
@@ -94,11 +101,14 @@
                     </button>
                          
                     <a href="{{ route('show.booking.page', ['billId' => $bill->id, 'data' => $data['user']->id]) }}" class="btn btn-danger mx-1">{{ __('messages.Update_subscription') }}</a>
-                    <button class="btn btn-warning mx-1" id="change-subscription-btn" data-id="{{ $bill->id }}">{{ __('messages.change_subscription') }}</button>
 
+                    @if ($auth_user->can('add update date'))
+                    <button class="btn btn-warning mx-1 change-subscription-btn"  data-id="{{ $bill->id }}">{{ __('messages.change_subscription') }}</button>
+                    @endif
 
-
-                        <button class="btn btn-info freeze-bill-btn" data-id="{{ $bill->id }}">{{ __('messages.freeze') }}</button>
+                         @if ($auth_user->can('freeze add'))
+                         <button class="btn btn-info freeze-bill-btn" data-id="{{ $bill->id }}">{{ __('messages.freeze') }}</button>  
+                         @endif
                         
                     </div>
                 </div>
@@ -253,8 +263,8 @@
             $(document).ready(function () {
             let currentBillId = null;
 
-            // عند الضغط على زر تغيير الاشتراك
-            $('#change-subscription-btn').on('click', function () {
+        
+            $('.change-subscription-btn').on('click', function () {
                 currentBillId = $(this).data('id');
                 $('#changeSubscriptionModal').modal('show');
             });

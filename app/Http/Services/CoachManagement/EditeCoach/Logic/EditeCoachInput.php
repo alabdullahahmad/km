@@ -9,7 +9,6 @@ class EditeCoachInput implements InputServiceInterface
     public int $coacheId;
     public $photo;
     public ?string $name;
-    public string $phoneNumber;
     public ?string $address;
     // public ?string $personalid;
     public string $gender;
@@ -23,7 +22,6 @@ class EditeCoachInput implements InputServiceInterface
         $this->coacheId = $input->coacheId;
         $this->photo = $input->file('photo');
         $this->name = $input->name;
-        $this->phoneNumber = $input->phoneNumber;
         $this->address = $input->address;
         // $this->personalid = $input->personalid;
         $this->gender = $input->gender;
@@ -38,7 +36,6 @@ class EditeCoachInput implements InputServiceInterface
     public function toArray(){
         return [
             'name' => $this->name,
-            'phoneNumber' => $this->phoneNumber,
             'address' => $this->address,
             // 'personalid' => $this->personalid,
             'gender' => $this->gender,

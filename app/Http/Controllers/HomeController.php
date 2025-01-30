@@ -22,6 +22,7 @@ use App\Models\SubCategory;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use App\Models\BookingRating;
 use App\Models\Coach;
+use App\Models\Subscription;
 //jabu
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -1026,7 +1027,7 @@ class HomeController extends Controller
                     $items = \App\Models\Tag::query()->select(['id', 'name as text'])->get();
                     break;
                 case 'subscription':
-                    $items = \App\Models\Subscription::query()->select(['id', 'name as text'])->get();
+                    $items = ($request->branchId)?Subscription::query()->where(['branchId' => $request->branchId])->select(['id', 'name as text'])->get():Subscription::query()->select(['id', 'name as text'])->get();
                 break;
                 case 'branch':
                     $items = \App\Models\Branch::query()->select(['id', 'name as text'])->get();

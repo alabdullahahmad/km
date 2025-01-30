@@ -26,7 +26,11 @@ class ShowFundLogLogic implements Service {
 
         $fundRepository = $this->repository->fundLogRepository();
 
-        $fundLog = $fundRepository->readRepository()->getByConditions([
+        $fundLog = $fundRepository->readRepository()->getAllRecordsWithRelations(
+            ['branch'=>function ($q) {
+                return $q->select('id','name');
+            }]
+            ,[
             'adminRecipient' => true,
             'stafRecipient' => true,
         ]);

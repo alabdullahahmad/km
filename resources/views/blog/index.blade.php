@@ -144,13 +144,15 @@
                               <form id="addEventForm">
                                   <!-- اختيار المدرب -->
                                   <div class="form-group">
-                                      <label for="coachId">{{__('messages.Coach')}}</label>
-                                      <select id="coachId" name="coachId" class="form-control select2js" required>
-                                          @foreach ($coaches as $coach)
-                                              <option value="{{ $coach->id }}">{{ $coach->name }}</option>
-                                          @endforeach
-                                      </select>
-                                  </div>
+                                    <label for="coachId">{{__('messages.Coach')}}</label>
+                                    <select id="coachId" name="coachId" class="form-control select2js" required>
+                                        <option value="" disabled selected>{{__('messages.select_Coache')}}</option> <!-- خيار فارغ -->
+                                        @foreach ($coaches as $coach)
+                                            <option value="{{ $coach->id }}">{{ $coach->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                
 
                                   <!-- اختيار الصف -->
                                   <div class="form-group">
@@ -208,9 +210,10 @@
       <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/fullcalendar.min.js"></script>
 
       <script>
+        
 // جلب قائمة الفروع عبر API
 $.ajax({
-    url: "{{ route('Branch') }}", // تأكد من إعداد المسار الصحيح
+    url: "{{ route('BranchCalander') }}", // المسار الخاص بجلب الفروع
     type: "GET",
     success: function(response) {
         if (response.status === 200) {
@@ -257,7 +260,7 @@ $.ajax({
             $("#branchTabs").html(tabsHtml);
             $("#branchTabsContent").html(contentHtml);
 
-            // جلب الغرف للفرع الأول تلقائيًا
+            // جلب الغرف والمدربين للفرع الأول تلقائيًا
             if (branches.length > 0) {
                 fetchRoomsByBranch(branches[0].id);
             }
@@ -274,36 +277,43 @@ $.ajax({
     }
 });
 
+const eventColors = ['#3f51b5', '#e91e63', '#ff9800', '#4caf50', '#9c27b0', '#009688', '#2196f3'];
 
+// دالة لجلب الغرف والمدربين بناءً على الفرع
+function fetchRoomsByBranch(branchId) {
+    $.ajax({
+        url: "{{ route('RoomBranch') }}", // المسار الخاص بجلب الغرف والمدربين
+        type: "POST",
+        data: { branchId: branchId }, // إرسال معرف الفرع كمعيار
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(response) {
+            if (response.status === 200) {
+                const rooms = response.data.rooms; // الغرف
+                const coaches = response.data.coaches; // المدربين
 
+                // ملء حقل اختيار المدربين
+                const coachSelect = $("#coachId");
+                coachSelect.empty(); // إفراغ الحقل أولًا
+                coachSelect.append('<option value="" disabled selected>{{__("messages.select_Coache")}}</option>'); // خيار فارغ
+                coaches.forEach(coach => {
+                    coachSelect.append(`<option value="${coach.id}">${coach.name}</option>`);
+                });
 
-  
-        const eventColors = ['#3f51b5', '#e91e63', '#ff9800', '#4caf50', '#9c27b0', '#009688', '#2196f3'];
-        function fetchRoomsByBranch(branchId) {
-            $.ajax({
-                url: "{{ route('RoomBranch') }}", // تأكد من إعداد المسار الصحيح
-                type: "post",
-                data: { branchId: branchId }, // إرسال معرف الفرع كمعيار
-                headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                success: function(response) {
-                    if (response.status === 200) {
-                        const rooms = response.data;
+                const branchRoomsContainer = $(`#branch-rooms-${branchId}`);
+                branchRoomsContainer.empty();
 
-                        const branchRoomsContainer = $(`#branch-rooms-${branchId}`);
-                        branchRoomsContainer.empty();
-
-                        if (rooms.length === 0) {
-                            branchRoomsContainer.html(`
-                                <div class="d-flex justify-content-center align-items-center" style="height: 300px;">
-                                    <div class="alert alert-warning text-center" role="alert" style="font-size: 1.5rem; font-weight: bold;">
-                                        {{ __('messages.no_rooms') }}
-                                    </div>
-                                </div>
-                            `);
-                            return;
-                        }
+                if (rooms.length === 0) {
+                    branchRoomsContainer.html(`
+                        <div class="d-flex justify-content-center align-items-center" style="height: 300px;">
+                            <div class="alert alert-warning text-center" role="alert" style="font-size: 1.5rem; font-weight: bold;">
+                                {{ __('messages.no_rooms') }}
+                            </div>
+                        </div>
+                    `);
+                    return;
+                }
 
                 // إنشاء التابات ومحتوى التاب لكل غرفة
                 let tabsHtml = '<ul class="nav nav-tabs" id="roomTabs" role="tablist">';
@@ -351,7 +361,7 @@ $.ajax({
             }
         },
         error: function(error) {
-            console.error("Error fetching rooms:", error);
+            console.error("Error fetching rooms and coaches:", error);
         }
     });
 }
@@ -382,7 +392,7 @@ buttonText: {
       editable: true, // تمكين تعديل الأحداث
       selectable: true, // تمكين تحديد الفواصل الزمنية
       selectHelper: true, // عرض مساعد التحديد
-      firstDay: 1, // بداية الأسبوع (1 = الاثنين)
+      firstDay: 6, // بداية الأسبوع (1 = الاثنين)
       nowIndicator: true, // مؤشر الوقت الحالي
       navLinks: false, // تعطيل روابط التنقل بين الأيام أو العناوين
 
@@ -429,6 +439,8 @@ buttonText: {
       }
   });
 },
+
+@if(Auth::user()->hasRole('admin'))
 eventClick: function(event) {
   // تعبئة تفاصيل الحدث
   $("#eventCoach").text(event.description.split(", ")[0].split(": ")[1]); // جلب اسم المدرب
@@ -443,11 +455,10 @@ eventClick: function(event) {
   $("#deleteEventBtn").data("eventId", event.id);
   $("#editEventBtn").data("event", event);
 },
-
-
+@endif
 
           select: function (start, end) {
-            @if(!Auth::user()->isAdmin)
+            @if(!Auth::user()->hasRole('admin'))
                 return false; 
             @endif
               // فتح نافذة الإضافة عند اختيار حدث جديد
@@ -548,6 +559,12 @@ $("#deleteEventBtn").on("click", function() {
           }
       });
   }
+});
+// إعادة تعيين القيم عند إغلاق المودال
+$('#addEventModal').on('hidden.bs.modal', function () {
+    // إعادة تعيين القيم الافتراضية
+    $('#coachId').val('').trigger('change');  // إعادة تعيين المدرب
+    $('#subscription').val('').trigger('change');  // إعادة تعيين الصف
 });
 
 ////تعديل الحدث

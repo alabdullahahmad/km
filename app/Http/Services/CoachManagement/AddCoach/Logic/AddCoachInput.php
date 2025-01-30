@@ -9,7 +9,6 @@ class AddCoachInput implements InputServiceInterface
     public $photo;
     public ?string $name;
     // public string $password;
-    public string $phoneNumber;
     public ?string $address;
     // public ?string $personalid;
     public string $gender;
@@ -23,7 +22,6 @@ class AddCoachInput implements InputServiceInterface
         $this->photo = $input->file('photo');
         $this->name = $input->name;
         // $this->password = $input->password;
-        $this->phoneNumber = $input->phoneNumber;
         $this->address = $input->address ?? '';
         // $this->personalid = $input->personalid;
         $this->gender = $input->gender;
@@ -40,7 +38,6 @@ class AddCoachInput implements InputServiceInterface
             'name' => $this->name,
             // 'password' => Hash::make($this->password),
             'photo' => $this->getPhoto($oldPath),
-            'phoneNumber' => $this->phoneNumber,
             'address' => $this->address,
             // 'personalid' => $this->personalid,
             'gender' => $this->gender,

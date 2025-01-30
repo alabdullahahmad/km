@@ -16,7 +16,6 @@ class Coach extends Model
     protected $fillable = [
         'photo',
         'name',
-        'phoneNumber',
         'address',
         'personalid',
         'gender',

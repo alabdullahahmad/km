@@ -105,6 +105,7 @@
             serverSide: false, // Client-side فقط
             autoWidth: false,
             responsive: true,
+            order: false,
             columnDefs: [{
                     targets: '_all',
                     className: 'text-wrap',
@@ -131,11 +132,14 @@
                     data: (data) => data.user.name ?? '', // التحقق من وجود الاسم
                     title: "{{ __('messages.name') }}"
                 },
+                @if(Auth::user()->hasRole('admin'))
                 {
+                
                     data: (data)=>data.branch.name,
                     name: 'branchName',
                     title: "{{ __('messages.branchName') }}"
                 },
+                @endif
                 {
                     data: 'startDate',
                     title: "{{ __('messages.subscription_start') }}"

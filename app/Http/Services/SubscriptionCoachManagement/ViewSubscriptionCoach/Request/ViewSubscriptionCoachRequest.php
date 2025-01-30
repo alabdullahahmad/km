@@ -24,7 +24,8 @@ class ViewSubscriptionCoachRequest extends BaseRequest
     {
         return
         [
-            'roomId' => ['required' , 'integer' , 'exists:rooms,id']
+            'roomId' => ['required' , 'integer' , 'exists:rooms,id'],
+            'branchId' => ['nullable' , 'integer' , 'exists:branches,id']
         ];
     }
 

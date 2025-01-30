@@ -26,10 +26,6 @@
                                     {{ Form::text('name', old('name'), ['placeholder' => __('messages.name'), 'class' => 'form-control', 'required', 'title' => 'Please enter alphabetic characters and spaces only']) }}
                                     <small class="help-block with-errors text-danger"></small>
                                 </div>
-                                <div class="form-group col-md-4">
-                                    {{ Form::label('discount_type',__('messages.branchName').' <span class="text-danger">*</span>',['class'=>'form-control-label'],false) }}
-                                    {{ Form::select('discount_type',['fixed' => __('messages.name') , 'percentage' => __('messages.percentage') ],old('status'),[ 'class' =>'form-control select2js','required']) }}
-                                </div>
 
 
                         </div>

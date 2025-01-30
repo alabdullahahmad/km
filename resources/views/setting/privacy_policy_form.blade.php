@@ -529,10 +529,10 @@ $(document).ready(function () {
         errorMessage += 'يرجى اختيار اشتراك.\n';
     }
 
-    if (!$('#coach_id').val()) {
-        isValid = false;
-        errorMessage += 'يرجى اختيار مدرب.\n';
-    }
+    // if (!$('#coach_id').val()) {
+    //     isValid = false;
+    //     errorMessage += 'يرجى اختيار مدرب.\n';
+    // }
 
 
     if (!$('#startDate').val()) {

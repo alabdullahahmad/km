@@ -31,6 +31,7 @@ class EditSubscriptionRequest extends BaseRequest
             'numOfSessions' => ['required' , 'integer'],
             'description' => ['nullable' , 'string'],
             'branchId' => ['required' , 'integer' , 'exists:branches,id'],
+            'tagId' => ['required' , 'integer' , 'exists:tags,id'],
 
         ];
     }

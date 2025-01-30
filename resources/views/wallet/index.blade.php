@@ -87,11 +87,13 @@
                         name: 'amount',
                         title: "{{__('messages.amount')}}"
                     },
+                    @if(auth()->user()->hasRole('admin'))
                     {
                     data: (data)=>data.branch.name,
                     name: 'branchName',
                     title: "{{ __('messages.branchName') }}"
                     },
+                    @endif
                     {
                         data: (data) => data.description ?? '', // التعامل مع القيم الفارغة
                         name: 'description',

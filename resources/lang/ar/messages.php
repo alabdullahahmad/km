@@ -943,6 +943,7 @@ use App\Http\Core\Const\Messages\Attributes;
        'Classes' => 'كلاسات',
        'Add_New_Coaches' => 'إضافة مدرب جديد',
        'select_Coaches' => 'اختيار :select',
+       'select_Coache' => 'اختر المدرب',
        'percentage' => 'نسبة',
        'Discount_Percentage' => 'قيمة الحسم',
        'Discounts' => 'الحسومات',
@@ -976,7 +977,8 @@ use App\Http\Core\Const\Messages\Attributes;
         'Bodybuilding' => 'كمال اجسام',
         "Subscription" => 'اشتراك',
         "price" => 'السعر',
-
+        'Player_list' => 'سجل اللاعبين',
+        'Bill_coaches' => 'فواتير الكوتشات',
         'select_name' => 'اختيار :select',
        'New_bodybuilding_subscription' => 'اشتراك كمال اجسام جديد',
         'New_Tools_subscription' => 'اشتراك ادوات جديد',
@@ -1095,6 +1097,7 @@ use App\Http\Core\Const\Messages\Attributes;
 'To_Hour'=> 'إلى الساعة',
 'add_Event' => 'إضافة موعد',
 'new_player'=> 'جديد',
+'Player' => 'اللاعبين',
 'old_player' => 'قديم',
 'subscription_period' => 'فترة الاشتراك',
 'coach_name' => 'اسم الكوتش',
@@ -1134,6 +1137,7 @@ use App\Http\Core\Const\Messages\Attributes;
 'old_password' => 'كلمة السر القديمة',
 'new_password' => 'كلمة السر الجديدة',
 'confirm_new_password' => 'تأكيد كلمة السر',
+
 
     )
 

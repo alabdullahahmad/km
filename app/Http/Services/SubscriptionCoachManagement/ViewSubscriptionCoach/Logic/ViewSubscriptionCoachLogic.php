@@ -25,8 +25,12 @@ class ViewSubscriptionCoachLogic implements Service {
         // write your Logic code..
         $subscriptionCoachRepository = $this->repository->SubscriptionCoachRepository();
 
+        $data =  ['roomId' => $this->input->getRoomId()];
+        if ($this->input->branchId) {
+            $data [] = ['branchId' => $this->input->branchId];
+        }
         $subscriptionCoachs = $subscriptionCoachRepository->readRepository()->getAllWithRelations(
-            ['roomId' => $this->input->getRoomId()]
+            $data
         );
 
         $response  = new ViewSubscriptionCoachOutput($subscriptionCoachs ,

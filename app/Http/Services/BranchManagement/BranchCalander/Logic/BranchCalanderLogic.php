@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Services\RoomManagement\ShowRoom\Logic;
+namespace App\Http\Services\BranchManagement\BranchCalander\Logic;
 
 use App\Http\Core\Const\Messages\Attributes;
 use App\Http\Core\Const\Messages\SuccessMessages;
@@ -7,13 +7,13 @@ use App\Http\Repositories\RepositoryCaller;
 use App\Http\Core\InternalInterface\Service;
 use App\Http\Core\Response\Adapter\PresentersModels\ResponseModel;
 
-class ShowRoomLogic implements Service {
+class BranchCalanderLogic implements Service {
 
     private RepositoryCaller $repository ; // access to all model's repositories
 
     public function __construct(
     //---------------------------------------------------------------------------------------
-    private ShowRoomInput $input,  /*| Pass Request To Service*/
+    private BranchCalanderInput $input,  /*| Pass Request To Service*/
     //---------------------------------------------------------------------------------------
     ){
         $this->repository = new RepositoryCaller();
@@ -23,16 +23,14 @@ class ShowRoomLogic implements Service {
     public function execute (): ResponseModel {
 
         // write your logic code..
-        $roomRepository = $this->repository->RoomRepository();
-        $room = $roomRepository->readRepository()->getByConditions($this->input->toArray());
+        $branchRepository = $this->repository->branchRepository();
 
-        $coaches = $this->repository->CoachRepository()->readRepository()
-        ->getByConditions($this->input->toArray());
+        $branches = (auth()->user()->hasRole('admin'))?$branchRepository->readRepository()->getAllRecords()
+        : $branchRepository->readRepository()->getByConditions(['id'=>auth()->user()->branchId]);
 
-        $response  = new ShowRoomOutput(['rooms'=>$room , 'coaches'=>$coaches],
-        SuccessMessages::getKey(SuccessMessages::$show,Attributes::Room)
-        ,viewPath:'room_management.show_room');
+
+        $response  = new BranchCalanderOutput($branches , SuccessMessages::getKey(SuccessMessages::$show,Attributes::Coache)
+        ,viewPath:'branch_management.index_branch');
         return $response->send_as_object();
-    }
-
+   }
 }

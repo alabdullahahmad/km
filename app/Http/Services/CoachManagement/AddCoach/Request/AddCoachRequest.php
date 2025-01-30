@@ -27,7 +27,6 @@ class AddCoachRequest extends BaseRequest
         [
             'name'=>['required' ,"string","min:3","max:20"],
             'photo'=>['nullable', 'image' , 'mimes:png,jpg'],
-            'phoneNumber'=>['required' , 'string', 'min:10','max:10' , 'unique:coaches,phoneNumber'  ],
             'address' => ['nullable','string', 'min:3' , 'max:50'],
             // 'personalid' => ['nullable' , 'string' , 'min:11','max:11'],
             'gender' => ['required' , 'string' ],

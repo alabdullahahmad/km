@@ -6,9 +6,11 @@ use App\Http\Core\InternalInterface\InputServiceInterface;
 class ViewSubscriptionCoachInput implements InputServiceInterface
 {
     public int $roomId;
+    public ?int $branchId;
     public function __construct( array $input)
     {
         $this->roomId = $input['roomId'];
+        $this->branchId = $input['branchId'] ?? null;
     }
 
     // write your input function here..

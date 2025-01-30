@@ -12,6 +12,7 @@ class EditeSubscriptionInput implements InputServiceInterface
     public int $numOfSessions;
     public string $description;
     public int $branchId;
+    public int $tagId;
 
 
     public function __construct( array $input)
@@ -23,6 +24,7 @@ class EditeSubscriptionInput implements InputServiceInterface
         $this->numOfSessions = $input['numOfSessions'];
         $this->description = $input['description'] ?? '';
         $this->branchId = $input['branchId'];
+        $this->tagId = $input['tagId'];
 
     }
 
@@ -35,7 +37,8 @@ class EditeSubscriptionInput implements InputServiceInterface
             'numOfDays' => $this->numOfDays,
             'numOfSessions' => $this->numOfSessions,
             'description' => $this->description,
-            'branchId' => $this->branchId
+            'branchId' => $this->branchId,
+            'tagId' => $this->tagId
         ];
     }
 

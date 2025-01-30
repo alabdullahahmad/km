@@ -21,10 +21,6 @@ class EditeUserInput implements InputServiceInterface
         $this->name = $input['name'] ?? null;
         $this->birthDay = $input['birthDay'] ?? null;
         $this->gender = $input['gender'] ?? null;
-        $this->familyNumber = $input['familyNumber'] ?? null;
-        $this->homeNumber = $input['homeNumber'] ?? null;
-        $this->address = $input['address'] ?? null;
-        $this->personalid = $input['personalid'] ?? null;
         // $this->password = $input['password'];
         $this->qr = $input['qr'] ?? null;
     }
@@ -36,10 +32,6 @@ class EditeUserInput implements InputServiceInterface
             'name' => $this->name ?? $oldData->name,
             'birthDay' => $this->birthDay ?? $oldData->birthDay,
             'gender' => $this->gender ?? $oldData->gender,
-            'familyNumber' => $this->familyNumber ?? $oldData->familyNumber,
-            'homeNumber' => $this->homeNumber ?? $oldData->homeNumber,
-            'address' => $this->address ?? $oldData->address,
-            'personalid' => $this->personalid ?? $oldData->personalid,
             // 'password' => $this->password,
             'qr' => $this->qr ?? $oldData->qr,
         ];

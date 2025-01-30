@@ -58,44 +58,30 @@
                                 <small class="help-block with-errors text-danger"></small>
                             </div>
                             <div class="form-group col-md-4">
-                                {{ Form::label('name', __('messages.select_name',[ 'select' => __('messages.branchName') ]).' <span class="text-danger">*</span>',['class'=>'form-control-label'],false) }}
+                                {{ Form::label('name', __('messages.select_name',[ 'select' => __('messages.branchName') ]).' <span class="text-danger">*</span>', ['class'=>'form-control-label'], false) }}
                                 <br />
                                 {{ Form::select('branchId', [optional($handymandata->branch)->id => optional($handymandata->branch)->name], optional($handymandata->branch)->id, [
-                                        'class' => 'select2js form-group category',
-                                        'required',
-                                        'data-placeholder' => __('messages.select_name',[ 'select' => __('messages.branchName') ]),
-                                        'data-ajax--url' => route('ajax-list', ['type' => 'branch']),
-                                    ]) }}
-
+                                    'class' => 'select2js form-group category',
+                                    'required',
+                                    'data-placeholder' => __('messages.select_name', ['select' => __('messages.branchName')]),
+                                    'data-ajax--url' => route('ajax-list', ['type' => 'branch']),
+                                ]) }}
                             </div>
-                            <div class="form-group col-md-4">
-                                {{ Form::label('phoneNumber',__('messages.phone').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
-                                {{ Form::text('phoneNumber',old('phoneNumber'),['placeholder' => __('messages.phone'),'class' =>'form-control contact_number','required']) }}
-                                <small class="help-block with-errors text-danger" id="contact_number_err"></small>
-                            </div>
-                            {{-- <div class="form-group col-md-4">
-                                {{ Form::label('personalid',__('messages.National_Id').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
-                                {{ Form::text('personalid',old('personalid'),['placeholder' => __('messages.National_Id'),'class' =>'form-control National_Id','required']) }}
-                                <small class="help-block with-errors text-danger" id="National_Id_err"></small>
-                            </div> --}}
-                            {{-- <div class="form-group col-md-4">
-                                {{ Form::label('status',__('messages.status').' <span class="text-danger">*</span>',['class'=>'form-control-label'],false) }}
-                                {{ Form::select('status',['1' => __('messages.active') , '0' => __('messages.inactive') ],old('status'),[ 'class' =>'form-control select2js','required']) }}
-                            </div> --}}
-
+                            
                             @if(auth()->user()->hasAnyRole(['admin','demo_admin']))
                             <div class="form-group col-md-4">
-                                {{ Form::label('class', __('messages.Classes',[ 'select' => __('messages.Classes') ]).' <span class="text-danger">*</span>',['class'=>'form-control-label'],false) }}
+                                {{ Form::label('class', __('messages.Classes',[ 'select' => __('messages.Classes') ]).' <span class="text-danger">*</span>', ['class'=>'form-control-label'], false) }}
                                 <br />
                                 {{ Form::select('class[]', [optional($handymandata->providers)->id => optional($handymandata->providers)->display_name], (int)optional($handymandata->providers)->id, [
-                                        'class' => 'select2js form-group providers',
-                                        'required',
-                                        'multiple' => 'multiple',
-                                        'data-placeholder' => __('messages.select_Coaches',[ 'select' => __('messages.Classes') ]),
-                                        'data-ajax--url' => route('ajax-list', ['type' => 'subscription']),
-                                    ]) }}
+                                    'class' => 'select2js form-group providers',
+                                    'required',
+                                    'multiple' => 'multiple',
+                                    'data-placeholder' => __('messages.select_Coaches', ['select' => __('messages.Classes')]),
+                                    'data-ajax--url' => route('ajax-list', ['type' => 'subscription', 'branchId' => '__branchId__']),
+                                ]) }}
                             </div>
                             @endif
+                            
 
                             <div class="form-group col-md-4">
                                 {{ Form::label('percentage', __('messages.percentage').' <span class="text-danger">*</span>', ['class' => 'form-control-label'], false) }}
@@ -118,6 +104,56 @@
     </div>
     @section('bottom_script')
     <script type="text/javascript">
+$(document).ready(function () {
+    let branchId = $('select[name="branchId"]').val();
+    if (branchId) {
+        loadClasses(branchId);
+    }
+});
+
+// عند تغيير الفرع
+$('select[name="branchId"]').on('change', function () {
+    let branchId = $(this).val();
+    loadClasses(branchId);
+});
+
+// دالة تحميل الكلاسات بناءً على الفرع
+function loadClasses(branchId) {
+    let classSelect = $('select[name="class[]"]');
+
+    // تحديث رابط data-ajax--url
+    classSelect.data('ajax--url', `/ajax-list?type=subscription&branchId=${branchId}`);
+
+    // إعادة تحميل البيانات
+    classSelect.select2({
+        ajax: {
+            url: classSelect.data('ajax--url'),
+            dataType: 'json',
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results: data.results.map(item => ({
+                        id: item.id,
+                        text: item.text
+                    }))
+                };
+            }
+        },
+        minimumInputLength: 0,
+        placeholder: "اختر الكلاس",
+        allowClear: false
+    });
+
+    // إعادة ضبط القيم المختارة بناءً على البيانات المحفوظة
+    let selectedClasses = {!! json_encode($handymandata->providers ? $handymandata->providers->pluck('id')->toArray() : []) !!};
+
+    classSelect.val(selectedClasses).trigger('change');
+}
+
+
+
+
+
     (function($) {
         "use strict";
         $(document).ready(function() {

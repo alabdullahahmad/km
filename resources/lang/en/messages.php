@@ -1142,6 +1142,8 @@ use App\Http\Core\Const\Messages\Attributes;
 'isFreeze' => 'Unable to log in. Subscription is frozen :(',
 'Error: ' => 'Error: ',
 'Logout' => 'Log out',
-
+'Player' => 'Player',
+"Bill_coaches" => 'Bill_coaches',
+'Player_list' =>'Player list',
     )
     ?>
