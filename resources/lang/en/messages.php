@@ -951,6 +951,7 @@ use App\Http\Core\Const\Messages\Attributes;
 'Classes' => 'Classes',
 'Add_New_Coaches' => 'Add New Coach',
 'select_Coaches' => 'Select :select',
+'select_Coache' => 'select Coache',
 'percentage' => 'Percentage',
 'Discount_Percentage' => 'Discount Percentage',
 'Discounts' => 'Discounts',

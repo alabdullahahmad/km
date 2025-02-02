@@ -989,3 +989,9 @@ Route::group(['prefix' => 'playerLoginLog' ,  'middleware' => ['auth']],function
     // Route::post('/edit',EditeUserController::class);
     Route::post('/add',AddPlayerLoginLogController::class)->name('addPlayerLoginLog');
 });
+
+
+Route::get('fin',function(){
+    info("ahmad");
+    return response()->json("ahmad");
+});

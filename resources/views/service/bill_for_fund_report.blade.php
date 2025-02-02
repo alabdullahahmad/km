@@ -5,7 +5,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
         <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> --}}
     </head>
 
     <div class="container-fluid">
@@ -95,7 +95,7 @@
                         searchable: false
                     },
                     {
-                        data: (data) => data.user?.name ?? '',
+                        data: (data) => data.user?.name ?? '___',
                         title: "{{ __('messages.player_name') }}"
                     },
                     {
@@ -107,7 +107,8 @@
                         title: "{{ __('messages.payment_time') }}"
                     },
                     {
-                        data: 'paymrentNote',
+                        data: (data) => data.paymrentNote ?? '___',
+                       
                         title: "{{ __('messages.payment_note') }}"
                     },
                     {
@@ -134,7 +135,7 @@
                         title: "{{ __('messages.Description') }}"
                     },
                     {
-                        data: (data) => data.subscription?.name ?? '',
+                        data: (data) => data.subscription?.name ?? '___',
                         title: "{{ __('messages.Subscription_Name') }}"
                     },
                     {
@@ -220,9 +221,7 @@
         text-align: center !important; /* يجعل النصوص والأرقام في منتصف الأعمدة */
         vertical-align: middle !important; /* يضمن توسيط النصوص عموديًا أيضًا */
     }
-    .dataTables_wrapper .dataTable td.text-wrap {
-        white-space: normal !important;
-    }
+
     .text-center {
         text-align: center !important;
         vertical-align: middle !important;
