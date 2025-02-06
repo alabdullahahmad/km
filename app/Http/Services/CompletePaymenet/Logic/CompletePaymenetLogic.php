@@ -5,6 +5,7 @@ use App\Http\Core\Const\Messages\SuccessMessages;
 use App\Http\Repositories\RepositoryCaller;
 use App\Http\Core\InternalInterface\Service;
 use App\Http\Core\Response\Adapter\PresentersModels\ResponseModel;
+use Illuminate\Support\Facades\Auth;
 
 class CompletePaymenetLogic implements Service {
 
@@ -34,6 +35,12 @@ class CompletePaymenetLogic implements Service {
             $bill->isCompletePayment == true;
             $bill->save();
         }
+
+        $fund = $this->repository->fundRepository()->readRepository()->getFirstByConditions(
+            ['branchId' => Auth::user()->branchId]
+        );
+        $fund->amount+=$this->input->amount;
+        $fund->save();
 
         $response  = new CompletePaymenetOutput($bill->toArray() , 
         SuccessMessages::getKey(SuccessMessages::$show)

@@ -1,12 +1,14 @@
         <x-master-layout>
 
     <head>
+        <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     </head>
       @if(!Auth::user()->isAdmin)
 
-    <div class="container-fluid">
+      <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
                 <div class="card card-block card-stretch">
@@ -17,22 +19,24 @@
                                 @csrf
                                 @method('post')
                                 <div class="d-flex justify-content-center align-items-center gap-3 mx-auto">
-                                    <label for="amountInput"
-                                        class="value-label font-weight-bold">{{ __('messages.Box_Value:') }}</label>
-                                    <input readonly id="amountInput" class="value-amount font-weight-bold"
-                                        style="border: 0px ;width: fit-content" name="amount"
-                                        value="{{ App\Models\fund::where([ 'branchId' => auth()->user()->branchId])->first()->amount }}">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <label for="amountInput"  style="margin:unset"
+                                            class="value-label font-weight-bold">{{ __('messages.Box_Value:') }}</label>
+                                        <input readonly id="amountInput" class="value-amount font-weight-bold"
+                                            style="border: 0px;padding-bottom: 0px; width: fit-content" name="amount"
+                                            value="{{ App\Models\fund::where([ 'branchId' => auth()->user()->branchId])->first()->amount }}">
+                                        <button class="btn btn-success btn-deliver-box">{{ __('messages.Deliver_Box') }}</button>
+                                    </div>
                                 </div>
-                                <button
-                                    class="btn btn-success btn-deliver-box">{{ __('messages.Deliver_Box') }}</button>
                             </form>
-
+    
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
     @endif
     <div class="card">
         <div class="card-body">
@@ -71,32 +75,35 @@
 
 
 
-
+{{-- 
     <div id="demoSidebar" class="sidebar" dir="ltr">
         <button class="close-btn" onclick="closeSidebar()">×</button>
         <h3 style=" margin-bottom: 10px;"><i class="fas fa-clock icon-style"></i>{{ __('messages.last_login') }}</h3>
 
-    </div>
+    </div> --}}
+    <div id="demoSidebar" class="sidebar" dir="ltr">
+        <button class="close-btn" onclick="closeSidebar()">×</button>
+        <h3 style="margin-bottom: 10px;"><i class="fas fa-clock icon-style"></i>{{ __('messages.last_login') }}</h3>
+      
+        <!-- حاوية الكروت -->
+        <div class="card subscription-card"></div>
+        <ul id="log-container" style="list-style: none; padding: 0;"></ul>
+       
+      </div>
+   
 
-    <div id="helpSidebar" class="sidebar active" dir="ltr">
+    <div id="helpSidebar" class="sidebar " dir="ltr">
         <!-- Header -->
         <div class="sidebar-header">
             <button class="close-btn" onclick="closeSidebar()">×</button>
-            <h3><i class="fas fa-hourglass-end icon-style"></i>{{ __('messages.Ending_Subscriptions') }}</h3>
+            <h3><i class="fas fa-hourglass-end icon-style"></i>{{ __('messages.Subscriptions') }}</h3>
         </div>
 
         <!-- Card داخل الـ Sidebar -->
-        <div class="card subscription-card">
-            <div class="card-body">
-                <h5 class="card-title">Ahmad-Alabdullah</h5>
-                <p class="card-text">
-                    <strong>End Date:</strong> 2024-11-15
-
-                </p>
-            </div>
-        </div>
+       <div class="card subscription-card"></div>
     </div>
      @endif
+    
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
         // إنشاء جدول DataTable
@@ -264,7 +271,137 @@
             }
         });
     </script>
+<script>
+  // الاتصال بخادم Node.js
+const socket = io('http://localhost:3003');
 
+
+// استقبال البيانات من خادم Node.js
+socket.on('connect',()=>{
+    console.log("ahmad2")
+   
+});
+socket.on('checkInUser-{{ auth()->user()->branchId }}', function (data) {
+  console.log('Data received:', data);
+
+  const logContainer = document.getElementById('log-container');
+
+
+  const responseData = data; 
+  const userData = responseData.data.user;
+  const billData = responseData.data.bill;
+
+  const userName = userData ? userData.name : 'Unknown';
+  const loginDate = userData ? userData.loginDate : 'N/A';
+//   const subscriptionName =  billData && billData.subscription.name ? billData.subscription.name : '⭐';
+  const status = userData.status ?? false;
+
+  console.log(status)
+  const cardColor = status =="1" ? '#ff293d' : '';
+  const messages = {
+        date: "{{ __('messages.Date') }}",
+        Subscription: "{{ __('messages.Subscription') }}"
+    };
+  logContainer.innerHTML += `
+    <li>
+      <div class="card login-card" style="margin-bottom: 10px; background-color: ${cardColor};">
+        <div class="card-body">
+          <h5 class="card-title">${userName}</h5>
+          <p class="card-text">
+          <strong> ${messages.date} : </strong> <span dir="ltr">${loginDate}</span>
+
+          </p>
+        </div>
+      </div>
+    </li>`;
+  
+  $('#demoSidebar').addClass('active');
+
+  const helpSidebar = document.getElementById('helpSidebar');
+
+  billData.forEach((bill, index) => {
+  const subscription = bill.subscription;
+  
+  if (subscription && subscription.name) {
+    const subscriptionName = subscription.name || '⭐';
+    const subscriptionCardColor = bill.status === 1 ? '#ff293d' : '';
+    
+    const isSelectable = billData.length > 1;
+    
+    helpSidebar.innerHTML += `
+      <div class="card subscription-card" style="margin-bottom: 10px; background-color: ${subscriptionCardColor}; cursor: ${isSelectable ? 'pointer' : 'default'};"
+        data-name="${subscriptionName}" data-user-id="${userData.id}" data-bill-id="${bill.id}">
+        <div class="card-body">
+          <h5 class="card-title">${userName}</h5>
+          <p class="card-text">
+             <strong>${messages.Subscription} : </strong> ${subscriptionName}
+          </p>
+        </div>
+      </div>`;
+  }
+});
+let selectedUserId = null; // متغير لتتبع المستخدم الذي اختار بطاقة
+
+if (billData.length > 1) {
+  document.querySelectorAll('.subscription-card').forEach(card => {
+    card.addEventListener('click', function () {
+      const userId = this.getAttribute('data-user-id');
+
+      // تحقق مما إذا كان المستخدم قد اختار بطاقة مسبقًا
+      if (selectedUserId && selectedUserId === userId) {
+        alert("لا يمكنك اختيار بطاقة أخرى بعد تحديد بطاقة بالفعل.");
+        return;
+      }
+
+      // إزالة التحديد السابق (إن وجد)
+      document.querySelectorAll('.subscription-card').forEach(c => c.style.border = '');
+      this.style.border = '2px solid blue';
+
+      const name = this.getAttribute('data-name');
+      const billId = this.getAttribute('data-bill-id');
+
+      // تعيين userId بعد الاختيار الأول
+      selectedUserId = userId;
+
+      recordEntry(name, userId, billId);
+    });
+  });
+}
+
+function recordEntry(name, userId, billId) {
+  $.ajax({
+    url: "{{ route('addPlayerLoginLog') }}",
+    method: "POST",
+    headers: {
+      'X-CSRF-TOKEN': '{{ csrf_token() }}'
+    },
+    contentType: "application/json",
+    data: JSON.stringify({ subscription_name: name, user_id: userId, billId: billId }),
+    success: function (data) {
+      console.log(data);
+      
+      if (data.data.success) {
+        alert('تم دخول اللاعب بنجاح');
+      } else {
+        alert('حدث خطأ أثناء تسجيل الدخول');
+      }
+    },
+    error: function (xhr) {
+      try {
+        var response = JSON.parse(xhr.responseText);
+        alert(response.message);
+      } catch (e) {
+        alert("خطأ غير متوقع.");
+      }
+    }
+  });
+}
+
+});
+
+
+  </script>
+  
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </x-master-layout>
 
@@ -291,6 +428,21 @@
 </style>
 
 <style>
+    .card.login-card .card-body {
+        padding: 15px;
+    }
+
+    .card.login-card .card-title {
+        font-size: 16px;
+        font-weight: bold;
+        color: #5F60B9;
+    }
+
+    .card.login-card .card-text {
+        font-size: 14px;
+        color: #333;
+        margin-top: 10px;
+    }
     .card.subscription-card .card-body {
         padding: 15px;
     }
@@ -414,6 +566,8 @@
         padding: 20px;
         transition: right 0.3s ease-in-out;
         z-index: 1100;
+        max-height: 100%; 
+        overflow-y: auto;
 
     }
 
@@ -472,6 +626,7 @@
         left: 10px;
         right: auto;
     }
+    
 </style>
 <script>
     function closeSidebar() {

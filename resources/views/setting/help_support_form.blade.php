@@ -320,10 +320,10 @@ $(document).ready(function () {
                     // تعبئة الجدول بالبيانات المستلمة
                     response.data.forEach((checkin, index) => {
                         tbody.append(`
-                            <tr>
+                            <tr style=color:${checkin.loginFiled ?"":"red"}>
                                 <td>${index + 1}</td>
                                 <td>${checkin.subscriptionName}</td>
-                                <td>${checkin.date}</td>
+                                <td style=direction:ltr>${checkin.date}</td>
                             </tr>
                         `);
                     });

@@ -8,7 +8,7 @@ class PalyerLoginLog extends Model
 {
 
     protected $fillable = [
-        'userId', 'date','subscriptionName'
+        'userId', 'date','subscriptionName' , 'loginFiled'
     ];
 
     /**

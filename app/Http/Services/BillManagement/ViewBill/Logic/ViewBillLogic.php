@@ -24,7 +24,7 @@ class ViewBillLogic implements Service {
 
     public function execute (): ResponseModel {
 
-        $condation = (auth()->user()->isAdmin) ? [] : ['branchId' => auth()->user()->branchId , 'stafId' => Auth::user()->id];
+        $condation = (auth()->user()->isAdmin) ? [] : ['branchId' => auth()->user()->branchId , 'stafId' => Auth::user()->id,'userId'=>null];
 
         // write your logic code..
         $billRepository = $this->repository->BillRepository();

@@ -76,7 +76,10 @@
                 {
                     data: 'date',
                     name: 'date',
-                    title: "{{ __('messages.date') }}"
+                    title: "{{ __('messages.date') }}",
+                    render: function(data, type, row) {
+                            return `<span dir="ltr">${data}</span>`;
+                        }
                 },
                 {
                     data: (data)=>data.branch?.name ?? "__",

@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('palyer_login_logs', function (Blueprint $table) {
+        Schema::create('daily_logins', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
-            $table->foreignId('userId')->references('id')->on('users')->cascadeOnDelete();
-            $table->string('subscriptionName');
-            $table->boolean('loginFiled')->default(true);
             $table->timestamps();
         });
     }
@@ -26,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('palyer_login_logs');
+        Schema::dropIfExists('daily_logins');
     }
 };

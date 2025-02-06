@@ -70,6 +70,7 @@
             }
         },
         columns: [
+            { data: 'id', name: 'id', title: "{{ __('messages.id') }}" },
             { data: 'name', name: 'name', title: "{{ __('messages.player_name') }}" },
             { data: 'gender', name: 'gender', title: "{{ __('messages.gender') }}" },
             { data: 'birthDay', name: 'birthDay', title: "{{ __('messages.birthday') }}" },

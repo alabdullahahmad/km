@@ -222,11 +222,11 @@ $.ajax({
             if (branches.length === 0) {
                 // عرض رسالة في حالة عدم وجود فروع
                 $("#branchTabs").html(`
-                    <li class="nav-item">
-                        <span class="nav-link text-danger font-weight-bold">
-                            {{ __('messages.no_branches') }}
-                        </span>
-                    </li>
+                    <div class="d-flex justify-content-center align-items-center" style="height: 100px;">
+                            <div class="alert alert-warning text-center" role="alert" style="font-size: 1.5rem; font-weight: bold;">
+                                {{ __('messages.no_branches') }}
+                            </div>
+                        </div>
                 `);
                 return;
             }

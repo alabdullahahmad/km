@@ -7,7 +7,7 @@ use App\Http\Core\Const\Messages\Attributes;
             Attributes::Category->value =>"الصنف"
         ],
         'add_success' => ':attributes add success',
-        'user' => 'User',
+        'user' => 'المستخدمين',
         'user_information' => 'User Information',
         'srno' => 'No',
         'permission' => 'Permission',
@@ -66,7 +66,7 @@ use App\Http\Core\Const\Messages\Attributes;
         'password_sent' => 'Password has been sent successfully to your email address.',
         'site_name' => 'Site Name',
         'category' => 'Category',
-        'service' => 'Service',
+        'service' => 'الخدمات',
         'price' => 'Price',
         'appointment' => 'Appointment',
         'date' => 'Date',
@@ -929,6 +929,10 @@ use App\Http\Core\Const\Messages\Attributes;
         'National_Id' => 'رقم الوطني',
         'action' => 'العمليات',
         'Receptions' => 'الرسبشين',
+        'Export_to_Excel' => 'تصدير لاكسل',
+        'Reception_Movements' => 'حركات الرسبشين',
+        'Entry_timing' => 'توقيت الدخول',
+        'Exit_timing' => 'توقيت الخروج',
         'Coaches' => 'المدربين',
         'status' => 'الحالة',
          'add_form_title' => 'إضافة :form',
@@ -1080,6 +1084,11 @@ use App\Http\Core\Const\Messages\Attributes;
 'End_Subscription' => 'نهاية الاشتراك',
 'Subscription_Name' => 'اسم الاشتراك',
 'note' => 'ملاحظة',
+'Financial Box' => 'الصندوق المالي',
+'Branches&bills' => 'الفروع والفواتير',
+'Rooms&Events' => 'القاعات والفعاليات',
+'GeneralSettings' => 'الإعدادات العامة',
+
 'Enter-note' => 'ادخل الملاحظة',
 'subscription_freeze' => 'تجميد الاشتراك',
 'freeze_start_date' => 'تاريخ بداية التجميد',
@@ -1087,6 +1096,7 @@ use App\Http\Core\Const\Messages\Attributes;
 'Enter-Amount' => 'ادخل قيمة الدفعة',
 'cannot_complete_bill_zero_value' => 'لا يمكن إكمال الفاتورة، القيمة صفر',
 'no_rooms' => 'لا يوجد قاعات، الرجاء إضافة غرفة جديدة',
+'no_branches' => 'لا توجد فروع متاحة، يرجى إضافة فرع جديد',
 'Shift' => 'فترة',
 'Time' =>'التوقيت',
 'Classe'=>'الصف',
@@ -1137,6 +1147,7 @@ use App\Http\Core\Const\Messages\Attributes;
 'old_password' => 'كلمة السر القديمة',
 'new_password' => 'كلمة السر الجديدة',
 'confirm_new_password' => 'تأكيد كلمة السر',
+
 
 
     )

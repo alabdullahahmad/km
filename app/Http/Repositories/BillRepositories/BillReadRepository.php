@@ -151,10 +151,36 @@ class BillReadRepository extends ReadRepository
             return $q->select(['id','billId', DB::raw('SUM(amount) as totalAmount')])->groupBy('billId');
         }]);
         if ($data) {
-            $model = $model->whereBetween('date', $data);   
+            $model = $model->whereBetween('date', $data);
         }
         return $model->where($condation)->with($with)/*->where('userId','!=',null)*/->get();
     }
 
 
+    public function checkLoginUser($userId)
+    {
+        $date = date("Y-m-d H:i");
+        return $this->model->with(['subscription'=>function($q){
+            return $q->select('id','name');
+        }])->where('userId', $userId)
+            ->where('endDate', ">=", $date)
+            ->where('startDate', '<=', $date)
+            ->where(function ($query) use ($date) {
+                $query->where(function ($subQuery) use ($date) {
+                    $subQuery->where('startDateFreeze', '<', $date)
+                             ->where('endDateFreeze', '>', $date);
+                })
+                ->orWhereNull('startDateFreeze')
+                ->orWhereNull('endDateFreeze');
+            })
+            ->orderBy('updated_at', 'desc')
+            ->get();
+    }
+    
+
+    public function endBill($userId){
+        return $this->model->with(['subscription'=>function($q){
+            return $q->select('id','name');
+        }])->where('userId',$userId)->where('isEnd',1)->latest('updated_at')->first();
+    }
 }

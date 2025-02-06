@@ -150,7 +150,10 @@
                     {
                         data: 'date',
                         name: 'date',
-                        title: "{{__('messages.Payment_Data')}}"
+                        title: "{{__('messages.Payment_Data')}}",
+                        render: function(data, type, row) {
+                            return `<span dir="ltr">${data}</span>`;
+                        }
                     },
                     {
                         data: 'action',

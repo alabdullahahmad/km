@@ -119,9 +119,11 @@ use App\Http\Services\BranchManagement\DeleteBranch\Controller\DeleteBranchContr
 use App\Http\Services\FundLogManagement\DeleteFundLog\Controller\DeleteFundLogController;
 use App\Http\Services\CategoryManagement\EditeCategory\Controller\EditeCategoryController;
 use App\Http\Services\CategoryManagement\DeleteCategory\Controller\DeleteCategoryController;
+use App\Http\Services\DaliyLoginLogic\Controller\DaliyLoginLogicController;
 use App\Http\Services\EditBillDate\Controller\EditBillDateController;
 use App\Http\Services\EditBillFreeze\Controller\EditBillFreezeController;
 use App\Http\Services\EditUserBill\Controller\EditUserBillController;
+use App\Http\Services\GetStafLogin\Controller\GetStafLoginController;
 use App\Http\Services\SubscriptionManagement\AddSubscription\Controller\AddSubscriptionController;
 use App\Http\Services\SubscriptionManagement\ShowSubscription\Controller\ShowSubscriptionController;
 use App\Http\Services\SubscriptionManagement\ViewSubscription\Controller\ViewSubscriptionController;
@@ -990,8 +992,4 @@ Route::group(['prefix' => 'playerLoginLog' ,  'middleware' => ['auth']],function
     Route::post('/add',AddPlayerLoginLogController::class)->name('addPlayerLoginLog');
 });
 
-
-Route::get('fin',function(){
-    info("ahmad");
-    return response()->json("ahmad");
-});
+Route::get('staf/login/trans',GetStafLoginController::class)->name('getStafLog');

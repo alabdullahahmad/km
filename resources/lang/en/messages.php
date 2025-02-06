@@ -14,6 +14,7 @@ use App\Http\Core\Const\Messages\Attributes;
         'parent_permission' => 'Parent Permission',
         'role' => 'Role',
         'name' => 'Name',
+        
         'email' => 'Email',
         'contact_number' => 'Contact Number',
         'password' => 'Password',
@@ -1009,6 +1010,10 @@ use App\Http\Core\Const\Messages\Attributes;
         'Deliver_Box' => 'Deliver Box',
         'e_Subscription' => 'Subscription',
         'Ending_Subscriptions' => 'Ending Subscriptions',
+        'Reception_Movements' => 'Reception Movements',
+        'Entry_timing' => 'Entry_timing',
+        'Exit_timing' => 'Exit_timing',
+        'Export_to_Excel'=> 'Export to Excel',
         'last_login' => 'The Last Checked In',
         'Tag_Subscriptions' => 'Tag Subscriptions',
         'Tag_New_Subscriptions' => 'Tag New Subscriptions',
@@ -1101,6 +1106,9 @@ use App\Http\Core\Const\Messages\Attributes;
 'cannot_complete_bill_zero_value' => 'Cannot complete the bill, the value is zero',
 
 'no_rooms' => 'No rooms available, please add a new room',
+'no_branches' => 'No branches available, please add a new branch',
+
+
 'Shift' => 'Shift',
 'Time' =>'Time',
 'Classe'=>'Classe',
@@ -1146,5 +1154,9 @@ use App\Http\Core\Const\Messages\Attributes;
 'Player' => 'Player',
 "Bill_coaches" => 'Bill_coaches',
 'Player_list' =>'Player list',
+'Financial Box' => 'Financial Box',
+'Branches&bills' => 'Branches & bills',
+'Room&Events' => 'Room & Events',
+'GeneralSettings' => 'General Settings',
     )
     ?>

@@ -1,61 +1,77 @@
 const express = require('express');
-const app = express();
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
+const http = require('http');
+const socketIo = require('socket.io');
 const axios = require('axios');
-const fs = require('fs');
+const cors = require('cors');
+
+const app = express();
+const server = http.createServer(app);
+const io = socketIo(server, {
+  cors: {
+    origin: "http://127.0.0.1:8000", // السماح للطلبات من Laravel
+    methods: ["GET", "POST"]
+  }
+});
+
+// استخدام CORS في Express
+app.use(cors());
 
 let checkInLogs = [];
 let checkedInLogs = [];
-io.of('/checkin').on('connection', (client) => {
-    // console.log('connected to /checkin: ' + client.id);
-    io.of('/checkin').emit('documents', JSON.stringify(checkInLogs));
-    client.on('documents', (data) => {
-      // console.log('recieved document from /checkin: ' + data);
-      checkInLogs = checkInLogs.filter((item) => item.userId != data);
-      checkedInLogs = checkedInLogs.filter((item) => item.userId != data);
-    });
-    client.on('disconnect', () => {
-      // console.log('disconnected: ' + client.id);
-    });
-  });
-  io.on('connection', (client) => {
-    // console.log('connected to /: ' + client.id);
-    client.on('documents', async (user) => {
 
-        try {
-            console.log(user);
-            const response = await axios.get("http://192.168.100.58:8000/fin");
-            console.log(response.data);
-          } catch (error) {
-            console.error('Error fetching data:', error);
-          }
-    //   let data = { userId: user };
-    //   if (!checkInLogs.find((item) => item.userId == data.userId)) {
-    //     const oldUser = (await getUsersData()).find((element, index) => {
-    //       return element.user_id == data.userId;
-    //     });
-    //     if (oldUser) {
-    //       // console.log(oldUser);
-    //       data.userId = oldUser.uid;
-    //       checkInLogs.push(data);
-    //       // temp = JSON.parse(fs.readFileSync(${__dirname}/checkInLog.json));
-    //       // temp.push(data);
-    //       // fs.writeFile(${__dirname}/checkInLog.json, JSON.stringify(temp));
-    //       io.of('/checkin').emit('documents', JSON.stringify(checkInLogs));
-    //     }
-    //   }
+// Namespace '/checkin'
+const checkinNamespace = io.of('/checkin');
 
-
-    });
-    client.on('attandamce',function (params) {
-        console.log(params);
-    })
-    client.on('disconnect', () => {
-      // console.log('disconnected: ' + client.id);
-    });
+checkinNamespace.on('connection', (client) => {
+  console.log('Connected to /checkin:', client.id);
+  
+  checkinNamespace.emit('documents', JSON.stringify(checkInLogs));
+  
+  client.on('documents', (data) => {
+    checkInLogs = checkInLogs.filter(item => item.userId != data);
+    checkedInLogs = checkedInLogs.filter(item => item.userId != data);
   });
 
-  http.listen(3003,"0.0.0.0", function () {
-    console.log(`listening on http*:${3003}`);
+  client.on('disconnect', () => {
+    console.log('Disconnected from /checkin:', client.id);
   });
+});
+
+// Root socket events
+io.on('connection', (client) => {
+  console.log('Client connected:', client.id);
+
+  client.on('checkIn', async (data) => {
+    try {
+      console.log('Check-in request received for:', data);
+      
+      const branchId = data.branchId;
+      // Call external API
+      const response = await axios.post('http://localhost:8000/api/fin',
+        {
+          userId : data.userId
+        }
+      );
+      console.log('Data fetched from Laravel:', response.data);
+      
+      // Send data back to the client
+      io.emit(`checkInUser-${branchId}`, response.data);
+      
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  });
+
+  client.on('attandamce', (params) => {
+    console.log('Attendance event received:', params);
+  });
+
+  client.on('disconnect', () => {
+    console.log('Client disconnected:', client.id);
+  });
+});
+
+// تشغيل الخادم
+server.listen(3003, "0.0.0.0", () => {
+  console.log(`Listening on port 3003`);
+});

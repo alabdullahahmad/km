@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 use App\Http\Controllers\API;
+use App\Http\Controllers\StafLogingController;
+use App\Http\Services\DaliyLoginLogic\Controller\DaliyLoginLogicController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -194,3 +197,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 
 });
+
+Route::post('fin',DaliyLoginLogicController::class);
+Route::post('stafLoging',StafLogingController::class);

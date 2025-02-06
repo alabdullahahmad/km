@@ -80,7 +80,10 @@
                     {
                         data: (data) => data.date ?? '', // التعامل مع القيم الفارغة
                         name: 'date',
-                        title: "{{__('messages.Date')}}"
+                        title: "{{__('messages.Date')}}",
+                        render: function(data, type, row) {
+                            return `<span dir="ltr">${data}</span>`;
+                        }
                     },
                     {
                         data: (data) => data.user_payment?.[0]?.totalAmount ?? 0, // التأكد من التعامل مع القيم الرقمية

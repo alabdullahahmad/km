@@ -60,7 +60,7 @@
                         </div>
 
                         <button id="export-excel" class="btn btn-success btn-sm ml-2"><i class="fa fa-file-excel"></i>
-                            Export to Excel</button>
+                            {{ __('messages.Export_to_Excel') }}</button>
                         {{-- <button id="export-pdf" class="btn btn-danger btn-sm"><i class="fa fa-file-pdf"></i> Export to PDF</button> --}}
 
                     </div>
@@ -167,7 +167,10 @@
                         // دمج التاريخ والوقت بالشكل المطلوب
                         return `${year}-${month}-${day}, ${String(hours).padStart(2, '0')}:${minutes} ${amPm}`;
                     },
-                    title: "{{ __('messages.payment_date_time') }}"
+                    title: "{{ __('messages.payment_date_time') }}",
+                    render: function(data, type, row) {
+                            return `<span dir="ltr">${data}</span>`;
+                        }
 
                    },      
                     {
