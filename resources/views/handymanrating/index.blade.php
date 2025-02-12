@@ -123,7 +123,7 @@
                     },
                     {
                         data: (data) => {
-                            return data.isActive ? "{{ __('messages.active') }}" : "{{ __('messages.inactive') }}"; // الحالة
+                            return data.isEnd ? "{{ __('messages.active') }}" : "{{ __('messages.inactive') }}"; // الحالة
                         },
                         name: 'status',
                         title: "{{ __('messages.status') }}"

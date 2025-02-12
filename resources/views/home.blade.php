@@ -1,23 +1,28 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
+<x-master-layout>
+    <style>
+        body {
+            background: url('your-background-image.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .welcome-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+        }
+    </style>
+    
+    <div class="container d-flex justify-content-center align-items-center min-vh-50">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
+            <div class="card welcome-card text-center shadow-lg">
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!')  }}
+                    <img src="images/logo.svg" alt="Logo" width="200" class="mb-3">
+                    <h2 class="text-primary">{{ __('messages.welcome') }}</h2>
+                    <p class="text-muted">{{ __('messages.login_succes') }}</p>
+                    
+                  
                 </div>
             </div>
         </div>
     </div>
-</div>
-@endsection
+    
+</x-master-layout>

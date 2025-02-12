@@ -252,7 +252,7 @@
                         {{ Form::submit(__('messages.Update'), ['class' => 'btn btn-md btn-primary float-right mx-1']) }}
                         {{ Form::close() }}
                         <a href="{{ route('show.booking.page',['data'=>$data['user']->id]) }}" class="btn btn-danger mx-1">{{ __('messages.renew_subscription') }}</a>
-                        <button class="btn btn-success mx-1">{{ __('messages.add_fingerprint') }}</button>
+                        <button type="button" class="btn btn-success mx-1" id="fingerprint">{{ __('messages.add_fingerprint') }}</button>
                     </div>
                 </div>
             </div>
@@ -434,8 +434,46 @@ $(document).ready(function () {
             }
         });
     });
-});
 
+ $('#fingerprint').on('click', function () {
+        const id = `{!! $data['user']->id !!}`;
+        const name = `{!! $data['user']->name !!}`;
+        const branchId = `{!! auth()->user()->branchId !!}`;
+
+        console.log("Branch ID:", branchId);
+
+        $.ajax({
+            url: `http://localhost:3003/user/${id}`,
+            type: 'POST',
+            data: {
+                username: 'user',
+                fingerId: id,
+                branchId: branchId,
+               // _token: '{{ csrf_token() }}', // تأكد من إضافة CSRF token
+            },
+            beforeSend: function () {
+                $('#fingerprint').prop('disabled', true).text('جاري الإضافة...');
+            },
+            success: function (response) {
+                console.log(response);
+
+                if (response.status === 200 || response.success) {
+                    alert('الرجاء التحقق من البصامة');
+                    location.reload();
+                } else {
+                    alert('الرجاء التحقق من البصامة');
+                }
+            },
+            error: function (xhr) {
+                console.error(xhr.responseText);
+                alert('حدث خطأ أثناء معالجة الطلب: ' + xhr.responseText);
+            },
+            complete: function () {
+                $('#fingerprint').prop('disabled', false).text('{{ __('messages.add_fingerprint') }}');
+            }
+        });
+    });
+});
 
    </script>
     @endsection

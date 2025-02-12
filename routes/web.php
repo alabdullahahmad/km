@@ -156,6 +156,9 @@ use Google\Service\DriveActivity\Delete;
 require __DIR__.'/auth.php';
 require __DIR__.'/frontend.php';
 
+Route::get('home_base',function(){
+    return view('home');
+})->name('home_base');
 Route::get('/create-storage-link', function () {
    // Execute the storage:link command
    Artisan::call('storage:link');

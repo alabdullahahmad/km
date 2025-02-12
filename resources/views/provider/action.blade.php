@@ -21,7 +21,52 @@ $auth_user= authSession();
         <i class="far fa-trash-alt"></i>
     </a>
     @endif
-
+   <a class="mr-2 text-success" href="#" onclick="addFingerprint('{{ $provider->id }}', '{{ $provider->name }}', '{{ $provider->branchId }}')">
+    <i class="fas fa-fingerprint"></i>
+    </a>
+ 
+    
 
 </div>
+<script>
+      function addFingerprint(id, name ,branchId) {
+
+
+        console.log("Branch ID:", id,name,branchId);
+
+        $.ajax({
+            url: `http://localhost:3003/user/${id}`,
+            type: 'POST',
+            data: {
+                username: 'staf',
+                fingerId: id,
+                branchId: branchId,
+                // _token: '{{ csrf_token() }}',
+            },
+            beforeSend: function () {
+                $('#fingerprint-{{$provider->id}}').prop('disabled', true).text('جاري الإضافة...');
+            },
+            success: function (response) {
+                console.log(response);
+                if (response.status === 200 || response.success) {
+                    alert('الرجاء التحقق من البصمة');
+                    location.reload();
+                } else {
+                    alert('الرجاء التحقق من البصمة');
+                }
+            },
+            error: function (xhr) {
+                console.error(xhr.responseText);
+                alert('حدث خطأ أثناء معالجة الطلب: ' + xhr.responseText);
+            },
+            complete: function () {
+                $('#fingerprint-{{$provider->id}}').prop('disabled', false).text('{{ __('messages.add_fingerprint') }}');
+            }
+        });
+
+}
+
+
+</script>
+
 {{ Form::close() }}

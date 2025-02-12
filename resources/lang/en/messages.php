@@ -1158,5 +1158,7 @@ use App\Http\Core\Const\Messages\Attributes;
 'Branches&bills' => 'Branches & bills',
 'Room&Events' => 'Room & Events',
 'GeneralSettings' => 'General Settings',
+'welcome' => 'Welcome to our system! 🎉',
+'login_succes' => 'You have successfully logged in. Enjoy your experience!',
     )
     ?>

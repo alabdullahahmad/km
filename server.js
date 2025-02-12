@@ -45,16 +45,18 @@ io.on('connection', (client) => {
     try {
       console.log('Check-in request received for:', data);
       
-      const branchId = data.branchId;
+      const branchId = +data.branchId.replace(/"/g, '');
       // Call external API
       const response = await axios.post('http://localhost:8000/api/fin',
         {
           userId : data.userId
         }
       );
-      console.log('Data fetched from Laravel:', response.data);
+
       
       // Send data back to the client
+      
+      console.log(branchId)
       io.emit(`checkInUser-${branchId}`, response.data);
       
     } catch (error) {

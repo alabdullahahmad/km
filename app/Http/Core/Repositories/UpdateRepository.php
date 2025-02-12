@@ -18,7 +18,7 @@ abstract class UpdateRepository {
         $user = $this->model->query()->where('endDate','<',date("Y-m-d H:i"))->update([
             'isEnd' => true
         ]);
-        return $user!=0 ? $user : make_exception(ErrorMessages::getKey(ErrorMessages::$SomeThingWentWrong));
+        return $user;
      }
 }
 

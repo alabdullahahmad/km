@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/booking';
+    public const HOME = '/home_base';
     public const FRONTEND = '/login';
 
     /**
